@@ -35,12 +35,14 @@ export function runView(run) {
 
 const actionStatuses={SUPPORTED_MODELED:'Supported in the model',CONDITIONAL_ONLY:'Conditional review',TARGET_ONLY:'Funding target',BLOCKED_OR_UNKNOWN:'Evidence needed',MAINTAIN:'Maintain and monitor'};
 const checkpointLabel=point=>point?`Month ${point.month} ${point.phase}`:null;
+const shortageLabel=(point,complete)=>point?`${checkpointLabel(point)} · ${money(point.need_cad)}`:complete?'None at modeled checkpoints':'Not established';
 
 export function financePlanView(plan) {
   if(!plan)return '';
   const first=plan.financial_diagnosis.first_shortfall;
-  const firstLabel=first?`${checkpointLabel(first)} · ${money(first.need_cad)}`:'None at modeled checkpoints';
-  const diagnosis=plan.financial_diagnosis.complete?firstLabel:`Known components only · ${first?firstLabel:'first shortage not established'}`;
+  const complete=plan.financial_diagnosis.complete;
+  const scope=complete?'':'Known components only · ';
+  const after=plan.comparison.after;
   const need=plan.remaining_gap_cad==null?'Full funding need not established':money(plan.remaining_gap_cad);
   const review=plan.next_review_checkpoint;
   const cards=plan.prioritized_actions.map(action=>{
@@ -51,13 +53,14 @@ export function financePlanView(plan) {
       <p>${e(action.reason)}</p>
       <p class="help">${e([when,action.amount_cad==null?null:`${money(action.amount_cad)} ${action.frequency||''}`.trim(),action.fee_cad==null?null:`Fees ${money(action.fee_cad)}`].filter(Boolean).join(' · '))}</p>
       ${impact==null?'':`<p>${e(action.impact.basis)} · ${e(impact<0?`Funding need increases by ${money(-impact)}`:impact>0?`Funding need decreases by ${money(impact)}`:'Funding need is unchanged')}. First shortage ${e(checkpointLabel(action.impact.before.first_shortfall)||'none')} → ${e(checkpointLabel(action.impact.after.first_shortfall)||'none')}.</p>`}
-      ${action.daily_comparison?`<p>Separate daily replay · first payment ${e(action.daily_comparison.first_original_date)} → ${e(action.daily_comparison.first_shifted_date)} · funding need ${e(money(action.daily_comparison.before_funding_need_cad))} → ${e(money(action.daily_comparison.after_funding_need_cad))}.</p>`:''}
+      ${action.daily_comparison?`<p>Separate daily replay · first payment ${e(action.daily_comparison.first_original_date)} → ${e(action.daily_comparison.first_shifted_date)} · first shortage ${e(action.daily_comparison.before_first_day||'none')} → ${e(action.daily_comparison.after_first_day||'none')} · funding need ${e(money(action.daily_comparison.before_funding_need_cad))} → ${e(money(action.daily_comparison.after_funding_need_cad))}.</p>`:''}
       ${action.repayment?.due?`<p>Catch-up payment ${e(money(action.repayment.amount_cad))} at ${e(checkpointLabel(action.repayment.due))}${action.repayment.beyond_horizon?' (beyond this horizon)':''}.</p>`:''}
       <p>${e(action.cash_treatment)}</p><p><strong>Review</strong> ${e(action.required_review)}</p></li>`;
   });
   const target=plan.required_target_only;
   return `<section class="card" aria-label="Recommended Financial Actions"><h2>Recommended Financial Actions</h2>
-    <p><strong>First shortage under the shock</strong> ${e(diagnosis)}</p>
+    <p><strong>First shortage under the shock</strong> ${e(scope+shortageLabel(first,complete))}</p>
+    <p><strong>First remaining shortage after supported actions</strong> ${e(scope+shortageLabel(after.first_shortfall,after.complete))}</p>
     <p><strong>Remaining funding need</strong> ${e(need)}</p>
     ${plan.status==='NO_SUPPORTABLE_ACTION'?'<p>No supported cash intervention was established for this case.</p>':''}
     ${target?`<p><strong>Calculated target</strong> ${e(money(target.upfront_cad))} upfront and ${e(money(target.uniform_monthly_improvement_cad))} per month starting at Month 1 end. Confirm a source before relying on these amounts.</p>`:''}

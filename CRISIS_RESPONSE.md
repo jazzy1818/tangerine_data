@@ -319,3 +319,12 @@ tests/test_backup_comparison_ui.py tests/test_portfolio_overview.py -q` passed a
 run exercised the actual app, account changes, a custom income shock and the
 monthly comparison. These checks establish the tested behavior, not finance-team
 signoff or completeness across every possible future scenario.
+
+## Finance decision policy
+
+Validated crisis results include a local `finance_plan` with the ordered actions,
+the matched cash paths and a candidate audit. The website and Streamlit display
+the action summary above the comparison. Assumed effects have a separate
+conditional path. A loan deferral with missing repayment terms withholds both
+legs until the terms are known. See the [finance action contract](finance_policy_integration/ACTION_PLAN_CONTRACT.md)
+and [finance review handoff](finance_policy_integration/FINANCE_REVIEW_NOTES.md).
