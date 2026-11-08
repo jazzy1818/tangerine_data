@@ -1,0 +1,209 @@
+--- a/web_app/portfolio.py
++++ b/web_app/portfolio.py
+@@ -1,13 +1,16 @@
+-"""Employee portfolio insights calculated from the supplied local records."""
++"""Employee portfolio insights from Snowflake SQL, with an explicit local fallback."""
+ from datetime import datetime, timezone
+ from functools import lru_cache
++import hashlib
++import json
+ from threading import Lock
++from time import monotonic
+ 
+ import numpy as np
+ import pandas as pd
+ 
+ import engine
+-from . import analytics
++from . import analytics, warehouse
+ 
+ COHORTS = {
+     'recurring_shortfalls': ('Repeated monthly shortfalls',
+@@ -47,7 +50,7 @@
+         deficit_accounts=('deficit_months', 'sum'), total_inflow=('money_in', 'sum'),
+         total_spending=('money_out', 'sum')).reset_index()
+     meta = {'period_start': str(monthly.month.min()), 'period_end': str(monthly.month.max()),
+-            'monthly_observations': len(monthly)}
++            'monthly_observations': len(monthly), 'source_hash': warehouse.fingerprint()}
+     return facts, trend, meta
+ 
+ 
+@@ -67,13 +70,41 @@
+ def snapshot(refresh=False):
+     global _cache
+     with _lock:
+-        if _cache is None or refresh:
+-            facts, trend, meta = local_snapshot()
+-            provenance = {'source': 'local', 'label': 'Local records',
+-                          'queried_at': datetime.now(timezone.utc).isoformat(),
+-                          'status': 'Calculated from the supplied monthly financial records.'}
+-            _cache = (enrich(facts), trend, meta, provenance)
+-        return _cache
++        config_error = None
++        try:
++            config = warehouse.settings()
++        except warehouse.WarehouseError as exc:
++            config, config_error = {}, exc
++        key = hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
++        now = monotonic()
++        # Sharing cached results keeps filter/pagination clicks free of warehouse calls.
++        # Explicit refresh is throttled to one query batch per ten seconds.
++        if _cache and _cache['key'] == key and now < _cache['expires'] and (not refresh or now-_cache['created'] < 10):
++            return _cache['value']
++        local_facts, local_trend, local_meta = local_snapshot()
++        facts, trend, meta = local_facts, local_trend, dict(local_meta)
++        source, error = 'local', config_error
++        if not error and config.get('PORTFOLIO_SOURCE') == 'snowflake':
++            try:
++                facts, trend, meta = warehouse.read_snapshot(config, local_meta['source_hash'])
++                if facts.account_id.duplicated().any() or set(facts.account_id) != set(local_facts.account_id):
++                    raise warehouse.WarehouseError('account_mismatch', 'Warehouse accounts differ from the customer records.')
++                source = 'snowflake'
++            except warehouse.WarehouseError as exc:
++                error = exc
++                facts, trend, meta = local_facts, local_trend, dict(local_meta)
++        if error:
++            warehouse.LOG.warning('portfolio_fallback code=%s', error.code)
++        provenance = {'source': source, 'label': 'Snowflake' if source == 'snowflake' else 'Local records',
++                      'queried_at': datetime.now(timezone.utc).isoformat(),
++                      'loaded_at': meta.get('loaded_at'), 'fallback': error is not None,
++                      'status': ('Warehouse analytics are unavailable. Showing the supplied local records.' if error else
++                                 'Calculated in Snowflake from the uploaded financial snapshot.' if source == 'snowflake' else
++                                 'Showing the supplied local records. Snowflake has not been enabled.'),
++                      'error_code': error.code if error else None}
++        value = (enrich(facts), trend, meta, provenance)
++        _cache = {'key': key, 'created': now, 'expires': monotonic()+(30 if error else 300), 'value': value}
++        return value
+ 
+ 
+ def discovery(cohort='recurring_shortfalls', offset=0, limit=25, refresh=False):
+@@ -100,6 +131,7 @@
+                'last_month', 'recent_months', 'deficit_months', 'negative_months', 'recovered_months', 'loan_in_arrears']
+     return {
+         'source': provenance['label'], 'provenance': provenance,
++        'snapshot_key': meta.get('snapshot_id', meta['source_hash']),
+         'period_start': meta['period_start'], 'period_end': meta['period_end'],
+         'recent_start': str(pd.Period(meta['period_end'], freq='M')-11),
+         'accounts': len(facts), 'monthly_observations': int(meta['monthly_observations']),
+--- a/web_app/server.py
++++ b/web_app/server.py
+@@ -15,7 +15,7 @@
+ import engine
+ from plan_classification.config import classifier_settings
+ from plan_classification.schemas import MODULES, MODULE_DESCRIPTIONS, ShockScenario
+-from . import analytics, portfolio, service, store
++from . import analytics, portfolio, portfolio_brief, service, store, warehouse
+ from .contracts import RunInput, ScenarioInput, ReviewUpdate
+ 
+ STATIC = Path(__file__).with_name('static')
+@@ -108,6 +108,14 @@
+     return portfolio.discovery(cohort, offset, limit, refresh)
+ 
+ 
++@app.post('/api/portfolio/brief')
++def prepare_portfolio_brief(payload: portfolio_brief.BriefRequest):
++    try:
++        return portfolio_brief.generate(payload)
++    except warehouse.WarehouseError as exc:
++        raise HTTPException(409 if exc.code == 'snapshot_changed' else 503, str(exc)) from exc
++
++
+ @app.post('/api/scenarios/preview')
+ def preview(request: ScenarioInput):
+     return service.preview(request)
+--- a/web_app/static/app.js
++++ b/web_app/static/app.js
+@@ -1,5 +1,5 @@
+ import {api,escapeHtml as e,notice,notify,download,downloadFile,blankDraft,readDraft,saveDraft} from './common.js';
+-import {homeView,discoveryView,accountListView,customerView,previewView,settingsView} from './views.js';
++import {homeView,discoveryView,portfolioBriefView,accountListView,customerView,previewView,settingsView} from './views.js';
+ import {runView,projectionChart,historyView,compareView} from './reviews.js';
+ import {scenarioView,effectFields,effectFromForm,contextFromForm,preset} from './scenario.js';
+ import {reviewBrief,plainNote} from './financial.js';
+@@ -8,7 +8,7 @@
+ const readLocal=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
+ const writeLocal=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));}catch{}};
+ const state={config:null,draft:readDraft(),customer:null,preview:null,run:null,query:'',filter:'all',offset:0,
+-  historyMonths:12,reviewFilter:'all',routeVersion:0,busy:false,poll:null,
++  historyMonths:12,reviewFilter:'all',routeVersion:0,busy:false,poll:null,portfolio:null,portfolioBriefs:{},
+   showGuide:readLocal('tangerine-guide-visible',true),reviewDrafts:readLocal('tangerine-review-notes',{}),
+   customerDrafts:readLocal('tangerine-customer-drafts',{})};
+ const route=()=>location.hash.slice(1)||'workspace';
+@@ -77,7 +77,7 @@
+     else if(page==='discovery'){
+       const params=new URLSearchParams({cohort:id||'recurring_shortfalls',offset:second||0,refresh:refreshPortfolio});
+       const data=await api(`/discovery?${params}`);if(version!==state.routeVersion)return;
+-      html=discoveryView(data);
++      state.portfolio=data;html=discoveryView(data,state.portfolioBriefs[`${data.worklist.cohort}/${data.snapshot_key}`]);
+     }
+     else if(page==='customers'){const params=new URLSearchParams({q:state.query,filter:state.filter,offset:state.offset});html=accountListView(await api(`/accounts?${params}`),state.query,state.filter);}
+     else if(page==='customer'){
+@@ -170,6 +170,17 @@
+   if(action==='refresh'){state.config=null;render();return;}
+   if(action==='portfolio-refresh'){render({refreshPortfolio:true});return;}
+   if(action==='portfolio-page'){location.hash=`discovery/${button.dataset.cohort}/${button.dataset.offset}`;return;}
++  if(action==='portfolio-brief'){
++    const data=state.portfolio,version=state.routeVersion,slot=document.getElementById('portfolio-brief-slot');
++    perform(async()=>{
++      button.textContent='Preparing discussion…';slot.innerHTML='<p class="help">Preparing questions from the measured portfolio evidence…</p>';
++      try{
++        const result=await api('/portfolio/brief',{method:'POST',body:JSON.stringify({cohort:data.worklist.cohort,snapshot_key:data.snapshot_key})});
++        state.portfolioBriefs[`${result.cohort}/${result.snapshot_key}`]=result;
++        if(version===state.routeVersion)slot.innerHTML=portfolioBriefView(result);
++      }catch(error){if(version===state.routeVersion)slot.innerHTML=notice('The briefing could not be displayed. The measured evidence remains available.','warn');throw error;}
++    });return;
++  }
+   if(action==='accounts-page'){state.offset=Number(button.dataset.offset);render();return;}
+   if(['show-guide','hide-guide'].includes(action)){state.showGuide=action==='show-guide';writeLocal('tangerine-guide-visible',state.showGuide);render({quiet:true});return;}
+   if(action==='compare'){const ids=[...main.querySelectorAll('[data-compare]:checked')].map(x=>x.dataset.compare);if(ids.length===2)location.hash=`compare/${ids[0]}/${ids[1]}`;return;}
+--- a/web_app/static/views.js
++++ b/web_app/static/views.js
+@@ -22,20 +22,28 @@
+     <div class="grid-2"><section class="card"><h2>Follow-up diary</h2>${followups.length?table(['Customer review','Due','Owner'],followups.slice(0,8).map(r=>[`<a href="#run/${e(r.id)}">${e(r.title)}</a><div class="help">Account ${r.account_id}</div>`,`${e(r.review.follow_up_date)} ${overdue(r)?badge('Overdue','warn'):''}`,e(r.review.owner||'Unassigned')])):'<p class="help">No follow-ups scheduled. Set a date when you record the outcome of a customer review.</p>'}</section><section class="card"><h2>Recent reviews</h2>${items.length?table(['Customer review','Progress'],items.slice(0,6).map(r=>[`<a href="#run/${e(r.id)}">${e(r.title)}</a><div class="help">Account ${r.account_id}</div>`,reviewStatus(r)])):'<p class="help">Your first saved assessment will appear here.</p>'}<a href="#history">View review history →</a></section></div><p class="section-caption">Worklist counts cover the latest 100 assessments saved in this workspace. Confirm current customer circumstances during the review.</p>`;
+ }
+ 
+-export function discoveryView(data) {
++export function discoveryView(data,brief=null) {
+   const p=data.provenance,w=data.worklist,group=data.cohorts.find(c=>c.id===w.cohort);
+   const evidence=r=>w.cohort==='recurring_shortfalls'?`${r.deficit_months} shortfall months out of 12`:w.cohort==='thin_reserves'?`${number(r.reserve_months)} months of reserves`:w.cohort==='payment_timing'?`${r.recovered_months} month(s) recovered after overdraft`:'Under 6 months of cover at 55% inflow';
+   return heading('Portfolio insights','Understand the patterns behind customer needs.','Use these observations to guide questions about affordability and cash reserves. They are historical patterns, not individual risk ratings.','<a class="button primary" href="#customers">Find a customer →</a>')+
+-    `<section class="card"><div class="card-head"><div>${badge(p.label)} <span class="help">${e(p.status)}</span></div><button class="small" data-action="portfolio-refresh">Refresh insights</button></div><p class="help">Retrieved ${e(new Date(p.queried_at).toLocaleString())}. Records through ${e(data.period_end)}; this is historical data.</p></section>
++    `<section class="card"><div class="card-head"><div>${badge(p.label,p.source==='snowflake'?'success':p.fallback?'warn':'')} <span class="help">${e(p.status)}</span></div><button class="small" data-action="portfolio-refresh">Refresh insights</button></div><p class="help">Retrieved ${e(new Date(p.queried_at).toLocaleString())}${p.loaded_at?` · Snapshot uploaded ${e(new Date(p.loaded_at).toLocaleString())}`:''}. Records through ${e(data.period_end)}; this is historical data.</p></section>
+     <section aria-label="Choose a customer group"><h2>Where could a customer conversation help?</h2><p class="help">Choose a group, review the recorded evidence, then open a customer overview. A customer may appear in more than one group.</p><div class="grid-2">${data.cohorts.map(c=>`<article class="card"><div class="card-head"><h3>${e(c.title)}</h3>${c.id===w.cohort?badge('Selected'):''}</div><div class="finding-number">${number(c.count)}</div><p>${e(c.description)}</p><p class="help">Of ${number(c.denominator)} eligible accounts.</p><a class="button ${c.id===w.cohort?'primary':''}" href="#discovery/${e(c.id)}" ${c.id===w.cohort?'aria-current="page"':''}>View customers →</a></article>`).join('')}</div></section>
+     <section class="card"><h2>${e(group.title)}</h2><p>${e(group.prompt)}</p><p class="help">${number(w.total)} accounts. Showing ${w.items.length?w.offset+1:0}–${w.offset+w.items.length}. Ordered by shortfall months, then reserve coverage and account number.</p>
+     ${w.items.length?table(['Account','Reason to review','Monthly surplus / gap','Cash reserve coverage','History through',''],w.items.map(r=>[`<a href="#customer/${r.account_id}">${r.account_id}</a>${r.loan_in_arrears?'<div class="help">Loan arrears recorded</div>':''}`,`${e(evidence(r))}<div class="help">${r.recent_months} of 12 recent months available</div>`,e(money(r.surplus)),r.reserve_months==null?'Not established':`${e(number(r.reserve_months))} months`,e(r.last_month),`<a class="button small" href="#customer/${r.account_id}">Review customer →</a>`])):'<p>No accounts meet this group’s criteria.</p>'}
+     <div class="actions end"><button class="small" data-action="portfolio-page" data-cohort="${e(w.cohort)}" data-offset="${Math.max(0,w.offset-w.limit)}" ${w.offset===0?'disabled':''}>Previous</button><button class="small" data-action="portfolio-page" data-cohort="${e(w.cohort)}" data-offset="${w.offset+w.limit}" ${w.offset+w.items.length>=w.total?'disabled':''}>Next</button></div></section>
++    <section class="card"><div class="card-head"><h2>Prepare for these customer conversations</h2><button data-action="portfolio-brief" ${p.source!=='snowflake'?'disabled':''}>Prepare discussion questions</button></div><p class="help">Use the group’s measured patterns to draft questions for a customer conversation. Preparation runs only when you select this button.${p.source!=='snowflake'?' This feature becomes available when the workspace is connected to Snowflake.':''}</p><div id="portfolio-brief-slot" aria-live="polite">${brief?portfolioBriefView(brief):''}</div></section>
+     <h2>Portfolio context</h2>
+     <div class="metric-grid">${metric('Accounts',number(data.accounts))}${metric('Active loans',number(data.active_loans))}${metric('Records through',data.period_end)}</div>
+     <div class="grid-3">${data.findings.map(f=>`<article class="card finding"><h3>${e(f.title)}</h3><div class="finding-number">${f.denominator?e(percent(f.numerator/f.denominator)):'Not established'}</div><p>${e(f.description)}</p><span class="badge">${e(number(f.numerator))} of ${e(number(f.denominator))}</span></article>`).join('')}</div>
+     <div class="grid-2"><section class="card">${barChart(data.reserve_distribution,'Cash reserves relative to monthly spending')}<p class="help">Historical average balance divided by typical spending. Coverage is unavailable for ${number(data.reserve_undefined)} accounts.</p></section><section class="card"><h2>Questions for the customer conversation</h2>${noteList(['How much cash is accessible today?', 'Are regular payments concentrated before the next income date?', 'Are there upcoming costs or changes in income that are absent from the account history?', 'What does the customer most want to protect or achieve?'])}<a class="button" href="#customers">Open a customer review →</a></section></div>
+     <section class="card">${lineChart(data.monthly_trend,[{key:'total_inflow',name:'Money in'},{key:'total_spending',name:'Money out'}],'month','Aggregate monthly cash flow')}<p class="help">${e(data.recent_start)} to ${e(data.period_end)}. Totals reflect accounts with records in each month.</p></section><details><summary>Observation period and interpretation</summary><p>Records from ${e(data.period_start)} to ${e(data.period_end)}.</p>${noteList(data.limitations.filter(s=>!s.includes('labelled best-plan')))}</details>`;
++}
++
++export function portfolioBriefView(result) {
++  return `${badge('Snowflake-assisted draft')}<p class="help">Prepared ${e(new Date(result.generated_at).toLocaleString())}. Review these suggestions against the recorded evidence and the customer’s current circumstances.</p><p>${e(result.brief.overview)}</p>${result.brief.questions.map(q=>{
++    const fact=result.evidence[q.evidence_id];
++    return `<article><h3>${e(q.question)}</h3><p>${e(q.reason)}</p><p class="help">Recorded evidence: ${e(fact.title)} — ${number(fact.numerator)} of ${number(fact.denominator)}. ${e(fact.description)}</p></article>`;
++  }).join('')}`;
+ }
+ 
+ export function accountListView(data,query='',filter='all') {
+--- a/.env.example
++++ b/.env.example
+@@ -5,3 +5,15 @@
+ JEV_MODEL=typesafe/jev-1.14
+ GEMINI_API_KEY=
+ GEMINI_CLASSIFIER_MODEL=gemini-3.5-flash-lite
++
++# Optional Snowflake portfolio insights. See SNOWFLAKE.md for account setup/upload.
++# These settings are server-side only. A Snowflake PAT is separate from AI API keys.
++PORTFOLIO_SOURCE=local
++SNOWFLAKE_ACCOUNT=
++SNOWFLAKE_USER=
++SNOWFLAKE_TOKEN=
++SNOWFLAKE_WAREHOUSE=TANGERINE_WH
++SNOWFLAKE_DATABASE=TANGERINE_ANALYTICS
++SNOWFLAKE_SCHEMA=PORTFOLIO
++SNOWFLAKE_ROLE=
++SNOWFLAKE_CORTEX_MODEL=claude-sonnet-4-6

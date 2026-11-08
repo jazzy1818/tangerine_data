@@ -1,0 +1,116 @@
+"""Explicit warehouse upload; never invoked by the website.
+
+python -m web_app.snowflake_sync sync --dry-run
+python -m web_app.snowflake_sync sync
+python -m web_app.snowflake_sync status
+"""
+import argparse
+from datetime import datetime, timezone
+import json
+from uuid import uuid4
+
+import numpy as np
+import pandas as pd
+
+from . import warehouse
+
+MONTHLY_COLUMNS = ['account_id', 'month', 'money_in', 'money_out', 'avg_daily_balance',
+                   'month_end_balance', 'days_below_zero']
+
+
+def prepare_data():
+    data_dir = warehouse.ROOT / 'data'
+    source_hash = warehouse.fingerprint(data_dir)
+    monthly = pd.read_csv(data_dir / 'monthly_summary.csv', usecols=MONTHLY_COLUMNS)[MONTHLY_COLUMNS]
+    loans = pd.read_csv(data_dir / 'loans.csv', usecols=['account_id', 'status'])[['account_id', 'status']]
+    if monthly.empty or monthly.duplicated(['account_id', 'month']).any() or loans.account_id.duplicated().any():
+        raise ValueError('Expected nonempty monthly history, unique account/month rows and one loan snapshot per account.')
+    for frame in (monthly, loans):
+        ids = frame.account_id
+        if not np.isfinite(ids).all() or (ids <= 0).any() or (ids % 1 != 0).any():
+            raise ValueError('Account identifiers must be positive integers.')
+        frame['account_id'] = ids.astype('int64')
+    if not monthly.month.str.fullmatch(r'\d{4}-(0[1-9]|1[0-2])', na=False).all():
+        raise ValueError('Monthly history must use YYYY-MM dates.')
+    dates = pd.to_datetime(monthly.month + '-01', format='%Y-%m-%d')
+    required = monthly[['money_in', 'money_out', 'avg_daily_balance']]
+    if not np.isfinite(required.to_numpy()).all() or (monthly[['money_in', 'money_out']] < 0).any().any():
+        raise ValueError('Inflow, spending and average balances must be finite; inflow and spending cannot be negative.')
+    for field in ('month_end_balance', 'days_below_zero'):
+        if not np.isfinite(monthly[field].dropna()).all():
+            raise ValueError('Optional balance observations must be finite when supplied.')
+    days = monthly.days_below_zero
+    if ((days < 0) | (days > dates.dt.days_in_month) | (days.notna() & (days % 1 != 0))).any():
+        raise ValueError('Negative-balance days must be whole days within the month, or missing.')
+    if not loans.status.isin(['A', 'B', 'C', 'D']).all() or not loans.account_id.isin(monthly.account_id).all():
+        raise ValueError('Loan statuses must be A–D and refer to accounts in monthly history.')
+    if warehouse.fingerprint(data_dir) != source_hash:
+        raise ValueError('Source files changed during preparation. Run the upload again.')
+    metadata = {'source_hash': source_hash, 'accounts': int(monthly.account_id.nunique()),
+                'monthly_observations': len(monthly), 'loan_rows': len(loans),
+                'period_start': monthly.month.min(), 'period_end': monthly.month.max()}
+    monthly['month'] = monthly.month + '-01'
+    # Convert pandas missing scalars to SQL NULL before sending bound parameters.
+    monthly = monthly.astype(object).where(pd.notna(monthly), None)
+    return monthly, loans, metadata
+
+
+def upload(config, monthly, loans, meta):
+    with warehouse.connection(config) as conn, conn.cursor() as cur:
+        # These three project tables are the only objects this command writes.
+        cur.execute('''CREATE TABLE IF NOT EXISTS monthly_history (
+            account_id BIGINT NOT NULL, month DATE NOT NULL,
+            money_in DOUBLE NOT NULL, money_out DOUBLE NOT NULL,
+            avg_daily_balance DOUBLE NOT NULL, month_end_balance DOUBLE, days_below_zero INTEGER)''')
+        cur.execute('CREATE TABLE IF NOT EXISTS loan_snapshot (account_id BIGINT NOT NULL, status VARCHAR(4) NOT NULL)')
+        cur.execute('''CREATE TABLE IF NOT EXISTS dataset_snapshot (
+            snapshot_id VARCHAR(36), source_hash VARCHAR(64), loaded_at VARCHAR(40),
+            period_start VARCHAR(7), period_end VARCHAR(7), monthly_rows BIGINT)''')
+        cur.execute('BEGIN')
+        try:
+            # DELETE, not TRUNCATE: retain the old snapshot on any insert failure.
+            for name in ('monthly_history', 'loan_snapshot', 'dataset_snapshot'):
+                cur.execute(f'DELETE FROM {name}')
+            for name, frame in (('monthly_history', monthly), ('loan_snapshot', loans)):
+                columns = ', '.join(frame.columns)
+                placeholders = ', '.join(['%s'] * len(frame.columns))
+                statement = f'INSERT INTO {name} ({columns}) VALUES ({placeholders})'
+                for start in range(0, len(frame), 5000):
+                    cur.executemany(statement, list(frame.iloc[start:start+5000].itertuples(index=False, name=None)))
+                cur.execute(f'SELECT COUNT(*) FROM {name}')
+                if cur.fetchone()[0] != len(frame):
+                    raise warehouse.WarehouseError('row_count_mismatch', 'Upload row counts did not match. The previous snapshot was retained.')
+            cur.execute('INSERT INTO dataset_snapshot VALUES (%s, %s, %s, %s, %s, %s)',
+                        (str(uuid4()), meta['source_hash'], datetime.now(timezone.utc).isoformat(),
+                         meta['period_start'], meta['period_end'], meta['monthly_observations']))
+            cur.execute('COMMIT')
+        except Exception:
+            cur.execute('ROLLBACK')
+            raise
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Load the supplied financial snapshot into Snowflake, or inspect its analytics.')
+    parser.add_argument('command', choices=['sync', 'status'])
+    parser.add_argument('--dry-run', action='store_true', help='Validate and describe the upload without connecting to Snowflake (sync only).')
+    args = parser.parse_args()
+    if args.dry_run and args.command != 'sync':
+        parser.error('--dry-run applies to sync only')
+    try:
+        if args.command == 'sync':
+            monthly, loans, meta = prepare_data()
+            print(json.dumps({'operation': 'upload_preview' if args.dry_run else 'upload', **meta}, indent=2))
+            if not args.dry_run:
+                upload(warehouse.settings(), monthly, loans, meta)
+                print('Snapshot committed. Run status to inspect the warehouse queries; enable PORTFOLIO_SOURCE=snowflake and restart the website.')
+        else:
+            facts, trend, meta = warehouse.read_snapshot(warehouse.settings(), warehouse.fingerprint())
+            print(json.dumps({'source': 'snowflake', 'accounts': len(facts), 'trend_months': len(trend), **meta}, indent=2))
+    except warehouse.WarehouseError as exc:
+        parser.exit(1, f'{exc.code}: {exc}\n')
+    except (ValueError, OSError, KeyError, TypeError):
+        parser.exit(1, 'Cannot prepare the supplied data. Check the CSV columns, unique account/month rows, dates and numeric values.\n')
+
+
+if __name__ == '__main__':
+    main()

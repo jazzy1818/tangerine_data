@@ -1,0 +1,149 @@
+"""Optional Snowflake connection and read-only portfolio queries.
+
+Secrets stay on the server. No cloud dependency is imported until configured.
+"""
+from contextlib import contextmanager
+import hashlib
+import json
+import logging
+import os
+from pathlib import Path
+import re
+import shlex
+from time import monotonic
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+SQL_DIR = Path(__file__).with_name('sql')
+LOG = logging.getLogger('uvicorn.error')
+NAMES = ('PORTFOLIO_SOURCE', 'SNOWFLAKE_ACCOUNT', 'SNOWFLAKE_USER', 'SNOWFLAKE_TOKEN',
+         'SNOWFLAKE_WAREHOUSE', 'SNOWFLAKE_DATABASE', 'SNOWFLAKE_SCHEMA', 'SNOWFLAKE_ROLE', 'SNOWFLAKE_CORTEX_MODEL')
+DEFAULTS = {'PORTFOLIO_SOURCE': 'local', 'SNOWFLAKE_DATABASE': 'TANGERINE_ANALYTICS',
+            'SNOWFLAKE_SCHEMA': 'PORTFOLIO', 'SNOWFLAKE_WAREHOUSE': 'TANGERINE_WH',
+            'SNOWFLAKE_CORTEX_MODEL': 'claude-sonnet-4-6'}
+
+
+class WarehouseError(Exception):
+    """Only fixed, non-secret messages/codes cross the connector boundary."""
+
+    def __init__(self, code, message):
+        self.code = code
+        super().__init__(message)
+
+
+def settings():
+    result = {**DEFAULTS, **{k: os.environ[k] for k in NAMES if k in os.environ}}
+    try:
+        lines = (ROOT / '.env').read_text(encoding='utf-8-sig').splitlines()
+    except FileNotFoundError:
+        lines = []
+    except (OSError, UnicodeError):
+        raise WarehouseError('configuration', 'Cannot read the project .env file.') from None
+    for line in lines:
+        line = line.strip().removeprefix('export ').lstrip()
+        name, separator, value = line.partition('=')
+        name = name.strip()
+        if separator and name in NAMES:
+            try:
+                parts = shlex.split(value, comments=True)
+                if len(parts) > 1:
+                    raise ValueError
+            except ValueError:
+                raise WarehouseError('configuration', f'Check the format of {name} in .env.') from None
+            result[name] = parts[0] if parts else ''
+    if result['PORTFOLIO_SOURCE'] not in ('local', 'snowflake'):
+        raise WarehouseError('configuration', 'PORTFOLIO_SOURCE must be local or snowflake.')
+    return result
+
+
+def identifier(value):
+    # Restrict names used in setup SQL to ordinary unquoted Snowflake identifiers.
+    if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,127}', value):
+        raise WarehouseError('configuration', 'Use simple letters, digits and underscores for Snowflake object names.')
+    return value.upper()
+
+
+@contextmanager
+def connection(config):
+    required = ('SNOWFLAKE_ACCOUNT', 'SNOWFLAKE_USER', 'SNOWFLAKE_TOKEN', 'SNOWFLAKE_WAREHOUSE',
+                'SNOWFLAKE_DATABASE', 'SNOWFLAKE_SCHEMA')
+    missing = [name for name in required if not config.get(name)]
+    if missing:
+        raise WarehouseError('not_configured', 'Add these settings to .env: ' + ', '.join(missing))
+    for name in ('SNOWFLAKE_WAREHOUSE', 'SNOWFLAKE_DATABASE', 'SNOWFLAKE_SCHEMA'):
+        identifier(config[name])
+    try:
+        import snowflake.connector
+    except ImportError:
+        raise WarehouseError('connector_missing', 'Install requirements-snowflake.txt in the active Python environment.') from None
+    kwargs = {k.removeprefix('SNOWFLAKE_').lower(): config[k] for k in (*required, 'SNOWFLAKE_ROLE')
+              if config.get(k)}
+    kwargs.update(authenticator='PROGRAMMATIC_ACCESS_TOKEN', login_timeout=15,
+                  network_timeout=30, socket_timeout=10, client_session_keep_alive=False,
+                  paramstyle='pyformat',
+                  session_parameters={'QUERY_TAG': 'tangerine_portfolio_v1',
+                                      'STATEMENT_TIMEOUT_IN_SECONDS': 60,
+                                      'STATEMENT_QUEUED_TIMEOUT_IN_SECONDS': 30})
+    conn = None
+    try:
+        conn = snowflake.connector.connect(**kwargs)
+        yield conn
+    except WarehouseError:
+        raise
+    except Exception:
+        # Connector exceptions may include SQL, endpoint/account details or auth context.
+        raise WarehouseError('snowflake_unavailable', 'Snowflake could not complete the request. Check account access, token, warehouse and setup in SNOWFLAKE.md.') from None
+    finally:
+        if conn is not None:
+            try:
+                conn.close()
+            except Exception:
+                pass
+
+
+def fingerprint(data_dir=ROOT / 'data'):
+    digest = hashlib.sha256()
+    for name in ('monthly_summary.csv', 'loans.csv'):
+        digest.update(name.encode())
+        with (data_dir / name).open('rb') as source:
+            for chunk in iter(lambda: source.read(1024 * 1024), b''):
+                digest.update(chunk)
+    return digest.hexdigest()
+
+
+def query_frame(conn, filename, query_ids):
+    with conn.cursor() as cur:
+        cur.execute((SQL_DIR / filename).read_text())
+        query_ids.append(cur.sfqid)
+        return pd.DataFrame(cur.fetchall(), columns=[c[0].lower() for c in cur.description])
+
+
+def metadata(conn):
+    with conn.cursor() as cur:
+        cur.execute('SELECT snapshot_id, source_hash, loaded_at, period_start, period_end, monthly_rows FROM dataset_snapshot')
+        rows = cur.fetchall()
+    if len(rows) != 1:
+        raise WarehouseError('not_loaded', 'Load the supplied dataset using the Snowflake sync command.')
+    return dict(zip(('snapshot_id', 'source_hash', 'loaded_at', 'period_start', 'period_end', 'monthly_observations'), rows[0]))
+
+
+def read_snapshot(config, expected_hash):
+    started, query_ids = monotonic(), []
+    with connection(config) as conn:
+        before = metadata(conn)
+        if before['source_hash'] != expected_hash:
+            raise WarehouseError('snapshot_mismatch', 'The warehouse snapshot differs from the customer records. Reload it and restart the website.')
+        facts = query_frame(conn, 'account_facts.sql', query_ids)
+        trend = query_frame(conn, 'monthly_trend.sql', query_ids)
+        after = metadata(conn)
+        # All loader changes commit together. Refuse a report that straddles a reload.
+        if before['snapshot_id'] != after['snapshot_id']:
+            raise WarehouseError('snapshot_changed', 'The warehouse was refreshed during this request. Try again shortly.')
+    if facts.empty or trend.empty:
+        raise WarehouseError('empty_snapshot', 'The warehouse contains no portfolio observations.')
+    for key in ('loaded_at', 'period_start', 'period_end'):
+        before[key] = str(before[key])
+    before.update(query_ids=query_ids, query_ms=round((monotonic()-started)*1000))
+    LOG.info('portfolio_snowflake %s', json.dumps({'query_ids': query_ids, 'query_ms': before['query_ms']}))
+    return facts, trend, before

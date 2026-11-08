@@ -14,17 +14,32 @@ This track is powered by Tangerine. At judging, a judge will pick a customer and
 
 ## Run locally
 
-Activate your Conda or virtual environment with Python 3.10+, install dependencies once with
-`python -m pip install -r requirements.txt`, then start the web app:
+The employee website supports customer reviews, financial assessments, discussion notes and follow-up.
+It uses a Python API and a separate browser frontend. It reuses the
+existing classification and guarded financial engines. See [WEBSITE.md](WEBSITE.md)
+for the workflow, architecture, data visualization decision, and local monitoring.
+
+Activate your Conda or virtual environment with Python 3.10+, then run:
 
 ```bash
+python -m pip install -r requirements-web.txt
 bash run.sh
 ```
 
+Open **http://127.0.0.1:8000**. Start from **My reviews**, find the customer, record their
+changing circumstances, and prepare a review. Save discussion notes and a follow-up date.
+Assessments and review notes persist across refreshes in the same browser.
+The new website does not need Streamlit or Node.js to run.
+
 The launcher uses Python from your active environment, with a `python3` fallback. It works on
 Linux and macOS; Windows requires Bash (for example, Git Bash or WSL) with Python available.
-Use `bash run.sh cli` for the command-line engine. Extra arguments are passed through, such as
-`bash run.sh --server.port 8502`. The classifier reads API keys from the project `.env` file.
+Use `bash run.sh cli` for the command-line engine or `bash run.sh --port 8001` for a
+different website port. The classifier reads API keys from the project `.env` file; no extra
+shell exports or browser key entry are needed.
+
+The earlier Streamlit workspace remains available with `bash run.sh streamlit`
+(install `requirements.txt` for all legacy/discovery dependencies). Its port option is
+`bash run.sh streamlit --server.port 8502`.
 
 ---
 

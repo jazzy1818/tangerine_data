@@ -20,10 +20,31 @@ if [ -z "$PYTHON_BIN" ]; then
     exit 1
 fi
 
-if [ "${1:-}" == "cli" ]; then
-    shift
-    exec "$PYTHON_BIN" -B engine.py "$@"
-else
-    echo "Starting Tangerine Mission Control ..."
-    exec "$PYTHON_BIN" -B -m streamlit run app.py "$@"
+case "${1:-web}" in
+    cli)
+        shift
+        exec "$PYTHON_BIN" -B engine.py "$@"
+        ;;
+    streamlit|legacy)
+        shift
+        exec "$PYTHON_BIN" -B -m streamlit run app.py "$@"
+        ;;
+    web)
+        if [ "$#" -gt 0 ]; then shift; fi
+        ;;
+    --help|-h)
+        echo "Usage: bash run.sh [web|streamlit|cli] [arguments]"
+        echo "Default: website at http://127.0.0.1:8000 (Python API + browser frontend)"
+        echo "Examples: bash run.sh --port 8001 | bash run.sh streamlit --server.port 8502"
+        exit 0
+        ;;
+esac
+
+if ! "$PYTHON_BIN" -c 'import fastapi, uvicorn, pandas, numpy, pydantic, requests' >/dev/null 2>&1; then
+    echo "Website dependencies are missing from the active Python environment." >&2
+    echo "Run: $PYTHON_BIN -m pip install -r requirements-web.txt" >&2
+    exit 1
 fi
+
+echo "Starting Tangerine Resilience Workspace (default: http://127.0.0.1:8000) ..."
+exec "$PYTHON_BIN" -B -m uvicorn web_app.server:app --host 127.0.0.1 --port 8000 --workers 1 "$@"

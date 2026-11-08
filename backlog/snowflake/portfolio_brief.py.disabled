@@ -1,0 +1,111 @@
+"""Explicit Snowflake Cortex REST briefing, grounded in aggregate SQL evidence."""
+from datetime import datetime, timezone
+import hashlib
+import json
+import re
+from threading import Lock
+from time import monotonic
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
+import requests
+
+from . import portfolio, warehouse
+
+Cohort = Literal['recurring_shortfalls', 'thin_reserves', 'payment_timing', 'shock_exposure']
+
+
+class BriefRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    cohort: Cohort
+    snapshot_key: str = Field(min_length=32, max_length=64)
+
+
+class DiscussionQuestion(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    question: str = Field(min_length=5, max_length=300)
+    reason: str = Field(min_length=5, max_length=500)
+    evidence_id: Literal['group', 'finding_1', 'finding_2', 'finding_3']
+
+
+class DiscussionBrief(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    overview: str = Field(min_length=5, max_length=600)
+    questions: list[DiscussionQuestion] = Field(min_length=3, max_length=3)
+
+
+_lock = Lock()
+_cache = {}
+_attempts = {}
+
+
+def generate(payload):
+    report = portfolio.discovery(payload.cohort)
+    if report['provenance']['source'] != 'snowflake':
+        raise warehouse.WarehouseError('warehouse_required', 'Discussion preparation needs a connected Snowflake snapshot. The customer list remains available.')
+    if report['snapshot_key'] != payload.snapshot_key:
+        raise warehouse.WarehouseError('snapshot_changed', 'The portfolio has changed. Refresh insights before preparing the discussion.')
+    group = next(c for c in report['cohorts'] if c['id'] == payload.cohort)
+    evidence = {'group': {'title': group['title'], 'description': group['description'],
+                          'numerator': group['count'], 'denominator': group['denominator']},
+                **{f'finding_{i}': finding for i, finding in enumerate(report['findings'], 1)}}
+    config = warehouse.settings()
+    account = config.get('SNOWFLAKE_ACCOUNT', '')
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,200}', account):
+        raise warehouse.WarehouseError('configuration', 'Use the Snowflake account identifier, without a URL, in .env.')
+    if not config.get('SNOWFLAKE_TOKEN'):
+        raise warehouse.WarehouseError('not_configured', 'Add the Snowflake programmatic access token to .env.')
+    model = config['SNOWFLAKE_CORTEX_MODEL']
+    cache_key = hashlib.sha256(json.dumps([config, payload.model_dump()], sort_keys=True).encode()).hexdigest()
+    with _lock:
+        now = monotonic()
+        if cache_key in _cache and now-_cache[cache_key][0] < 1800:
+            return {**_cache[cache_key][1], 'cached': True}
+        if now-_attempts.get(cache_key, -60) < 30:
+            raise warehouse.WarehouseError('brief_cooldown', 'Please wait a few moments before requesting this briefing again.')
+        if len(_attempts) > 32:
+            _attempts.clear()
+        _attempts[cache_key] = now
+        # Keep the requested schema simple for model compatibility; Pydantic enforces lengths.
+        schema = {'type': 'object', 'additionalProperties': False,
+                  'properties': {'overview': {'type': 'string'}, 'questions': {'type': 'array', 'items': {
+                      'type': 'object', 'additionalProperties': False,
+                      'properties': {'question': {'type': 'string'}, 'reason': {'type': 'string'},
+                                     'evidence_id': {'type': 'string', 'enum': list(evidence)}},
+                      'required': ['question', 'reason', 'evidence_id']}}},
+                  'required': ['overview', 'questions']}
+        body = {'model': model, 'stream': False, 'max_tokens': 1200,
+                'messages': [
+                    {'role': 'system', 'content': 'Help a bank employee prepare customer conversations for the selected historical portfolio group. Use only the supplied evidence. Write a short overview (under 600 characters) and exactly three practical questions, each with a brief reason and supporting evidence_id. Questions must be under 300 characters, reasons under 500. Distinguish observations from hypotheses; ask the employee to confirm current circumstances. Do not calculate new numbers, infer causes or individual risk, select financial plans, recommend products or make eligibility decisions. Do not repeat numeric statistics in prose; the interface displays the authoritative evidence alongside your text. Return JSON matching the schema.'},
+                    {'role': 'user', 'content': json.dumps({'selected_group': group['title'],
+                        'period_end': report['period_end'], 'evidence': evidence, 'limitations': report['limitations']})}],
+                'response_format': {'type': 'json_schema', 'json_schema': {'name': 'discussion_brief', 'strict': True, 'schema': schema}}}
+        started = monotonic()
+        url = f'https://{account.replace("_", "-")}.snowflakecomputing.com/api/v2/cortex/v1/chat/completions'
+        try:
+            with requests.post(url, headers={'Authorization': f'Bearer {config["SNOWFLAKE_TOKEN"]}',
+                               'X-Snowflake-Authorization-Token-Type': 'PROGRAMMATIC_ACCESS_TOKEN'},
+                               json=body, timeout=(10, 45), allow_redirects=False) as response:
+                if response.status_code != 200:
+                    warehouse.LOG.warning('portfolio_cortex status=%s', response.status_code)
+                    raise warehouse.WarehouseError('cortex_unavailable', 'Discussion preparation is unavailable. Ask the administrator to check Snowflake model access and usage limits.')
+                raw = response.json()
+            choice = raw['choices'][0]
+            if choice.get('finish_reason') != 'stop':
+                raise ValueError('Incomplete response')
+            brief = DiscussionBrief.model_validate_json(choice['message']['content'])
+        except warehouse.WarehouseError:
+            raise
+        except (requests.RequestException, ValueError, TypeError, KeyError, IndexError, AttributeError, ValidationError):
+            warehouse.LOG.warning('portfolio_cortex code=invalid_or_incomplete_response')
+            raise warehouse.WarehouseError('cortex_response', 'Discussion preparation did not complete. The measured portfolio evidence remains available.') from None
+        usage = raw.get('usage') or {}
+        safe_usage = {k: v for k, v in usage.items() if k in ('prompt_tokens', 'completion_tokens', 'total_tokens') and isinstance(v, int)} if isinstance(usage, dict) else {}
+        warehouse.LOG.info('portfolio_cortex %s', json.dumps({'status': 'complete', 'latency_ms': round((monotonic()-started)*1000), 'usage': safe_usage}))
+        result = {'brief': brief.model_dump(), 'evidence': evidence, 'source': 'Snowflake Cortex',
+                  'cohort': payload.cohort, 'snapshot_key': report['snapshot_key'],
+                  'generated_at': datetime.now(timezone.utc).isoformat(), 'cached': False}
+        if len(_cache) >= 32:
+            _cache.clear()
+        _cache[cache_key] = (monotonic(), result)
+        return result

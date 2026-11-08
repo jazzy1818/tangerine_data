@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore financial resilience, model a customer scenario, and review an evidence-based response.">
+  <title>Tangerine · Customer Review Workspace</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23d94d20'/%3E%3Cpath d='M10 12h20v5h-7v14h-6V17h-7z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="sidebar">
+    <a class="brand" href="#workspace"><span class="brand-mark">t</span><span>tangerine<span class="brand-sub">Customer reviews</span></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <a href="#workspace" data-nav="workspace">My reviews</a>
+      <a href="#customers" data-nav="customers">Find a customer</a>
+      <a href="#scenario" data-nav="scenario">Assess a change</a>
+      <a href="#history" data-nav="history">Review history</a>
+      <a href="#discovery" data-nav="discovery">Portfolio insights</a>
+    </nav>
+    <div id="selected-customer" class="selected-customer"></div>
+    <div class="sidebar-foot"><a href="#settings">Assessment preferences</a><br><span class="live-dot"></span> Employee workspace<br><small>Amounts in CAD<br>Confirm current customer circumstances.</small></div>
+  </aside>
+  <div class="shell">
+    <header class="topbar"><span>CUSTOMER FINANCIAL SUPPORT <span class="muted">/ EMPLOYEE WORKSPACE</span></span><span id="connection-status" class="badge">Opening workspace</span></header>
+    <main id="main" tabindex="-1"><div class="loading">Loading the workspace…</div></main>
+    <footer>Financial projections use the supplied records and scenario assumptions. Review unresolved evidence before drawing a funding conclusion.</footer>
+  </div>
+  <div id="notifications" role="status" aria-live="polite"></div>
+  <noscript>This workspace needs JavaScript enabled to load customer data and submit scenarios.</noscript>
+</body>
+</html>
