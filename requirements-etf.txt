@@ -1,0 +1,2 @@
+# Optional public market history. Local illustrations work without this extra.
+yfinance>=0.2.65,<2
