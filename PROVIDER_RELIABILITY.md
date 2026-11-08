@@ -160,3 +160,10 @@ Before pushing, a concurrent finance-verification handoff advanced remote `main`
 to `c7ce2f0`. That update was merged without conflicts, preserving its review
 artifacts. The full suite was rerun on the combined code before retrying the push.
 It again passed **446 tests and 9 subtests**; `git diff --check` also passed.
+
+## Phase 3: inspectable offline fallback evidence
+
+The follow-up branch adds a case/backend CSV, reproducible normalized case hashes,
+source fingerprints, explicit live **Not run** records and independent UI checks.
+See the [Phase 3 handoff](reports/provider_fallbacks/README.md) for the scope,
+synthetic expectations, reproduction command and bounded operator smoke setup.
