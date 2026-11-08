@@ -178,14 +178,14 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
         except (ValueError, TypeError):
             proposal_status = 'rejected_invalid_external_proposal'
             flags.append('CLASSIFICATION_REJECTED: Invalid external PlanSelection; local baseline retained.')
-    modules = list(dict.fromkeys(_SUPPORTED_MODULE[e.type] for e in scenario.effects
-                                if e.type in _SUPPORTED_MODULE and e.value is not None and e.evidence != 'unknown'
-                                and e.start_month <= scenario.horizon_months
+    in_scope_effects = [effect for effect in scenario.effects
+                        if effect.value is not None and effect.evidence != 'unknown'
+                        and effect.start_month <= scenario.horizon_months]
+    modules = list(dict.fromkeys(_SUPPORTED_MODULE[e.type] for e in in_scope_effects
+                                if e.type in _SUPPORTED_MODULE
                                 and e.value != (1 if e.type == 'income_multiplier' else 0)))
     adverse = set()
-    for e in scenario.effects:
-        if e.value is None or e.evidence == 'unknown' or e.start_month > scenario.horizon_months:
-            continue
+    for e in in_scope_effects:
         if (e.type == 'income_multiplier' and e.value < 1) or (e.type == 'income_delta' and e.value < 0):
             adverse.add('income')
         elif e.type in ('expense_delta','expense_percent','household_bills_delta','household_bills_percent','debt_payment_delta','one_off_cost','liquidity_hold') and e.value > 0:
@@ -200,8 +200,8 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
     if no_action['first_shortfall_month'] == 0:
         modules.append('M3')
     if any(e.type in ('income_delta', 'expense_delta', 'expense_percent', 'household_bills_percent', 'household_bills_delta')
-           and e.value is not None and (e.value > 0 if e.type == 'income_delta' else e.value < 0)
-           for e in scenario.effects):
+           and (e.value > 0 if e.type == 'income_delta' else e.value < 0)
+           for e in in_scope_effects):
         modules.append('M8')
     recovery = make_recovery_plan(recovery_snapshot, reserve_months=normal.reserve_months)
     if recovery_snapshot is not None:

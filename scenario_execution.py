@@ -39,7 +39,8 @@ def period_values(customer, scenario, month):
     protected = _base(customer, 'F')
     household = bills
     recorded_payment = customer.get('raw_P', customer.get('P'))
-    loan = money(recorded_payment) if recorded_payment is not None else None
+    recorded_loan = money(recorded_payment) if recorded_payment is not None else None
+    loan = recorded_loan
     included_payment = customer.get('included_loan_payment')
     history = customer.get('history')
     if history is not None and 'loan_payments' in history:
@@ -48,6 +49,7 @@ def period_values(customer, scenario, month):
     other_fixed = max(Decimal(0), protected - bills - (included_payment or Decimal(0)))
     receipt = cost = held = Decimal(0)
     unknown, applied = [], []
+    debt_changes, repayments, pending_deferrals = {}, {}, []
     income_unknown = spending_unknown = False
     income_expired = False
     explicit_income = False
@@ -60,25 +62,14 @@ def period_values(customer, scenario, month):
         if effect.obligation_account_id is not None and effect.obligation_account_id != customer.get('account_id'):
             unknown.append(f'{identity}: payment evidence belongs to another account; no relief or repayment applied')
             continue
-        # A deferral is a liability, not forgiveness. Keep repayment outside the
-        # relief window and retain unresolved/out-of-horizon obligations.
-        if effect.debt_change_kind == 'deferral' and month >= effect.start_month:
-            if effect.repayment_unresolved:
-                unknown.append(f'{identity}: deferred loan obligation unresolved; repayment not established')
-            elif effect.repayment_month > scenario.horizon_months:
-                unknown.append(f'{identity}: deferred repayment beyond horizon remains owed')
-            if month == effect.repayment_month:
-                if effect.evidence in ('judge_specified', 'user_confirmed'):
-                    cost += money(effect.repayment_amount)
-                else:
-                    unknown.append(f'{identity}: deferred repayment evidence unknown; not applied')
         active = effect.active(month)
+        repayment_due = effect.debt_change_kind == 'deferral' and month == effect.repayment_month
         if kind in ('income_multiplier', 'income_delta') and v is not None:
             adverse = (v < 1 if kind == 'income_multiplier' else v < 0)
             end = effect.start_month + effect.duration_months if effect.duration_months else None
             if adverse and end is not None and month >= end:
                 income_expired = True
-        if not active:
+        if not active and not repayment_due:
             continue
         if kind == 'unspecified_event':
             unknown.append(f'{identity}: financial effects unspecified')
@@ -108,7 +99,8 @@ def period_values(customer, scenario, month):
             income += money(v)
             explicit_income = True
         elif kind == 'debt_payment_delta':
-            payment = loan
+            payment = recorded_loan
+            change = money(v)
             if effect.obligation_payment is not None:
                 if not (effect.payment_in_baseline and effect.obligation_source):
                     unknown.append(f'{identity}: supplied loan payment lacks source/baseline inclusion; relief not applied')
@@ -117,18 +109,36 @@ def period_values(customer, scenario, month):
             if v < 0 and payment is None:
                 unknown.append(f'{identity}: loan payment unknown; supply sourced payment included in spending; relief not applied')
                 continue
-            if payment is not None and payment + money(v) < 0:
+            if payment is not None and payment + change < 0:
                 raise ValueError(f'Reduction exceeds the specific loan payment in month {month}')
             if v < 0 and effect.obligation_payment is None:
                 if included_payment is None:
                     unknown.append(f'{identity}: loan payment inclusion in baseline spending unknown; relief not applied')
                     continue
-                if included_payment + money(v) < 0:
+                if included_payment + change < 0:
                     raise ValueError(f'Reduction exceeds the loan payment included in baseline spending in month {month}')
-            loan = payment + money(v) if payment is not None else None
-            loan_changed = True
-            spending += money(v)
-            protected += money(v)
+            # Both legs depend on the same payment evidence and assumption status.
+            if repayment_due:
+                repayments[index] = money(effect.repayment_amount)
+                cost += repayments[index]
+            else:
+                loan = payment + change if payment is not None else None
+                loan_changed = True
+                spending += change
+                protected += change
+                debt_changes[index] = change
+                if effect.debt_change_kind == 'deferral' and (
+                    effect.repayment_unresolved or effect.repayment_month > scenario.horizon_months
+                ):
+                    reason = ('deferred loan obligation unresolved; repayment not established'
+                              if effect.repayment_unresolved else 'deferred repayment beyond horizon remains owed')
+                    unknown.append(f'{identity}: {reason}')
+                    if month == effect.start_month:
+                        pending_deferrals.append({
+                            'effect_id': effect.effect_id, 'type': 'deferred_repayment',
+                            'start_month': effect.repayment_month, 'value': effect.repayment_amount,
+                            'unresolved': effect.repayment_unresolved,
+                        })
         elif kind in ('expense_delta', 'household_bills_delta'):
             spending += money(v)
             if kind != 'expense_delta':
@@ -170,7 +180,8 @@ def period_values(customer, scenario, month):
         income = Decimal(0)
     return dict(income=income, spending=spending, receipt=receipt, cost=cost,
                 held=held, income_unknown=income_unknown, spending_unknown=spending_unknown,
-                unknown=unknown, applied=applied, protected=protected)
+                unknown=unknown, applied=applied, protected=protected,
+                debt_changes=debt_changes, repayments=repayments, pending_deferrals=pending_deferrals)
 
 
 def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
@@ -187,6 +198,7 @@ def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
             raise ValueError('Cash effects must be finite and nonnegative')
     initial = cash
     rows, checkpoints, flags, unknowns = [], [], [], []
+    pending = [e.model_dump(mode='json') for e in scenario.effects if e.start_month > scenario.horizon_months]
     complete = not (scenario.phase == 'active' and not scenario.effects)
     if not complete:
         unknowns.append('Active event has no supplied financial effects; no-impact must be explicitly marked normal.')
@@ -195,6 +207,7 @@ def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
         unknowns.append('Recovery phase alone does not establish updated cash or income; this is a baseline reference, with recovery assessed separately.')
     for month in range(scenario.horizon_months + 1):
         p = period_values(customer, scenario, month)
+        pending.extend(p['pending_deferrals'])
         release = money(releases.get(month, 0)) if month else Decimal(0)
         fee = money(fees.get(month, 0)) if month else Decimal(0)
         if month and release > p['spending'] - p['protected']:
@@ -225,12 +238,7 @@ def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
     gap = amount(max(0., -minimum))
     if unknowns:
         flags.append('PARTIAL_PROJECTION: Only quantified components are included; no complete funding conclusion is established.')
-    pending = [e.model_dump(mode='json') for e in scenario.effects if e.start_month > scenario.horizon_months]
-    pending.extend({'effect_id': e.effect_id, 'type': 'deferred_repayment',
-        'start_month': e.repayment_month, 'value': e.repayment_amount,
-        'unresolved': e.repayment_unresolved} for e in scenario.effects
-        if e.debt_change_kind == 'deferral' and (e.repayment_unresolved or e.repayment_month > scenario.horizon_months))
-    if pending:
+    if any(e['start_month'] is not None and e['start_month'] > scenario.horizon_months for e in pending):
         flags.append('BEYOND_HORIZON: Supplied effects outside this horizon remain scheduled; they are not treated as paid or received.')
     if any(e.type in ('income_multiplier', 'income_delta') and e.value is not None
            and (e.value < 1 if e.type == 'income_multiplier' else e.value < 0)

@@ -98,7 +98,10 @@ def set_account_preset(account_id):
 def clear_account_evidence():
     st.session_state.pop('classification_result', None)
     for key in list(st.session_state):
-        if key.startswith('transfer_') or key == 'tailored_explanation':
+        if key.startswith(('transfer_', 'classification_debt_')) or key in (
+            'tailored_explanation', 'classification_guided_value_debt_payment_delta',
+            'classification_guided_effect_id',
+        ):
             del st.session_state[key]
     st.session_state['recovery_supplied'] = False
     st.session_state.pop('recovery_month', None)
