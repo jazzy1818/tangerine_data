@@ -1,0 +1,41 @@
+case_id,scenario,expected_trigger_ids,expected_primary_goal,must_not_do
+S01,Regular surplus; low liquidity,"G08,G16",BUILD_EMERGENCY_RESERVE,No immediate ETF purchase; use verified cash or label B proxy
+S02,Cash flow negative 8 of 12 months,"G01,G09",STABILIZE_CASHFLOW,No forced positive savings transfer
+S03,Positive median surplus; 5 deficit months,G03,SMOOTH_IRREGULAR_INCOME,Avoid fixed transfer equal to median surplus
+S04,Large month-end balance; negative daily balances,"G06,G10",PROTECT_OPERATING_CASH,Do not assume no short-term risk
+S05,Latest balances falling rapidly,G05,STABILIZE_CASHFLOW,Do not call trend permanent cause
+S06,Irregular credits and recurring bill timing mismatch,"G04,G07",PROTECT_OPERATING_CASH,Must verify dates and essential bills
+S07,Low cash; high fixed-cost ratio,"G08,G11",BUILD_EMERGENCY_RESERVE,Do not double count fixed costs
+S08,Active large loan payment; APR unknown,G12,MANAGE_DEBT_OBLIGATIONS,Do not claim high-interest debt
+S09,Bank record or scenario verifies high APR and low buffer,"G08,G13",MANAGE_DEBT_OBLIGATIONS,Compare cash minimum and costly debt; no automatic zero buffer
+S10,No debt appears in supplied bank loan table,G26,MAINTAIN_AND_REVIEW,Do not infer debt-free outside bank
+S11,Reserve target met but historical balance proxy only,"G17,G24",DATA_LIMITED_REVIEW,Flag bank review; no automatic investment allocation
+S12,"Historical surplus and verified cash; documented long-horizon goal, but risk profile absent","G16,G17,G18",INVESTMENT_READINESS_REVIEW,Flag investment suitability unverified; no specific ETF or trade
+S13,Adequate cash; no confirmed goals,G26,MAINTAIN_AND_REVIEW,No investment or savings forced
+S14,House purchase planned in 18 months,"G19,G20",PREPARE_KNOWN_EXPENSE,No equities assumption for needed short-term money
+S15,Future tuition obligation known,G20,PREPARE_KNOWN_EXPENSE,Budget amount and timing customer confirmed
+S16,Account receives apparent $50k transfer,G21,DATA_LIMITED_REVIEW,Flag possible transfer; do not assume new unrestricted money
+S17,Confirmed unrestricted inheritance; low reserve,"G08,G21",BUILD_EMERGENCY_RESERVE,"Allocate windfall once, not as recurring salary"
+S18,Strong income rise with deficit months,"G01,G22",STABILIZE_CASHFLOW,No immediate invest until sustainable
+S19,Emergency fund depleted after earlier shock,G15,REBUILD_AFTER_SHOCK,Use proxy with visible limitations; flag current cash unavailable
+S20,Reserves full and goal completed,G23,ALLOCATE_SURPLUS,Only upon documented goals and eligibility; otherwise flag bank review
+S21,No history: 1 month of account data,G24,DATA_LIMITED_REVIEW,Do not assert volatility/seasonality
+S22,Account history with negative observed B,"G06,G24",STABILIZE_CASHFLOW,No negative dollar reserve contributions
+S23,Loan status finished in source,G24,DATA_LIMITED_REVIEW,Do not infer current payment or APR
+S24,Most withdrawals unlabeled,G24,DATA_LIMITED_REVIEW,Do not recommend cancel subscriptions by guessed amount
+S25,Insurance premium appears in outflow,G24,DATA_LIMITED_REVIEW,Do not assume covered policy and payout
+S26,"Client is authorized user, ownership unclear",G24,DATA_LIMITED_REVIEW,Do not presume full personal control of balance
+S27,Judge gives job loss and current goal is investing,"G25,G01",STABILIZE_CASHFLOW,Suspend optional contributions conditionally; show backup now
+S28,"Judge says someone backflipped, no monetary impact",G26,MAINTAIN_AND_REVIEW,Do not invent injury or costs
+S29,Judge says divorce without amounts,G24,DATA_LIMITED_REVIEW,"Flag shock as under-specified, present configurable assumptions; no fabricated amounts"
+S30,Unexpected positive shock: verified bonus,"G16,G21",ALLOCATE_SURPLUS,One-time bonus not recurring cashflow
+S31,Customer has stable surplus but no verified available cash,"G16,G24",DATA_LIMITED_REVIEW,No unsupported automated cash investment
+S32,"Income and spending stable, but 2 months to goal deadline",G20,PREPARE_KNOWN_EXPENSE,Horizon dominates stock growth hypothesis
+S33,"Concurrent low cash, debt cost high, incoming bill","G08,G13,G20",PREPARE_KNOWN_EXPENSE,"Protect imminent essential payment, compare debt and buffer"
+S34,Goal achieved while judge shock occurs same day,"G23,G25",STABILIZE_CASHFLOW,Goal may be paused despite historical completion
+S35,Historical deficit caused by one extreme exceptional purchase,"G01,G03",STABILIZE_CASHFLOW,Review outlier; no assumption ongoing deficit
+S36,Irregular income and loan payment; low reserve,"G04,G08,G12",SMOOTH_IRREGULAR_INCOME,Overlay debt defense and reserve; do not force single class
+S37,No actionable changes can meet six month horizon,"G09,G25",NO_FEASIBLE_CONTRIBUTION,"Report unresolved gap, not false positive outcome"
+S38,Bank-recorded risk preference excludes equities; ETF review attempted,G18,MAINTAIN_AND_REVIEW,Do not recommend risky purchase against documented preference
+S39,Saving a reserve through transfers between own accounts,"G08,G16",BUILD_EMERGENCY_RESERVE,Do not double count transferred savings as new wealth
+S40,Sparse months with zeros and large deposits,"G04,G24",DATA_LIMITED_REVIEW,Do not divide by zero or infer salary from transfers
