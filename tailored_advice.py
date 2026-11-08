@@ -81,7 +81,7 @@ def build_advice(plan):
             f"supported rebuild {_cad(recovery['monthly_contribution'])}/month. "
             + (f'Conditional rebuild timeline: {eta} months.' if eta is not None else 'Rebuild timeline is not established.'))
     else:
-        cards['recovery'] = 'Recovery is not established. Updated cash, inflows, spending, stability and obligation coverage are required before setting a rebuild date.'
+        cards['recovery'] = 'Recovery is not established. Updated cash, spending, stability, obligation coverage and a supported contribution are required before setting a rebuild date.'
     # Reviews remain mandatory in the UI even when Gemini chooses other emphasis.
     result = {'cards': cards, 'review_flags': plan['review_flags'],
               'transfer_sources': [{'event_id': t['event_id'], 'source': t['source']} for t in plan['existing_transfers']],

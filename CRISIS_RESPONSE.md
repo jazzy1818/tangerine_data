@@ -132,15 +132,21 @@ partial until actual target events/dates are supplied.
 ## Recovery
 
 The optional UI checkpoint accepts explicitly supplied assessment month, cash,
-updated inflows/spending, obligation coverage, stability, and an optional supported
-monthly rebuild bound. It is cleared when the selected account changes. Merely
+updated spending, obligation coverage, stability, and an optional supported
+monthly rebuild bound. Updated inflows are optional: an explicitly supported
+contribution can establish a conditional rebuild rate without inventing income.
+It is cleared when the selected account changes. Merely
 selecting phase `recovery` cannot establish recovery or a new cash balance.
 
 `RecoverySnapshot` source and cash basis (`judge_specified`, `observed`, or
 `simulated`) stay visible. A negative balance, ongoing deficit, uncovered
 obligations, or unestablished stability keeps stabilization active. Otherwise,
 reserve restoration uses the same configured reserve-month policy with updated
-spending and protected earmarks. The rate cannot exceed supported current surplus;
+spending and protected earmarks. When inflows are supplied, the rate cannot exceed
+current surplus, and a known deficit blocks rebuilding even if a contribution is
+supplied. When inflows are absent, monthly surplus remains unknown and only an
+explicitly supported contribution is used; an inflow-unquantified flag records
+that limitation. Stable cash flow and covered obligations must still be supplied;
 the displayed cent amount is the amount used for the timeline. Zero/unknown rates
 have no ETA. Restored reserves trigger reassessment, never automatic ETF advice.
 

@@ -365,7 +365,8 @@ with tab2:
     from plan_classification import scenario_from_engine, ShockScenario
     from plan_classification.ui import render_classification
     handoff = render_classification(customer, income_mult, bills_increase, repair_cost, event_evidence=judge_evidence)
-    if not handoff or handoff['scenario'] is None:
+    scenario_input_valid = bool(handoff and handoff['scenario'] is not None)
+    if not scenario_input_valid:
         st.warning('Scenario input is incomplete or invalid. The baseline remains visible, but no stale slider scenario is applied.')
         active_scenario = ShockScenario(effects=[{'type': 'unspecified_event', 'value': None, 'evidence': 'unknown'}])
         classification_selection = None
@@ -435,12 +436,12 @@ with tab3:
             from recovery_plan import RecoverySnapshot
             checkpoint_month = st.text_input('Checkpoint month (YYYY-MM)', value='', key='recovery_month')
             rcash = st.number_input('Accessible cash at checkpoint (CAD)', value=None, key='recovery_cash')
-            rincome = st.number_input('Updated recurring inflows (CAD/month)', min_value=0., value=None, key='recovery_income')
+            rincome = st.number_input('Updated recurring inflows (CAD/month; optional if contribution support is supplied)', min_value=0., value=None, key='recovery_income')
             rspending = st.number_input('Updated recurring spending (CAD/month)', min_value=.01, value=None, key='recovery_spending')
             rrate = st.number_input('Supported rebuild contribution (CAD/month; leave blank if unknown)', min_value=0., value=None, key='recovery_rate')
             rstable = st.checkbox('Scenario explicitly establishes stable cash flow', key='recovery_stable')
             rcovered = st.checkbox('Scenario explicitly establishes coverage of upcoming obligations', key='recovery_covered')
-            if None not in (rcash, rincome, rspending):
+            if None not in (rcash, rspending):
                 try:
                     recovery_snapshot = RecoverySnapshot(source='Judge-supplied conditional recovery checkpoint',
                         account_id=customer['account_id'],
@@ -466,7 +467,7 @@ with tab3:
         st.stop()
     crisis = plans['crisis_plan']
     if crisis['runtime_validation']['status'] != 'passed':
-        st.error('Financial validation blocked this result. Review the supplied evidence before issuing advice.')
+        st.error('Financial validation blocked this result. Check the flags below, then correct or clear the supplied scenario and payment evidence.')
         review_flags(crisis['review_flags'])
         with tab5:
             from etf_ui import render_etf_explorer
@@ -504,8 +505,12 @@ with tab3:
     review_flags(goal["review_flags"])
 
     st.markdown("### Plan 2 · Backup Plan")
-    from backup_comparison import render_backup_comparison
-    cash_comparison = render_backup_comparison(crisis)
+    cash_comparison = None
+    if scenario_input_valid:
+        from backup_comparison import render_backup_comparison
+        cash_comparison = render_backup_comparison(crisis)
+    else:
+        st.info("The cash comparison is available once the scenario input is corrected.")
     st.write(f"**Lead module:** {crisis['lead_module'] or 'BANK_REVIEW'} · **Goal:** {crisis['goal_status']} · **G25:** {crisis['G25_state']}")
     proposal = crisis['module_proposal']['lead_module']
     actual_source = (crisis.get('classification') or {}).get('actual_backend','external proposal')
@@ -526,7 +531,8 @@ with tab3:
         st.warning("This projection covers quantified effects only. Missing or additional event/expense effects prevent a full funding conclusion; see Allocation Review for additional evidence.")
     with st.expander('Full projection ledger and comparison calculations'):
         if cash_comparison is not None:
-            st.markdown('**Chart checkpoint ledger · accessible cash (CAD)**')
+            ledger_basis = 'accessible cash' if cash_comparison['complete'] else 'Known components'
+            st.markdown(f'**Chart checkpoint ledger · {ledger_basis} (CAD)**')
             st.dataframe(pd.DataFrame([{
                 'Month': before['month'], 'Phase': before['phase'],
                 'Without new action (CAD)': before['cash'], 'Revised plan (CAD)': after['cash'],
@@ -538,13 +544,6 @@ with tab3:
         gap_col.metric("Extra Starting Cash Needed" if backup["funding_result_complete"] else "Quantified Cash Need (partial estimate)", money(backup["remaining_cash_needed"]))
         if not backup["funding_result_complete"]:
             gap_col.caption("Full funding need: Not established")
-        shortage = backup["exhaustion_month"]
-        if shortage == 0:
-            st.warning("The opening cash proxy goes below zero immediately.")
-        elif shortage is not None:
-            st.warning(f"The first negative quantified-component checkpoint is month {shortage} ({crisis['no_action']['first_shortfall_phase']}). Actual outcomes remain unestablished when effects are unresolved.")
-        else:
-            st.info("The quantified cash path stays nonnegative at the modeled checkpoints. This is not a daily-solvency or complete-funding claim when effects are unresolved.")
         schedule = pd.DataFrame(backup["six_month_schedule"]).rename(columns={
             "month": "Month",
             "start_balance": "Opening balance (CAD)",
@@ -591,6 +590,7 @@ with tab3:
     if crisis['timing_comparison'] is not None:
         timing = crisis['timing_comparison']
         st.markdown('**Conditional M7 historical timing comparison**')
+        st.caption(f"Basis: historical daily closing balances · {timing['basis']}. This is separate from the monthly cash chart.")
         st.write(f"Extra starting-cash need before: {money(timing['no_action']['extra_cash_needed'])}; after: {money(timing['conditional_bill_move']['extra_cash_needed'])}.")
         st.caption(' '.join(timing['conditions']))
     st.markdown("**Analyst action notes**")
