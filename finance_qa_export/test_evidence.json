@@ -1,0 +1,11 @@
+{
+  "command": "/workspace/.venvs/tangerine/bin/python -m pytest -q",
+  "executed_on_commit": "d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4",
+  "current_commit": "d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4",
+  "tree": "924209e39b44241ec544078166f37934adbee3cc",
+  "application_revision": "f848be792228ff3ebbf2a06fe481d87c42b9fe74d2c4e35e8bf09e0a918c36c8",
+  "evidence": "423 passed, 9 subtests passed in 204.85s (0:03:24)",
+  "scope": "All tracked application/data/test files outside finance_qa_export match the tested revision. Audit artifacts are verified separately.",
+  "additional_checks": 1157,
+  "mismatches": 0
+}

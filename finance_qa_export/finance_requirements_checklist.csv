@@ -1,0 +1,15 @@
+point,requirement,status,evidence
+1,Worksheet,DONE,"Workbook has inputs, standalone expectations, observed outputs and findings."
+2,Independent arithmetic,DONE WITH LIMITATION,No engine imports in check_finance.py. Expectations frozen before this fresh export; retrospective check because prior results were already seen. Original independent Excel workbook remains unreviewed.
+3,Checkpoints,DONE,"112 accessible-cash checkpoints, exact CAD-cent comparisons; immediate/start/end labels retained. Recovery exposes target/ETA only."
+4,Funding need,DONE,"First shortage, full six-month minimum, and $200 pre-receipt requirement checked. Unknown full amounts stay blank."
+A,Compound paths,DONE,All three paths checked; proposal pause gives no cash credit; included approved pause releases $300/month.
+B,Late receipt,DONE,Month 2 End shortage remains before Month 3 Start receipt; full-period need $600.
+C,Deferral,DONE,Month 4 Start repayment checked; missing inclusion blocks both relief and repayment and full funding remains unknown.
+D,Recovery,DONE,"Target $7200, gap $4200, supported ETA 14 months; unknown contribution gives no ETA."
+E,Unknown income,DONE,Synthetic baseline explicitly reused from A. Value/timing/duration questions and goal-review hold verified; full funding unknown.
+5,Real accounts,DONE,"Both accounts, chronological six months, fixed-cost sum then median, active loan status and full raw metric precision checked."
+6,Organizer shocks,DONE,"Six scenarios and seven runway boundary cases checked, including zero/negative buffer precedence, no shortfall and cap."
+7,Daily replay denominator,DONE,"Independent raw-data replay matches the engine: 4424 eligible, 143 hidden, 102 qualifying, 44 eliminated, 43.1%; unchanged month ends and conditional zero-fee assumptions documented."
+8,Handoff package,READY FOR HUMAN REVIEW,"Worksheet, source/commit, logs, findings and open issues are packaged. No message or file has been sent to another teammate."
+Human,Original workbook comparison and sign-off,PENDING,"Finance teammate compares their independent Excel workbook, checks assumptions, and signs name/date/commit/cases/exceptions. No signature has been invented."

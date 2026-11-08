@@ -1,0 +1,68 @@
+{
+  "Supported contribution": {
+    "inputs": {
+      "source": "Tangerine-Team-Execution-Prompts.pdf, Phase 1 Case D, page 3",
+      "assessment_month": "2026-11",
+      "cash_basis": "judge_specified",
+      "available_cash": 3000.0,
+      "monthly_spending": 2400.0,
+      "stable_cash_flow": true,
+      "obligations_covered": true,
+      "supported_monthly_contribution": 300.0
+    },
+    "result": {
+      "source": "Tangerine-Team-Execution-Prompts.pdf, Phase 1 Case D, page 3",
+      "assessment_month": "2026-11",
+      "cash_basis": "judge_specified",
+      "reserve_target": 7200.0,
+      "reserve_gap": 4200.0,
+      "current_cash": 3000.0,
+      "monthly_surplus": null,
+      "monthly_contribution": 300.0,
+      "months_to_target": 14,
+      "review_flags": [
+        "CONDITIONAL_RECOVERY: Timeline uses the supplied checkpoint; simulated cash is not verified current funds.",
+        "INFLOW_UNQUANTIFIED: Monthly inflow and surplus remain unknown; any rebuild date uses only the explicitly supported contribution, stability and obligation coverage."
+      ],
+      "status": "REBUILDING",
+      "lead_module": "M6",
+      "trigger_ids": [
+        "G15"
+      ],
+      "reason": "Rebuild liquid reserves; contributions remain liquid cash, not investment returns."
+    }
+  },
+  "Unknown contribution": {
+    "inputs": {
+      "source": "Tangerine-Team-Execution-Prompts.pdf, Phase 1 Case D, page 3",
+      "assessment_month": "2026-11",
+      "cash_basis": "judge_specified",
+      "available_cash": 3000.0,
+      "monthly_spending": 2400.0,
+      "stable_cash_flow": true,
+      "obligations_covered": true,
+      "supported_monthly_contribution": null
+    },
+    "result": {
+      "source": "Tangerine-Team-Execution-Prompts.pdf, Phase 1 Case D, page 3",
+      "assessment_month": "2026-11",
+      "cash_basis": "judge_specified",
+      "reserve_target": 7200.0,
+      "reserve_gap": 4200.0,
+      "current_cash": 3000.0,
+      "monthly_surplus": null,
+      "monthly_contribution": 0.0,
+      "months_to_target": null,
+      "review_flags": [
+        "CONDITIONAL_RECOVERY: Timeline uses the supplied checkpoint; simulated cash is not verified current funds.",
+        "INFLOW_UNQUANTIFIED: Monthly inflow and surplus remain unknown; any rebuild date uses only the explicitly supported contribution, stability and obligation coverage."
+      ],
+      "status": "REBUILDING",
+      "lead_module": "M6",
+      "trigger_ids": [
+        "G15"
+      ],
+      "reason": "Rebuild liquid reserves; contributions remain liquid cash, not investment returns."
+    }
+  }
+}
