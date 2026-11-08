@@ -11,8 +11,9 @@ from .config import classifier_settings
 from .schemas import (ClassificationCase, MODULES, MODULE_DESCRIPTIONS,
                       PlanSelection, SelectionResult)
 
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 PROMPT_VERSION = 'module-selection-1.1'
+GEMINI_PROMPT_VERSION = 'module-selection-gemini-1.2'
 JEV_ENDPOINT = 'https://openrouter.ai/api/v1/systemone'
 POLICY = """Select the lead financial response family from the allowed modules using the supplied case.
 Classify the financial problem, not the person's income bracket. Several interacting adverse
@@ -31,12 +32,18 @@ Reasons must come from observed_reasons. Do not invent dollar amounts or claim f
 """
 
 
+class _SelectionValidationError(ValueError):
+    def __init__(self, code, message):
+        super().__init__(message)
+        self.code = code
+
+
 def validate_selection(selection: PlanSelection, case: ClassificationCase) -> PlanSelection:
     selected = [selection.lead_module, *selection.support_modules]
     if not set(selected) <= set(case.constraints.allowed_modules):
-        raise ValueError('A selected module is not allowed.')
+        raise _SelectionValidationError('unsupported_modules', 'A selected module is not allowed.')
     if not set(selection.reason_codes) <= set(case.observed_reasons):
-        raise ValueError('A reason is unsupported by the supplied facts.')
+        raise _SelectionValidationError('unsupported_reason_codes', 'A reason is unsupported by the supplied facts.')
     # Preserve unresolved facts regardless of a remote model omitting them.
     questions = list(dict.fromkeys(case.missing_details + selection.needs_clarification))
     return PlanSelection(**{**selection.model_dump(), 'needs_clarification': questions})
@@ -170,11 +177,12 @@ def _gemini_usage(response):
     }
 
 
-def _gemini_json_schema():
+def _gemini_json_schema(case: ClassificationCase | None = None):
     # Use the JSON Schema transport. google-genai's OpenAPI response_schema
     # conversion currently emits snake_case Schema fields (e.g. additional_properties)
-    # that the server rejects. Array bounds also expand Gemini's decoding grammar
-    # enough to reject this schema. Local Pydantic validation enforces those limits.
+    # that the server rejects. Large array bounds also expand the decoding grammar
+    # enough to reject this schema. Keep only the small support-module bound on
+    # the wire; local Pydantic validation still enforces every limit.
     schema = PlanSelection.model_json_schema()
 
     def supported(node):
@@ -191,14 +199,28 @@ def _gemini_json_schema():
                 supported(child)
 
     supported(schema)
+    properties = schema['properties']
+    properties['support_modules']['maxItems'] = 2
+    properties['support_modules']['description'] = (
+        'Zero, one, or two unique supporting modules; never repeat the lead module.')
+    properties['reason_codes']['description'] = (
+        'One or more unique codes copied exactly from this case\'s observed_reasons. '
+        'Do not add inferred reasons; a zero cash-flow effect does not imply a cost or income change.')
+    properties['rationale']['description'] = 'Brief explanation in 1–3 sentences, at most 1200 characters.'
+    if case is not None:
+        # The generic contract lists all possible reasons/modules. Constrain
+        # generation to this case, matching validate_selection's stricter checks.
+        properties['lead_module']['enum'] = list(case.constraints.allowed_modules)
+        properties['support_modules']['items']['enum'] = list(case.constraints.allowed_modules)
+        properties['reason_codes']['items']['enum'] = list(dict.fromkeys(case.observed_reasons))
     return schema
 
 
-def _gemini_config(model):
+def _gemini_config(model, case: ClassificationCase | None = None):
     config = {
         'system_instruction': POLICY + '\nModule definitions: ' + json.dumps(MODULE_DESCRIPTIONS),
         'response_mime_type': 'application/json',
-        'response_json_schema': _gemini_json_schema(),
+        'response_json_schema': _gemini_json_schema(case),
         'max_output_tokens': 2048,
     }
     # Sampling controls are deprecated on 3.5 Flash-Lite/3.6 and later models.
@@ -206,6 +228,33 @@ def _gemini_config(model):
     if model.startswith('gemini-2.'):
         config['temperature'] = 0
     return config
+
+
+def _gemini_validation_code(exc):
+    """Return fixed diagnostic codes, never raw model text or validation input."""
+    if isinstance(exc, _SelectionValidationError):
+        return f'gemini_{exc.code}'
+    if isinstance(exc, ValidationError):
+        errors = exc.errors(include_input=False, include_context=False, include_url=False)
+        if any(error['type'] == 'json_invalid' for error in errors):
+            return 'gemini_invalid_json'
+        for field in ('reason_codes', 'support_modules', 'rationale'):
+            if any(error['loc'] and error['loc'][0] == field for error in errors):
+                return f'gemini_invalid_{field}'
+        return 'gemini_schema_mismatch'
+    return 'invalid_gemini_response'
+
+
+def _gemini_retry_contents(case, code):
+    # A fresh request with a fixed correction; rejected free text is never echoed.
+    return canonical_json(case) + (
+        f'\n\nThe previous output failed validation ({code}). Return a corrected JSON object only. '
+        'Use an allowed lead_module and at most two distinct support_modules excluding the lead. '
+        'reason_codes must be nonempty, unique, and copied exactly from observed_reasons. '
+        'Do not infer additional reason codes from effects or module names. '
+        'Keep rationale nonempty and under 1200 characters. '
+        'Use arrays for support_modules and needs_clarification, including [] when empty. '
+        'Use only the fields in the response schema.')
 
 
 def jev_payload(case: ClassificationCase, model: str) -> dict:
@@ -297,7 +346,7 @@ def select_plan_gemini(case: ClassificationCase, *, api_key: str | None = None,
     settings = classifier_settings()
     model = model or settings.get('GEMINI_CLASSIFIER_MODEL') or 'gemini-3.5-flash-lite'
     key = api_key or settings.get('GEMINI_API_KEY')
-    metadata = dict(model_version=model, prompt_version=PROMPT_VERSION)
+    metadata = dict(model_version=model, prompt_version=GEMINI_PROMPT_VERSION)
     if len(case.constraints.allowed_modules) == 1:
         return _result(case, 'gemini', started, failure='single_allowed_module', **metadata)
     if client is None and not key:
@@ -316,28 +365,35 @@ def select_plan_gemini(case: ClassificationCase, *, api_key: str | None = None,
     calls, invalid = 0, 0
     failure = 'gemini_unavailable'
     usage = _Usage()
+    validation_errors = []
+    contents = canonical_json(case)
     try:
         for _ in range(2):
             usage_recorded = False
             try:
                 calls += 1
                 response = client.models.generate_content(
-                    model=model, contents=canonical_json(case),
-                    config=_gemini_config(model),
+                    model=model, contents=contents,
+                    config=_gemini_config(model, case),
                 )
                 usage.record(_gemini_usage(response), {
                     'input_tokens', 'output_tokens', 'thought_tokens', 'total_tokens'})
                 usage_recorded = True
+                if not isinstance(response.text, str) or not response.text.strip():
+                    raise _SelectionValidationError('empty_response', 'Gemini returned no JSON text.')
                 selection = validate_selection(PlanSelection.model_validate_json(response.text), case)
                 metadata['model_version'] = _resolved_model(getattr(response, 'model_version', None), model)
                 return _result(case, 'gemini', started, selection=selection, **metadata,
-                               api_calls=calls, invalid_outputs=invalid, **usage.metadata(),
+                               api_calls=calls, invalid_outputs=invalid, validation_errors=validation_errors,
+                               **usage.metadata(),
                                rationale_source='model')
-            except (ValueError, TypeError, ValidationError):
+            except (ValueError, TypeError, ValidationError) as exc:
                 if not usage_recorded:
                     usage.complete = False
                 invalid += 1
-                failure = 'invalid_gemini_response'
+                failure = _gemini_validation_code(exc)
+                validation_errors.append(failure)
+                contents = _gemini_retry_contents(case, failure)
             except Exception as exc:
                 usage.complete = False
                 code = getattr(exc, 'code', None)
@@ -354,7 +410,7 @@ def select_plan_gemini(case: ClassificationCase, *, api_key: str | None = None,
             except Exception:
                 pass
     return _result(case, 'gemini', started, failure=failure, **metadata, api_calls=calls,
-                   invalid_outputs=invalid, **usage.metadata())
+                   invalid_outputs=invalid, validation_errors=validation_errors, **usage.metadata())
 
 
 def select_plan(case: ClassificationCase, backend='rules', **kwargs) -> SelectionResult:

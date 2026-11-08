@@ -43,8 +43,8 @@ def _render_request_history():
         return
     columns = ('timestamp_utc', 'requested_backend', 'status', 'actual_backend',
                'lead_module', 'model_version', 'api_calls', 'elapsed_ms', 'fallback_reason',
-               'total_tokens', 'cost_usd')
-    st.dataframe([{name: row[name] for name in columns} for row in reversed(history)],
+               'validation_errors', 'total_tokens', 'cost_usd')
+    st.dataframe([{name: row.get(name) for name in columns} for row in reversed(history)],
                  hide_index=True, use_container_width=True)
     st.caption('Blank token or cost values mean the provider did not report them.')
     st.download_button('Download request logs (JSONL)',

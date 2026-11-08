@@ -9,7 +9,7 @@ from uuid import uuid4
 LOG_PATH = Path(__file__).resolve().parents[1] / 'logs' / 'classification.jsonl'
 LOG_FIELDS = (
     'requested_backend', 'actual_backend', 'model_version', 'fallback_used',
-    'fallback_reason', 'api_calls', 'invalid_outputs', 'elapsed_ms', 'input_hash',
+    'fallback_reason', 'api_calls', 'invalid_outputs', 'validation_errors', 'elapsed_ms', 'input_hash',
     'input_tokens', 'output_tokens', 'thought_tokens', 'total_tokens', 'usage_complete',
     'cost_usd', 'implementation_version', 'prompt_version',
 )

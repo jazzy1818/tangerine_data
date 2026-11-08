@@ -234,6 +234,7 @@ class SelectionResult(Contract):
     elapsed_ms: float = Field(ge=0)
     api_calls: int = Field(default=0, ge=0)
     invalid_outputs: int = Field(default=0, ge=0)
+    validation_errors: list[str] = Field(default_factory=list, max_length=2)
     input_tokens: int | None = Field(default=None, ge=0)
     output_tokens: int | None = Field(default=None, ge=0)
     thought_tokens: int | None = Field(default=None, ge=0)

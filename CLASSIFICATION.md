@@ -86,6 +86,10 @@ response; `fallback` means the local baseline was used instead. The panel keeps 
 requests in the current browser session and offers a JSONL download. A persistent metadata copy
 is appended to `logs/classification.jsonl` (ignored by Git) when the button is clicked. It excludes
 keys, account IDs, balances, scenario text, and model rationale. Unknown costs/tokens stay blank.
+Gemini's response schema restricts module IDs and reason codes to the current case. Its single
+retry includes corrective instructions after invalid output; strict local validation still applies.
+The `validation_errors` log field records safe rejection codes (including a failed first attempt
+when the retry succeeds), without storing provider text or credentials.
 To watch new classification records in a terminal after the first request:
 
 ```bash
