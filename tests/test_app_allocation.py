@@ -17,7 +17,7 @@ class AllocationDashboardTests(unittest.TestCase):
             app.text_input(key='judge_event').set_value('Divorce without financial amounts').run()
             self.assertFalse(app.exception)
             after = {item.label: item.value for item in app.metric}
-            self.assertEqual(before['Month 6 Closing Balance'], after['Month 6 Closing Balance'])
+            self.assertEqual(before['Month 6 Closing Balance'], after['Month 6 Closing Balance (partial estimate)'])
             self.assertTrue(any('quantified effects only' in message.value for message in app.warning))
             self.assertTrue(any('SHOCK_UNDER_SPECIFIED' in str(item.value) for item in app.markdown))
 

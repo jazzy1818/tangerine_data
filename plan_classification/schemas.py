@@ -57,6 +57,7 @@ class Baseline(Contract):
     H: float = Field(ge=0)
     B: float
     P: float | None = Field(default=None, ge=0)
+    included_loan_payment: float | None = Field(default=None, ge=0)
     runway: float | str
 
 
@@ -91,9 +92,40 @@ class ShockEffect(Contract):
     ongoing: bool = False
     evidence: Literal['judge_specified', 'user_confirmed', 'assumed', 'unknown'] = 'judge_specified'
 
+    # Local obligation evidence; never included in normalized provider payloads.
+    obligation_account_id: int | None = Field(default=None, ge=1)
+    obligation_payment: float | None = Field(default=None, ge=0, le=1e12)
+    obligation_source: str | None = Field(default=None, min_length=1, max_length=500)
+    payment_in_baseline: bool = Field(default=False, strict=True)
+    debt_change_kind: Literal['payment_change', 'deferral'] = 'payment_change'
+    repayment_month: int | None = Field(default=None, ge=1, le=240)
+    repayment_amount: float | None = Field(default=None, ge=0, le=1e12)
+    repayment_unresolved: bool = Field(default=False, strict=True)
+
     @model_validator(mode='after')
     def valid_effect(self):
         v = self.value
+        debt_fields = (self.obligation_account_id is not None or self.obligation_payment is not None or self.obligation_source is not None
+            or self.payment_in_baseline or self.debt_change_kind != 'payment_change'
+            or self.repayment_month is not None or self.repayment_amount is not None or self.repayment_unresolved)
+        if debt_fields and self.type != 'debt_payment_delta':
+            raise ValueError('Obligation evidence fields apply only to debt payment changes.')
+        if self.debt_change_kind == 'deferral':
+            if v is not None and v >= 0:
+                raise ValueError('A deferral must reduce a scheduled loan payment.')
+            if self.repayment_unresolved:
+                if self.repayment_month is not None or self.repayment_amount is not None:
+                    raise ValueError('Choose explicit repayment terms or an unresolved obligation.')
+            elif (self.repayment_month is None or self.repayment_amount is None or self.duration_months is None):
+                raise ValueError('Deferral requires finite duration and repayment month/amount, or repayment_unresolved=true.')
+            else:
+                if self.repayment_month < self.start_month + self.duration_months:
+                    raise ValueError('Repayment must follow the deferred-payment periods.')
+                from decimal import Decimal
+                if v is not None and Decimal(str(self.repayment_amount)) < -Decimal(str(v))*self.duration_months:
+                    raise ValueError('Repayment cannot omit deferred principal; otherwise mark the obligation unresolved.')
+        elif self.repayment_month is not None or self.repayment_amount is not None or self.repayment_unresolved:
+            raise ValueError('Repayment terms require debt_change_kind=deferral.')
         if self.ongoing and (self.duration_months is not None or self.type in ONE_TIME | {'unspecified_event'}):
             raise ValueError('ongoing requires a recurring/access effect with no finite duration.')
         if self.type == 'unspecified_event':

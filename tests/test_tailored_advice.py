@@ -40,7 +40,8 @@ def test_upfront_fee_creating_earlier_shortfall_is_not_recommended():
     p=make_crisis_plan(c,ShockScenario(phase='normal'),normal_goal=normal_goal(),existing_transfers=transfers(50.))
     assert p['supported_pause']['first_shortfall_month']==1
     assert p['applied_plan']['first_shortfall_month'] is None
-    assert not p['applied_transfer_ids']
+    assert 'saving-1' not in p['applied_transfer_ids']
+    assert p['applied_transfer_ids']==['saving-2','saving-3','saving-4','saving-5','saving-6']
 
 
 def test_tampered_advice_and_action_accounting_blocked():

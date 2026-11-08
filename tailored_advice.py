@@ -45,7 +45,11 @@ def build_advice(plan):
             f"Avoided payments: {_cad(gross)}; fees: {_cad(fees)}; net cash retained: {_cad(gross-fees)}. "
             'This is a modeled plan; no banking instruction has been executed.')
     else:
-        cards['pause'] = 'No existing-transfer pause is applied: no supplied schedule passes the evidence and financial-benefit checks.'
+        cards['pause'] = 'No existing-transfer pause is applied: no supplied schedule passes the evidence and financial-benefit checks for a stated funding, timing or reserve purpose.'
+    if plan['pause_decisions']:
+        cards['pause_decisions'] = '; '.join(f"{d['event_id']}: {d['status']} ({d['reason']})" for d in plan['pause_decisions']) + '.'
+    if plan['G25'] is None:
+        cards['goal_review'] = 'Goal held for review: the unknown financial impact does not establish G25 deterioration. The full funding need remains unestablished.'
     cards['outcome'] = (f"Under the revised plan, first shortfall: {_shortfall(revised)}; "
         f"extra starting cash needed for quantified components: {_cad(revised['additional_cash_needed'])}; "
         f"closing cash: {_cad(revised['ending_cash'])}. "

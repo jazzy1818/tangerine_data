@@ -372,7 +372,8 @@ def test_installed_google_sdk_accepts_config():
 
 def test_debt_relief_is_positive_opportunity(history):
     p=profile_from_history(17,history,{'status':'C','monthly_payment':200},as_of='2025-12')
-    case=case_for(p,[{'type':'debt_payment_delta','value':-100}])
+    case=case_for(p,[{'type':'debt_payment_delta','value':-100, 'obligation_payment':200.,
+        'obligation_source':'Explicit synthetic payment included in spending', 'payment_in_baseline':True}])
     assert select_plan(case).selection.lead_module=='M8'
     assert 'cost_reduction' in case.observed_reasons
 

@@ -372,14 +372,13 @@ def enforce_crisis_validations(plan):
     enforce_execution. Here enforce lifecycle, G25, proposals and recovery truth.
     No selector confidence, phase label or proposed pause may create funds.
     """
-    from crisis_rules import goal_worsened, first_shortfall_order
+    from crisis_rules import evidenced_goal_worsened, first_shortfall_order
     baseline, shocked = plan['baseline_without_crisis'], plan['no_action']
-    # The exact decision including contribution headroom is frozen by the finance
-    # engine, not reconstructed from the classifier's normalized ratios.
-    lower_capacity = plan['goal_contribution_revised'] < plan['normal_feasible_contribution'] - .005
-    expected = goal_worsened(baseline_gap=baseline['additional_cash_needed'], scenario_gap=shocked['additional_cash_needed'],
-                            baseline_first=first_shortfall_order(baseline), scenario_first=first_shortfall_order(shocked),
-                            normal_contribution=1. if lower_capacity else 0., scenario_contribution=0.)
+    expected = evidenced_goal_worsened(baseline, shocked,
+        normal_contribution=plan['normal_feasible_contribution'],
+        scenario_contribution=plan['goal_contribution_revised'])
+    if plan['goal_review_required'] != (not shocked['funding_result_complete']):
+        raise ValueError('Incomplete financial effects require an explicit goal review state')
     if plan['G25'] != expected:
         raise ValueError('G25 must describe deterioration, not merely an existing deficit or a changed scenario.')
     if plan['proposal_pause_cash_credit'] != 0:
@@ -399,7 +398,18 @@ def enforce_crisis_validations(plan):
         applied['additional_cash_needed'] > plan['revised_goal']['additional_cash_needed'] + .005):
         raise ValueError('Applied action worsens funding or first shortfall')
     ids = plan['applied_transfer_ids']
+    from pause_decisions import pause_purpose
+    if ids and pause_purpose(plan['revised_goal'], applied, plan['protected_reserve_floor']) is None:
+        raise ValueError('Applied pause lacks a supported funding, timing or reserve purpose')
+    decisions = plan['pause_decisions']
+    if set(ids) != {d['event_id'] for d in decisions if d['status'] == 'included'}:
+        raise ValueError('Pause decision audit does not match applied payments')
+    if plan['G25_state'] != ('unknown' if expected is None else 'active' if expected else 'inactive'):
+        raise ValueError('G25 uncertainty state does not match evidence')
     records = {t['event_id']: t for t in plan['existing_transfers']}
+    if (len(decisions) != len(records) or {d['event_id'] for d in decisions} != set(records)
+        or any(not d['reason'] for d in decisions)):
+        raise ValueError('Every supplied payment needs one explained decision')
     if len(ids) != len(set(ids)) or any(i not in records for i in ids):
         raise ValueError('Applied action IDs are not unique supplied records')
     for i in ids:
@@ -417,7 +427,7 @@ def enforce_crisis_validations(plan):
         delta += released-fees-Decimal(str(after['proposed_contribution']))
         if abs(Decimal(str(after['end_balance']))-Decimal(str(before['end_balance']))-delta) > Decimal('.005'):
             raise ValueError('Revised cash improvement does not reconcile')
-    plan['runtime_validation'] = {'enforced': True, 'status': 'passed', 'policy_version': 'crisis-lifecycle-v1',
-        'checks': ['original_CAD_ledger', 'all_effects_independent_of_module_labels', 'G25_deterioration',
+    plan['runtime_validation'] = {'enforced': True, 'status': 'passed', 'policy_version': 'crisis-lifecycle-v2',
+        'checks': ['original_CAD_ledger', 'all_effects_independent_of_module_labels', 'G25_evidenced_deterioration_or_unknown', 'goal_review_separate_from_G25', 'individual_pause_purpose',
                    'proposal_pause_zero_credit', 'existing_outflow_evidence', 'partial_funding', 'M6_recovery_evidence']}
     return plan

@@ -136,7 +136,8 @@ def profile_from_history(account_id: int, history: pd.DataFrame,
         trend = ratio(float(recent.iloc[-1].month_end_balance - recent.iloc[0].month_end_balance), S)
     return CustomerProfile(
         account_id=account_id, as_of=str(cutoff), last_month=str(last),
-        baseline=Baseline(I=I, S=S, F=F, H=H, B=B, P=P, runway=calculate_runway(B, S-I)),
+        baseline=Baseline(I=I, S=S, F=F, H=H, B=B, P=P,
+                          included_loan_payment=float(frame['loan_payments'].median()), runway=calculate_runway(B, S-I)),
         features=CustomerFeatures(
             surplus_margin=ratio(I-S, I), reserve_months=ratio(B, S),
             fixed_cost_ratio=ratio(F, I), debt_payment_ratio=ratio(P, I) if P is not None else None,

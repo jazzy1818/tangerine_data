@@ -66,11 +66,11 @@ def test_invalid_or_unknown_scenario_does_not_restore_old_slider_values(app):
     app.text_area(key='classification_scenario_json').set_value('not json').run()
     assert not app.exception
     assert any('no stale slider scenario' in m.value for m in app.warning)
-    assert dollars(metric(app,'Month 6 Closing Balance'))==pytest.approx(receipt_balance-5000.)
+    assert dollars(metric(app,'Month 6 Closing Balance (partial estimate)'))==pytest.approx(receipt_balance-5000.)
     assert any('quantified effects only' in m.value for m in app.warning)
     app.text_area(key='classification_scenario_json').set_value(json.dumps({'effects':[{'type':'income_multiplier','value':None}]})).run()
     assert not app.exception
-    assert metric(app,'Money In After Shock')=='Not established'
+    assert metric(app,'Month 1 Inflow')=='Not established'
 
 
 def test_recovery_phase_needs_checkpoint_and_then_shows_rebuild(app):

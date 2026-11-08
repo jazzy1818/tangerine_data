@@ -14,3 +14,32 @@ def first_shortfall_order(path):
     if month is None:
         return None
     return month * 2 + (0 if path.get('first_shortfall_phase') == 'start' else 1)
+
+
+def evidenced_goal_worsened(baseline, scenario, *, normal_contribution, scenario_contribution):
+    """Tri-state G25: missing capacity is a review hold, not proven deterioration.
+
+    Complete matched prefixes can prove an earlier shortage before a later unknown
+    event. Capacity changes require complete paths on both sides.
+    """
+    complete = baseline['funding_result_complete'] and scenario['funding_result_complete']
+    if complete:
+        return goal_worsened(baseline_gap=baseline['additional_cash_needed'],
+            scenario_gap=scenario['additional_cash_needed'], baseline_first=first_shortfall_order(baseline),
+            scenario_first=first_shortfall_order(scenario), normal_contribution=normal_contribution,
+            scenario_contribution=scenario_contribution)
+    rows = []
+    for left, right in zip(baseline['schedule'], scenario['schedule'], strict=True):
+        if not left['period_complete'] or not right['period_complete']:
+            break
+        rows.append(left['month'])
+    for month in rows:
+        b = [p for p in baseline['checkpoints'] if p['month'] <= month]
+        s = [p for p in scenario['checkpoints'] if p['month'] <= month]
+        if max(0., -min(p['cash'] for p in s)) > max(0., -min(p['cash'] for p in b)) + .005:
+            return True
+        first_b = next((i for i,p in enumerate(b) if p['cash'] < 0), None)
+        first_s = next((i for i,p in enumerate(s) if p['cash'] < 0), None)
+        if first_s is not None and (first_b is None or first_s < first_b):
+            return True
+    return None

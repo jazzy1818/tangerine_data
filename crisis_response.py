@@ -14,7 +14,7 @@ from plan_classification import build_case, profile_from_engine, select_plan
 from plan_classification.backends import validate_selection
 from plan_classification.case import case_hash
 from plan_classification.schemas import Contract, PlanSelection, SelectionResult, ShockScenario
-from crisis_rules import goal_worsened, first_shortfall_order
+from crisis_rules import goal_worsened, first_shortfall_order, evidenced_goal_worsened
 from recovery_plan import make_recovery_plan
 from scenario_execution import execute_scenario, enforce_execution, money, period_values, scenario_hash
 
@@ -98,11 +98,8 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
     capacity = _monthly_capacity(customer, scenario, no_action, floor, source_cap)
     # A proposed liquid-reserve earmark is not a second outflow. Its amount is
     # still paused as a goal decision if a crisis prevents further earmarking.
-    worsened = goal_worsened(baseline_gap=baseline['additional_cash_needed'],
-                             scenario_gap=no_action['additional_cash_needed'],
-                             baseline_first=first_shortfall_order(baseline),
-                             scenario_first=first_shortfall_order(no_action),
-                             normal_contribution=base_capacity, scenario_contribution=capacity)
+    worsened = evidenced_goal_worsened(baseline, no_action,
+        normal_contribution=base_capacity, scenario_contribution=capacity)
     if source_cap == 0:
         goal_status = 'NOT_SCHEDULED'
     elif not no_action['funding_result_complete']:
@@ -129,17 +126,13 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
         else:
             flags.append(f'TRANSFER_PAUSE_UNVERIFIED: {t.event_id} lacks complete pause evidence or its fee consumes the benefit; no cash is credited.')
     comparison = execute_scenario(customer, scenario, spending_releases=dict(releases), release_fees=dict(fees), **kwargs)
-    applied = execute_scenario(customer, scenario, contribution=revised_debit,
-        spending_releases=dict(releases), release_fees=dict(fees), **kwargs)
-    applied_releases, applied_fees = dict(releases), dict(fees)
-    eligible_ids = [t.event_id for t in transfers if t.month <= scenario.horizon_months
-        and t.included_in_baseline and t.pause_approved and t.pause_fee is not None and t.pause_fee < t.amount]
-    earlier = (first_shortfall_order(applied) is not None and
-        (first_shortfall_order(revised) is None or first_shortfall_order(applied) < first_shortfall_order(revised)))
-    if earlier or applied['additional_cash_needed'] > revised['additional_cash_needed'] + .005:
-        flags.append('PAUSE_NOT_APPLIED: Upfront fees worsen the funding gap or advance the first shortfall; retain the comparison for review.')
-        applied = revised.copy()
-        applied_releases, applied_fees, eligible_ids = {}, {}, []
+    from pause_decisions import select_pauses
+    applied, applied_releases, applied_fees, eligible_ids, pause_decisions = select_pauses(
+        customer, scenario, transfers, revised, floor=floor,
+        contribution=revised_debit, opening_cash=opening_cash)
+    for decision in pause_decisions:
+        if decision['status'] == 'excluded':
+            flags.append('PAUSE_NOT_APPLIED: ' + decision['event_id'] + ': ' + decision['reason'])
     if source_cap == 0 and eligible_ids:
         goal_status = 'EXISTING_TRANSFERS_PAUSED'
     upfront = max([0.] + [-p['cash'] for p in no_action['checkpoints']
@@ -285,11 +278,15 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
         'required_monthly_improvement': monthly_target if no_action['funding_result_complete'] else None,
         'quantified_component_monthly_target': monthly_target,
         'improvement_status': 'CALCULATED_TARGET_NOT_VERIFIED_ADJUSTABLE_SPENDING',
-        'G25': worsened, 'trigger_ids': ['G25'] if worsened else [],
+        'G25': worsened, 'G25_state': 'unknown' if worsened is None else 'active' if worsened else 'inactive',
+        'goal_review_required': not no_action['funding_result_complete'],
+        'trigger_ids': ['G25'] if worsened else [],
         'no_action': no_action, 'baseline_without_crisis': baseline,
         'continue_goal': continued, 'revised_goal': revised, 'supported_pause': comparison,
         'applied_plan': applied,
         'applied_transfer_ids': eligible_ids,
+        'pause_decisions': pause_decisions, 'protected_reserve_floor': floor,
+        'applied_pause_fees': round(sum(applied_fees.values()), 2),
         'pause_fees': round(sum(fees.values()), 2),
         'pause_funding_gap_improvement': round(no_action['additional_cash_needed'] - comparison['additional_cash_needed'], 2),
         'timing_comparison': timing, 'recovery': recovery,

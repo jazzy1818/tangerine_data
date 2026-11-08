@@ -357,18 +357,19 @@ with tab2:
     st.caption('Organizer formula for standard presets; other scenarios show a first-period reference only. The backup timeline applies all dates and durations.')
 
     st.markdown("---")
-    st.markdown("#### 🚨 Official Numbers Under Shock")
+    organizer_reference = shock['scope'] == 'ORGANIZER_STANDARD'
+    st.markdown('#### Official numbers under shock' if organizer_reference else '#### Month 1 reference — dated scenario')
 
     mcol1, mcol2, mcol3, mcol4, mcol5 = st.columns(5)
     with mcol1:
         st.metric(
-            "Money In After Shock",
+            "Money In After Shock" if organizer_reference else "Month 1 Inflow",
             money(shock['income_after_shock']),
             delta=None,
         )
     with mcol2:
         st.metric(
-            "Spending After Shock",
+            "Spending After Shock" if organizer_reference else "Month 1 Spending",
             money(shock['spending_after_shock']),
             delta=None,
         )
@@ -386,7 +387,11 @@ with tab2:
         )
     with mcol5:
         post_rw = shock["runway"]
-        if post_rw is None:
+        if not organizer_reference:
+            st.markdown('**Month 1 reference**')
+            st.write('Not established' if post_rw is None else f'{post_rw} months using Month 1 components only.')
+            st.caption('This is not an official or dated runway. The dated first shortfall below includes future effects.')
+        elif post_rw is None:
             badge_html = '<div>Not established: first-period effects are incomplete.</div>'
         elif isinstance(post_rw, (int, float)):
             if post_rw <= 3:
@@ -397,7 +402,9 @@ with tab2:
                 badge_html = f"<div class='runway-badge-safe'>⏱️ {post_rw:.1f} Months</div>"
         else:
             badge_html = f"<div class='runway-badge-safe'>🛡️ {post_rw}</div>"
-        st.markdown(f"**Official Shock Runway:**<br>{badge_html}", unsafe_allow_html=True)
+        if organizer_reference:
+            st.markdown(f"**Official Shock Runway:**<br>{badge_html}", unsafe_allow_html=True)
+    dated_projection_area = st.container()
 
 
 
@@ -439,6 +446,13 @@ with tab3:
         st.error('Financial validation blocked this result. Review the supplied evidence before issuing advice.')
         review_flags(crisis['review_flags'])
         st.stop()
+    with dated_projection_area:
+        dated_path = crisis['no_action']
+        first = dated_path['first_shortfall_month']
+        title = 'Dated first shortfall' if dated_path['funding_result_complete'] else 'First quantified shortfall (partial estimate)'
+        st.metric(title, 'None at modeled checkpoints' if first is None else f"Month {first} ({dated_path['first_shortfall_phase']})")
+        if not dated_path['funding_result_complete']:
+            st.caption('Full funding need is not established; unknown effects can change the first shortfall.')
     goal = plans["goal_plan"]
     backup = plans["backup_plan"]
 
@@ -464,7 +478,9 @@ with tab3:
     review_flags(goal["review_flags"])
 
     st.markdown("### Plan 2 · Backup Plan")
-    st.write(f"**Lead module:** {crisis['lead_module'] or 'BANK_REVIEW'} · **Goal:** {crisis['goal_status']} · **G25:** {crisis['G25']}")
+    st.write(f"**Lead module:** {crisis['lead_module'] or 'BANK_REVIEW'} · **Goal:** {crisis['goal_status']} · **G25:** {crisis['G25_state']}")
+    if crisis['goal_review_required']:
+        st.info('Goal held for review: incomplete effects do not by themselves establish G25 deterioration. Full funding need remains open.')
     st.caption('All financial effects are calculated, independently of the classifier’s limit of two supporting labels.')
     st.write('Affected modules: ' + (', '.join(crisis['affected_modules']) or 'None established'))
     st.caption(f"Scenario execution: {crisis['scenario_hash'][:12]} · Proposal status: {crisis['selection_status']}")
@@ -479,8 +495,11 @@ with tab3:
         st.warning("This projection covers quantified effects only. Missing or additional event/expense effects prevent a full funding conclusion; see Allocation Review for additional evidence.")
     start_col, end_col, gap_col = st.columns(3)
     start_col.metric("Opening Proxy After Immediate Cost", money(backup["initial_buffer_left"]))
-    end_col.metric(f"Month {active_scenario.horizon_months} Closing Balance", money(backup["month_6_balance"]))
-    gap_col.metric("Extra Starting Cash Needed", money(backup["remaining_cash_needed"]))
+    end_label = f"Month {active_scenario.horizon_months} Closing Balance" + (" (partial estimate)" if not backup["funding_result_complete"] else "")
+    end_col.metric(end_label, money(backup["month_6_balance"]))
+    gap_col.metric("Extra Starting Cash Needed" if backup["funding_result_complete"] else "Quantified Cash Need (partial estimate)", money(backup["remaining_cash_needed"]))
+    if not backup["funding_result_complete"]:
+        gap_col.caption("Full funding need: Not established")
     shortage = backup["exhaustion_month"]
     if shortage == 0:
         st.warning("The opening cash proxy goes below zero immediately.")
@@ -506,6 +525,9 @@ with tab3:
     } for label, key in [('Before shock (no proposed transfer)', 'baseline_without_crisis'), ('No new action', 'no_action'), ('Continue proposed goal', 'continue_goal'),
                           ('Revised goal only', 'revised_goal'), ('Supported existing-transfer pause', 'supported_pause'),
                           ('Applied revised plan', 'applied_plan')]]), hide_index=True)
+    if crisis['pause_decisions']:
+        st.markdown('**Pause decisions — included and excluded payments**')
+        st.dataframe(crisis['pause_decisions'], hide_index=True)
     from tailored_advice import explain_plan, validate_advice
     validate_advice(crisis['advice'], crisis)
     st.markdown('**Personalized action plan**')

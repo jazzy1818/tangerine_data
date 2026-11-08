@@ -74,7 +74,7 @@ def _remember_guided_setting(name, widget_key):
     _clear_classification_result()
 
 
-def _render_guided_scenario():
+def _render_guided_scenario(account_id=None):
     """Build a scenario with widgets; only explicitly added effects are classified."""
     if 'classification_guided_effects' not in st.session_state:
         st.session_state['classification_guided_effects'] = []
@@ -130,6 +130,22 @@ def _render_guided_scenario():
                             ['judge_specified', 'user_confirmed', 'assumed', 'unknown'],
                             format_func=lambda value: value.replace('_', ' ').capitalize(),
                             key='classification_guided_evidence', on_change=_clear_classification_result)
+    obligation = {}
+    if kind == 'debt_payment_delta':
+        st.caption('A reduction is bounded by the specific recorded payment. Supply an override only when the scenario explicitly establishes the payment and its inclusion in spending.')
+        if st.checkbox('Scenario supplies the existing payment amount', key='classification_debt_supplied'):
+            obligation['obligation_account_id'] = account_id
+            obligation['obligation_payment'] = st.number_input('Existing loan payment (CAD/month)', min_value=0., value=None, key='classification_debt_payment')
+            obligation['obligation_source'] = st.text_input('Payment evidence source', key='classification_debt_source').strip() or None
+            obligation['payment_in_baseline'] = st.checkbox('Payment explicitly included in baseline spending', key='classification_debt_included')
+        change_kind = st.selectbox('Nature of loan payment change', ['payment_change', 'deferral'], key='classification_debt_kind')
+        obligation['debt_change_kind'] = change_kind
+        if change_kind == 'deferral':
+            unresolved = st.checkbox('Repayment remains unresolved', value=True, key='classification_debt_unresolved')
+            obligation['repayment_unresolved'] = unresolved
+            if not unresolved:
+                obligation['repayment_month'] = st.number_input('Deferred repayment month', min_value=1, max_value=240, value=7, key='classification_debt_repayment_month')
+                obligation['repayment_amount'] = st.number_input('Full deferred repayment (CAD)', min_value=0., value=None, key='classification_debt_repayment_amount')
     identity = st.text_input('Effect / obligation ID (optional; local only)', key='classification_guided_effect_id',
                              help='Use the same ID for a repeated invoice, different IDs for distinct obligations.',
                              on_change=_clear_classification_result)
@@ -137,7 +153,7 @@ def _render_guided_scenario():
         try:
             effect = ShockEffect(type=kind, value=value, start_month=start,
                                  duration_months=duration, ongoing=ongoing, evidence=evidence,
-                                 effect_id=identity.strip() or None)
+                                 effect_id=identity.strip() or None, **obligation)
             combined = [*st.session_state['classification_guided_effects'], effect.model_dump(mode='json')]
             checked = ShockScenario(effects=combined, phase=phase, horizon_months=horizon)
             st.session_state['classification_guided_effects'] = [e.model_dump(mode='json') for e in checked.effects]
@@ -177,7 +193,7 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
         scenario = scenario_from_engine(income_multiplier, bills_increase_pct, one_off_costs)
         if mode == 'Guided scenario editor':
             try:
-                scenario = _render_guided_scenario()
+                scenario = _render_guided_scenario(customer['account_id'])
             except ValueError as exc:
                 st.error(f'Check the guided scenario: {exc}')
                 with history_area:

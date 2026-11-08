@@ -179,9 +179,14 @@ rejected. Correct or clear invalid schedules before advice is issued.
 `applied_plan` combines the supported revised contribution with approved existing
 transfer pauses. The separate `supported_pause` path remains a comparison. Fees
 occur at month-start; avoided payments affect month-end. A pause whose fees consume
-the benefit is excluded. If the combined pause advances the first shortfall or
-increases required funding, the applied plan retains the revised goal alone and
-marks the pause comparison for review. No automatic banking action occurs.
+the benefit is excluded. Each payment is evaluated in deterministic fee/month/ID
+order. Useful payments remain selected when another payment would advance a
+shortfall or increase required funding. Approval permits modeling; recommendation
+also requires reducing the funding gap, delaying a shortfall, or improving a
+stated reserve-floor deficit without worsening its maximum. A healthy account
+with no such purpose retains the pause only as a comparison. Every payment has an
+included/excluded decision with a reason. This is a deterministic selection
+policy, not a proof of a globally optimal combination. No banking action occurs.
 
 Mandatory runtime checks reconcile each applied payment, fee and contribution
 against supplied records, the original scenario ledger, and every closing cash
@@ -207,3 +212,44 @@ $400, -$200, $1,200, $600, $0, -$600; and a $4,200 reserve gap rebuilt at $300/m
 in 14 months. The late-receipt example needs $200 before the receipt and $600 of
 extra starting cash across the full six-month horizon. These are synthetic
 verification cases, not observed customer facts or independent finance-team signoff.
+
+
+## Pre-demo review corrections
+
+Loan relief is bounded by the specific existing payment and its inclusion in
+baseline spending. The current loan snapshot and the historical monthly spending
+component are distinct facts. A zero loan payment cannot be reduced, and a
+snapshot alone cannot establish an avoided payment in the modeled spending.
+Unknown payment/inclusion leaves relief unapplied and the projection incomplete.
+An explicit scenario override requires `obligation_payment`, `obligation_source`
+and `payment_in_baseline=true`. The guided editor binds such evidence to the
+selected account with local `obligation_account_id`; switching accounts leaves
+that override unapplied until matching evidence is supplied. Scoped reductions never consume unchanged
+household bills or other protected fixed obligations. Classification uses the
+same obligation checks; raw payment evidence remains local.
+
+A temporary deferral uses `debt_change_kind="deferral"` plus finite duration,
+`repayment_month` and `repayment_amount`, or `repayment_unresolved=true`.
+Repayment cannot omit deferred principal. A dated repayment enters cash once;
+unknown repayment or repayment beyond the horizon remains a visible liability
+and prevents a full-funding claim. The normalized classifier case includes an
+in-horizon repayment as a dated cost. Example with a known included $300 payment:
+
+```json
+{"type":"debt_payment_delta","value":-300.0,"duration_months":2,
+ "debt_change_kind":"deferral","repayment_month":4,"repayment_amount":600.0}
+```
+
+G25 is tri-state: `true` for evidenced deterioration, `false` when complete paths
+show none, and `null`/`G25_state="unknown"` when the impact is unestablished.
+`goal_review_required` independently holds contributions for incomplete evidence.
+A complete known prefix can still prove an immediate shortage before a later
+unknown effect. Unknown income, unknown event effects and missing duration do not
+by themselves prove deteriorated allocation capacity.
+
+Only `scope="ORGANIZER_STANDARD"` receives the official runway label and colored
+runway badge. Dated scenarios display a neutral Month 1 reference and the actual
+monthly projection's first shortfall prominently. Incomplete cash paths label
+cash need and closing cash as partial estimates; the full funding need remains
+not established. Runtime policy `crisis-lifecycle-v2` enforces the uncertainty,
+financial-purpose, per-payment audit and original-CAD reconciliation rules.

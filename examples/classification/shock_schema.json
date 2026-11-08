@@ -84,6 +84,94 @@
           ],
           "title": "Evidence",
           "type": "string"
+        },
+        "obligation_account_id": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Account Id"
+        },
+        "obligation_payment": {
+          "anyOf": [
+            {
+              "maximum": 1000000000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Payment"
+        },
+        "obligation_source": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Source"
+        },
+        "payment_in_baseline": {
+          "default": false,
+          "title": "Payment In Baseline",
+          "type": "boolean"
+        },
+        "debt_change_kind": {
+          "default": "payment_change",
+          "enum": [
+            "payment_change",
+            "deferral"
+          ],
+          "title": "Debt Change Kind",
+          "type": "string"
+        },
+        "repayment_month": {
+          "anyOf": [
+            {
+              "maximum": 240,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Repayment Month"
+        },
+        "repayment_amount": {
+          "anyOf": [
+            {
+              "maximum": 1000000000000.0,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Repayment Amount"
+        },
+        "repayment_unresolved": {
+          "default": false,
+          "title": "Repayment Unresolved",
+          "type": "boolean"
         }
       },
       "required": [

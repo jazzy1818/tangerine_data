@@ -54,6 +54,24 @@ def build_case(profile: CustomerProfile, scenario: ShockScenario,
             elif t in {'expense_delta', 'household_bills_delta', 'debt_payment_delta', 'one_off_cost'}: cash_delta = -v
             elif t == 'expense_percent': cash_delta = -v * b.S / 100
             elif t == 'household_bills_percent': cash_delta = -v * b.H / 100
+        if effect.obligation_account_id is not None and effect.obligation_account_id != profile.account_id:
+            cash_delta = None
+            missing.append('Payment evidence belongs to another account; supply evidence for the selected account.')
+        if t == 'debt_payment_delta' and v is not None and v < 0:
+            supplied = effect.obligation_payment is not None
+            supported = (effect.payment_in_baseline and effect.obligation_source) if supplied else (b.P is not None and b.included_loan_payment is not None)
+            if not supported:
+                cash_delta = None
+                missing.append('Confirm the existing loan payment, source and inclusion in spending before modeling relief.')
+        if effect.debt_change_kind == 'deferral' and effect.repayment_month is not None and effect.repayment_month <= scenario.horizon_months:
+            repayment_supported = (effect.evidence in ('judge_specified', 'user_confirmed')
+                and (effect.obligation_account_id is None or effect.obligation_account_id == profile.account_id))
+            effects.append(NormalizedEffect(type='one_off_cost', value=effect.repayment_amount/scale,
+                unit='cash_scale', start_month=effect.repayment_month, duration_months=None, ongoing=False,
+                cashflow_delta_to_scale=-effect.repayment_amount/scale if repayment_supported else None,
+                evidence=effect.evidence if repayment_supported else 'unknown'))
+            reasons.add('one_off_expense')
+            families.add('one_off_cost')
         effects.append(NormalizedEffect(type=t, value=v/scale if v is not None and t in MONEY_EFFECTS else v,
                                        unit=unit, start_month=effect.start_month,
                                        duration_months=effect.duration_months, ongoing=effect.ongoing,
@@ -103,26 +121,25 @@ def build_case(profile: CustomerProfile, scenario: ShockScenario,
         elif t == 'investment_return':
             reasons.add('investment_change')
             missing.append('Confirm invested assets, sale/settlement, and any actual cash effect.')
-    # Validate sign feasibility in every affected period without creating a second financial solver.
-    for month in range(1, scenario.horizon_months + 1):
-        inc, out, household, debt = b.I, b.S, b.H, b.P
-        for e in scenario.effects:
-            if not e.active(month) or e.value is None or e.evidence == 'unknown':
-                continue
-            t, v = e.type, e.value
-            if t == 'income_multiplier': inc += (v-1)*b.I
-            elif t == 'income_delta': inc += v
-            elif t == 'expense_delta': out += v
-            elif t == 'expense_percent': out += v*b.S/100
-            elif t in {'household_bills_delta', 'household_bills_percent'}:
-                delta = v if t == 'household_bills_delta' else v*b.H/100
-                out += delta
-                household += delta
-            elif t == 'debt_payment_delta':
-                out += v
-                if debt is not None: debt += v
-        if min(inc, out, household) < -1e-9 or (debt is not None and debt < -1e-9):
-            raise ValueError(f'Effects imply negative inflow, spending, bills, or loan payment in month {month}.')
+    # Validate scoped cost relief with the same obligation guard as execution.
+    # Other classifier screening fields remain historical first-period references;
+    # missing income is never recast here as a verified zero-income shock.
+    outflow_types = {'expense_delta', 'expense_percent', 'household_bills_delta',
+                     'household_bills_percent', 'debt_payment_delta'}
+    if any(e.type in outflow_types for e in scenario.effects):
+        from scenario_execution import period_values
+        financial_baseline = {name: getattr(b, name) for name in ('I', 'S', 'F', 'H', 'B', 'P', 'included_loan_payment')}
+        financial_baseline['account_id'] = profile.account_id
+        periods = [period_values(financial_baseline, scenario, m) for m in range(scenario.horizon_months+1)]
+        spending = float(periods[1]['spending'])
+        if any(p['unknown'] for p in periods) and not missing:
+            missing.append('Financial execution has unresolved effects; only quantified components are established.')
+    for month in range(1, scenario.horizon_months+1):
+        incoming = b.I + sum(((e.value-1)*b.I if e.type == 'income_multiplier' else e.value)
+            for e in scenario.effects if e.type in ('income_multiplier', 'income_delta')
+            and e.active(month) and e.value is not None and e.evidence != 'unknown')
+        if incoming < -1e-9:
+            raise ValueError(f'Effects imply negative inflow in month {month}.')
     if len(families) > 1:
         reasons.add('compound_effects')
     if not families and not missing:

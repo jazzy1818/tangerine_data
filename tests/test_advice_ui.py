@@ -1,4 +1,4 @@
-from test_crisis_ui import app
+from test_crisis_ui import app, custom
 
 
 def add_schedule(app, fee=0.):
@@ -14,6 +14,7 @@ def add_schedule(app, fee=0.):
 
 
 def test_dashboard_applies_schedule_and_resets_account_evidence(app):
+    custom(app,{'effects':[{'type':'income_multiplier','value':0.,'duration_months':6}]})
     add_schedule(app)
     assert len(app.session_state['transfer_records'])==6
     assert any('net cash retained: CAD 1,800.00' in m.value for m in app.markdown)
