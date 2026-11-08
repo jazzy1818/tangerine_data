@@ -5,16 +5,21 @@ Streamlit labels offline. All provider responses are mocked at the HTTP/client
 boundary. No live request was made. A successful mocked response demonstrates
 integration behavior, not provider availability, agreement, or model accuracy.
 
-Start: clean `main` at `48806bd`. Work is on `provider-fallback-evidence`.
+Start: clean `main` at `48806bd`. Work was developed on
+`provider-fallback-evidence` and merged into `main` at `e447102` without conflicts.
 Existing fallback/SDK/privacy tests were reused. The additions close the gaps in
 inspectable case results, the UI failure matrix, and independent explanation tests.
 
-Result on this branch: **498 tests and 9 subtests passed**, including the 52 new
+Feature branch result: **498 tests and 9 subtests passed**, including the 52 new
 checks. The export contains **65 verified rows** across classification, classifier
 UI, explanation and explanation UI. Export consistency checks confirmed one
 effective lead/ledger fingerprint per normalized reference case, unique rows,
 matching source hashes and explicit live **Not run** records. `git diff --check`
 passed. No live provider availability or model-quality claim follows from this.
+
+Main integration verification: the full suite passed **498 tests and 9 subtests**
+after the merge. Regenerating the 65 evidence rows produced identical artifacts;
+source fingerprints and `git diff --check` passed. Live routes remain **Not run**.
 
 ## Reproduce
 

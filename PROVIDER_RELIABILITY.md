@@ -167,3 +167,7 @@ The follow-up branch adds a case/backend CSV, reproducible normalized case hashe
 source fingerprints, explicit live **Not run** records and independent UI checks.
 See the [Phase 3 handoff](reports/provider_fallbacks/README.md) for the scope,
 synthetic expectations, reproduction command and bounded operator smoke setup.
+
+Merged `provider-fallback-evidence` (`2a28e59`) into `main` without conflicts.
+The merged suite passed **498 tests and 9 subtests**; the regenerated evidence
+artifacts were unchanged. No live provider calls were made during merge checks.
