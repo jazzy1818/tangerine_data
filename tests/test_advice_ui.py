@@ -1,4 +1,4 @@
-from test_crisis_ui import app, custom
+from test_crisis_ui import app, backup_cash_chart, custom
 
 
 def add_schedule(app, fee=0.):
@@ -15,9 +15,17 @@ def add_schedule(app, fee=0.):
 
 def test_dashboard_applies_schedule_and_resets_account_evidence(app):
     custom(app,{'effects':[{'type':'income_multiplier','value':0.,'duration_months':6}]})
-    add_schedule(app)
+    add_schedule(app, fee=25.)
     assert len(app.session_state['transfer_records'])==6
-    assert any('net cash retained: CAD 1,800.00' in m.value for m in app.markdown)
+    assert any('net cash retained: CAD 1,650.00' in m.value for m in app.markdown)
+    paths = {trace['name']: trace for trace in backup_cash_chart(app)['data']}
+    applied = paths['With supported actions']
+    shocked = paths['Shock only']
+    assert round(applied['y'][-1] - shocked['y'][-1], 2) == 1650.
+    first_payment = next(i for i, row in enumerate(applied['customdata']) if row[:2] == [1, 'start'])
+    assert 'Action fee: CAD 25.00' in applied['customdata'][first_payment][2]
+    assert 'Action fee' not in shocked['customdata'][first_payment][2]
+    assert any('a decrease of CAD 1,650.00' in m.value for m in app.tabs[2].markdown)
     # Reruns do not duplicate scheduled payments.
     app.run()
     assert len(app.session_state['transfer_records'])==6
@@ -25,6 +33,7 @@ def test_dashboard_applies_schedule_and_resets_account_evidence(app):
     assert not app.exception
     assert 'transfer_records' not in app.session_state
     assert any('No existing-transfer pause' in m.value for m in app.markdown)
+    assert all('Action fee' not in row[2] for trace in backup_cash_chart(app)['data'] for row in trace['customdata'])
 
 
 def test_unknown_fee_and_duplicate_schedule_get_no_invented_cash(app):
@@ -43,3 +52,4 @@ def test_excessive_release_blocks_advice_without_crashing(app):
     next(b for b in app.button if b.label=='Add evidenced schedule').click().run()
     assert not app.exception
     assert any('cannot be applied' in m.value for m in app.error)
+    assert backup_cash_chart(app) is None

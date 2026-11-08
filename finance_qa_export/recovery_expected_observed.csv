@@ -1,0 +1,11 @@
+case,path,metric,expected,observed,comparison,expected_calculated_at,review_status
+D,Supported contribution,reserve_target,7200.0,7200.0,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Supported contribution,reserve_gap,4200.0,4200.0,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Supported contribution,monthly_contribution,300.0,300.0,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Supported contribution,months_to_target,14,14,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Supported contribution,monthly_surplus,,,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Unknown contribution,reserve_target,7200.0,7200.0,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Unknown contribution,reserve_gap,4200.0,4200.0,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Unknown contribution,monthly_contribution,0.0,0.0,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Unknown contribution,months_to_target,,,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review
+D,Unknown contribution,monthly_surplus,,,MATCH,2026-11-08T13:46:24.185895+00:00,Pending human finance review

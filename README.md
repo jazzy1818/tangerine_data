@@ -34,8 +34,11 @@ The new website does not need Streamlit or Node.js to run.
 The launcher uses Python from your active environment, with a `python3` fallback. It works on
 Linux and macOS; Windows requires Bash (for example, Git Bash or WSL) with Python available.
 Use `bash run.sh cli` for the command-line engine or `bash run.sh --port 8001` for a
-different website port. The classifier reads API keys from the project `.env` file; no extra
-shell exports or browser key entry are needed.
+different website port. Provider routes read approved settings from the project `.env`
+file; no extra shell exports or browser key entry are needed. The website requests
+classification only when you select **Prepare customer review**. Each optional remote
+route in the legacy interface also requires its own explicit button; configuring a key
+does not make calls automatically. See [provider/demo reliability](PROVIDER_RELIABILITY.md).
 
 The earlier Streamlit workspace remains available with `bash run.sh streamlit`
 (install `requirements.txt` for all legacy/discovery dependencies). Its port option is

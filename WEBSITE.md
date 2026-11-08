@@ -41,6 +41,8 @@ the supplied local CSV files.
    Income levels are entered as percentages (55 means 55% of usual inflow).
 4. Confirm accessible cash and its source. Optional financial forms capture existing savings
    payments, a savings objective, and updated recovery figures. No JSON entry is required.
+   Recovery inflow can remain unknown. A rebuild date then requires an explicitly supported
+   contribution, confirmed stability and covered obligations; blank inflow is not zero income.
 5. **Check the financial impact**, then **Prepare customer review**. The prepared review
    shows the funding gap, first shortfall, suggested focus, savings-goal impact, and
    outstanding information. It identifies a standard assessment when assistance is unavailable.
@@ -48,6 +50,17 @@ the supplied local CSV files.
    in progress, awaiting information, ready for discussion, follow-up scheduled, or closed.
 7. Download the review summary, print/save a PDF, or export the cash-flow schedule as CSV.
    Compare two saved assessments from **Review history** when discussing alternatives.
+
+The financial comparison stays in the existing review card and uses the shared
+`backup_comparison.py` validation and explanations. Charts show month-start and month-end
+cash, with the first shortfall marked and posted events available on hover. A month-start
+shortage stays visible even when the balance recovers by month-end. Partial projections
+show known components and leave the full funding need unestablished.
+
+New assessments save the validated comparison alongside the original plan. Earlier saved
+reviews remain readable and unchanged; prepare a revised assessment to obtain the newly
+saved comparison explanation. The portfolio income-shock finding also uses the teammate's
+shared `portfolio_overview.py` calculation.
 
 **Portfolio insights** is a secondary view with historical observations and conversation
 prompts, customer groups and links into individual reviews. Its charts and customer groups
@@ -114,7 +127,8 @@ without model access, and a provider failure is explicitly labelled as a local f
 - `web_app/contracts.py`: HTTP contracts that reuse the repository's Pydantic financial types.
 - `web_app/service.py`: adapts `engine`, `plan_classification`, and the existing runtime
   validators. It checks the full financial plan before a paid call, then binds the returned
-  classification to the exact canonical input hash.
+  classification to the exact canonical input hash. Shared comparison validation runs before
+  that call and again against the final plan; financial amounts are not recalculated in JS.
 - `web_app/analytics.py`: read-only CSV-derived customer search.
   In-memory data views refresh on server restart, matching the engine's dataset cache.
 - `web_app/portfolio.py`: local portfolio groups, historical charts and customer drilldown.

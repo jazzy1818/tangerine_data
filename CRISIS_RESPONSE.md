@@ -132,15 +132,21 @@ partial until actual target events/dates are supplied.
 ## Recovery
 
 The optional UI checkpoint accepts explicitly supplied assessment month, cash,
-updated inflows/spending, obligation coverage, stability, and an optional supported
-monthly rebuild bound. It is cleared when the selected account changes. Merely
+updated spending, obligation coverage, stability, and an optional supported
+monthly rebuild bound. Updated inflows are optional: an explicitly supported
+contribution can establish a conditional rebuild rate without inventing income.
+It is cleared when the selected account changes. Merely
 selecting phase `recovery` cannot establish recovery or a new cash balance.
 
 `RecoverySnapshot` source and cash basis (`judge_specified`, `observed`, or
 `simulated`) stay visible. A negative balance, ongoing deficit, uncovered
 obligations, or unestablished stability keeps stabilization active. Otherwise,
 reserve restoration uses the same configured reserve-month policy with updated
-spending and protected earmarks. The rate cannot exceed supported current surplus;
+spending and protected earmarks. When inflows are supplied, the rate cannot exceed
+current surplus, and a known deficit blocks rebuilding even if a contribution is
+supplied. When inflows are absent, monthly surplus remains unknown and only an
+explicitly supported contribution is used; an inflow-unquantified flag records
+that limitation. Stable cash flow and covered obligations must still be supplied;
 the displayed cent amount is the amount used for the timeline. Zero/unknown rates
 have no ETA. Restored reserves trigger reassessment, never automatic ETF advice.
 
@@ -257,3 +263,59 @@ monthly projection's first shortfall prominently. Incomplete cash paths label
 cash need and closing cash as partial estimates; the full funding need remains
 not established. Runtime policy `crisis-lifecycle-v2` enforces the uncertainty,
 financial-purpose, per-payment audit and original-CAD reconciliation rules.
+
+## Backup Plan comparison screen
+
+**Goal and Backup Plans → Backup Plan** now puts the analyst summary and a Plotly
+cash comparison above the detailed ledgers. Both paths are after the same shock:
+`no_action` versus `applied_plan`. The display reads the engine's existing outputs;
+it does not call the engine again, change a goal or create cash relief.
+
+Every Month 0 through the chosen horizon has separate start/end points. The chart
+uses an ordered checkpoint axis (not days), a CAD 0 line, distinct line styles,
+and first-negative annotations. A negative month-start balance remains visible
+even if that month's closing balance recovers. Held funds follow the engine's
+accessible-cash definition. Lines between checkpoints do not establish daily
+solvency. Daily Replay remains a separate historical analysis.
+
+The view validates matching scenario hashes, horizon and opening basis, ordered
+checkpoint grids, finite CAD cents, first-shortfall metadata, full/partial funding
+status and the funding need implied by minimum cash. Inconsistent or blocked
+results produce no comparison. Source results are not mutated.
+
+Above the chart, the screen shows first shortfall and required cash before/after,
+then explains the supported pauses, fees and new proposed transfers that account
+for the difference. Identical paths explicitly explain why a proposal pause or an
+unavailable existing-transfer action adds no cash. A partial projection leaves
+full funding needs **Not established** and identifies quantified estimates and
+unresolved effects separately. The complete checkpoint ledger, monthly schedule,
+comparison table and per-payment inclusion/exclusion decisions remain underneath
+in expanders. Existing evidence and review flags remain available.
+
+**Financial Safe Mode** is a read-only presentation of existing engine decisions:
+review required, modeled liquidity protection, or no additional restriction
+established. It adds no financial policy, account control or automatic transfer.
+It does not equate an unrestricted contribution conclusion with suitability.
+
+The opening portfolio card is recomputed from `monthly_summary.csv`: **714 of
+3,309 accounts with positive typical monthly surplus** have modeled runway below
+six months at 55% inflow, using the unrounded threshold and no additional bill or
+repair shock. The denominator excludes zero/negative typical surplus accounts.
+I/S are full-history medians; B is the mean of the last up to six monthly average
+balances. This is a simulation finding, not observed future customer outcomes.
+The one-decimal official runway display is separate: thresholding that rounded
+display would produce 699 rather than 714. No organizer formula is changed.
+
+[Manual comparison review sheet](examples/crisis/backup_comparison_review.csv)
+contains independently worked synthetic expectations and empty finance-reviewer
+fields. Automated tests do not constitute independent finance signoff. Tests
+cover the $3,360/$1,560 example, start/end timing, zero and one-cent boundaries,
+unknown impacts, proposed debits, identical paths, corrupt/stale comparisons,
+account/shock/evidence changes, safe-mode presentation and the portfolio finding.
+
+Verification for this screen: `python -m pytest tests/test_backup_comparison.py
+tests/test_backup_comparison_ui.py tests/test_portfolio_overview.py -q` passed all
+22 focused checks. The full suite passed **400 tests and 9 subtests**. A Chromium
+run exercised the actual app, account changes, a custom income shock and the
+monthly comparison. These checks establish the tested behavior, not finance-team
+signoff or completeness across every possible future scenario.

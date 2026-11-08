@@ -1,0 +1,11 @@
+case,source,units,horizon,monthly_rows,B_months,loan_status,I,S,H,F,B,P,path,opening_cash,post_shock_income,post_shock_spending,immediate_repair,pause_existing,evidence
+Account 20111,Local monthly_summary.csv and loans.csv,CAD,All observed months; last six for B,38,2025-07;2025-08;2025-09;2025-10;2025-11;2025-12,D,6339.39,8599.605,0.0,2330.06,17611.86333333333333333333333,2330.19,,,,,,,
+Account 22812,Local monthly_summary.csv and loans.csv,CAD,All observed months; last six for B,34,2025-07;2025-08;2025-09;2025-10;2025-11;2025-12,NO_LOAN,14472.325,14786.965,2350.32,2350.32,51219.555,0,,,,,,,
+A,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,No intervention,3000,1650,2460,1500,False,Synthetic; unknown income/deferral inclusion remains unknown where specified
+A,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Pause future proposed investment,3000,1650,2460,1500,False,Synthetic; unknown income/deferral inclusion remains unknown where specified
+A,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Pause approved existing outflow,3000,1650,2460,1500,True,Synthetic; unknown income/deferral inclusion remains unknown where specified
+B,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Start Month 3 receipt,1000,1800,2400,0,False,Synthetic; unknown income/deferral inclusion remains unknown where specified
+C,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Original payments,300,2200,2400,0,False,Synthetic; unknown income/deferral inclusion remains unknown where specified
+C,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Approved deferral,300,2200,2400,0,False,Synthetic; unknown income/deferral inclusion remains unknown where specified
+C,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Deferral without baseline evidence,300,2200,2400,0,False,Synthetic; unknown income/deferral inclusion remains unknown where specified
+E,Team PDF Phase 1 p3; E explicitly reuses A baseline,CAD,6 months,,,,,,,,,,Income changes; synthetic baseline from Case A,3000,,2400,0,False,Synthetic; unknown income/deferral inclusion remains unknown where specified

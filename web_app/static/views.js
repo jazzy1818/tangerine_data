@@ -1,5 +1,5 @@
 import {escapeHtml as e, money, number, percent, badge, metric, notice, table} from './common.js';
-import {lineChart, barChart} from './charts.js';
+import {lineChart, barChart, cashPathChart} from './charts.js';
 import {reviewStatuses, plainNote, shortfall} from './financial.js';
 
 export function heading(step,title,description,actions='') {
@@ -63,7 +63,7 @@ export function customerView(c,months=12) {
 
 export function previewView(p) {
   const path=p.projection;
-  return `<section class="card" id="preview-card"><div class="card-head"><h2>How do the changes affect cash?</h2>${badge('Before any proposed action')}</div><div class="metric-grid">${metric('First projected shortfall',shortfall(path))}${metric('Additional cash needed',money(path.full_funding_need),path.funding_result_complete?'Across the review period':'Known-amount estimate: '+money(path.additional_cash_needed))}${metric('Cash at the end of the period',money(path.ending_cash),path.funding_result_complete?'Based on the supplied assumptions':'Known amounts only')}</div>${!path.funding_result_complete?notice('Some amounts or dates are still unknown. Confirm them before drawing a complete funding conclusion.','warn'):''}${p.notes.filter(s=>!s.includes('description is context')).map(s=>notice(plainNote(s),'warn')).join('')}${lineChart(path.schedule,[{key:'end_balance',name:'Without additional action'}],'month','Projected accessible cash')}<p class="help">Month 1 is the first month of the review. Monthly balances do not confirm that every payment can be met on its due date.</p><details><summary>Information to confirm and assumptions</summary>${noteList([...p.case.missing_details,...path.review_flags])}</details></section>`;
+  return `<section class="card" id="preview-card"><div class="card-head"><h2>How do the changes affect cash?</h2>${badge('Before any proposed action')}</div><div class="metric-grid">${metric('First projected shortfall',shortfall(path))}${metric('Additional cash needed',money(path.full_funding_need),path.funding_result_complete?'Across the review period':'Known-amount estimate: '+money(path.additional_cash_needed))}${metric('Cash at the end of the period',money(path.ending_cash),path.funding_result_complete?'Based on the supplied assumptions':'Known amounts only')}</div>${!path.funding_result_complete?notice('Some amounts or dates are still unknown. Confirm them before drawing a complete funding conclusion.','warn'):''}${p.notes.filter(s=>!s.includes('description is context')).map(s=>notice(plainNote(s),'warn')).join('')}${cashPathChart([{key:'no_action',name:'Without additional action',path}])}<p class="help">Month 1 is the first month of the review. Monthly balances do not confirm that every payment can be met on its due date.</p><details><summary>Information to confirm and assumptions</summary>${noteList([...p.case.missing_details,...path.review_flags])}</details></section>`;
 }
 
 export function settingsView(config,backend) {

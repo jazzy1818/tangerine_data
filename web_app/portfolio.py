@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 
 import engine
+from portfolio_overview import portfolio_finding
 from . import analytics
 
 COHORTS = {
@@ -47,7 +48,7 @@ def local_snapshot():
         deficit_accounts=('deficit_months', 'sum'), total_inflow=('money_in', 'sum'),
         total_spending=('money_out', 'sum')).reset_index()
     meta = {'period_start': str(monthly.month.min()), 'period_end': str(monthly.month.max()),
-            'monthly_observations': len(monthly)}
+            'monthly_observations': len(monthly), 'income_shock': portfolio_finding(monthly)}
     return facts, trend, meta
 
 
@@ -60,7 +61,7 @@ def enrich(facts):
     facts['active_loan'] = facts.loan_status.isin(['C', 'D'])
     facts['loan_in_arrears'] = facts.loan_status.eq('D')
     gap = facts.money_out-.55*facts.money_in
-    facts['shock_exposure'] = (facts.surplus > 0) & ((facts.buffer <= 0) | ((gap > 0) & (facts.buffer/gap.replace(0, np.nan) < 6)))
+    facts['shock_exposure'] = (facts.surplus > 0) & ((facts.buffer <= 0) | ((gap > 0) & (facts.buffer < 6*gap)))
     return facts
 
 
@@ -105,8 +106,8 @@ def discovery(cohort='recurring_shortfalls', offset=0, limit=25, refresh=False):
         'accounts': len(facts), 'monthly_observations': int(meta['monthly_observations']),
         'active_loans': int(facts.active_loan.sum()),
         'findings': [
-            {'title': 'A surplus can disappear under a shock', 'numerator': int(facts.shock_exposure.sum()),
-             'denominator': int((facts.surplus > 0).sum()),
+            {'title': 'A surplus can disappear under a shock', 'numerator': meta['income_shock']['under_six_months'],
+             'denominator': meta['income_shock']['positive_surplus_accounts'],
              'description': 'Positive-surplus accounts with under six months of runway when inflow drops to 55%. This is a hypothetical scenario, not a job-loss probability.'},
             {'title': 'Typical surplus can hide difficult months', 'numerator': int((eligible & masks['recurring_shortfalls']).sum()),
              'denominator': int(eligible.sum()),

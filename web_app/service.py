@@ -3,6 +3,7 @@ import json
 import logging
 
 import engine
+from backup_comparison import build_comparison, safe_mode_status
 from plan_classification import build_case, profile_from_engine, select_plan
 from plan_classification.case import case_hash
 from plan_classification.request_log import append_request, request_record
@@ -61,6 +62,7 @@ def execute_run(session_id, request):
         plans = engine.make_plan(customer, **kwargs)
         if plans['crisis_plan'].get('runtime_validation', {}).get('status') != 'passed':
             raise ValueError('The financial engine requires review. No classifier API call was made.')
+        build_comparison(plans['crisis_plan'])
         case = build_case(profile_from_engine(customer), request.scenario, planning_cash=request.opening_cash)
         selected = select_plan(case, request.backend)
         record = request_record(selected)
@@ -70,11 +72,15 @@ def execute_run(session_id, request):
         except OSError:
             log_warning = 'The text request log could not be appended; request metadata remains in this saved result.'
         plans = engine.make_plan(customer, selection_result=selected, **kwargs)
+        comparison = build_comparison(plans['crisis_plan'])
+        status, reason = safe_mode_status(plans['crisis_plan'], comparison)
+        comparison['planning_status'] = {'label': status, 'reason': reason}
         # Normalize NumPy scalars using the same JSON-safe encoding as the HTTP layer.
         from fastapi.encoders import jsonable_encoder
         import numpy as np
         result = jsonable_encoder({**evidence, 'classification': selected.model_dump(mode='json'),
-                                   'plans': plans, 'request_log': record, 'log_warning': log_warning},
+                                   'plans': plans, 'cash_comparison': comparison,
+                                   'request_log': record, 'log_warning': log_warning},
                                   custom_encoder={np.int64: int, np.float64: float, np.bool_: bool})
         json.dumps(result, allow_nan=False)
         store.finish(session_id, run_id, result=result)

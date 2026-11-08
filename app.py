@@ -90,6 +90,12 @@ def get_all_accounts():
     return engine.get_account_ids()
 
 
+@st.cache_data
+def get_portfolio_finding():
+    from portfolio_overview import portfolio_finding
+    return portfolio_finding(engine.load_data()['monthly'])
+
+
 def set_account_preset(account_id):
     st.session_state["account_selector"] = account_id
     clear_account_evidence()
@@ -99,7 +105,7 @@ def clear_account_evidence():
     st.session_state.pop('classification_result', None)
     for key in list(st.session_state):
         if key.startswith(('transfer_', 'classification_debt_')) or key in (
-            'tailored_explanation', 'classification_guided_value_debt_payment_delta',
+            'tailored_explanation', 'daily_advisor_result', 'classification_guided_value_debt_payment_delta',
             'classification_guided_effect_id',
         ):
             del st.session_state[key]
@@ -145,6 +151,16 @@ except (ValueError, FileNotFoundError) as exc:
 if not account_ids:
     st.error("No accounts are available in the supplied monthly data.")
     st.stop()
+
+try:
+    finding = get_portfolio_finding()
+    if finding['positive_surplus_accounts']:
+        st.info(f"Portfolio simulation: {finding['under_six_months']:,} of {finding['positive_surplus_accounts']:,} accounts with positive typical monthly surplus have under six months of modeled runway when account inflows fall to 55%.")
+        st.caption(f"Source: {finding['source']} through {finding['last_month']} · {finding['basis']} Simulation result; not observed customer outcomes or verified benefit eligibility.")
+    else:
+        st.info('Portfolio simulation: no accounts meet the positive typical-surplus denominator.')
+except (ValueError, KeyError, TypeError) as exc:
+    st.caption(f'Portfolio simulation unavailable: {exc}. Individual account analysis remains separate.')
 
 for key, default in {
     "account_selector": 20111 if 20111 in account_ids else account_ids[0],
@@ -349,7 +365,8 @@ with tab2:
     from plan_classification import scenario_from_engine, ShockScenario
     from plan_classification.ui import render_classification
     handoff = render_classification(customer, income_mult, bills_increase, repair_cost, event_evidence=judge_evidence)
-    if not handoff or handoff['scenario'] is None:
+    scenario_input_valid = bool(handoff and handoff['scenario'] is not None)
+    if not scenario_input_valid:
         st.warning('Scenario input is incomplete or invalid. The baseline remains visible, but no stale slider scenario is applied.')
         active_scenario = ShockScenario(effects=[{'type': 'unspecified_event', 'value': None, 'evidence': 'unknown'}])
         classification_selection = None
@@ -419,12 +436,12 @@ with tab3:
             from recovery_plan import RecoverySnapshot
             checkpoint_month = st.text_input('Checkpoint month (YYYY-MM)', value='', key='recovery_month')
             rcash = st.number_input('Accessible cash at checkpoint (CAD)', value=None, key='recovery_cash')
-            rincome = st.number_input('Updated recurring inflows (CAD/month)', min_value=0., value=None, key='recovery_income')
+            rincome = st.number_input('Updated recurring inflows (CAD/month; optional if contribution support is supplied)', min_value=0., value=None, key='recovery_income')
             rspending = st.number_input('Updated recurring spending (CAD/month)', min_value=.01, value=None, key='recovery_spending')
             rrate = st.number_input('Supported rebuild contribution (CAD/month; leave blank if unknown)', min_value=0., value=None, key='recovery_rate')
             rstable = st.checkbox('Scenario explicitly establishes stable cash flow', key='recovery_stable')
             rcovered = st.checkbox('Scenario explicitly establishes coverage of upcoming obligations', key='recovery_covered')
-            if None not in (rcash, rincome, rspending):
+            if None not in (rcash, rspending):
                 try:
                     recovery_snapshot = RecoverySnapshot(source='Judge-supplied conditional recovery checkpoint',
                         account_id=customer['account_id'],
@@ -450,7 +467,7 @@ with tab3:
         st.stop()
     crisis = plans['crisis_plan']
     if crisis['runtime_validation']['status'] != 'passed':
-        st.error('Financial validation blocked this result. Review the supplied evidence before issuing advice.')
+        st.error('Financial validation blocked this result. Check the flags below, then correct or clear the supplied scenario and payment evidence.')
         review_flags(crisis['review_flags'])
         with tab5:
             from etf_ui import render_etf_explorer
@@ -488,7 +505,16 @@ with tab3:
     review_flags(goal["review_flags"])
 
     st.markdown("### Plan 2 · Backup Plan")
+    cash_comparison = None
+    if scenario_input_valid:
+        from backup_comparison import render_backup_comparison
+        cash_comparison = render_backup_comparison(crisis)
+    else:
+        st.info("The cash comparison is available once the scenario input is corrected.")
     st.write(f"**Lead module:** {crisis['lead_module'] or 'BANK_REVIEW'} · **Goal:** {crisis['goal_status']} · **G25:** {crisis['G25_state']}")
+    proposal = crisis['module_proposal']['lead_module']
+    actual_source = (crisis.get('classification') or {}).get('actual_backend','external proposal')
+    st.caption(f"Module proposal: {proposal} ({actual_source}); effective financial response: {crisis['lead_module'] or 'BANK_REVIEW'}. The Python engine owns cash and action eligibility.")
     if crisis['goal_review_required']:
         st.info('Goal held for review: incomplete effects do not by themselves establish G25 deterioration. Full funding need remains open.')
     st.caption('All financial effects are calculated, independently of the classifier’s limit of two supporting labels.')
@@ -503,58 +529,48 @@ with tab3:
     )
     if not backup["funding_result_complete"]:
         st.warning("This projection covers quantified effects only. Missing or additional event/expense effects prevent a full funding conclusion; see Allocation Review for additional evidence.")
-    start_col, end_col, gap_col = st.columns(3)
-    start_col.metric("Opening Proxy After Immediate Cost", money(backup["initial_buffer_left"]))
-    end_label = f"Month {active_scenario.horizon_months} Closing Balance" + (" (partial estimate)" if not backup["funding_result_complete"] else "")
-    end_col.metric(end_label, money(backup["month_6_balance"]))
-    gap_col.metric("Extra Starting Cash Needed" if backup["funding_result_complete"] else "Quantified Cash Need (partial estimate)", money(backup["remaining_cash_needed"]))
-    if not backup["funding_result_complete"]:
-        gap_col.caption("Full funding need: Not established")
-    shortage = backup["exhaustion_month"]
-    if shortage == 0:
-        st.warning("The opening cash proxy goes below zero immediately.")
-    elif shortage is not None:
-        st.warning(f"The first negative quantified-component checkpoint is month {shortage} ({crisis['no_action']['first_shortfall_phase']}). Actual outcomes remain unestablished when effects are unresolved.")
-    else:
-        st.info("The quantified cash path stays nonnegative at the modeled checkpoints. This is not a daily-solvency or complete-funding claim when effects are unresolved.")
-    schedule = pd.DataFrame(backup["six_month_schedule"]).rename(columns={
-        "month": "Month",
-        "start_balance": "Opening balance (CAD)",
-        "income": "Money in (CAD)",
-        "spending": "Money out (CAD)",
-        "net_shortfall": "Shortfall (CAD)",
-        "end_balance": "Closing balance (CAD)",
-    })
-    st.dataframe(schedule.set_index("Month"), width="stretch")
-    st.markdown('**Goal and supported-pause comparison**')
-    st.caption('A proposed pause adds $0 to the no-action path. Reserve earmarks remain liquid. Existing outflow relief is counted only with supplied schedule, inclusion, approval and fees.')
-    st.dataframe(pd.DataFrame([{
-        'Path': label, 'Closing cash (quantified components)': crisis[key]['ending_cash'],
-        'Extra starting cash needed (quantified components)': crisis[key]['additional_cash_needed'],
-        'Full funding conclusion established': crisis[key]['funding_result_complete'],
-    } for label, key in [('Before shock (no proposed transfer)', 'baseline_without_crisis'), ('No new action', 'no_action'), ('Continue proposed goal', 'continue_goal'),
-                          ('Revised goal only', 'revised_goal'), ('Supported existing-transfer pause', 'supported_pause'),
-                          ('Applied revised plan', 'applied_plan')]]), hide_index=True)
-    if crisis['pause_decisions']:
-        st.markdown('**Pause decisions — included and excluded payments**')
-        st.dataframe(crisis['pause_decisions'], hide_index=True)
+    with st.expander('Full projection ledger and comparison calculations'):
+        if cash_comparison is not None:
+            ledger_basis = 'accessible cash' if cash_comparison['complete'] else 'Known components'
+            st.markdown(f'**Chart checkpoint ledger · {ledger_basis} (CAD)**')
+            st.dataframe(pd.DataFrame([{
+                'Month': before['month'], 'Phase': before['phase'],
+                'Without new action (CAD)': before['cash'], 'Revised plan (CAD)': after['cash'],
+            } for before, after in zip(cash_comparison['before']['points'], cash_comparison['after']['points'], strict=True)]), hide_index=True, width='stretch')
+        start_col, end_col, gap_col = st.columns(3)
+        start_col.metric("Opening Proxy After Immediate Cost", money(backup["initial_buffer_left"]))
+        end_label = f"Month {active_scenario.horizon_months} Closing Balance" + (" (partial estimate)" if not backup["funding_result_complete"] else "")
+        end_col.metric(end_label, money(backup["month_6_balance"]))
+        gap_col.metric("Extra Starting Cash Needed" if backup["funding_result_complete"] else "Quantified Cash Need (partial estimate)", money(backup["remaining_cash_needed"]))
+        if not backup["funding_result_complete"]:
+            gap_col.caption("Full funding need: Not established")
+        schedule = pd.DataFrame(backup["six_month_schedule"]).rename(columns={
+            "month": "Month",
+            "start_balance": "Opening balance (CAD)",
+            "income": "Money in (CAD)",
+            "spending": "Money out (CAD)",
+            "net_shortfall": "Shortfall (CAD)",
+            "end_balance": "Closing balance (CAD)",
+        })
+        st.dataframe(schedule.set_index("Month"), width="stretch")
+        st.markdown('**Goal and supported-pause comparison**')
+        st.caption('A proposed pause adds $0 to the no-action path. Reserve earmarks remain liquid. Existing outflow relief is counted only with supplied schedule, inclusion, approval and fees.')
+        st.dataframe(pd.DataFrame([{
+            'Path': label, 'Closing cash (quantified components)': crisis[key]['ending_cash'],
+            'Extra starting cash needed (quantified components)': crisis[key]['additional_cash_needed'],
+            'Full funding conclusion established': crisis[key]['funding_result_complete'],
+        } for label, key in [('Before shock (no proposed transfer)', 'baseline_without_crisis'), ('No new action', 'no_action'), ('Continue proposed goal', 'continue_goal'),
+                              ('Revised goal only', 'revised_goal'), ('Supported existing-transfer pause', 'supported_pause'),
+                              ('Applied revised plan', 'applied_plan')]]), hide_index=True)
+    with st.expander('Transfer pause decisions — included and excluded payments'):
+        if crisis['pause_decisions']:
+            st.markdown('**Pause decisions — included and excluded payments**')
+            st.dataframe(crisis['pause_decisions'], hide_index=True)
     from tailored_advice import explain_plan, validate_advice
     validate_advice(crisis['advice'], crisis)
     st.markdown('**Personalized action plan**')
-    explanation = explain_plan(crisis)
-    if st.button('Use Gemini to emphasize validated findings', key='tailored_explain'):
-        st.session_state['tailored_explanation'] = explain_plan(crisis, backend='gemini')
-    cached = st.session_state.get('tailored_explanation')
-    if cached and cached['fingerprint'] == crisis['advice']['fingerprint']:
-        explanation = cached
-    st.caption('Explanation emphasis: ' + explanation['actual_backend'] +
-        (' · local fallback: ' + explanation['fallback_reason'] if explanation['fallback_reason'] else ''))
-    # All mandatory facts remain visible regardless of model emphasis.
-    for card_id, sentence in crisis['advice']['cards'].items():
-        if card_id in explanation['focus_ids']:
-            st.info(sentence)
-        else:
-            st.write(sentence)
+    from provider_controls import render_explanation
+    render_explanation(crisis, account_id)
     if crisis['advice']['transfer_sources']:
         st.dataframe(crisis['advice']['transfer_sources'], hide_index=True)
     st.markdown('**Recovery assessment**')
@@ -566,6 +582,7 @@ with tab3:
     if crisis['timing_comparison'] is not None:
         timing = crisis['timing_comparison']
         st.markdown('**Conditional M7 historical timing comparison**')
+        st.caption(f"Basis: historical daily closing balances · {timing['basis']}. This is separate from the monthly cash chart.")
         st.write(f"Extra starting-cash need before: {money(timing['no_action']['extra_cash_needed'])}; after: {money(timing['conditional_bill_move']['extra_cash_needed'])}.")
         st.caption(' '.join(timing['conditions']))
     st.markdown("**Analyst action notes**")
@@ -753,16 +770,16 @@ with tab4:
                 if active
             ]
             shock_type = "compound" if len(effect_types) > 1 else next(iter(effect_types), "none")
-            advisory = ga.consult_gemini_advisor(
-                shock_type=shock_type,
-                days_to_shortfall=baseline["days_to_shortfall"],
-                cash_needed=baseline_gap,
-                has_bill_to_shift=helpful_move,
-                has_one_off=repair_cost > 0,
-            )
+            from provider_controls import daily_advisor_control
+            advisory = daily_advisor_control(dict(
+                shock_type=shock_type, days_to_shortfall=baseline['days_to_shortfall'],
+                cash_needed=baseline_gap, has_bill_to_shift=helpful_move, has_one_off=repair_cost > 0),
+                account_id=account_id, normalized_case=crisis['classification_input_hash'],
+                scenario_hash=crisis['scenario_hash'])
             advice = advisory["plan"]
             st.markdown("**Analyst review**")
             st.write(advice["title"])
             st.write(advice["rationale"])
             review_flags(advice["bank_review_flags"])
-            st.caption("Selector: Gemini" if advisory["is_ai_live"] else "Selector: Local rules")
+            st.caption(f"Daily advisor requested: {advisory['requested_backend']} · actual: {advisory['actual_backend']} · API calls: {advisory['api_calls']}" +
+                (f" · local fallback: {advisory['fallback_reason']}" if advisory['fallback_reason'] else ''))

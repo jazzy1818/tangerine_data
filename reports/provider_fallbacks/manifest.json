@@ -1,0 +1,60 @@
+{
+  "input_basis": "synthetic_only",
+  "live_tests": [
+    {
+      "reason": "No separate live-test authorization",
+      "route": "jev_classification",
+      "status": "Not run"
+    },
+    {
+      "reason": "No separate live-test authorization",
+      "route": "gemini_classification",
+      "status": "Not run"
+    },
+    {
+      "reason": "No separate live-test authorization",
+      "route": "gemini_explanation",
+      "status": "Not run"
+    },
+    {
+      "reason": "No separate live-test authorization",
+      "route": "gemini_daily",
+      "status": "Not run"
+    }
+  ],
+  "pytest_exit_status": 0,
+  "rows": 65,
+  "runtime": {
+    "packages": {
+      "google-genai": "3.0.0",
+      "pandas": "3.1.1",
+      "pydantic": "2.14.3",
+      "pytest": "9.2.0",
+      "streamlit": "1.67.0"
+    },
+    "python": "3.12.14"
+  },
+  "smoke_case_hash": "163cebf2bf349408d6904f4c83b4a4aa6a979b80f1785389ec6ecbc175a305a4",
+  "source_sha256": {
+    "app.py": "cf5236421e0ec074ce2c588980fabced3ba4c53be461af2630e9a3d5c74bbcb5",
+    "crisis_response.py": "f7d03f9dee188e61c9e19d5ac02587819f9cdff81214b8523331e87b74b88931",
+    "goal_validation.py": "f5a628d7898cbac6e26e892a0b6d32bcc718b584c0f9752ffee1574e1636505c",
+    "pause_decisions.py": "b5a9dda35038c8fc00789dc4d38dd249f8ca04bfa74f70ccba89abfe3c5e41f1",
+    "plan_classification/backends.py": "e87c5bc58bbf864ce5bf7633392430d4f57d270b86c27f87069724197829a0d4",
+    "plan_classification/case.py": "64b9a320a99350d73c28de28cc279b1562049b9fa9ea2fd9966ab921173fda9c",
+    "plan_classification/config.py": "f5a016603723bd0c5b9448f534e6639f0b816ead077ac5afcb641a6e02e34b3e",
+    "plan_classification/schemas.py": "cbd5fe09fa9ae359e294d3ddc708ba06acd2e631916bb10c6e3d40db0e10ef85",
+    "plan_classification/ui.py": "86d8b1896609be8ac32f4e422ad468f82c106a6233f4efa0ec4b97ca157c7ee4",
+    "provider_controls.py": "ae101b7f0a583fd0830dcc8103525b7d47b0b1eda2a6550cf377bec76edcbe02",
+    "recovery_plan.py": "dbcecb0c74e5d34b86262065bb62ff9cc7cd51936d38fc805ee29e0aab585a81",
+    "scenario_execution.py": "9a6b0c8cac369dca03402ff835c68fd6e464ca724dcea3095127024c0fb4a01a",
+    "tailored_advice.py": "c2b14c083e205521f0adc5d0092e63304db627b24d7990cfcc1fcdefbc9f779e",
+    "tests/conftest.py": "9705edb97412b4a020cd9eb03018723da3c45a41900e088f8ec90b6a9588ddf4",
+    "tests/provider_test_support.py": "ba4b3f2900ae03e09784e5623e7340d6bdfbfdf4574e9490fd488e77e551a68c",
+    "tests/test_crisis_execution.py": "46f8be546df0404efa9d96a4e07394d32ed10e9e1d702879d375a7c9b68f38c0",
+    "tests/test_provider_fallback_evidence.py": "72a1e51d7f91995213f3cd44e0e1d624021841f41872df92624879778786b7fa",
+    "tests/test_provider_fallback_ui.py": "6c004183a8c19ffaf3762ccc90d34dad7d04fac3991f126f66276da9e70dfc4c",
+    "tests/test_tailored_advice.py": "3c81a6222ad8ebea85c1b390fd02586ba0fa6d01ad689836770a1fc027f3ecb4"
+  },
+  "status": "passed"
+}

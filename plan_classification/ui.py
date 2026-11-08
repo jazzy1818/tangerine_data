@@ -5,7 +5,7 @@ import streamlit as st
 
 from . import build_case, profile_from_engine, scenario_from_engine, select_plan
 from .case import case_hash
-from .config import classifier_settings
+from .config import classifier_settings, provider_identity
 from .request_log import append_request, request_record
 from .schemas import MAX_SHOCK_EFFECTS, MODULES, ONE_TIME, ShockEffect, ShockScenario
 
@@ -219,16 +219,14 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
         if backend != 'rules':
             try:
                 settings = classifier_settings()
-            except ValueError as exc:
-                st.error(str(exc))
-                with history_area:
-                    _render_request_history()
-                return handoff
+            except ValueError:
+                settings = {}
+                st.warning('Provider settings are unavailable. Classify scenario will return the local fallback until configuration is corrected.')
             provider = 'OpenRouter' if backend == 'jev' else 'Gemini'
             variable = 'OPENROUTER_API_KEY' if backend == 'jev' else 'GEMINI_API_KEY'
             widget = 'classification_openrouter_key' if backend == 'jev' else 'classification_gemini_key'
             key = st.text_input(f'{provider} API key override (optional)', type='password', key=widget,
-                                help='Leave blank to use the project .env file or process environment.')
+                                help='Leave blank to use the project .env file or process environment.', on_change=_clear_classification_result)
             if key or settings.get(variable):
                 st.caption(f'{provider} key configured. The API is called only when you click Classify scenario.')
             else:
@@ -251,7 +249,8 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
             st.json(case.model_dump(mode='json'))
         if case.missing_details:
             st.warning('Some scenario details are unresolved; any classification is provisional.')
-        fingerprint = (customer['account_id'], case_hash(case), backend)
+        fingerprint = (customer['account_id'], case_hash(case), backend,
+                       provider_identity(backend,api_key=key) if backend != 'rules' else None)
         if st.button('Classify scenario', key='classification_run'):
             with st.spinner('Selecting a plan module…'):
                 result = select_plan(case, backend, **({'api_key': key} if backend != 'rules' else {}))
@@ -270,13 +269,14 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
             selection = result['selection']
             if result['fallback_used']:
                 st.warning(f"{choice} unavailable ({result['fallback_reason']}). Showing the local baseline.")
+            st.caption('Module proposal only. The finance engine independently validates the effective response and all cash calculations.')
             st.write(f"**{selection['lead_module']} — {MODULES[selection['lead_module']]}**")
             if selection['support_modules']:
                 st.write('Supporting modules: ' + ', '.join(selection['support_modules']))
             st.write(selection['rationale'])
             for question in selection['needs_clarification']:
                 st.info('Bank analyst review: ' + question)
-            st.caption(f"Source: {result['actual_backend']} · {result['elapsed_ms']:.0f} ms · "
+            st.caption(f"Source: {result['actual_backend']} · requested: {result['requested_backend']} · {result['elapsed_ms']:.0f} ms · "
                        f"API calls: {result['api_calls']}")
             if result['provider_confidence'] is not None:
                 st.caption(f"Provider confidence: {result['provider_confidence']:.3f}. "
