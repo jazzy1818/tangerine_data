@@ -7,7 +7,7 @@
       "title": "Build a reserve for the selected shock",
       "shocks": ["layoff", "bill_increase", "one_off_expense"],
       "required_inputs": ["scenario_horizon", "projected_cash_flows", "available_cash", "confirmed_monthly_contribution"],
-      "confirmation_question": "How much can you set aside each month after the expenses you need to protect?",
+      "bank_review": "Reserve sizing uses the available-cash evidence or a labeled historical proxy. A contribution and savings date remain conditional on evidence of affordability.",
       "engine_effect": "Find the starting cash required to keep the projected balance at or above zero through the selected horizon. Subtract available cash and calculate the savings timeline using the confirmed contribution.",
       "constraints": [
         "Use the same contribution in the displayed recommendation and savings timeline.",
@@ -20,7 +20,7 @@
       "title": "Move a recurring bill after a deposit",
       "shocks": ["layoff", "bill_increase", "one_off_expense"],
       "required_inputs": ["bill_event", "deposit_event", "biller_approved_date", "first_effective_date"],
-      "confirmation_question": "Can this bill be moved to after the deposit, and when would the new date take effect?",
+      "bank_review": "The replay supports reviewing a date change for one recurring household bill. The simulated move is conditional on biller approval and verified effective dates and fees.",
       "engine_effect": "Move the affected bill events to the confirmed date in each billing cycle, keep their amounts, and rerun the daily cash flow.",
       "constraints": [
         "Keep the action hypothetical until the new date is confirmed.",
@@ -34,7 +34,7 @@
       "title": "Reduce a specific expense temporarily",
       "shocks": ["layoff", "bill_increase", "one_off_expense"],
       "required_inputs": ["expense_events", "confirmed_reduction", "start_date", "end_date"],
-      "confirmation_question": "Which expense can you reduce, by how much, and when would the first saving take effect?",
+      "bank_review": "Adjustable spending and the effective date need verification from bank records or the judge's scenario. The base projection includes zero assumed cuts.",
       "engine_effect": "Reduce eligible expense events by the confirmed amount during the agreed period and rerun the cash flow.",
       "constraints": [
         "Keep customer-marked essential expenses out of the candidate set.",
@@ -48,7 +48,7 @@
       "title": "Pause a planned goal contribution",
       "shocks": ["layoff", "bill_increase", "one_off_expense"],
       "required_inputs": ["scheduled_goal_transfers", "confirmed_pause_count", "confirmed_restart_date"],
-      "confirmation_question": "Are you willing to pause any scheduled goal contributions, and for how long?",
+      "bank_review": "Verify an existing scheduled goal transfer and the effective pause and restart dates before modeling the change.",
       "engine_effect": "Remove the selected future transfers from available-cash outflows during the pause, then recalculate cash runway and the goal date.",
       "constraints": [
         "Apply only to future transfers already included as outflows in the available-cash projection.",
@@ -61,7 +61,7 @@
       "title": "Test an approved split payment for a one-off cost",
       "shocks": ["one_off_expense"],
       "required_inputs": ["one_off_event", "provider_approved_payment_schedule", "total_fees"],
-      "confirmation_question": "Has the provider offered a split payment? What are the payment dates, amounts, and total fees?",
+      "bank_review": "A split payment requires verified provider terms, including payment dates, amounts, and all fees. Keep the original payment in the base projection until terms are supplied.",
       "engine_effect": "Replace the original expense event with the approved payment schedule and include all fees in the dated cash flow.",
       "constraints": [
         "Check that scheduled payments and fees reconcile with the quoted total.",
@@ -74,7 +74,7 @@
       "title": "Check the first month after temporary income ends",
       "shocks": ["layoff"],
       "required_inputs": ["benefit_end_date", "ongoing_income", "replacement_income_scenarios"],
-      "confirmation_question": "What income do you expect after the temporary payments stop, and when would it start?",
+      "bank_review": "Ongoing income after temporary payments end remains unverified unless a bank record or the judge's scenario supplies the amount and start date.",
       "engine_effect": "End temporary payments on the supplied date, keep confirmed ongoing inflows, and rerun each replacement-income scenario.",
       "constraints": [
         "Label any unconfirmed replacement income as a scenario assumption.",
