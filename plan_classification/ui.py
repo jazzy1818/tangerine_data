@@ -276,7 +276,7 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
             st.write(selection['rationale'])
             for question in selection['needs_clarification']:
                 st.info('Bank analyst review: ' + question)
-            st.caption(f"Source: {result['actual_backend']} · {result['elapsed_ms']:.0f} ms · "
+            st.caption(f"Source: {result['actual_backend']} · requested: {result['requested_backend']} · {result['elapsed_ms']:.0f} ms · "
                        f"API calls: {result['api_calls']}")
             if result['provider_confidence'] is not None:
                 st.caption(f"Provider confidence: {result['provider_confidence']:.3f}. "

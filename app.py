@@ -569,16 +569,8 @@ with tab3:
     from tailored_advice import explain_plan, validate_advice
     validate_advice(crisis['advice'], crisis)
     st.markdown('**Personalized action plan**')
-    from provider_controls import explanation_control
-    explanation = explanation_control(crisis, account_id)
-    st.caption('Explanation emphasis: ' + explanation['actual_backend'] +
-        (' · local fallback: ' + explanation['fallback_reason'] if explanation['fallback_reason'] else ''))
-    # All mandatory facts remain visible regardless of model emphasis.
-    for card_id, sentence in crisis['advice']['cards'].items():
-        if card_id in explanation['focus_ids']:
-            st.info(sentence)
-        else:
-            st.write(sentence)
+    from provider_controls import render_explanation
+    render_explanation(crisis, account_id)
     if crisis['advice']['transfer_sources']:
         st.dataframe(crisis['advice']['transfer_sources'], hide_index=True)
     st.markdown('**Recovery assessment**')

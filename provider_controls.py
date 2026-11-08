@@ -32,6 +32,22 @@ def explanation_control(crisis, account_id):
     return result
 
 
+def render_explanation(crisis, account_id):
+    """Optional provider emphasis never replaces the accepted local facts."""
+    result = explanation_control(crisis, account_id)
+    st.caption('Optional explanation emphasis only. The accepted plan and cash calculations come from Python.')
+    st.caption('Explanation emphasis: ' + result['actual_backend'] +
+        ' · requested: ' + result['requested_backend'] + f" · API calls: {result['api_calls']}" +
+        (' · local fallback: ' + result['fallback_reason'] if result['fallback_reason'] else ''))
+    # Every accepted fact remains visible, including facts outside provider emphasis.
+    for card_id, sentence in crisis['advice']['cards'].items():
+        if card_id in result['focus_ids']:
+            st.info(sentence)
+        else:
+            st.write(sentence)
+    return result
+
+
 def daily_advisor_control(inputs, *, account_id, normalized_case, scenario_hash):
     identity=request_identity('daily',{'account':account_id,'normalized_case':normalized_case,
         'scenario':scenario_hash,'replay':inputs})
