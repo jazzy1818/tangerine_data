@@ -7,6 +7,7 @@ import streamlit as st
 import daily_simulation as ds
 import engine
 import gemini_advisor as ga
+from investment_triggers import AnalystEvidence
 
 st.set_page_config(
     page_title="Tangerine Mission Control",
@@ -173,6 +174,20 @@ with st.sidebar:
 
     st.markdown("---")
     st.caption("Use an account ID and the judge’s twist. Missing evidence appears as bank review flags.")
+    with st.expander("Judge event context (optional)"):
+        judge_event = st.text_input("Judge-supplied event description", key="judge_event")
+        judge_event_effect = st.selectbox(
+            "Additional financial effect of this event",
+            ["Not quantified", "Explicitly no additional financial effect"],
+            key="judge_event_effect",
+        )
+        st.caption("No dollar effect is inferred from the description. Numeric twist inputs remain separate, explicit scenario effects.")
+
+judge_evidence = (AnalystEvidence(
+    source="Judge-entered event context",
+    event_description=judge_event,
+    event_financial_effect="unspecified" if judge_event_effect == "Not quantified" else "none",
+) if judge_event.strip() else None)
 
 try:
     customer = engine.know_customer(account_id)
@@ -182,11 +197,12 @@ except (ValueError, FileNotFoundError) as exc:
 if st.session_state.get("repair_uses_typical_spending", False):
     st.session_state["slider_repair_cost"] = customer["raw_S"]
 
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "1. Know the Customer",
     "2. Take a Shock",
     "3. Goal and Backup Plans",
     "4. Daily Replay and Advisor",
+    "5. Allocation Review",
 ])
 
 with tab1:
@@ -359,7 +375,7 @@ with tab2:
 
 with tab3:
     st.subheader(f"Goal and Backup Plans for Account {account_id}")
-    plans = engine.make_plan(customer, shock=shock)
+    plans = engine.make_plan(customer, shock=shock, analyst_evidence=judge_evidence)
     goal = plans["goal_plan"]
     backup = plans["backup_plan"]
 
@@ -377,9 +393,9 @@ with tab3:
         target = goal[f"target_{months}mo"]
         remaining = goal[f"needed_for_{months}mo"]
         eta = goal[f"months_to_{months}mo"]
-        column.caption(f"Gap using historical proxy: {money(remaining)}")
+        column.caption(f"Gap using conservative opening estimate: {money(remaining)}")
         if target > 0:
-            column.progress(min(1.0, max(0.0, customer["B"] / target)))
+            column.progress(min(1.0, max(0.0, goal["current_buffer"] / target)))
         if eta is not None and remaining > 0:
             column.caption(f"Illustrative time at modeled contribution: {eta:.1f} months")
     review_flags(goal["review_flags"])
@@ -389,6 +405,8 @@ with tab3:
         "No-action projection under the judge’s shock. The historical buffer is an opening proxy, "
         "and unverified spending reductions, outside cash, and payouts are excluded."
     )
+    if not backup["funding_result_complete"]:
+        st.warning("This projection covers quantified effects only. Missing or additional event/expense effects prevent a full funding conclusion; see Allocation Review for additional evidence.")
     start_col, end_col, gap_col = st.columns(3)
     start_col.metric("Opening Proxy After Immediate Cost", money(backup["initial_buffer_left"]))
     end_col.metric("Month 6 Closing Balance", money(backup["month_6_balance"]))
@@ -413,6 +431,69 @@ with tab3:
     for action in backup["actions"]:
         st.write(f"• {action}")
     review_flags(backup["review_flags"])
+
+with tab5:
+    allocation = plans["investment_plan"]
+    st.subheader("Surplus allocation and investment readiness")
+    st.caption("Bank analyst decision support · conditional estimates · no ETF selection or trade")
+    st.write(allocation["recommendation"])
+    normal_col, selected_col, stress_col = st.columns(3)
+    normal_col.metric("Normal monthly allocation (conditional)", money(allocation["normal_monthly_allocation"]))
+    selected_col.metric("Selected shock monthly allocation", money(allocation["selected_scenario_monthly_allocation"]))
+    stress_col.metric("Monthly allocation passing all listed scenarios", money(allocation["all_scenarios_monthly_allocation"]))
+    st.write(f"**Primary goal:** {allocation['primary_goal']}")
+    st.write(f"**Investment suitability:** {allocation['investment_suitability']}")
+    if not allocation.get("funding_result_complete", False):
+        st.warning("Some supplied effects are unquantified. Paths below show only quantified components; they do not establish full funding or affordability.")
+    if allocation["pause_optional_contributions"]:
+        st.warning("The selected shock calls for reducing or pausing optional allocations. Pausing does not guarantee the funding gap is resolved.")
+    features = allocation["features"]
+    if features:
+        st.caption(
+            f"Observed window: {features['history_start']} to {features['history_end']} "
+            f"({features['history_months']} months). Opening cash basis: {features['cash_basis']}. "
+            "Monthly stress projections are assumptions, not six months of future observations."
+        )
+        st.dataframe(pd.DataFrame([{
+            "Median net flow": features["median_realized_surplus"],
+            "Weakest monthly net flow": features["minimum_realized_surplus"],
+            "Lower-quartile net flow": features["lower_quartile_surplus"],
+            "Operating floor": features["operating_cash_floor"],
+            "Illustrative reserve target": features["reserve_target"],
+            "Opening cash estimate": features["opening_cash_estimate"],
+            "Estimated reserve gap": features["reserve_gap"],
+        }]), hide_index=True, width="stretch")
+    st.markdown("**Trigger evidence**")
+    st.dataframe(pd.DataFrame(allocation["triggers"]), hide_index=True, width="stretch")
+    if allocation["candidate_results"]:
+        st.markdown("**Candidate contribution comparison**")
+        st.dataframe(pd.DataFrame(allocation["candidate_results"]), hide_index=True, width="stretch")
+    for result in allocation["scenario_results"]:
+        with st.expander(result["scenario"]):
+            st.caption(str(result["assumptions"]))
+            paths = []
+            for label, key in (("No allocation", "no_allocation"), ("Continue normal amount", "continue_normal_allocation"), ("Revised amount", "revised_allocation")):
+                path = result[key]
+                paths.append({"Policy": label, "Monthly allocation": path["monthly_contribution"],
+                              "Minimum cash": path["minimum_cash"], "Closing cash": path["ending_cash"],
+                              "Required floor": path["required_cash_floor"], "Preserves floor": path["preserves_cash_floor"],
+                              "Extra starting cash to avoid negative balance": path["additional_cash_needed"]})
+            st.dataframe(pd.DataFrame(paths), hide_index=True, width="stretch")
+            chart = pd.DataFrame({label: [point["closing_cash"] for point in result[key]["schedule"]]
+                                  for label, key in (("No allocation", "no_allocation"), ("Continue normal amount", "continue_normal_allocation"), ("Revised amount", "revised_allocation"))})
+            chart.index.name = "Month"
+            st.line_chart(chart)
+            st.dataframe(pd.DataFrame(result["revised_allocation"]["schedule"]), hide_index=True, width="stretch")
+    with st.expander("Historical replay, assumptions and policy"):
+        st.caption("In-sample diagnostic: the same window sizes the contribution and shows its historical effect. Not an out-of-sample backtest. Contributions are conservatively debited at the start of each observed month; their effects accumulate.")
+        if allocation["historical_replay"]:
+            st.dataframe(pd.DataFrame(allocation["historical_replay"]), hide_index=True, width="stretch")
+        st.json(allocation["policy"])
+        st.json(allocation["data_provenance"])
+    review_flags(allocation["bank_review_flags"])
+    st.markdown("**Reassess when**")
+    for condition in allocation["next_review_conditions"]:
+        st.write(f"• {condition}")
 
 with tab4:
     st.subheader(f"Daily Replay for Account {account_id}")
