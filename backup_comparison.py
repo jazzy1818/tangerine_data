@@ -265,14 +265,17 @@ def render_backup_comparison(crisis):
     st.info('Financial Safe Mode · ' + mode + '. ' + reason)
     st.caption('Planning status only: the existing engine determines amounts; no account setting or banking instruction is changed.')
     st.markdown('#### Analyst summary · impact of the modeled revised plan')
+    st.caption('Extra cash needed covers the full modeled period.')
     columns=st.columns(2)
     for col,key,label in [(columns[0],'before','without new action'),(columns[1],'after','revised plan')]:
         first=view[key]['first']
         value=_point_label(first) or ('None at checkpoints' if view['complete'] else 'Not established')
         col.metric(('First shortfall' if view['complete'] else 'First shortfall · Known components')+' · '+label,value)
         need=view[key]['full_need'] if view['complete'] else None
-        col.metric('Extra cash needed · '+label,'Not established' if need is None else _cad(need))
         prefix = '' if view['complete'] else 'Known components · '
+        if first is not None:
+            col.caption(f"{prefix}Cash missing at first shortfall: {_cad(-first['cash'])}")
+        col.metric('Extra cash needed · '+label,'Not established' if need is None else _cad(need))
         col.caption(f"{prefix}Lowest modeled cash: {_cad(view[key]['minimum_cash'])}")
         col.caption(f"{prefix}Ending cash: {_cad(view[key]['ending_cash'])}")
     if not view['complete']:st.warning(view['summary'])
