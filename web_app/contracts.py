@@ -8,15 +8,7 @@ from pydantic import Field, model_validator
 from crisis_response import ExistingGoalTransfer, NormalGoal
 from plan_classification.schemas import Contract, ShockScenario
 from recovery_plan import RecoverySnapshot
-
-
-class ScenarioInput(Contract):
-    account_id: int = Field(ge=1)
-    scenario: ShockScenario
-    opening_cash: float | None = Field(default=None, ge=-1e12, le=1e12)
-    normal_goal: NormalGoal | None = None
-    existing_transfers: list[ExistingGoalTransfer] = Field(default_factory=list, max_length=120)
-    recovery_snapshot: RecoverySnapshot | None = None
+from .savings import SavingsEvidence
 
 
 class ReviewDetails(Contract):
@@ -26,11 +18,21 @@ class ReviewDetails(Contract):
     cash_source: str = Field(default='', max_length=500)
 
 
+class ScenarioInput(Contract):
+    account_id: int = Field(ge=1)
+    scenario: ShockScenario
+    opening_cash: float | None = Field(default=None, ge=-1e12, le=1e12)
+    normal_goal: NormalGoal | None = None
+    existing_transfers: list[ExistingGoalTransfer] = Field(default_factory=list, max_length=120)
+    recovery_snapshot: RecoverySnapshot | None = None
+    review_details: ReviewDetails = Field(default_factory=ReviewDetails)
+    savings_evidence: SavingsEvidence | None = None
+
+
 class RunInput(ScenarioInput):
     request_id: UUID
     backend: Literal['rules', 'jev', 'gemini'] = 'rules'
     title: str = Field(default='Scenario review', min_length=1, max_length=120)
-    review_details: ReviewDetails = Field(default_factory=ReviewDetails)
 
 
 class ReviewUpdate(Contract):

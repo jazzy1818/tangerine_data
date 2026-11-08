@@ -36,6 +36,9 @@ def connection():
 
 def reserve(session_id, request):
     payload = request.model_dump(mode='json')
+    # An omitted optional snapshot must retain the fingerprint of pre-feature requests.
+    if payload.get('savings_evidence') is None:
+        payload.pop('savings_evidence', None)
     serialized = json.dumps(payload, sort_keys=True, allow_nan=False)
     fingerprint = hashlib.sha256(serialized.encode()).hexdigest()
     run_id = str(request.request_id)

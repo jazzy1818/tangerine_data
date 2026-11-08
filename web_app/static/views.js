@@ -61,9 +61,32 @@ export function customerView(c,months=12) {
     <section class="card"><h2>How often has cash flow been under pressure?</h2><div class="metric-grid">${metric('Months spending exceeded inflow',percent(f.deficit_month_share),'Share of available recent months')}${metric('Months with a negative balance',percent(f.negative_balance_month_share),'At least one negative-balance day')}${metric('Recent months available',`${f.recent_months} / 12`)}</div><p class="help">Historical experience does not establish current affordability. Confirm income, commitments and accessible balances with the customer.</p>${f.quality_flags.length?notice(f.quality_flags.map(x=>x.replaceAll('_',' ')).join('; '),'warn'):''}</section>`;
 }
 
+export function savingsReviewCard(result) {
+  if(!result)return '';
+  const title='<h2>One-time emergency savings review</h2>';
+  if(result.status==='needs_evidence'){
+    return `<section class="card">${title}<p>Confirm these details before estimating an amount.</p>${noteList(result.outstanding)}</section>`;
+  }
+  const room=result.room_after_commitments_and_cushion;
+  const messages={
+    available:`Up to ${money(result.amount)} could be marked for emergency savings.`,
+    no_room:room<0?`$0 available. Cash is ${money(-room)} short of covering commitments and the cushion.`:'$0 available after commitments and the cushion.',
+    goal_met:'Emergency savings goal met.',
+  };
+  return `<section class="card">${title}<h3>${e(messages[result.status])}</h3>
+    <p>Confirmed cash as of ${e(result.as_of)} with commitments protected through ${e(result.protect_through)}.</p>
+    ${table(['Calculation','CAD'],[
+      ['Cleared, unallocated cash',e(money(result.unallocated_cash))],
+      ['Less unpaid commitments',e(money(result.unpaid_commitments))],
+      ['Less the cash cushion',e(money(result.cash_cushion))],
+      ['Room after commitments and cushion',e(money(room))],
+      ['Remaining reserve goal from the supplied snapshot',e(money(result.remaining_reserve_goal))],
+    ])}<p class="help">The set-aside stays liquid. Recheck the figures when cash or commitments change, including after a deposit clears.</p></section>`;
+}
+
 export function previewView(p) {
   const path=p.projection;
-  return `<section class="card" id="preview-card"><div class="card-head"><h2>How do the changes affect cash?</h2>${badge('Before any proposed action')}</div><div class="metric-grid">${metric('First projected shortfall',shortfall(path))}${metric('Additional cash needed',money(path.full_funding_need),path.funding_result_complete?'Across the review period':'Known-amount estimate: '+money(path.additional_cash_needed))}${metric('Cash at the end of the period',money(path.ending_cash),path.funding_result_complete?'Based on the supplied assumptions':'Known amounts only')}</div>${!path.funding_result_complete?notice('Some amounts or dates are still unknown. Confirm them before drawing a complete funding conclusion.','warn'):''}${p.notes.filter(s=>!s.includes('description is context')).map(s=>notice(plainNote(s),'warn')).join('')}${cashPathChart([{key:'no_action',name:'Without additional action',path}])}<p class="help">Month 1 is the first month of the review. Monthly balances do not confirm that every payment can be met on its due date.</p><details><summary>Information to confirm and assumptions</summary>${noteList([...p.case.missing_details,...path.review_flags])}</details></section>`;
+  return `<section class="card" id="preview-card"><div class="card-head"><h2>How do the changes affect cash?</h2>${badge('Before any proposed action')}</div><div class="metric-grid">${metric('First projected shortfall',shortfall(path))}${metric('Additional cash needed',money(path.full_funding_need),path.funding_result_complete?'Across the review period':'Known-amount estimate: '+money(path.additional_cash_needed))}${metric('Cash at the end of the period',money(path.ending_cash),path.funding_result_complete?'Based on the supplied assumptions':'Known amounts only')}</div>${!path.funding_result_complete?notice('Some amounts or dates are still unknown. Confirm them before drawing a complete funding conclusion.','warn'):''}${p.notes.filter(s=>!s.includes('description is context')).map(s=>notice(plainNote(s),'warn')).join('')}${cashPathChart([{key:'no_action',name:'Without additional action',path}])}<p class="help">Month 1 is the first month of the review. Monthly balances do not confirm that every payment can be met on its due date.</p><details><summary>Information to confirm and assumptions</summary>${noteList([...p.case.missing_details,...path.review_flags])}</details></section>`+savingsReviewCard(p.flexible_savings);
 }
 
 export function settingsView(config,backend) {

@@ -1,7 +1,7 @@
 import {api,escapeHtml as e,notice,notify,download,downloadFile,blankDraft,readDraft,saveDraft} from './common.js';
 import {homeView,discoveryView,accountListView,customerView,previewView,settingsView} from './views.js';
 import {runView,projectionChart,historyView,compareView} from './reviews.js';
-import {scenarioView,effectFields,effectFromForm,contextFromForm,preset} from './scenario.js';
+import {scenarioView,effectFields,effectFromForm,contextFromForm,preset,savingsReviewApplies} from './scenario.js';
 import {reviewBrief,plainNote} from './financial.js';
 
 const main=document.getElementById('main');
@@ -25,7 +25,12 @@ function persist(){
   sidebar();
 }
 function invalidate(){state.preview=null;const slot=document.getElementById('preview-slot');if(slot?.innerHTML)slot.innerHTML=notice('The review has changed. Check the financial impact again to see the updated figures.');persist();}
-function financialInput(){return {...state.draft.context,account_id:state.draft.accountId,scenario:state.draft.scenario};}
+function financialInput(){
+  const draft=state.draft;
+  const input={...draft.context,account_id:draft.accountId,scenario:draft.scenario,review_details:draft.reviewDetails};
+  if(savingsReviewApplies(draft)&&draft.savingsEvidence?.account_id===draft.accountId)input.savings_evidence=draft.savingsEvidence;
+  return input;
+}
 function currentInput(){
   if(!state.draft.accountId)throw new Error('Find the customer first.');
   if(state.draft.rawScenario!=null||state.draft.rawContext!=null)throw new Error('Resolve the unfinished entry from the previous editor before continuing.');
@@ -142,6 +147,12 @@ main.addEventListener('input',event=>{
   const el=event.target,form=el.closest('form');
   if(form?.id==='review-form'&&state.run){state.reviewDrafts[state.run.id]=capture(form);writeLocal('tangerine-review-notes',state.reviewDrafts);document.getElementById('review-save-status').textContent='Unsaved notes — save to update the worklist.';return;}
   if(form?.dataset.entry){state.draft.formDrafts[form.id]=capture(form);invalidate();return;}
+  if(el.hasAttribute('data-savings-field')){
+    const draft=state.draft;
+    if(draft.savingsEvidence?.account_id!==draft.accountId)draft.savingsEvidence={account_id:draft.accountId};
+    draft.savingsEvidence[el.name]=el.value||null;
+    invalidate();return;
+  }
   const fields={
     'scenario-title':()=>state.draft.title=el.value,'scenario-horizon':()=>state.draft.scenario.horizon_months=Number(el.value),
     'scenario-description':()=>state.draft.scenario.description=el.value,'opening-cash':()=>state.draft.context.opening_cash=el.value===''?null:Number(el.value),
@@ -156,8 +167,15 @@ main.addEventListener('change',event=>{
   if(el.id==='effect-type'){document.getElementById('effect-fields').innerHTML=effectFields(el.value);state.draft.formDrafts['effect-form']=capture(form);invalidate();}
   else if(el.name==='unknown'||el.name==='duration_mode')syncEffectFields();
   else if(el.id==='backend'){state.draft.backend=el.value;persist();render({quiet:true});}
-  else if(el.id==='review-purpose'){state.draft.reviewDetails.purpose=el.value;persist();}
-  else if(el.id==='scenario-phase'){state.draft.scenario.phase=el.value;invalidate();}
+  else if(el.id==='review-purpose'){
+    const refreshSavings=state.draft.reviewDetails.purpose==='savings'||el.value==='savings';
+    state.draft.reviewDetails.purpose=el.value;
+    if(refreshSavings){invalidate();render({quiet:true});}else persist();
+  }
+  else if(el.id==='scenario-phase'){
+    state.draft.scenario.phase=el.value;invalidate();
+    if(state.draft.reviewDetails.purpose==='savings')render({quiet:true});
+  }
   else if(el.id==='history-window'){state.historyMonths=Number(el.value);main.innerHTML=customerView(state.customer,state.historyMonths);}
   else if(el.id==='review-filter'){state.reviewFilter=el.value;render({quiet:true});}
   else if(el.dataset.path){const selected=[...main.querySelectorAll('[data-path]:checked')].map(x=>x.dataset.path);document.getElementById('projection-chart').innerHTML=projectionChart(state.run.result.plans.crisis_plan,selected);}
@@ -200,7 +218,7 @@ main.addEventListener('click',event=>{
       const result=await validateDraft(payload);
       if(initial===route()&&signature===JSON.stringify(currentInput())){state.preview=result;const slot=document.getElementById('preview-slot');slot.innerHTML=previewView(result);slot.scrollIntoView({block:'start'});}
     }else if(action==='run'){
-      const body={...currentInput(),backend:state.draft.backend,title:state.draft.title.trim(),review_details:state.draft.reviewDetails};
+      const body={...currentInput(),backend:state.draft.backend,title:state.draft.title.trim()};
       if(!body.title)throw new Error('Give the customer review a title.');
       const signature=JSON.stringify(body),old=state.draft.pendingRequest,id=old?.signature===signature?old.id:crypto.randomUUID();
       state.draft.pendingRequest={id,signature};persist();button.textContent='Preparing review…';

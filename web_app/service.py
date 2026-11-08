@@ -11,6 +11,7 @@ from scenario_execution import execute_scenario
 
 from . import store
 from .analytics import records
+from .savings import assess_savings
 
 logger = logging.getLogger('tangerine.website')
 
@@ -44,10 +45,18 @@ def preview(request):
             notes.append('This percentage change has no cash impact because no amount is recorded for the affected category. Confirm the actual amount with the customer.')
     if request.scenario.description:
         notes.append('The description is context only. Only the listed structured effects change the calculations; add an unknown event when its financial impact is unquantified.')
-    return {'customer': customer_view(customer), 'scenario': request.scenario.model_dump(mode='json'),
-            'reference': engine.scenario_reference(customer, request.scenario),
-            'case': case.model_dump(mode='json'), 'input_hash': case_hash(case),
-            'projection': path, 'notes': list(dict.fromkeys(notes))}
+    result = {'customer': customer_view(customer), 'scenario': request.scenario.model_dump(mode='json'),
+              'reference': engine.scenario_reference(customer, request.scenario),
+              'case': case.model_dump(mode='json'), 'input_hash': case_hash(case),
+              'projection': path, 'notes': list(dict.fromkeys(notes))}
+    if (request.review_details.purpose == 'savings' and request.scenario.phase == 'normal'
+            and request.recovery_snapshot is None and not request.existing_transfers
+            and (request.normal_goal is None or request.normal_goal.monthly_contribution == 0)
+            and path['funding_result_complete'] and path['additional_cash_needed'] == 0):
+        result['flexible_savings'] = assess_savings(
+            request.savings_evidence, account_id=request.account_id, opening_cash=request.opening_cash,
+            cash_source=request.review_details.cash_source)
+    return result
 
 
 def execute_run(session_id, request):
