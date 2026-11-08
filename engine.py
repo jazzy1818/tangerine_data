@@ -17,6 +17,7 @@ from math import ceil, isfinite
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 import pandas as pd
+from investment_triggers import evaluate_investment_triggers
 
 ROOT_DIR = Path(__file__).resolve().parent
 DATA_DIR = ROOT_DIR / "data"
@@ -98,6 +99,7 @@ def know_customer(account_id: int, data_dir: Path = DATA_DIR) -> Dict[str, Any]:
     acc_loans = loans[loans["account_id"] == account_id]
     raw_P = 0.0
     loan_status = None
+    status = None
     if not acc_loans.empty:
         status = str(acc_loans.iloc[0]["status"]).strip()
         if len(acc_loans) != 1 or status not in {"A", "B", "C", "D"}:
@@ -146,6 +148,8 @@ def know_customer(account_id: int, data_dir: Path = DATA_DIR) -> Dict[str, Any]:
         "P": round(raw_P, 2),
         "has_running_loan": raw_P > 0,
         "loan_status_meaning": loan_status,
+        "source_loan_status": status,
+        "data_dir": str(data_dir),
         "baseline_gap": round(baseline_gap, 2),
         "baseline_runway": baseline_runway,
         "demographics": demographics,
@@ -266,6 +270,7 @@ def make_plan(
     shock: Optional[Dict[str, Any]] = None,
     *,
     confirmed_monthly_cut: float = 0.0,
+    analyst_evidence=None,
 ) -> Dict[str, Any]:
     """Return historical reserve estimates and a conditional shock projection."""
     raw_I = customer.get("raw_I", customer["I"])
@@ -273,76 +278,49 @@ def make_plan(
     raw_B = customer.get("raw_B", customer["B"])
     raw_P = customer.get("raw_P", customer["P"])
     monthly_surplus = round(raw_I - raw_S, 2)
-    target_3mo = round(3 * raw_S, 2)
-    target_6mo = round(6 * raw_S, 2)
-    needed_3mo = max(0.0, round(target_3mo - raw_B, 2))
-    needed_6mo = max(0.0, round(target_6mo - raw_B, 2))
-
-    goal_flags = [
-        "BANK_REVIEW_REQUIRED: Current available cash and total obligations are unverified. "
-        "Reserve estimates use the historical buffer proxy.",
-        "INVESTMENT_SUITABILITY_UNVERIFIED: The supplied records do not establish investment suitability.",
-    ]
-    if customer.get("demographics", {}).get("relationship") != "Single Owner":
-        goal_flags.append("BANK_REVIEW_REQUIRED: Access records do not verify sole control of the account balance.")
-
-    contribution = 0.0
-    history = customer.get("history")
-    recent_shortfalls = False
-    history_is_sufficient = False
-    if history is not None and {"money_in", "money_out"}.issubset(history.columns):
-        recent = history.tail(12)
-        realized = (recent["money_in"] - recent["money_out"]).dropna()
-        history_is_sufficient = len(realized) >= 6
-        recent_shortfalls = "days_below_zero" in recent and bool(recent["days_below_zero"].gt(0).any())
-        if history_is_sufficient and raw_B >= 0 and not recent_shortfalls:
-            contribution = round(max(0.0, min(monthly_surplus, float(realized.quantile(0.25)))), 2)
-    if not history_is_sufficient:
-        goal_flags.append("DATA_LIMITED_REVIEW: At least six months of cash-flow history are needed for the contribution estimate.")
-    if raw_S <= 0:
-        contribution = 0.0
-        goal_flags.append("DATA_LIMITED_REVIEW: Recorded spending does not support a spending-based reserve target.")
+    transactions = None
+    if customer.get("data_dir"):
+        from daily_simulation import load_transactions
+        try:
+            transactions = load_transactions(Path(customer["data_dir"]))
+        except (OSError, ValueError):
+            # Optional dated evidence remains unknown; monthly metrics still work.
+            pass
+    # MANDATORY: every UI/CLI goal uses the S01-S40 runtime enforcement inside
+    # evaluate_investment_triggers. Never substitute unchecked model/selector
+    # output here; missing facts stay unknown and violations require review.
+    investment_plan = evaluate_investment_triggers(customer, shock, transactions=transactions, evidence=analyst_evidence)
+    allocation_features = investment_plan["features"]
+    planning_spending = allocation_features.get("median_monthly_spending", raw_S)
+    planning_cash = allocation_features.get("opening_cash_estimate", raw_B)
+    target_3mo = round(3 * planning_spending, 2)
+    target_6mo = round(6 * planning_spending, 2)
+    needed_3mo = max(0.0, round(target_3mo - planning_cash, 2))
+    needed_6mo = max(0.0, round(target_6mo - planning_cash, 2))
+    goal_flags = investment_plan["bank_review_flags"]
+    # Reserve earmarks stay liquid. Investment allocations are a separate review,
+    # never the same contribution counted toward two goals.
+    contribution = investment_plan["reserve_monthly_earmark"]
 
     goal_plan: Dict[str, Any] = {
         "monthly_surplus": monthly_surplus,
         "target_3mo": target_3mo,
         "target_6mo": target_6mo,
-        "current_buffer": round(raw_B, 2),
+        "current_buffer": round(planning_cash, 2),
         "needed_for_3mo": needed_3mo,
         "needed_for_6mo": needed_6mo,
         "recommended_contribution": contribution,
         "months_to_3mo": round(needed_3mo / contribution, 1) if contribution > 0 else None,
         "months_to_6mo": round(needed_6mo / contribution, 1) if contribution > 0 else None,
         "contribution_basis": (
-            "Illustrative amount capped by the lower quartile of observed monthly net cash flow "
-            "over up to 12 months and by typical surplus. At least six months of history and "
-            "no recorded recent negative-balance days are required. Future affordability is unverified."
+            "Conditional liquid-reserve earmark capped at 75% of the weaker of the minimum and "
+            "lower-quartile trailing net flows, subject to operating-cash and selected-scenario checks. "
+            "Policy and detailed calculations are shown in Allocation Review. Transfers do not create wealth."
         ),
         "review_flags": goal_flags,
     }
-    if raw_S <= 0:
-        goal_plan["recommendation"] = "Review spending data before sizing a reserve."
-    elif recent_shortfalls:
-        goal_plan["recommendation"] = (
-            "Protect operating cash. Recent history includes negative-balance days, "
-            "so the plan does not schedule fixed savings contributions."
-        )
-    elif contribution <= 0:
-        goal_plan["recommendation"] = (
-            "Review cash-flow stability and protect essential obligations. "
-            "Available records do not support a fixed contribution or savings timeline."
-        )
-    elif needed_3mo > 0:
-        goal_plan["recommendation"] = (
-            f"Review an illustrative reserve contribution of CAD {contribution:,.2f}/month. "
-            f"At that rate the estimated three-month reserve gap would take "
-            f"{goal_plan['months_to_3mo']:.1f} months to cover."
-        )
-    else:
-        goal_plan["recommendation"] = (
-            "Maintain liquidity and review available cash. The historical buffer proxy covers the "
-            "three-month spending benchmark."
-        )
+    goal_plan["recommendation"] = investment_plan["recommendation"]
+    goal_plan["primary_goal"] = investment_plan["primary_goal"]
 
     backup_plan: Dict[str, Any] = {}
     if shock is not None:
@@ -379,6 +357,8 @@ def make_plan(
             ]
 
         backup_plan = {
+            "projection_scope": "Official full-history medians and numeric judge twist only; additional evidence is in investment_plan.scenario_results.",
+            "funding_result_complete": investment_plan["funding_result_complete"] and not bool(analyst_evidence and analyst_evidence.known_expenses),
             "unprotected_runway": shock["runway"],
             "monthly_cash_gap": shock["gap"],
             "buffer_left": shock["buffer_left"],
@@ -395,7 +375,7 @@ def make_plan(
             "review_flags": review_flags,
         }
 
-    return {"goal_plan": goal_plan, "backup_plan": backup_plan}
+    return {"goal_plan": goal_plan, "backup_plan": backup_plan, "investment_plan": investment_plan}
 
 
 def run_pipeline(
@@ -404,6 +384,8 @@ def run_pipeline(
     bills_increase_pct: float = 0.0,
     one_off_costs: float = 0.0,
     data_dir: Path = DATA_DIR,
+    *,
+    analyst_evidence=None,
 ) -> Dict[str, Any]:
     """Execute the complete 3-step pipeline."""
     customer = know_customer(account_id, data_dir=data_dir)
@@ -413,7 +395,7 @@ def run_pipeline(
         bills_increase_pct=bills_increase_pct,
         one_off_costs=one_off_costs,
     )
-    plan = make_plan(customer, shock=shock)
+    plan = make_plan(customer, shock=shock, analyst_evidence=analyst_evidence)
 
     return {
         "customer": customer,
@@ -476,8 +458,8 @@ def main():
     gp = p["goal_plan"]
     print("  [Plan 1: Goal Plan - Normal Times]")
     print(f"  • Monthly Surplus             : ${gp['monthly_surplus']:>10.2f}")
-    print(f"  • Target 3-Month Fund (3xS)   : ${gp['target_3mo']:>10.2f} (Needed: ${gp['needed_for_3mo']:.2f})")
-    print(f"  • Target 6-Month Fund (6xS)   : ${gp['target_6mo']:>10.2f} (Needed: ${gp['needed_for_6mo']:.2f})")
+    print(f"  • Illustrative 3-Month Reserve: ${gp['target_3mo']:>10.2f} (Needed: ${gp['needed_for_3mo']:.2f})")
+    print(f"  • Illustrative 6-Month Reserve: ${gp['target_6mo']:>10.2f} (Needed: ${gp['needed_for_6mo']:.2f})")
     print(f"  • Reserve Review              : {gp['recommendation']}")
     for flag in gp["review_flags"]:
         print(f"    - {flag}")
@@ -492,6 +474,14 @@ def main():
     print("  • Analyst Review:")
     for item in [*bp["actions"], *bp["review_flags"]]:
         print(f"    - {item}")
+    investment = p["investment_plan"]
+    print("\nALLOCATION REVIEW (Conditional, no security selection)")
+    print(f"  • Goal                        : {investment['primary_goal']}")
+    print(f"  • Normal allocation           : ${investment['normal_monthly_allocation']:,.2f}/mo")
+    print(f"  • Selected scenario allocation: ${investment['selected_scenario_monthly_allocation']:,.2f}/mo")
+    print(f"  • All listed stress scenarios : ${investment['all_scenarios_monthly_allocation']:,.2f}/mo")
+    print(f"  • Active triggers             : {', '.join(investment['trigger_ids'])}")
+    print(f"  • Suitability                 : {investment['investment_suitability']}")
     print("=" * 65 + "\n")
 
 
