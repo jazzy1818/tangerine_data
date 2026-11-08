@@ -467,7 +467,7 @@ with tab3:
         st.stop()
     crisis = plans['crisis_plan']
     if crisis['runtime_validation']['status'] != 'passed':
-        st.error('Financial validation blocked this result. Review the supplied evidence before issuing advice.')
+        st.error('Financial validation blocked this result. Check the flags below, then correct or clear the supplied scenario and payment evidence.')
         review_flags(crisis['review_flags'])
         with tab5:
             from etf_ui import render_etf_explorer
@@ -528,7 +528,8 @@ with tab3:
         st.warning("This projection covers quantified effects only. Missing or additional event/expense effects prevent a full funding conclusion; see Allocation Review for additional evidence.")
     with st.expander('Full projection ledger and comparison calculations'):
         if cash_comparison is not None:
-            st.markdown('**Chart checkpoint ledger · accessible cash (CAD)**')
+            ledger_basis = 'accessible cash' if cash_comparison['complete'] else 'Known components'
+            st.markdown(f'**Chart checkpoint ledger · {ledger_basis} (CAD)**')
             st.dataframe(pd.DataFrame([{
                 'Month': before['month'], 'Phase': before['phase'],
                 'Without new action (CAD)': before['cash'], 'Revised plan (CAD)': after['cash'],
@@ -540,13 +541,6 @@ with tab3:
         gap_col.metric("Extra Starting Cash Needed" if backup["funding_result_complete"] else "Quantified Cash Need (partial estimate)", money(backup["remaining_cash_needed"]))
         if not backup["funding_result_complete"]:
             gap_col.caption("Full funding need: Not established")
-        shortage = backup["exhaustion_month"]
-        if shortage == 0:
-            st.warning("The opening cash proxy goes below zero immediately.")
-        elif shortage is not None:
-            st.warning(f"The first negative quantified-component checkpoint is month {shortage} ({crisis['no_action']['first_shortfall_phase']}). Actual outcomes remain unestablished when effects are unresolved.")
-        else:
-            st.info("The quantified cash path stays nonnegative at the modeled checkpoints. This is not a daily-solvency or complete-funding claim when effects are unresolved.")
         schedule = pd.DataFrame(backup["six_month_schedule"]).rename(columns={
             "month": "Month",
             "start_balance": "Opening balance (CAD)",
@@ -597,6 +591,7 @@ with tab3:
     if crisis['timing_comparison'] is not None:
         timing = crisis['timing_comparison']
         st.markdown('**Conditional M7 historical timing comparison**')
+        st.caption(f"Basis: historical daily closing balances · {timing['basis']}. This is separate from the monthly cash chart.")
         st.write(f"Extra starting-cash need before: {money(timing['no_action']['extra_cash_needed'])}; after: {money(timing['conditional_bill_move']['extra_cash_needed'])}.")
         st.caption(' '.join(timing['conditions']))
     st.markdown("**Analyst action notes**")

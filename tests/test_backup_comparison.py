@@ -56,6 +56,10 @@ def test_zero_and_immediate_one_cent_boundaries(cost,first,gap):
     p=make_crisis_plan(account(),ShockScenario(effects=[dict(type='one_off_cost',value=cost,start_month=0)]),normal_goal=normal_goal())
     v=build_comparison(p)
     assert v['before']['first']==first and v['before']['full_need']==gap
+    trace = comparison_figure(v).data[0]
+    assert trace.y[0] == p['no_action']['checkpoints'][0]['cash']
+    if first:
+        assert trace.marker.symbol[0] == 'diamond-open'
 
 
 def test_partial_projection_has_no_full_funding_claim():
@@ -64,7 +68,26 @@ def test_partial_projection_has_no_full_funding_claim():
     assert not v['complete']
     assert v['before']['full_need'] is None and v['after']['full_need'] is None
     assert 'Partial projection' in v['summary'] and 'Not established' in v['summary']
-    assert 'Partial projection' in comparison_figure(v).layout.title.text
+    assert comparison_figure(v).layout.title.text == 'Known components'
+
+
+def test_repayment_moves_first_shortfall_to_month_start():
+    customer = account(income=2200., spending=2400., cash=300.)
+    goal = NormalGoal(name='No new transfer', monthly_contribution=0., reserve_target=0.)
+    baseline = make_crisis_plan(customer, ShockScenario(phase='normal'), normal_goal=goal)
+    assert build_comparison(baseline)['before']['first']['phase'] == 'end'
+    scenario = ShockScenario(effects=[dict(
+        type='debt_payment_delta', value=-300., duration_months=2, debt_change_kind='deferral',
+        repayment_month=4, repayment_amount=650., obligation_payment=300.,
+        obligation_source='Synthetic loan schedule', payment_in_baseline=True,
+    )])
+    plan = make_crisis_plan(customer, scenario, normal_goal=goal)
+    view = build_comparison(plan)
+    assert view['before']['first'] == {'month': 4, 'phase': 'start', 'cash': -350.}
+    assert view['before']['full_need'] == 950.
+    chart = comparison_figure(view)
+    assert list(chart.data[0].y) == [p['cash'] for p in plan['no_action']['checkpoints']]
+    assert 'Deferred loan repayment: CAD 650.00' in chart.data[0].customdata[8][2]
 
 
 @pytest.mark.parametrize('corrupt',[
