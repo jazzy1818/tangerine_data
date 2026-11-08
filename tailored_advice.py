@@ -5,8 +5,8 @@ amounts, products, or actions. This restriction is enforced on every response.
 """
 import hashlib
 import json
-import os
 from pydantic import BaseModel, ConfigDict
+from plan_classification.config import resolve_provider
 
 
 def _cad(value):
@@ -101,18 +101,20 @@ class Emphasis(BaseModel):
     focus_ids: list[str]
 
 
-def explain_plan(plan, *, backend='local', client=None, api_key=None):
+def explain_plan(plan, *, backend='local', client=None, api_key=None, model=None):
     advice = validate_advice(plan['advice'], plan)
     cards = advice['cards']
     result = {'actual_backend': 'local', 'requested_backend': backend, 'fallback_reason': None,
-              'fingerprint': advice['fingerprint'], 'focus_ids': [], 'cards': cards}
+              'fingerprint': advice['fingerprint'], 'focus_ids': [], 'cards': cards, 'api_calls':0}
     if backend == 'local':
         return result
     if backend != 'gemini':
         raise ValueError('Unknown explanation backend')
-    key = api_key or os.environ.get('GEMINI_API_KEY')
+    try:key,model=resolve_provider('explanation',api_key=api_key,model=model)
+    except ValueError:return {**result,'fallback_reason':'invalid_provider_settings'}
     if client is None and not key:
         return {**result, 'fallback_reason': 'credentials_unavailable'}
+    calls=0
     try:
         from google import genai
         from google.genai import types
@@ -125,17 +127,20 @@ def explain_plan(plan, *, backend='local', client=None, api_key=None):
             'has_supported_pause': bool(plan['applied_transfer_ids']),
             'has_remaining_gap': plan['applied_plan']['additional_cash_needed'] > 0,
             'projection_complete': plan['applied_plan']['funding_result_complete'],
-            'recovery_status': plan['recovery']['status']}
+            'recovery_status': plan['recovery']['status'], 'effective_module': plan['lead_module']}
         try:
-            response = client.models.generate_content(model='gemini-2.5-flash',
+            calls += 1
+            response = client.models.generate_content(model=model,
                 contents='Choose up to three allowed_ids to emphasize for this analyst. Return focus_ids only. '+json.dumps(context),
-                config=types.GenerateContentConfig(response_mime_type='application/json', response_schema=Emphasis, temperature=0))
+                config=types.GenerateContentConfig(response_mime_type='application/json', response_json_schema={'type':'object','properties':{'focus_ids':{'type':'array',
+                        'items':{'type':'string','enum':list(cards)},'maxItems':3}},
+                        'required':['focus_ids'],'additionalProperties':False}, **({'temperature':0} if model.startswith('gemini-2.') else {})))
             focus = Emphasis.model_validate_json(response.text).focus_ids
             if len(focus) > 3 or len(set(focus)) != len(focus) or any(i not in cards for i in focus):
                 raise ValueError('Unapproved explanation content')
         finally:
             if owned:
                 client.close()
-        return {**result, 'actual_backend': 'gemini', 'focus_ids': focus}
+        return {**result, 'actual_backend': 'gemini', 'focus_ids': focus, 'api_calls':calls}
     except Exception:
-        return {**result, 'fallback_reason': 'provider_or_validation_failure'}
+        return {**result, 'fallback_reason': 'provider_or_validation_failure', 'api_calls':calls}

@@ -1,17 +1,18 @@
 """Jev (OpenRouter), Gemini (official SDK), and an explicitly separate offline baseline."""
 import json
 import math
+import re
 from time import perf_counter
 
 import requests
 from pydantic import ValidationError
 
 from .case import canonical_json, case_hash
-from .config import classifier_settings
+from .config import resolve_provider, PROVIDER_ROUTES
 from .schemas import (ClassificationCase, MODULES, MODULE_DESCRIPTIONS,
                       PlanSelection, SelectionResult)
 
-VERSION = '1.2.0'
+VERSION = '1.3.0'
 PROMPT_VERSION = 'module-selection-1.2'
 GEMINI_PROMPT_VERSION = 'module-selection-gemini-1.3'
 JEV_ENDPOINT = 'https://openrouter.ai/api/v1/systemone'
@@ -153,7 +154,7 @@ class _Usage:
 def _resolved_model(value, requested):
     if value is None:
         return requested
-    if not isinstance(value, str) or not value.strip():
+    if not isinstance(value, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._:/+@-]{0,199}',value):
         raise ValueError('Invalid response model identifier.')
     return value.strip()
 
@@ -276,9 +277,11 @@ def jev_payload(case: ClassificationCase, model: str) -> dict:
 def select_plan_jev(case: ClassificationCase, *, api_key: str | None = None,
                     model: str | None = None, transport=None) -> SelectionResult:
     started = perf_counter()
-    settings = classifier_settings()
-    model = model or settings.get('JEV_MODEL') or 'typesafe/jev-1.14'
-    key = api_key or settings.get('OPENROUTER_API_KEY')
+    try:
+        key,model = resolve_provider('jev', api_key=api_key, model=model)
+    except ValueError:
+        return _result(case, 'jev', started, failure='invalid_provider_settings',
+                       model_version=PROVIDER_ROUTES['jev'][2])
     metadata = dict(model_version=model, prompt_version=PROMPT_VERSION)
     if len(case.constraints.allowed_modules) == 1:
         return _result(case, 'jev', started, failure='single_allowed_module', **metadata)
@@ -298,6 +301,8 @@ def select_plan_jev(case: ClassificationCase, *, api_key: str | None = None,
                 timeout=(3.0, 15.0), allow_redirects=False,
             )
             status = response.status_code
+            if type(status) is not int or not 100 <= status <= 599:
+                raise ValueError('Invalid provider status')
             if status != 200:
                 usage.complete = False
                 failure = f'jev_http_{status}'
@@ -308,6 +313,7 @@ def select_plan_jev(case: ClassificationCase, *, api_key: str | None = None,
             usage.record(_jev_usage(data), {'input_tokens', 'output_tokens', 'cost_usd'})
             usage_recorded = True
             resolved_model = _resolved_model(data.get('model'), model)
+            if key and key in resolved_model:raise ValueError('Invalid response metadata')
             answer = data['answers']['lead_module']
             lead, confidence, probabilities = _choice(answer, case.constraints.allowed_modules)
             scores = {}
@@ -335,7 +341,7 @@ def select_plan_jev(case: ClassificationCase, *, api_key: str | None = None,
                 usage.complete = False
             invalid += 1
             failure = 'invalid_jev_response'
-        except requests.RequestException:
+        except Exception:
             usage.complete = False
             failure = 'jev_transport_error'
     return _result(case, 'jev', started, failure=failure, **metadata,
@@ -345,9 +351,11 @@ def select_plan_jev(case: ClassificationCase, *, api_key: str | None = None,
 def select_plan_gemini(case: ClassificationCase, *, api_key: str | None = None,
                        model: str | None = None, client=None) -> SelectionResult:
     started = perf_counter()
-    settings = classifier_settings()
-    model = model or settings.get('GEMINI_CLASSIFIER_MODEL') or 'gemini-3.5-flash-lite'
-    key = api_key or settings.get('GEMINI_API_KEY')
+    try:
+        key,model = resolve_provider('gemini', api_key=api_key, model=model)
+    except ValueError:
+        return _result(case, 'gemini', started, failure='invalid_provider_settings',
+                       model_version=PROVIDER_ROUTES['gemini'][2])
     metadata = dict(model_version=model, prompt_version=GEMINI_PROMPT_VERSION)
     if len(case.constraints.allowed_modules) == 1:
         return _result(case, 'gemini', started, failure='single_allowed_module', **metadata)
@@ -385,10 +393,19 @@ def select_plan_gemini(case: ClassificationCase, *, api_key: str | None = None,
                     raise _SelectionValidationError('empty_response', 'Gemini returned no JSON text.')
                 selection = validate_selection(PlanSelection.model_validate_json(response.text), case)
                 metadata['model_version'] = _resolved_model(getattr(response, 'model_version', None), model)
+                if key and key in metadata['model_version']:
+                    metadata['model_version'] = model
+                    raise ValueError('Invalid response metadata')
+                # Accept the structured module/reasons, never arbitrary provider
+                # financial prose or questions as an analyst recommendation.
+                selection = PlanSelection(**{**selection.model_dump(),
+                    'rationale': f'Gemini proposed {MODULES[selection.lead_module]}. Application evidence summary: '
+                        + ', '.join(r.replace('_',' ') for r in selection.reason_codes) + '.',
+                    'needs_clarification': list(dict.fromkeys(case.missing_details))})
                 return _result(case, 'gemini', started, selection=selection, **metadata,
                                api_calls=calls, invalid_outputs=invalid, validation_errors=validation_errors,
                                **usage.metadata(),
-                               rationale_source='model')
+                               rationale_source='evidence_template')
             except (ValueError, TypeError, ValidationError) as exc:
                 if not usage_recorded:
                     usage.complete = False

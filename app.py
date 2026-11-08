@@ -105,7 +105,7 @@ def clear_account_evidence():
     st.session_state.pop('classification_result', None)
     for key in list(st.session_state):
         if key.startswith(('transfer_', 'classification_debt_')) or key in (
-            'tailored_explanation', 'classification_guided_value_debt_payment_delta',
+            'tailored_explanation', 'daily_advisor_result', 'classification_guided_value_debt_payment_delta',
             'classification_guided_effect_id',
         ):
             del st.session_state[key]
@@ -512,6 +512,9 @@ with tab3:
     else:
         st.info("The cash comparison is available once the scenario input is corrected.")
     st.write(f"**Lead module:** {crisis['lead_module'] or 'BANK_REVIEW'} · **Goal:** {crisis['goal_status']} · **G25:** {crisis['G25_state']}")
+    proposal = crisis['module_proposal']['lead_module']
+    actual_source = (crisis.get('classification') or {}).get('actual_backend','external proposal')
+    st.caption(f"Module proposal: {proposal} ({actual_source}); effective financial response: {crisis['lead_module'] or 'BANK_REVIEW'}. The Python engine owns cash and action eligibility.")
     if crisis['goal_review_required']:
         st.info('Goal held for review: incomplete effects do not by themselves establish G25 deterioration. Full funding need remains open.')
     st.caption('All financial effects are calculated, independently of the classifier’s limit of two supporting labels.')
@@ -566,12 +569,8 @@ with tab3:
     from tailored_advice import explain_plan, validate_advice
     validate_advice(crisis['advice'], crisis)
     st.markdown('**Personalized action plan**')
-    explanation = explain_plan(crisis)
-    if st.button('Use Gemini to emphasize validated findings', key='tailored_explain'):
-        st.session_state['tailored_explanation'] = explain_plan(crisis, backend='gemini')
-    cached = st.session_state.get('tailored_explanation')
-    if cached and cached['fingerprint'] == crisis['advice']['fingerprint']:
-        explanation = cached
+    from provider_controls import explanation_control
+    explanation = explanation_control(crisis, account_id)
     st.caption('Explanation emphasis: ' + explanation['actual_backend'] +
         (' · local fallback: ' + explanation['fallback_reason'] if explanation['fallback_reason'] else ''))
     # All mandatory facts remain visible regardless of model emphasis.
@@ -779,16 +778,16 @@ with tab4:
                 if active
             ]
             shock_type = "compound" if len(effect_types) > 1 else next(iter(effect_types), "none")
-            advisory = ga.consult_gemini_advisor(
-                shock_type=shock_type,
-                days_to_shortfall=baseline["days_to_shortfall"],
-                cash_needed=baseline_gap,
-                has_bill_to_shift=helpful_move,
-                has_one_off=repair_cost > 0,
-            )
+            from provider_controls import daily_advisor_control
+            advisory = daily_advisor_control(dict(
+                shock_type=shock_type, days_to_shortfall=baseline['days_to_shortfall'],
+                cash_needed=baseline_gap, has_bill_to_shift=helpful_move, has_one_off=repair_cost > 0),
+                account_id=account_id, normalized_case=crisis['classification_input_hash'],
+                scenario_hash=crisis['scenario_hash'])
             advice = advisory["plan"]
             st.markdown("**Analyst review**")
             st.write(advice["title"])
             st.write(advice["rationale"])
             review_flags(advice["bank_review_flags"])
-            st.caption("Selector: Gemini" if advisory["is_ai_live"] else "Selector: Local rules")
+            st.caption(f"Daily advisor requested: {advisory['requested_backend']} · actual: {advisory['actual_backend']} · API calls: {advisory['api_calls']}" +
+                (f" · local fallback: {advisory['fallback_reason']}" if advisory['fallback_reason'] else ''))
