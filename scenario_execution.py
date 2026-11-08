@@ -56,7 +56,7 @@ def period_values(customer, scenario, month, *, include_assumptions=False):
     loan_changed = False
     for index, effect in enumerate(scenario.effects):
         kind, v = effect.type, effect.value
-        identity = effect.effect_id or f'effect-{index + 1}'
+        identity = scenario.effect_identity(index)
         if effect.start_month > scenario.horizon_months:
             continue
         if effect.obligation_account_id is not None and effect.obligation_account_id != customer.get('account_id'):
@@ -123,7 +123,7 @@ def period_values(customer, scenario, month, *, include_assumptions=False):
             if effect.debt_change_kind == 'deferral' and effect.repayment_unresolved:
                 unknown.append(f'{identity}: deferred loan obligation unresolved; repayment not established')
                 if month == effect.start_month:
-                    pending_deferrals.append({'effect_id': effect.effect_id, 'type': 'deferred_repayment',
+                    pending_deferrals.append({'effect_id': identity, 'type': 'deferred_repayment',
                                               'start_month': None, 'value': None, 'unresolved': True})
                 continue
             # Both legs depend on the same payment evidence and assumption status.
@@ -140,7 +140,7 @@ def period_values(customer, scenario, month, *, include_assumptions=False):
                     unknown.append(f'{identity}: deferred repayment beyond horizon remains owed')
                     if month == effect.start_month:
                         pending_deferrals.append({
-                            'effect_id': effect.effect_id, 'type': 'deferred_repayment',
+                            'effect_id': identity, 'type': 'deferred_repayment',
                             'start_month': effect.repayment_month, 'value': effect.repayment_amount,
                             'unresolved': effect.repayment_unresolved,
                         })

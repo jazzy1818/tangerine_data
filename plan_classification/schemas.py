@@ -169,6 +169,17 @@ class ShockScenario(Contract):
     horizon_months: int = Field(default=6, ge=1, le=120)
     effects: list[ShockEffect] = Field(default_factory=list, max_length=MAX_SHOCK_EFFECTS)
 
+    def effect_identity(self, index: int) -> str:
+        """Resolve local ledger IDs without aliasing an operator-supplied ID."""
+        effect = self.effects[index]
+        if effect.effect_id is not None:
+            return effect.effect_id
+        identity = f'effect-{index + 1}'
+        supplied = {item.effect_id for item in self.effects if item.effect_id is not None}
+        while identity in supplied:
+            identity += '-generated'
+        return identity
+
     @model_validator(mode='before')
     @classmethod
     def identified_obligations_once(cls, data):

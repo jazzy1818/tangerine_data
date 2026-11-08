@@ -54,9 +54,11 @@ def _point_label(point):
 
 
 def _evidence_notes(crisis, left, right):
+    from plan_classification.schemas import ShockScenario
+    scenario = ShockScenario.model_validate(crisis['scenario'])
     effect_numbers = {
-        effect['effect_id'] or f'effect-{number}': number
-        for number, effect in enumerate(crisis['scenario']['effects'], 1)
+        scenario.effect_identity(index): index + 1
+        for index in range(len(scenario.effects))
     }
     notes = []
     for issue in dict.fromkeys(left['unresolved_effects'] + right['unresolved_effects']):
@@ -312,6 +314,10 @@ def render_backup_comparison(crisis):
                 st.caption(f"Catch-up: {_cad(action['repayment']['amount_cad'])} at {_point_label(action['repayment']['due'])}.")
             st.write(action['reason'])
             st.caption(action['cash_treatment'] + ' ' + action['required_review'])
+            if action['review_checkpoint']:
+                st.caption('Review by ' + _point_label(action['review_checkpoint']))
+            for tradeoff in action.get('tradeoffs', []):
+                st.write('Trade-off: ' + tradeoff)
         if target := finance['required_target_only']:
             st.caption(f"Calculated target: {_cad(target['upfront_cad'])} upfront plus {_cad(target['uniform_monthly_improvement_cad'])}/month from Month 1 end.")
         review = finance['next_review_checkpoint']

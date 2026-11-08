@@ -55,7 +55,9 @@ export function financePlanView(plan) {
       ${impact==null?'':`<p>${e(action.impact.basis)} · ${e(impact<0?`Funding need increases by ${money(-impact)}`:impact>0?`Funding need decreases by ${money(impact)}`:'Funding need is unchanged')}. First shortage ${e(checkpointLabel(action.impact.before.first_shortfall)||'none')} → ${e(checkpointLabel(action.impact.after.first_shortfall)||'none')}.</p>`}
       ${action.daily_comparison?`<p>Separate daily replay · first payment ${e(action.daily_comparison.first_original_date)} → ${e(action.daily_comparison.first_shifted_date)} · first shortage ${e(action.daily_comparison.before_first_day||'none')} → ${e(action.daily_comparison.after_first_day||'none')} · funding need ${e(money(action.daily_comparison.before_funding_need_cad))} → ${e(money(action.daily_comparison.after_funding_need_cad))}.</p>`:''}
       ${action.repayment?.due?`<p>Catch-up payment ${e(money(action.repayment.amount_cad))} at ${e(checkpointLabel(action.repayment.due))}${action.repayment.beyond_horizon?' (beyond this horizon)':''}.</p>`:''}
-      <p>${e(action.cash_treatment)}</p><p><strong>Review</strong> ${e(action.required_review)}</p></li>`;
+      <p>${e(action.cash_treatment)}</p><p><strong>Review</strong> ${e(action.required_review)}</p>
+      ${action.review_checkpoint?`<p><strong>Review by</strong> ${e(checkpointLabel(action.review_checkpoint))}</p>`:''}
+      ${action.tradeoffs?.length?`<p><strong>Trade-offs</strong></p>${noteList(action.tradeoffs)}`:''}</li>`;
   });
   const target=plan.required_target_only;
   return `<section class="card" aria-label="Recommended Financial Actions"><h2>Recommended Financial Actions</h2>

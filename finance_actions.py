@@ -122,7 +122,7 @@ def _deferral_actions(crisis, customer, scenario):
     for index, effect in enumerate(scenario.effects):
         if effect.debt_change_kind != 'deferral':
             continue
-        identity = effect.effect_id or f'effect-{index + 1}'
+        identity = scenario.effect_identity(index)
         posted = any(identity in row['applied_effect_ids'] for row in base['schedule'])
         impact = None
         limitation = None
@@ -167,7 +167,7 @@ def _deferral_actions(crisis, customer, scenario):
 
 
 def _assumption_comparison(crisis, customer, scenario):
-    effects = [effect.effect_id or f'effect-{index}' for index, effect in enumerate(scenario.effects, 1)
+    effects = [scenario.effect_identity(index) for index, effect in enumerate(scenario.effects)
                if effect.evidence == 'assumed' and effect.value is not None and effect.start_month <= scenario.horizon_months]
     if not effects:
         return None, None
@@ -203,6 +203,8 @@ def _review_checkpoint(crisis, after, scenario):
             upcoming.append((effect.repayment_month, 'start', 'Review the cash available before the loan catch-up is due.'))
         if effect.type in ('one_off_receipt', 'one_off_cost') and effect.start_month > 0:
             upcoming.append((effect.start_month, 'start', 'Verify the dated receipt or expense before relying on its timing.'))
+        if effect.type == 'liquidity_hold' and effect.value:
+            upcoming.append((effect.start_month, 'start', 'Confirm the restricted amount and access dates before the cash hold starts.'))
     for record in crisis['existing_transfers']:
         if record['event_id'] in crisis['applied_transfer_ids']:
             upcoming.append((record['month'], 'start', 'Confirm the pause is in effect and check the fee before this payment.'))
@@ -335,6 +337,10 @@ def build_finance_plan(crisis, customer, scenario, case):
             'MAINTAIN', '§§4, 6', 'No new action is justified on the modeled evidence.',
             evidence=['DERIVED'], required_review=review['reason']))
     candidates.extend(item for item in principal if item not in candidates)
+    approval_flags = []
+    if accepted or any(item['action_id'].startswith('deferral:') and item['status'] == 'CONDITIONAL_ONLY'
+                       for item in candidates):
+        approval_flags.append('SUPPLIED_ACTION_TERMS: Approvals are supplied scenario evidence. Independently verify authorization, effective dates and fees before acting; hypothetical approvals do not establish bank execution.')
     profile = customer.get('history')
     history = (str(profile['month'].min()), str(profile['month'].max())) if profile is not None and not profile.empty else None
     return {
@@ -348,8 +354,8 @@ def build_finance_plan(crisis, customer, scenario, case):
             'first_month_recurring_gap_cad': round(before['schedule'][1]['spending'] - before['schedule'][1]['income'], 2)
                 if before['schedule'][1]['period_complete'] and before['schedule'][1]['income'] is not None else None,
             'evidence': ['OBSERVED', 'DERIVED'],
-            'effect_evidence': [{'effect_id': effect.effect_id or f'effect-{index}',
-                'provenance': SCENARIO_EVIDENCE[effect.evidence]} for index, effect in enumerate(scenario.effects, 1)],
+            'effect_evidence': [{'effect_id': scenario.effect_identity(index),
+                'provenance': SCENARIO_EVIDENCE[effect.evidence]} for index, effect in enumerate(scenario.effects)],
             'one_offs_and_repayments': [{key: row[key] for key in ('month', 'one_off_receipt', 'one_off_cost', 'deferred_repayment')}
                 for row in before['schedule'] if row['one_off_receipt'] or row['one_off_cost']],
             **matched['before']},
@@ -365,7 +371,7 @@ def build_finance_plan(crisis, customer, scenario, case):
             if crisis['existing_transfer_pause_credit'] else None),
         'conditional_assumption_path': assumption_path,
         'remaining_gap_cad': gap, 'required_target_only': target,
-        'bank_review_flags': list(dict.fromkeys([*crisis['review_flags'], *comparison['evidence_notes']])),
+        'bank_review_flags': list(dict.fromkeys([*crisis['review_flags'], *comparison['evidence_notes'], *approval_flags])),
         'next_review_checkpoint': review, 'post_horizon_obligations': [
             item for item in applied['pending_effects'] if item['type'] in ('one_off_cost', 'deferred_repayment')
             and item['start_month'] is not None and item['start_month'] > scenario.horizon_months],

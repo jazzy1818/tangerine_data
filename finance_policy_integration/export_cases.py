@@ -3,6 +3,7 @@ import argparse
 from collections import Counter
 import csv
 from datetime import datetime, timezone
+from hashlib import sha256
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -21,6 +22,25 @@ REVIEW_COLUMNS = ('case_id', 'account_id', 'scenario', 'candidate', 'finance_pol
                   'evidence_status', 'action_status', 'result_before', 'result_after', 'remaining_gap',
                   'first_shortfall', 'complete', 'bank_review_flags', 'finance_reviewer_verdict',
                   'finance_reviewer_notes')
+
+
+def source_manifest():
+    """Bind exports to the actual code, including uncommitted review changes."""
+    files = {Path(__file__).resolve(), ROOT / 'shock_playbook.json'}
+    for pattern in ('*.py', 'requirements*.txt', 'plan_classification/*.py', 'web_app/*.py',
+                    'web_app/static/*', 'tests/*.py'):
+        files.update(path for path in ROOT.glob(pattern) if path.is_file())
+    hashes = {str(path.relative_to(ROOT)): sha256(path.read_bytes()).hexdigest()
+              for path in sorted(files)}
+    try:
+        status = subprocess.check_output(['git', 'status', '--porcelain=v1', '--', *hashes],
+                                         cwd=ROOT, stderr=subprocess.DEVNULL, text=True, timeout=5)
+    except (OSError, subprocess.SubprocessError):
+        modified = None
+    else:
+        modified = bool(status)
+    return {'base_commit': source_commit(), 'has_uncommitted_source_changes': modified,
+            'sha256': hashes}
 
 
 def effect(kind, value=None, **terms):
@@ -114,6 +134,18 @@ def cases():
     assumed = pick(lambda row: float(row['B']) > 0)
     yield sample('19-conditional', 'Unconfirmed spending change kept in a separate comparison', assumed,
                  effect('expense_delta', 100., evidence='assumed', duration_months=6))
+    identity_loan = pick(lambda row: row['active_loan'] == 'True' and float(row['P']) > 0)
+    payment = identity_loan['P']
+    deferred = min(payment, 250.)
+    yield sample('20-withheld-identity', 'A separate expense cannot confirm a withheld deferral', identity_loan,
+                 effect('one_off_cost', 25., start_month=0),
+                 effect('debt_payment_delta', -deferred, duration_months=2, effect_id='effect-1',
+                        obligation_payment=payment, obligation_source='Hypothetical unverified inclusion',
+                        payment_in_baseline=False, debt_change_kind='deferral', repayment_month=4,
+                        repayment_amount=round(2 * deferred + 50., 2)))
+    access = pick(positive)
+    yield sample('21-access-review', 'Review an upcoming cash hold even without a projected shortage', access,
+                 effect('liquidity_hold', min(100., round(access['B'] / 10, 2)), start_month=2, duration_months=2))
 
 
 class VisibleText(HTMLParser):
@@ -236,7 +268,8 @@ def export(output):
         print(f'{case_id}: {plan["status"]}', flush=True)
     captures = list(render_reviews(runs))
     (output / 'finance_acceptance_details.json').write_text(json.dumps(
-        {'source_commit': commit, 'generated_at': generated, 'finance_approval': 'PENDING', 'cases': records},
+        {'source_commit': commit, 'source_manifest': source_manifest(), 'generated_at': generated,
+         'finance_approval': 'PENDING', 'cases': records},
         indent=2, allow_nan=False) + '\n')
     (output / 'rendered_reviews.txt').write_text('\n\n'.join(
         f'{record["case_id"]} — {record["title"]}\n{capture}'

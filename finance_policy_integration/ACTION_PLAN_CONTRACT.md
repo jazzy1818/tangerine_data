@@ -44,3 +44,13 @@ A stipulated loan deferral is part of the original shock. Its separate counterfa
 Synthetic Case A books six included, approved payments of CAD 300 with zero fee. The supported bundle moves the first shortage from Month 2 end to Month 3 end and reduces full need from CAD 3,360 to CAD 1,560. The remaining CAD 260 per month from Month 1 is `TARGET_ONLY`. Separately, a future contribution proposal outside spending frees CAD 0.
 
 Synthetic Case C delays the first shortage from Month 2 end to Month 4 start while increasing full funding need from CAD 900 to CAD 950. The extra CAD 50 is part of the CAD 650 catch-up, not a separately charged fee. It is shown as a conditional bridge trade-off.
+
+### Evidence identity and review presentation
+
+`ShockScenario.effect_identity(index)` preserves supplied IDs and gives anonymous events deterministic local IDs that cannot collide with them. For example, if another event supplies `effect-1`, the first anonymous event resolves to `effect-1-generated` (with another suffix if needed). This does not rewrite scenario inputs or change their hash. Ledger postings, pending deferrals, finance decisions and numbered evidence prompts use the same resolution. An unrelated expense cannot make a withheld deferral appear posted or bank-confirmed.
+
+The website and Streamlit action cards display their recorded `tradeoffs` and `review_checkpoint`. An upcoming liquidity hold contributes a review deadline at its start even when no shortage is projected. `SUPPLIED_ACTION_TERMS` in `bank_review_flags` identifies supplied pause/deferral authorizations that require independent bank-side confirmation; human finance approval remains pending.
+
+### Export source manifest
+
+The review JSON includes `source_manifest.base_commit`, `has_uncommitted_source_changes`, and a `sha256` map of the actual runtime, renderer, exporter, dependency declarations and test files. When the working tree is modified, `source_commit` identifies the base commit rather than claiming those edits were committed. The hashes identify the code used for the package without including credentials or bank source data. Generated timestamps and hashes are provenance, not finance approval.

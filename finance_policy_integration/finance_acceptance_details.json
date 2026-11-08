@@ -1,6 +1,98 @@
 {
-  "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
-  "generated_at": "2026-11-08T15:34:34.234186+00:00",
+  "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+  "source_manifest": {
+    "base_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+    "has_uncommitted_source_changes": true,
+    "sha256": {
+      "app.py": "781163384ca3abb99a8cf58bcb57af414a970a5b49d37437eda315db61b426a2",
+      "backup_comparison.py": "30b4aa376a78596ad97d784819cae2559b9b6ffa21499cae0a79261e2821154e",
+      "crisis_response.py": "a1c61befb478dadcc0371f3add79815fbd82e6c22fffb920c285d79dfe8aa71c",
+      "crisis_rules.py": "116b75d7d0e9fddc7739ddb21e2cc751dd8ebe4e17f2266403ba564ae5f584c4",
+      "daily_simulation.py": "5cbac5cfb9307ab41e51fcd700707c06ac30417a1617db31651005e2b99fc582",
+      "engine.py": "cea8022b7079c78072e972062a7db8b6446e83f77ec406da5a6c7cc6bacc3d19",
+      "etf_calculations.py": "e8783bd494d939fe8ddab00700ad5357727210ae44c4505467735cd1013bb1fd",
+      "etf_demo.py": "b66ac8cbefd2ae0e619698c7900f8070658de2701edcae4a43eb12be4f90ac5f",
+      "etf_market.py": "1aed14aeab907e9930a2818c4f5dc69cf54ea1f1d45540c748959c5c29d7c955",
+      "etf_ui.py": "a272d904adb20add7d9327b34dcf9f43ee24587aa5e0dfde3983bd26d187b9b7",
+      "finance_actions.py": "f5a07e28a6743a8ba51bd28618ec8f01f358ad3fb87122ba676d2f8a02e9aca0",
+      "finance_policy_integration/export_cases.py": "bd6fd32bde7eded797fc056975a71141fa2b61edefe402a4ccaddf3a63f9c22f",
+      "gemini_advisor.py": "f2d8a6de0bf7ea0f4bcfe54e9a9bc2d8f5601551014548b2f65d955c2e1105b6",
+      "goal_validation.py": "f5a628d7898cbac6e26e892a0b6d32bcc718b584c0f9752ffee1574e1636505c",
+      "investment_triggers.py": "57bb50f779342e9a3ce82f4e547fde88467497dedbfa3ac4cc0c2410c7e46a20",
+      "pause_decisions.py": "a18a813016b079cd40cc85bd64079ad89e5977c0c4c197c3774e8a4528243486",
+      "plan_classification/__init__.py": "72c3ee3679adf3ba2358af66afa8ad13ac5c95d34b66b31c70885a7f1ed46984",
+      "plan_classification/__main__.py": "4fa44f7a27b6f6e7a875d59b9dc3e32a0c583c68cd558b719e3079449bbc8832",
+      "plan_classification/backends.py": "e87c5bc58bbf864ce5bf7633392430d4f57d270b86c27f87069724197829a0d4",
+      "plan_classification/case.py": "4715ab2bed12f23d92e99e093b1fa61ee1d2d89b7759411624e82284ac1b86c7",
+      "plan_classification/config.py": "f5a016603723bd0c5b9448f534e6639f0b816ead077ac5afcb641a6e02e34b3e",
+      "plan_classification/discovery.py": "2dd6bcff5bf1577781cadd4cd1a63b3fe384084bd5977c627fad5e2ddac86765",
+      "plan_classification/features.py": "8126d43eaffabfd6e98b4cef37fabea4c88bcbaf36d1fe915ce8c731af12bcf7",
+      "plan_classification/request_log.py": "7dfc8d4593e8a673475e5f1193ba19dc8b21968fdf7074052264e3e4bbd54461",
+      "plan_classification/schemas.py": "b33bd98ec8bb24f2e857ce671af119985e648e8ab67d43649313d3df68cbd596",
+      "plan_classification/ui.py": "86d8b1896609be8ac32f4e422ad468f82c106a6233f4efa0ec4b97ca157c7ee4",
+      "portfolio_overview.py": "f3c79028d7271cf8b1b042378cb2ad63e9adbcc5ee480536c87fc181567875f9",
+      "profile_relationships.py": "bccb0261bda379bf6f47cffb6f07f68b7f319068572ba817ecd7a8a1931ccbe5",
+      "provider_controls.py": "ae101b7f0a583fd0830dcc8103525b7d47b0b1eda2a6550cf377bec76edcbe02",
+      "recovery_plan.py": "dbcecb0c74e5d34b86262065bb62ff9cc7cd51936d38fc805ee29e0aab585a81",
+      "requirements-classification-dev.txt": "e0669dd327ac8b0807dc98f79e597a7103ae841b90d04ecba75b5a9658abb869",
+      "requirements-etf.txt": "fe9bd62813096adee2a60793c64d9a7aaa1355625a020f485e2d7ba955c6d10b",
+      "requirements-web.txt": "146337042fe911ab10583e002527ecc5d3cc47b031ca226672ed3ecb7ccd8857",
+      "requirements.txt": "1c9ea5c82402030f97dc8bbecac806350025cc7de92811d638666c6f536e9290",
+      "scenario_execution.py": "0ce792dc8dffcac13f5d0302af621434684ff51793de5ff65b91fca44a38e6c3",
+      "shock_playbook.json": "76a2714f8be83a61e50b7241dfec5fc6200259069675742cccf496e5d1a88e66",
+      "tailored_advice.py": "c2b14c083e205521f0adc5d0092e63304db627b24d7990cfcc1fcdefbc9f779e",
+      "tests/conftest.py": "9705edb97412b4a020cd9eb03018723da3c45a41900e088f8ec90b6a9588ddf4",
+      "tests/provider_test_support.py": "ba4b3f2900ae03e09784e5623e7340d6bdfbfdf4574e9490fd488e77e551a68c",
+      "tests/test_advice_ui.py": "c6680369859bbdb8175f8d9b418ac1bf7cc2be84fcc7b66e71205f322afb9bff",
+      "tests/test_app_allocation.py": "84f01eb63fcd135463424fdf226bdd367cbc6b2148a510d607b9d920daeeec0a",
+      "tests/test_backend_audit.py": "080deb0fb6117555ecdba283da9c78c1dfb256286dc7042287817114f946cb4a",
+      "tests/test_backup_comparison.py": "f98acd2453a336cb43dabba899911cd11b91bc3f0384a8134917265eaed777ba",
+      "tests/test_backup_comparison_ui.py": "730d708fc30cca8af10e819c1d47c5ea352efadc2a4e2d8a0855ae2f510815c1",
+      "tests/test_classification.py": "aa193bd64926c76536a083d816556d08bc0091d024e35443d6af1de6e929efc9",
+      "tests/test_classification_ui.py": "4a4680bb5dba729a15fe78c709a97fd021150a040dadcffd7ffe6623105c0071",
+      "tests/test_crisis_execution.py": "46f8be546df0404efa9d96a4e07394d32ed10e9e1d702879d375a7c9b68f38c0",
+      "tests/test_crisis_ui.py": "4f39f4ebe8442f1336f531775e1f2c7932d93855ce9179f69753a424ee695361",
+      "tests/test_etf_explorer.py": "3cf7c21fed1839032dada466a1aebff0e4e7588070771f4da538cd3fdfd3caee",
+      "tests/test_etf_ui.py": "72a2886cb7a611fa59262dd176db96a5fda1f6dd6b522e536dfe7b5194e96d00",
+      "tests/test_feature_audit.py": "0876705ffcf89309fdf12be47a84573418ffc35e5d67be1e483ea7b6e1f38984",
+      "tests/test_finance_decision_policy.py": "697359f24d47a17891d6d19b29b1f8710fcfe55bc6713d906b6eac1651169ec5",
+      "tests/test_finance_policy_followup.py": "326ce67846041155878e96f5259e748e768cec963e81da17b4bbffc53cbde419",
+      "tests/test_goal_matrix.py": "a036159e8c49334cc0293889607ab99f12c4702448eaba90c044ed55118b965a",
+      "tests/test_investment_triggers.py": "9056b597e37ea4df3318b74626074acd878bab4d3ba335c5da8afe18c5aceb92",
+      "tests/test_portfolio_overview.py": "4404941c0453053b4311a235dea3f2a56daef1f96c18ba06928653cf8c0c7075",
+      "tests/test_provider_controls.py": "aa2fd14f116ab44da8e8da3b096205b6c57584a2e12daa916e339a195f3367d2",
+      "tests/test_provider_fallback_evidence.py": "72a1e51d7f91995213f3cd44e0e1d624021841f41872df92624879778786b7fa",
+      "tests/test_provider_fallback_ui.py": "6c004183a8c19ffaf3762ccc90d34dad7d04fac3991f126f66276da9e70dfc4c",
+      "tests/test_provider_reliability.py": "10089dd2c2dfb98fe2eca4a7e36ea953585387eded6abae7cf89594e80d938e5",
+      "tests/test_recovery_evidence.py": "c49db1c2350bde01d67de4ec807fff3b0034f1aa06ba1c8cdcaab4e73ab89a69",
+      "tests/test_review_regressions.py": "8848d699b8dc1e3231df583e059c824f41a6d2efa3c2b118d885ade456dabe56",
+      "tests/test_review_ui.py": "6e216b45295ad6853bd6c50d45620ebc619e9bfd6acee97e41393ff50edb8bc8",
+      "tests/test_runtime_enforcement.py": "75d67e0c43c2f62dd9fc17992015f5dfbbfb35ed1e4bb200bf75b86b8e780e75",
+      "tests/test_schema_audit.py": "b4351edf2c21b4a7593b1b6514ff04849a8685f0c80df98b8e522571e4506246",
+      "tests/test_tailored_advice.py": "3c81a6222ad8ebea85c1b390fd02586ba0fa6d01ad689836770a1fc027f3ecb4",
+      "tests/test_ui_audit.py": "d2adf6460ea96a33793b60dec6e585d19fcb9bd24db41e7e6f57dc432d2374fe",
+      "tests/test_website_savings.py": "278c091c299f6b7029a01c767cbbddf864264b449a4caf0f9e5cbc0b09f3df88",
+      "transfer_ui.py": "aea1cc48fc8ccaa178646ed615915bf873eaad13449c47f84e1bd188f31edc6e",
+      "web_app/__init__.py": "1f8b904348671d06853f1e160070d2e17f630082b062a4822871a0f801741cdd",
+      "web_app/analytics.py": "a4d23de077f23c98b9d1def7712150a952de30e076daead49a617242eb496942",
+      "web_app/contracts.py": "ae11e718841ef6d8e34a39fc9cc1e3fe4759a045a83fd0317e71ee9fbe10257f",
+      "web_app/portfolio.py": "ae053b39d45a391231cf00ef24b08f33fe5b142111b345b5d8a6b92feef2c2de",
+      "web_app/savings.py": "80223baef557e1bdd0eaf18cafb46cd34fd3b234d0af2b7f5813c485db0aa15b",
+      "web_app/server.py": "c219204e790fbef4f7002f395dd64662c299190072c31b1366e5bbad7718e246",
+      "web_app/service.py": "d0708dc67931dd69af40fc351ba5d118acc0fa19507ba3f96c2e444763597c42",
+      "web_app/static/app.js": "776622dd26d7a2ac99ab1ec237c1ee7e45bec9479c42cfbed0101e4d5c7f2889",
+      "web_app/static/charts.js": "cf9e85210dd792ec0e093f250cd59fb512c8b15e51cbfa8f22dbc25429315983",
+      "web_app/static/common.js": "0795a7f74fe2ff5e79eea94bd642f2c6dc8f1b041000e7100b24cf45af2f338e",
+      "web_app/static/financial.js": "1a7f32a66d1960084d3fcb23956b18e07176e15b6939e78cde08cab52958edda",
+      "web_app/static/index.html": "40ee94fdf0380f409a774f8e59fa9f2dbc494b6b89aa0add817cf3443c059581",
+      "web_app/static/reviews.js": "ece97c4fff6276f1161e6616c4bba21fc4f07bed719ef7950b7675cb49d032ee",
+      "web_app/static/scenario.js": "37ae317db6e0cd976f6111a62fa353472efa9d05de286348c16f0050affbeb66",
+      "web_app/static/styles.css": "7aaca6e9480ba6f3f441c92909e4f0013fc681dd09d2807f10a9482d788fbb25",
+      "web_app/static/views.js": "1d81b3e65db640272f02782ce08c5dfc8e33ec0a40aaf5b59ac1518475859763",
+      "web_app/store.py": "847dfc69c66db0983beab377ae7b37be4658f5d9ac43344b197060ee7ef8ca81"
+    }
+  },
+  "generated_at": "2026-11-08T16:17:53.227789+00:00",
   "finance_approval": "PENDING",
   "cases": [
     {
@@ -88,7 +180,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20741,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -816,7 +908,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 21026,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -1605,7 +1697,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 21101,
         "scenario_hash": "507cd34993724eefffdfa86906422554b6ce68c93dc556ed1a09ecde349d8af9",
         "horizon_months": 6,
@@ -2410,7 +2502,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 32078,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -3200,7 +3292,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 26939,
         "scenario_hash": "843927d87de08879afe94243af278a339ff9e3530127587c74d7d7a673fa70ac",
         "horizon_months": 6,
@@ -4013,7 +4105,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20578,
         "scenario_hash": "d7b34cbd03311a99042499083055df2ed67c37bbdee44f9710cfe242203fbd14",
         "horizon_months": 6,
@@ -4782,7 +4874,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20111,
         "scenario_hash": "a5d8d1e954cf1a0fa1aab931744f94dceccf3f7ed77a2f6e71373066f5040b90",
         "horizon_months": 6,
@@ -5579,7 +5671,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20134,
         "scenario_hash": "68e4120796c860251d45240fd6416d5273b30270cccc5b77f78d38856586f8b4",
         "horizon_months": 6,
@@ -6366,7 +6458,8 @@
           "CURRENT_LIQUID_CASH_UNVERIFIED: Opening cash uses the competition historical buffer proxy, not a live accessible balance.",
           "LOAN_TERMS_UNVERIFIED: Recorded payment pressure does not establish current APR, deferral approval or payment release.",
           "MODULE_ELIGIBILITY_OVERRIDE: Classification proposal is retained for audit; the finance engine selected a supported protective/review response.",
-          "DAILY_REPLAY_NOT_APPLIED: This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency."
+          "DAILY_REPLAY_NOT_APPLIED: This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.",
+          "SUPPLIED_ACTION_TERMS: Approvals are supplied scenario evidence. Independently verify authorization, effective dates and fees before acting; hypothetical approvals do not establish bank execution."
         ],
         "next_review_checkpoint": {
           "checkpoint": {
@@ -6523,7 +6616,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 31500,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -7282,7 +7375,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20303,
         "scenario_hash": "1e83552378f22a4da7132d802ef963e48761cfb56f903f487dc482bd8ee09580",
         "horizon_months": 6,
@@ -8067,7 +8160,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20133,
         "scenario_hash": "843927d87de08879afe94243af278a339ff9e3530127587c74d7d7a673fa70ac",
         "horizon_months": 6,
@@ -9003,7 +9096,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20143,
         "scenario_hash": "e05cd985bb6c590ff5d2487495324a5fe12258323e80e5bb73c5a80ff6e09cea",
         "horizon_months": 6,
@@ -10862,7 +10955,8 @@
         "bank_review_flags": [
           "POST_BENEFIT_INCOME_UNVERIFIED: This horizon does not establish replacement income after temporary inflows end.",
           "CONDITIONAL_PROJECTION: Historical full-history medians and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.",
-          "CURRENT_LIQUID_CASH_UNVERIFIED: Opening cash uses the competition historical buffer proxy, not a live accessible balance."
+          "CURRENT_LIQUID_CASH_UNVERIFIED: Opening cash uses the competition historical buffer proxy, not a live accessible balance.",
+          "SUPPLIED_ACTION_TERMS: Approvals are supplied scenario evidence. Independently verify authorization, effective dates and fees before acting; hypothetical approvals do not establish bank execution."
         ],
         "next_review_checkpoint": {
           "checkpoint": {
@@ -11045,7 +11139,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 21817,
         "scenario_hash": "3c24f54906be87925b8541d5c361eec660349b9ef2517705e7847950a3ac506c",
         "horizon_months": 6,
@@ -11862,7 +11956,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 21214,
         "scenario_hash": "04ec00a5234a4e14d116db38c570d05d7e8fd5f7369f06edef95bedf24f06fe2",
         "horizon_months": 6,
@@ -12686,7 +12780,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20176,
         "scenario_hash": "bcbbe6a1a5edcf9cd8dbefe02ca6c6fd0fd34af5bf0ca383ab7f7e7dace09ae9",
         "horizon_months": 6,
@@ -13471,7 +13565,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20160,
         "scenario_hash": "963b1ad722e01c68b97ad80f806e6d1aa6e36a778f112b9d418800228c296a57",
         "horizon_months": 6,
@@ -14284,7 +14378,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20189,
         "scenario_hash": "16a22c7bc6b52f064f2bbfaf6c153cf834c5d21c744bcbed494b41c80ea545ac",
         "horizon_months": 6,
@@ -15053,7 +15147,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20208,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -15821,7 +15915,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "d2ef37c08a539a3ef9d442bfa52a1fb7bb22dde4",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
         "account_id": 20230,
         "scenario_hash": "3fb44d037e121142b98b6b1cf80b54a77954e2e7308b43df7ee4b6054a6bea0b",
         "horizon_months": 6,
@@ -16783,6 +16877,1730 @@
       "conditional_action_ids": [
         "scenario-assumptions"
       ],
+      "excluded_action_ids_and_reasons": {},
+      "action_fees_and_future_obligations": {
+        "applied_fees_cad": 0,
+        "future": []
+      },
+      "validation": {
+        "enforced": true,
+        "status": "passed",
+        "policy_version": "crisis-lifecycle-v2",
+        "checks": [
+          "original_CAD_ledger",
+          "all_effects_independent_of_module_labels",
+          "G25_evidenced_deterioration_or_unknown",
+          "goal_review_separate_from_G25",
+          "individual_pause_purpose",
+          "proposal_pause_zero_credit",
+          "existing_outflow_evidence",
+          "partial_funding",
+          "M6_recovery_evidence"
+        ]
+      }
+    },
+    {
+      "case_id": "20-withheld-identity",
+      "title": "A separate expense cannot confirm a withheld deferral",
+      "raw_input_provenance": {
+        "history": [
+          "data/monthly_summary.csv",
+          "data/loans.csv",
+          "data/dispositions.csv"
+        ],
+        "scenario": "Hypothetical judge scenario, including any supplied approval or current cash",
+        "history_count": 40,
+        "account_access": {
+          "num_clients": 1,
+          "relationship": "Single Owner"
+        },
+        "loan_status": "D"
+      },
+      "request": {
+        "account_id": 20331,
+        "scenario": {
+          "description": "",
+          "phase": "active",
+          "horizon_months": 6,
+          "effects": [
+            {
+              "effect_id": null,
+              "type": "one_off_cost",
+              "value": 25.0,
+              "start_month": 0,
+              "duration_months": null,
+              "ongoing": false,
+              "evidence": "judge_specified",
+              "obligation_account_id": null,
+              "obligation_payment": null,
+              "obligation_source": null,
+              "payment_in_baseline": false,
+              "debt_change_kind": "payment_change",
+              "repayment_month": null,
+              "repayment_amount": null,
+              "repayment_unresolved": false
+            },
+            {
+              "effect_id": "effect-1",
+              "type": "debt_payment_delta",
+              "value": -250.0,
+              "start_month": 1,
+              "duration_months": 2,
+              "ongoing": false,
+              "evidence": "judge_specified",
+              "obligation_account_id": null,
+              "obligation_payment": 4555.91,
+              "obligation_source": "Hypothetical unverified inclusion",
+              "payment_in_baseline": false,
+              "debt_change_kind": "deferral",
+              "repayment_month": 4,
+              "repayment_amount": 550.0,
+              "repayment_unresolved": false
+            }
+          ]
+        },
+        "opening_cash": null,
+        "normal_goal": null,
+        "existing_transfers": [],
+        "recovery_snapshot": null,
+        "review_details": {
+          "purpose": "cash_flow",
+          "prepared_by": "",
+          "customer_priority": "",
+          "cash_source": ""
+        },
+        "savings_evidence": null,
+        "request_id": "b7b286ed-71e4-5a78-8a8a-d37219e1060d",
+        "backend": "rules",
+        "title": "A separate expense cannot confirm a withheld deferral"
+      },
+      "organizer_reference": {
+        "income_after_shock": 21048.42,
+        "spending_after_shock": 19123.07,
+        "buffer_left": 38836.369999999995,
+        "gap": -1925.3499999999985,
+        "runway": "no shortfall (120+)",
+        "scope": "FIRST_PERIOD_COMPONENT_REFERENCE",
+        "funding_result_complete": false
+      },
+      "normal_goal_plan": {
+        "monthly_surplus": 1925.35,
+        "target_3mo": 120312.21,
+        "target_6mo": 240624.42,
+        "current_buffer": 34783.15,
+        "needed_for_3mo": 85529.06,
+        "needed_for_6mo": 205841.27,
+        "recommended_contribution": 0.0,
+        "months_to_3mo": null,
+        "months_to_6mo": null,
+        "contribution_basis": "Conditional liquid-reserve earmark capped at 75% of the weaker of the minimum and lower-quartile trailing net flows, subject to operating-cash and selected-scenario checks. Policy and detailed calculations are shown in Allocation Review. Transfers do not create wealth.",
+        "review_flags": [
+          "INVESTMENT_SUITABILITY_UNVERIFIED: Competition data does not justify a security recommendation.",
+          "CONDITIONAL_ESTIMATE: Historical account net flows are not verified recurring income or total household savings.",
+          "SUITABILITY_REVIEW_REQUIRED: Missing objective, horizon, risk tolerance, capacity for loss, existing holdings, total obligations",
+          "CURRENT_LIQUID_CASH_UNVERIFIED: Opening estimate is the lower of the historical six-month average balance and latest closing balance.",
+          "ACCOUNT_CONTROL_UNVERIFIED: Account access/ownership does not establish unrestricted personal control.",
+          "COVERAGE_UNVERIFIED: Recorded insurance payments do not establish covered benefits or a payout; none is funded.",
+          "ADJUSTABLE_SPENDING_UNVERIFIED: Withdrawals/transfers do not establish discretionary purchases or feasible spending cuts.",
+          "HISTORICAL_REPLAY_IN_SAMPLE: Amounts are sized from this same window; this is not out-of-sample performance.",
+          "SCENARIOS_NOT_EXHAUSTIVE: Monthly paths do not establish intramonth or future solvency; no guarantee across all events.",
+          "TRANSFERS_NOT_NEW_WEALTH: Account inflows may include transfers; no investment return, payout, credit or asset sale is assumed."
+        ],
+        "recommendation": "Daily balance history fails the operating cushion; do not commit to a fixed investment transfer.",
+        "primary_goal": "PROTECT_OPERATING_CASH"
+      },
+      "finance_plan": {
+        "policy_version": "finance-decision-v1.1",
+        "finance_approval": "PENDING",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "account_id": 20331,
+        "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+        "horizon_months": 6,
+        "opening_cash_basis": "HISTORICAL_PROXY",
+        "financial_diagnosis": {
+          "scenario": {
+            "description": "",
+            "phase": "active",
+            "horizon_months": 6,
+            "effects": [
+              {
+                "effect_id": null,
+                "type": "one_off_cost",
+                "value": 25.0,
+                "start_month": 0,
+                "duration_months": null,
+                "ongoing": false,
+                "evidence": "judge_specified",
+                "obligation_account_id": null,
+                "obligation_payment": null,
+                "obligation_source": null,
+                "payment_in_baseline": false,
+                "debt_change_kind": "payment_change",
+                "repayment_month": null,
+                "repayment_amount": null,
+                "repayment_unresolved": false
+              },
+              {
+                "effect_id": "effect-1",
+                "type": "debt_payment_delta",
+                "value": -250.0,
+                "start_month": 1,
+                "duration_months": 2,
+                "ongoing": false,
+                "evidence": "judge_specified",
+                "obligation_account_id": null,
+                "obligation_payment": 4555.91,
+                "obligation_source": "Hypothetical unverified inclusion",
+                "payment_in_baseline": false,
+                "debt_change_kind": "deferral",
+                "repayment_month": 4,
+                "repayment_amount": 550.0,
+                "repayment_unresolved": false
+              }
+            ]
+          },
+          "opening_cash_cad": 38861.37,
+          "baseline": {
+            "I": 21048.42,
+            "S": 19123.074999999997,
+            "F": 7485.79,
+            "H": 2721.59,
+            "B": 38861.369999999995,
+            "P": 4555.91
+          },
+          "observed_window": [
+            "2022-09",
+            "2025-12"
+          ],
+          "first_month_inflow_cad": 21048.42,
+          "first_month_spending_cad": 19123.07,
+          "first_month_recurring_gap_cad": null,
+          "evidence": [
+            "OBSERVED",
+            "DERIVED"
+          ],
+          "effect_evidence": [
+            {
+              "effect_id": "effect-1-generated",
+              "provenance": "JUDGE_SPECIFIED"
+            },
+            {
+              "effect_id": "effect-1",
+              "provenance": "JUDGE_SPECIFIED"
+            }
+          ],
+          "one_offs_and_repayments": [
+            {
+              "month": 0,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 25.0,
+              "deferred_repayment": 0.0
+            }
+          ],
+          "first_shortfall": null,
+          "lowest_checkpoint": {
+            "month": 0,
+            "phase": "start",
+            "cash": 38836.37
+          },
+          "full_funding_need_cad": null,
+          "known_components_need_cad": 0.0,
+          "ending_cash_cad": 50388.47,
+          "complete": false
+        },
+        "lead_module": "M4",
+        "support_modules": [
+          "M3"
+        ],
+        "module_rationale": {
+          "M4": "Protect evidenced loan payments and review any proposed change to the terms.",
+          "M3": "Address the dated expense or immediate accessible-cash need."
+        },
+        "status": "REVIEW_REQUIRED",
+        "prioritized_actions": [
+          {
+            "action_id": "verify-material-inputs",
+            "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+            "module_ids": [
+              "M4",
+              "M3"
+            ],
+            "title": "Verify the missing financial terms",
+            "status": "BLOCKED_OR_UNKNOWN",
+            "finance_policy_clause": "\u00a7\u00a72\u20133",
+            "reason": "Full funding need is not established.",
+            "disposition": "review",
+            "evidence": [
+              "UNKNOWN_OR_CONFLICTING"
+            ],
+            "starts_at": null,
+            "ends_at": null,
+            "amount_cad": null,
+            "frequency": null,
+            "fee_cad": null,
+            "repayment": null,
+            "impact": null,
+            "affected_event_ids": [],
+            "required_review": "Event 2 \u00b7 Provide the loan-payment source and confirm that the payment is already included in normal spending. Confirm the existing loan payment, source and inclusion in spending before modeling the change. Confirm the financial value and timing of effect 2 (debt_payment_delta).",
+            "cash_treatment": "No cash change is credited to the supported path.",
+            "tradeoffs": [],
+            "review_checkpoint": {
+              "month": 0,
+              "phase": "start"
+            },
+            "not_executed": true
+          },
+          {
+            "action_id": "deferral:effect-1",
+            "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+            "module_ids": [
+              "M4"
+            ],
+            "title": "Review the loan deferral and catch-up payment",
+            "status": "BLOCKED_OR_UNKNOWN",
+            "finance_policy_clause": "\u00a7\u00a73, 5 M4",
+            "reason": "Relief and repayment were withheld. Confirm the included payment, approval, dates and repayment.",
+            "disposition": "excluded",
+            "evidence": [
+              "UNKNOWN_OR_CONFLICTING"
+            ],
+            "starts_at": {
+              "month": 1,
+              "phase": "end"
+            },
+            "ends_at": {
+              "month": 2,
+              "phase": "end"
+            },
+            "amount_cad": 250.0,
+            "frequency": "per deferred month",
+            "fee_cad": null,
+            "repayment": {
+              "due": {
+                "month": 4,
+                "phase": "start"
+              },
+              "amount_cad": 550.0,
+              "extra_over_deferred_principal_cad": 50.0,
+              "beyond_horizon": false
+            },
+            "impact": null,
+            "affected_event_ids": [
+              "effect-1"
+            ],
+            "required_review": "Confirm authorization, baseline inclusion, full fees and repayment terms with the lender.",
+            "cash_treatment": "The separate comparison adds no cash to the primary action path.",
+            "tradeoffs": [
+              "The original loan terms and any outstanding balance still require review."
+            ],
+            "review_checkpoint": {
+              "month": 1,
+              "phase": "start"
+            },
+            "not_executed": true
+          }
+        ],
+        "candidate_action_decisions": [
+          {
+            "action_id": "deferral:effect-1",
+            "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+            "module_ids": [
+              "M4"
+            ],
+            "title": "Review the loan deferral and catch-up payment",
+            "status": "BLOCKED_OR_UNKNOWN",
+            "finance_policy_clause": "\u00a7\u00a73, 5 M4",
+            "reason": "Relief and repayment were withheld. Confirm the included payment, approval, dates and repayment.",
+            "disposition": "excluded",
+            "evidence": [
+              "UNKNOWN_OR_CONFLICTING"
+            ],
+            "starts_at": {
+              "month": 1,
+              "phase": "end"
+            },
+            "ends_at": {
+              "month": 2,
+              "phase": "end"
+            },
+            "amount_cad": 250.0,
+            "frequency": "per deferred month",
+            "fee_cad": null,
+            "repayment": {
+              "due": {
+                "month": 4,
+                "phase": "start"
+              },
+              "amount_cad": 550.0,
+              "extra_over_deferred_principal_cad": 50.0,
+              "beyond_horizon": false
+            },
+            "impact": null,
+            "affected_event_ids": [
+              "effect-1"
+            ],
+            "required_review": "Confirm authorization, baseline inclusion, full fees and repayment terms with the lender.",
+            "cash_treatment": "The separate comparison adds no cash to the primary action path.",
+            "tradeoffs": [
+              "The original loan terms and any outstanding balance still require review."
+            ],
+            "review_checkpoint": {
+              "month": 1,
+              "phase": "start"
+            },
+            "not_executed": true
+          },
+          {
+            "action_id": "verify-material-inputs",
+            "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+            "module_ids": [
+              "M4",
+              "M3"
+            ],
+            "title": "Verify the missing financial terms",
+            "status": "BLOCKED_OR_UNKNOWN",
+            "finance_policy_clause": "\u00a7\u00a72\u20133",
+            "reason": "Full funding need is not established.",
+            "disposition": "review",
+            "evidence": [
+              "UNKNOWN_OR_CONFLICTING"
+            ],
+            "starts_at": null,
+            "ends_at": null,
+            "amount_cad": null,
+            "frequency": null,
+            "fee_cad": null,
+            "repayment": null,
+            "impact": null,
+            "affected_event_ids": [],
+            "required_review": "Event 2 \u00b7 Provide the loan-payment source and confirm that the payment is already included in normal spending. Confirm the existing loan payment, source and inclusion in spending before modeling the change. Confirm the financial value and timing of effect 2 (debt_payment_delta).",
+            "cash_treatment": "No cash change is credited to the supported path.",
+            "tradeoffs": [],
+            "review_checkpoint": {
+              "month": 0,
+              "phase": "start"
+            },
+            "not_executed": true
+          }
+        ],
+        "comparison": {
+          "basis": "Same shock, opening cash and horizon",
+          "before": {
+            "first_shortfall": null,
+            "lowest_checkpoint": {
+              "month": 0,
+              "phase": "start",
+              "cash": 38836.37
+            },
+            "full_funding_need_cad": null,
+            "known_components_need_cad": 0.0,
+            "ending_cash_cad": 50388.47,
+            "complete": false
+          },
+          "after": {
+            "first_shortfall": null,
+            "lowest_checkpoint": {
+              "month": 0,
+              "phase": "start",
+              "cash": 38836.37
+            },
+            "full_funding_need_cad": null,
+            "known_components_need_cad": 0.0,
+            "ending_cash_cad": 50388.47,
+            "complete": false
+          },
+          "funding_improvement_cad": null,
+          "cash_change_at_original_shortfall_cad": null
+        },
+        "no_action": {
+          "opening_cash": 38861.37,
+          "opening_basis": "HISTORICAL_PROXY",
+          "horizon_months": 6,
+          "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+          "schedule": [
+            {
+              "month": 0,
+              "start_balance": 38861.37,
+              "income": 0.0,
+              "quantified_income": 0.0,
+              "spending": 0.0,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 25.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 38836.37,
+              "end_balance": 38836.37,
+              "period_complete": true,
+              "applied_effect_ids": [
+                "effect-1-generated"
+              ]
+            },
+            {
+              "month": 1,
+              "start_balance": 38836.37,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 40761.72,
+              "end_balance": 40761.72,
+              "period_complete": false,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 2,
+              "start_balance": 40761.72,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 42687.07,
+              "end_balance": 42687.07,
+              "period_complete": false,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 3,
+              "start_balance": 42687.07,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 44612.42,
+              "end_balance": 44612.42,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 4,
+              "start_balance": 44612.42,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 46537.77,
+              "end_balance": 46537.77,
+              "period_complete": false,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 5,
+              "start_balance": 46537.77,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 48463.12,
+              "end_balance": 48463.12,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 6,
+              "start_balance": 48463.12,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 50388.47,
+              "end_balance": 50388.47,
+              "period_complete": true,
+              "applied_effect_ids": []
+            }
+          ],
+          "checkpoints": [
+            {
+              "month": 0,
+              "phase": "start",
+              "cash": 38836.37
+            },
+            {
+              "month": 0,
+              "phase": "end",
+              "cash": 38836.37
+            },
+            {
+              "month": 1,
+              "phase": "start",
+              "cash": 38836.37
+            },
+            {
+              "month": 1,
+              "phase": "end",
+              "cash": 40761.72
+            },
+            {
+              "month": 2,
+              "phase": "start",
+              "cash": 40761.72
+            },
+            {
+              "month": 2,
+              "phase": "end",
+              "cash": 42687.07
+            },
+            {
+              "month": 3,
+              "phase": "start",
+              "cash": 42687.07
+            },
+            {
+              "month": 3,
+              "phase": "end",
+              "cash": 44612.42
+            },
+            {
+              "month": 4,
+              "phase": "start",
+              "cash": 44612.42
+            },
+            {
+              "month": 4,
+              "phase": "end",
+              "cash": 46537.77
+            },
+            {
+              "month": 5,
+              "phase": "start",
+              "cash": 46537.77
+            },
+            {
+              "month": 5,
+              "phase": "end",
+              "cash": 48463.12
+            },
+            {
+              "month": 6,
+              "phase": "start",
+              "cash": 48463.12
+            },
+            {
+              "month": 6,
+              "phase": "end",
+              "cash": 50388.47
+            }
+          ],
+          "ending_cash": 50388.47,
+          "minimum_cash": 38836.37,
+          "first_shortfall_month": null,
+          "first_shortfall_phase": null,
+          "additional_cash_needed": 0.0,
+          "full_funding_need": null,
+          "funding_result_complete": false,
+          "makes_it_through_horizon": false,
+          "unresolved_effects": [
+            "effect-1: supplied loan payment lacks source/baseline inclusion; relief not applied"
+          ],
+          "pending_effects": [],
+          "review_flags": [
+            "PARTIAL_PROJECTION: Only quantified components are included; no complete funding conclusion is established."
+          ],
+          "resolution": "MONTH_START_AND_END"
+        },
+        "supported_action": {
+          "opening_cash": 38861.37,
+          "opening_basis": "HISTORICAL_PROXY",
+          "horizon_months": 6,
+          "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
+          "schedule": [
+            {
+              "month": 0,
+              "start_balance": 38861.37,
+              "income": 0.0,
+              "quantified_income": 0.0,
+              "spending": 0.0,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 25.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 38836.37,
+              "end_balance": 38836.37,
+              "period_complete": true,
+              "applied_effect_ids": [
+                "effect-1-generated"
+              ]
+            },
+            {
+              "month": 1,
+              "start_balance": 38836.37,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 40761.72,
+              "end_balance": 40761.72,
+              "period_complete": false,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 2,
+              "start_balance": 40761.72,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 42687.07,
+              "end_balance": 42687.07,
+              "period_complete": false,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 3,
+              "start_balance": 42687.07,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 44612.42,
+              "end_balance": 44612.42,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 4,
+              "start_balance": 44612.42,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 46537.77,
+              "end_balance": 46537.77,
+              "period_complete": false,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 5,
+              "start_balance": 46537.77,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 48463.12,
+              "end_balance": 48463.12,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 6,
+              "start_balance": 48463.12,
+              "income": 21048.42,
+              "quantified_income": 21048.42,
+              "spending": 19123.07,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 50388.47,
+              "end_balance": 50388.47,
+              "period_complete": true,
+              "applied_effect_ids": []
+            }
+          ],
+          "checkpoints": [
+            {
+              "month": 0,
+              "phase": "start",
+              "cash": 38836.37
+            },
+            {
+              "month": 0,
+              "phase": "end",
+              "cash": 38836.37
+            },
+            {
+              "month": 1,
+              "phase": "start",
+              "cash": 38836.37
+            },
+            {
+              "month": 1,
+              "phase": "end",
+              "cash": 40761.72
+            },
+            {
+              "month": 2,
+              "phase": "start",
+              "cash": 40761.72
+            },
+            {
+              "month": 2,
+              "phase": "end",
+              "cash": 42687.07
+            },
+            {
+              "month": 3,
+              "phase": "start",
+              "cash": 42687.07
+            },
+            {
+              "month": 3,
+              "phase": "end",
+              "cash": 44612.42
+            },
+            {
+              "month": 4,
+              "phase": "start",
+              "cash": 44612.42
+            },
+            {
+              "month": 4,
+              "phase": "end",
+              "cash": 46537.77
+            },
+            {
+              "month": 5,
+              "phase": "start",
+              "cash": 46537.77
+            },
+            {
+              "month": 5,
+              "phase": "end",
+              "cash": 48463.12
+            },
+            {
+              "month": 6,
+              "phase": "start",
+              "cash": 48463.12
+            },
+            {
+              "month": 6,
+              "phase": "end",
+              "cash": 50388.47
+            }
+          ],
+          "ending_cash": 50388.47,
+          "minimum_cash": 38836.37,
+          "first_shortfall_month": null,
+          "first_shortfall_phase": null,
+          "additional_cash_needed": 0.0,
+          "full_funding_need": null,
+          "funding_result_complete": false,
+          "makes_it_through_horizon": false,
+          "unresolved_effects": [
+            "effect-1: supplied loan payment lacks source/baseline inclusion; relief not applied"
+          ],
+          "pending_effects": [],
+          "review_flags": [
+            "PARTIAL_PROJECTION: Only quantified components are included; no complete funding conclusion is established."
+          ],
+          "resolution": "MONTH_START_AND_END"
+        },
+        "all_eligible_pauses_comparison": null,
+        "conditional_assumption_path": null,
+        "remaining_gap_cad": null,
+        "required_target_only": null,
+        "bank_review_flags": [
+          "PARTIAL_PROJECTION: Only quantified components are included; no complete funding conclusion is established.",
+          "CONDITIONAL_PROJECTION: Historical full-history medians and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.",
+          "CURRENT_LIQUID_CASH_UNVERIFIED: Opening cash uses the competition historical buffer proxy, not a live accessible balance.",
+          "LOAN_TERMS_UNVERIFIED: Recorded payment pressure does not establish current APR, deferral approval or payment release.",
+          "BANK_REVIEW_REQUIRED: Confirm the existing loan payment, source and inclusion in spending before modeling the change.",
+          "BANK_REVIEW_REQUIRED: Confirm the financial value and timing of effect 2 (debt_payment_delta).",
+          "DAILY_REPLAY_NOT_APPLIED: This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.",
+          "Event 2 \u00b7 Provide the loan-payment source and confirm that the payment is already included in normal spending."
+        ],
+        "next_review_checkpoint": {
+          "checkpoint": {
+            "month": 0,
+            "phase": "start"
+          },
+          "reason": "Confirm missing material scenario terms before relying on the projection."
+        },
+        "post_horizon_obligations": [],
+        "normal_goal_impact": {
+          "status": "NOT_SCHEDULED",
+          "before": {
+            "name": "PROTECT_OPERATING_CASH",
+            "monthly_contribution": 0.0,
+            "reserve_target": 120312.21,
+            "reserve_months": 3.0,
+            "contribution_type": "PROPOSAL",
+            "kind": "LIQUID_RESERVE_EARMARK",
+            "source": "Guarded normal-goal assessment"
+          },
+          "revised_monthly_cad": 0.0,
+          "proposal_pause_cash_credit_cad": 0.0
+        },
+        "recovery_checkpoint": {
+          "status": "RECOVERY_UNVERIFIED",
+          "lead_module": null,
+          "trigger_ids": [],
+          "monthly_contribution": 0.0,
+          "months_to_target": null,
+          "reserve_gap": null,
+          "review_flags": [
+            "RECOVERY_UNVERIFIED: Updated cash, spending, stability and obligation coverage are required; a supported contribution is needed for a rebuild date. No automatic income recovery is assumed."
+          ]
+        },
+        "model_limitations": [
+          "Monthly checkpoints do not establish day-to-day solvency.",
+          "Recorded account inflows do not establish wages or household finances.",
+          "Supplied approvals are scenario evidence. Every intervention is modeled and unexecuted.",
+          "Pause selection evaluates standalone and cumulative trials in fee, month and ID order."
+        ]
+      },
+      "candidate_action_ids": [
+        "deferral:effect-1",
+        "verify-material-inputs"
+      ],
+      "accepted_action_ids": [],
+      "conditional_action_ids": [],
+      "excluded_action_ids_and_reasons": {
+        "deferral:effect-1": "Relief and repayment were withheld. Confirm the included payment, approval, dates and repayment."
+      },
+      "action_fees_and_future_obligations": {
+        "applied_fees_cad": 0,
+        "future": []
+      },
+      "validation": {
+        "enforced": true,
+        "status": "passed",
+        "policy_version": "crisis-lifecycle-v2",
+        "checks": [
+          "original_CAD_ledger",
+          "all_effects_independent_of_module_labels",
+          "G25_evidenced_deterioration_or_unknown",
+          "goal_review_separate_from_G25",
+          "individual_pause_purpose",
+          "proposal_pause_zero_credit",
+          "existing_outflow_evidence",
+          "partial_funding",
+          "M6_recovery_evidence"
+        ]
+      }
+    },
+    {
+      "case_id": "21-access-review",
+      "title": "Review an upcoming cash hold even without a projected shortage",
+      "raw_input_provenance": {
+        "history": [
+          "data/monthly_summary.csv",
+          "data/loans.csv",
+          "data/dispositions.csv"
+        ],
+        "scenario": "Hypothetical judge scenario, including any supplied approval or current cash",
+        "history_count": 17,
+        "account_access": {
+          "num_clients": 1,
+          "relationship": "Single Owner"
+        },
+        "loan_status": null
+      },
+      "request": {
+        "account_id": 20243,
+        "scenario": {
+          "description": "",
+          "phase": "active",
+          "horizon_months": 6,
+          "effects": [
+            {
+              "effect_id": null,
+              "type": "liquidity_hold",
+              "value": 100.0,
+              "start_month": 2,
+              "duration_months": 2,
+              "ongoing": false,
+              "evidence": "judge_specified",
+              "obligation_account_id": null,
+              "obligation_payment": null,
+              "obligation_source": null,
+              "payment_in_baseline": false,
+              "debt_change_kind": "payment_change",
+              "repayment_month": null,
+              "repayment_amount": null,
+              "repayment_unresolved": false
+            }
+          ]
+        },
+        "opening_cash": null,
+        "normal_goal": null,
+        "existing_transfers": [],
+        "recovery_snapshot": null,
+        "review_details": {
+          "purpose": "cash_flow",
+          "prepared_by": "",
+          "customer_priority": "",
+          "cash_source": ""
+        },
+        "savings_evidence": null,
+        "request_id": "8ed31331-83f4-5c0c-aefa-3b539eec1e29",
+        "backend": "rules",
+        "title": "Review an upcoming cash hold even without a projected shortage"
+      },
+      "organizer_reference": {
+        "income_after_shock": 3093.74,
+        "spending_after_shock": 2031.66,
+        "buffer_left": 11060.92,
+        "gap": -1062.0799999999997,
+        "runway": "no shortfall (120+)",
+        "scope": "FIRST_PERIOD_COMPONENT_REFERENCE",
+        "funding_result_complete": true
+      },
+      "normal_goal_plan": {
+        "monthly_surplus": 1062.08,
+        "target_3mo": 7794.0,
+        "target_6mo": 15588.0,
+        "current_buffer": 11060.92,
+        "needed_for_3mo": 0.0,
+        "needed_for_6mo": 4527.08,
+        "recommended_contribution": 0.0,
+        "months_to_3mo": null,
+        "months_to_6mo": null,
+        "contribution_basis": "Conditional liquid-reserve earmark capped at 75% of the weaker of the minimum and lower-quartile trailing net flows, subject to operating-cash and selected-scenario checks. Policy and detailed calculations are shown in Allocation Review. Transfers do not create wealth.",
+        "review_flags": [
+          "INVESTMENT_SUITABILITY_UNVERIFIED: Competition data does not justify a security recommendation.",
+          "CONDITIONAL_ESTIMATE: Historical account net flows are not verified recurring income or total household savings.",
+          "SUITABILITY_REVIEW_REQUIRED: Missing objective, horizon, risk tolerance, capacity for loss, existing holdings, total obligations",
+          "CURRENT_LIQUID_CASH_UNVERIFIED: Opening estimate is the lower of the historical six-month average balance and latest closing balance.",
+          "ACCOUNT_CONTROL_UNVERIFIED: Account access/ownership does not establish unrestricted personal control.",
+          "NO_LOAN_IN_SOURCE: No loan row in the supplied table is not evidence of being debt-free elsewhere.",
+          "ADJUSTABLE_SPENDING_UNVERIFIED: Withdrawals/transfers do not establish discretionary purchases or feasible spending cuts.",
+          "HISTORICAL_REPLAY_IN_SAMPLE: Amounts are sized from this same window; this is not out-of-sample performance.",
+          "SCENARIOS_NOT_EXHAUSTIVE: Monthly paths do not establish intramonth or future solvency; no guarantee across all events.",
+          "TRANSFERS_NOT_NEW_WEALTH: Account inflows may include transfers; no investment return, payout, credit or asset sale is assumed."
+        ],
+        "recommendation": "Use flexible surplus review rather than a fixed investment commitment.",
+        "primary_goal": "SMOOTH_IRREGULAR_INCOME"
+      },
+      "finance_plan": {
+        "policy_version": "finance-decision-v1.1",
+        "finance_approval": "PENDING",
+        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "account_id": 20243,
+        "scenario_hash": "199e492221078a2f196761f5de8152bab6c751688f5ab68d75e7cb34e8b41e10",
+        "horizon_months": 6,
+        "opening_cash_basis": "HISTORICAL_PROXY",
+        "financial_diagnosis": {
+          "scenario": {
+            "description": "",
+            "phase": "active",
+            "horizon_months": 6,
+            "effects": [
+              {
+                "effect_id": null,
+                "type": "liquidity_hold",
+                "value": 100.0,
+                "start_month": 2,
+                "duration_months": 2,
+                "ongoing": false,
+                "evidence": "judge_specified",
+                "obligation_account_id": null,
+                "obligation_payment": null,
+                "obligation_source": null,
+                "payment_in_baseline": false,
+                "debt_change_kind": "payment_change",
+                "repayment_month": null,
+                "repayment_amount": null,
+                "repayment_unresolved": false
+              }
+            ]
+          },
+          "opening_cash_cad": 11060.92,
+          "baseline": {
+            "I": 3093.74,
+            "S": 2031.66,
+            "F": 2022.47,
+            "H": 2022.47,
+            "B": 11060.92,
+            "P": 0.0
+          },
+          "observed_window": [
+            "2024-08",
+            "2025-12"
+          ],
+          "first_month_inflow_cad": 3093.74,
+          "first_month_spending_cad": 2031.66,
+          "first_month_recurring_gap_cad": -1062.08,
+          "evidence": [
+            "OBSERVED",
+            "DERIVED"
+          ],
+          "effect_evidence": [
+            {
+              "effect_id": "effect-1",
+              "provenance": "JUDGE_SPECIFIED"
+            }
+          ],
+          "one_offs_and_repayments": [],
+          "first_shortfall": null,
+          "lowest_checkpoint": {
+            "month": 0,
+            "phase": "start",
+            "cash": 11060.92
+          },
+          "full_funding_need_cad": 0.0,
+          "known_components_need_cad": 0.0,
+          "ending_cash_cad": 17433.4,
+          "complete": true
+        },
+        "lead_module": "M7",
+        "support_modules": [],
+        "module_rationale": {
+          "M7": "Check when money becomes accessible relative to the payment."
+        },
+        "status": "MAINTAIN",
+        "prioritized_actions": [
+          {
+            "action_id": "maintain-and-monitor",
+            "scenario_hash": "199e492221078a2f196761f5de8152bab6c751688f5ab68d75e7cb34e8b41e10",
+            "module_ids": [
+              "M7"
+            ],
+            "title": "Maintain the current viable plan",
+            "status": "MAINTAIN",
+            "finance_policy_clause": "\u00a7\u00a74, 6",
+            "reason": "No new action is justified on the modeled evidence.",
+            "disposition": "review",
+            "evidence": [
+              "DERIVED"
+            ],
+            "starts_at": null,
+            "ends_at": null,
+            "amount_cad": null,
+            "frequency": null,
+            "fee_cad": null,
+            "repayment": null,
+            "impact": null,
+            "affected_event_ids": [],
+            "required_review": "Confirm the restricted amount and access dates before the cash hold starts.",
+            "cash_treatment": "No cash change is credited to the supported path.",
+            "tradeoffs": [],
+            "review_checkpoint": null,
+            "not_executed": true
+          }
+        ],
+        "candidate_action_decisions": [
+          {
+            "action_id": "maintain-and-monitor",
+            "scenario_hash": "199e492221078a2f196761f5de8152bab6c751688f5ab68d75e7cb34e8b41e10",
+            "module_ids": [
+              "M7"
+            ],
+            "title": "Maintain the current viable plan",
+            "status": "MAINTAIN",
+            "finance_policy_clause": "\u00a7\u00a74, 6",
+            "reason": "No new action is justified on the modeled evidence.",
+            "disposition": "review",
+            "evidence": [
+              "DERIVED"
+            ],
+            "starts_at": null,
+            "ends_at": null,
+            "amount_cad": null,
+            "frequency": null,
+            "fee_cad": null,
+            "repayment": null,
+            "impact": null,
+            "affected_event_ids": [],
+            "required_review": "Confirm the restricted amount and access dates before the cash hold starts.",
+            "cash_treatment": "No cash change is credited to the supported path.",
+            "tradeoffs": [],
+            "review_checkpoint": null,
+            "not_executed": true
+          }
+        ],
+        "comparison": {
+          "basis": "Same shock, opening cash and horizon",
+          "before": {
+            "first_shortfall": null,
+            "lowest_checkpoint": {
+              "month": 0,
+              "phase": "start",
+              "cash": 11060.92
+            },
+            "full_funding_need_cad": 0.0,
+            "known_components_need_cad": 0.0,
+            "ending_cash_cad": 17433.4,
+            "complete": true
+          },
+          "after": {
+            "first_shortfall": null,
+            "lowest_checkpoint": {
+              "month": 0,
+              "phase": "start",
+              "cash": 11060.92
+            },
+            "full_funding_need_cad": 0.0,
+            "known_components_need_cad": 0.0,
+            "ending_cash_cad": 17433.4,
+            "complete": true
+          },
+          "funding_improvement_cad": 0.0,
+          "cash_change_at_original_shortfall_cad": null
+        },
+        "no_action": {
+          "opening_cash": 11060.92,
+          "opening_basis": "HISTORICAL_PROXY",
+          "horizon_months": 6,
+          "scenario_hash": "199e492221078a2f196761f5de8152bab6c751688f5ab68d75e7cb34e8b41e10",
+          "schedule": [
+            {
+              "month": 0,
+              "start_balance": 11060.92,
+              "income": 0.0,
+              "quantified_income": 0.0,
+              "spending": 0.0,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 11060.92,
+              "end_balance": 11060.92,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 1,
+              "start_balance": 11060.92,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 12123.0,
+              "end_balance": 12123.0,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 2,
+              "start_balance": 12123.0,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 100.0,
+              "total_cash": 13185.08,
+              "end_balance": 13085.08,
+              "period_complete": true,
+              "applied_effect_ids": [
+                "effect-1"
+              ]
+            },
+            {
+              "month": 3,
+              "start_balance": 13185.08,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 100.0,
+              "total_cash": 14247.16,
+              "end_balance": 14147.16,
+              "period_complete": true,
+              "applied_effect_ids": [
+                "effect-1"
+              ]
+            },
+            {
+              "month": 4,
+              "start_balance": 14247.16,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 15309.24,
+              "end_balance": 15309.24,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 5,
+              "start_balance": 15309.24,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 16371.32,
+              "end_balance": 16371.32,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 6,
+              "start_balance": 16371.32,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 17433.4,
+              "end_balance": 17433.4,
+              "period_complete": true,
+              "applied_effect_ids": []
+            }
+          ],
+          "checkpoints": [
+            {
+              "month": 0,
+              "phase": "start",
+              "cash": 11060.92
+            },
+            {
+              "month": 0,
+              "phase": "end",
+              "cash": 11060.92
+            },
+            {
+              "month": 1,
+              "phase": "start",
+              "cash": 11060.92
+            },
+            {
+              "month": 1,
+              "phase": "end",
+              "cash": 12123.0
+            },
+            {
+              "month": 2,
+              "phase": "start",
+              "cash": 12023.0
+            },
+            {
+              "month": 2,
+              "phase": "end",
+              "cash": 13085.08
+            },
+            {
+              "month": 3,
+              "phase": "start",
+              "cash": 13085.08
+            },
+            {
+              "month": 3,
+              "phase": "end",
+              "cash": 14147.16
+            },
+            {
+              "month": 4,
+              "phase": "start",
+              "cash": 14247.16
+            },
+            {
+              "month": 4,
+              "phase": "end",
+              "cash": 15309.24
+            },
+            {
+              "month": 5,
+              "phase": "start",
+              "cash": 15309.24
+            },
+            {
+              "month": 5,
+              "phase": "end",
+              "cash": 16371.32
+            },
+            {
+              "month": 6,
+              "phase": "start",
+              "cash": 16371.32
+            },
+            {
+              "month": 6,
+              "phase": "end",
+              "cash": 17433.4
+            }
+          ],
+          "ending_cash": 17433.4,
+          "minimum_cash": 11060.92,
+          "first_shortfall_month": null,
+          "first_shortfall_phase": null,
+          "additional_cash_needed": 0.0,
+          "full_funding_need": 0.0,
+          "funding_result_complete": true,
+          "makes_it_through_horizon": true,
+          "unresolved_effects": [],
+          "pending_effects": [],
+          "review_flags": [],
+          "resolution": "MONTH_START_AND_END"
+        },
+        "supported_action": {
+          "opening_cash": 11060.92,
+          "opening_basis": "HISTORICAL_PROXY",
+          "horizon_months": 6,
+          "scenario_hash": "199e492221078a2f196761f5de8152bab6c751688f5ab68d75e7cb34e8b41e10",
+          "schedule": [
+            {
+              "month": 0,
+              "start_balance": 11060.92,
+              "income": 0.0,
+              "quantified_income": 0.0,
+              "spending": 0.0,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 11060.92,
+              "end_balance": 11060.92,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 1,
+              "start_balance": 11060.92,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 12123.0,
+              "end_balance": 12123.0,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 2,
+              "start_balance": 12123.0,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 100.0,
+              "total_cash": 13185.08,
+              "end_balance": 13085.08,
+              "period_complete": true,
+              "applied_effect_ids": [
+                "effect-1"
+              ]
+            },
+            {
+              "month": 3,
+              "start_balance": 13185.08,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 100.0,
+              "total_cash": 14247.16,
+              "end_balance": 14147.16,
+              "period_complete": true,
+              "applied_effect_ids": [
+                "effect-1"
+              ]
+            },
+            {
+              "month": 4,
+              "start_balance": 14247.16,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 15309.24,
+              "end_balance": 15309.24,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 5,
+              "start_balance": 15309.24,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 16371.32,
+              "end_balance": 16371.32,
+              "period_complete": true,
+              "applied_effect_ids": []
+            },
+            {
+              "month": 6,
+              "start_balance": 16371.32,
+              "income": 3093.74,
+              "quantified_income": 3093.74,
+              "spending": 2031.66,
+              "one_off_receipt": 0.0,
+              "one_off_cost": 0.0,
+              "deferred_repayment": 0.0,
+              "paused_existing_outflow": 0.0,
+              "action_fees": 0.0,
+              "proposed_contribution": 0.0,
+              "held_cash": 0.0,
+              "total_cash": 17433.4,
+              "end_balance": 17433.4,
+              "period_complete": true,
+              "applied_effect_ids": []
+            }
+          ],
+          "checkpoints": [
+            {
+              "month": 0,
+              "phase": "start",
+              "cash": 11060.92
+            },
+            {
+              "month": 0,
+              "phase": "end",
+              "cash": 11060.92
+            },
+            {
+              "month": 1,
+              "phase": "start",
+              "cash": 11060.92
+            },
+            {
+              "month": 1,
+              "phase": "end",
+              "cash": 12123.0
+            },
+            {
+              "month": 2,
+              "phase": "start",
+              "cash": 12023.0
+            },
+            {
+              "month": 2,
+              "phase": "end",
+              "cash": 13085.08
+            },
+            {
+              "month": 3,
+              "phase": "start",
+              "cash": 13085.08
+            },
+            {
+              "month": 3,
+              "phase": "end",
+              "cash": 14147.16
+            },
+            {
+              "month": 4,
+              "phase": "start",
+              "cash": 14247.16
+            },
+            {
+              "month": 4,
+              "phase": "end",
+              "cash": 15309.24
+            },
+            {
+              "month": 5,
+              "phase": "start",
+              "cash": 15309.24
+            },
+            {
+              "month": 5,
+              "phase": "end",
+              "cash": 16371.32
+            },
+            {
+              "month": 6,
+              "phase": "start",
+              "cash": 16371.32
+            },
+            {
+              "month": 6,
+              "phase": "end",
+              "cash": 17433.4
+            }
+          ],
+          "ending_cash": 17433.4,
+          "minimum_cash": 11060.92,
+          "first_shortfall_month": null,
+          "first_shortfall_phase": null,
+          "additional_cash_needed": 0.0,
+          "full_funding_need": 0.0,
+          "funding_result_complete": true,
+          "makes_it_through_horizon": true,
+          "unresolved_effects": [],
+          "pending_effects": [],
+          "review_flags": [],
+          "resolution": "MONTH_START_AND_END"
+        },
+        "all_eligible_pauses_comparison": null,
+        "conditional_assumption_path": null,
+        "remaining_gap_cad": 0.0,
+        "required_target_only": null,
+        "bank_review_flags": [
+          "CONDITIONAL_PROJECTION: Historical full-history medians and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.",
+          "CURRENT_LIQUID_CASH_UNVERIFIED: Opening cash uses the competition historical buffer proxy, not a live accessible balance.",
+          "DAILY_REPLAY_NOT_APPLIED: This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency."
+        ],
+        "next_review_checkpoint": {
+          "checkpoint": {
+            "month": 2,
+            "phase": "start"
+          },
+          "reason": "Confirm the restricted amount and access dates before the cash hold starts."
+        },
+        "post_horizon_obligations": [],
+        "normal_goal_impact": {
+          "status": "NOT_SCHEDULED",
+          "before": {
+            "name": "SMOOTH_IRREGULAR_INCOME",
+            "monthly_contribution": 0.0,
+            "reserve_target": 7794.0,
+            "reserve_months": 3.0,
+            "contribution_type": "PROPOSAL",
+            "kind": "LIQUID_RESERVE_EARMARK",
+            "source": "Guarded normal-goal assessment"
+          },
+          "revised_monthly_cad": 0.0,
+          "proposal_pause_cash_credit_cad": 0.0
+        },
+        "recovery_checkpoint": {
+          "status": "RECOVERY_UNVERIFIED",
+          "lead_module": null,
+          "trigger_ids": [],
+          "monthly_contribution": 0.0,
+          "months_to_target": null,
+          "reserve_gap": null,
+          "review_flags": [
+            "RECOVERY_UNVERIFIED: Updated cash, spending, stability and obligation coverage are required; a supported contribution is needed for a rebuild date. No automatic income recovery is assumed."
+          ]
+        },
+        "model_limitations": [
+          "Monthly checkpoints do not establish day-to-day solvency.",
+          "Recorded account inflows do not establish wages or household finances.",
+          "Supplied approvals are scenario evidence. Every intervention is modeled and unexecuted.",
+          "Pause selection evaluates standalone and cumulative trials in fee, month and ID order."
+        ]
+      },
+      "candidate_action_ids": [
+        "maintain-and-monitor"
+      ],
+      "accepted_action_ids": [],
+      "conditional_action_ids": [],
       "excluded_action_ids_and_reasons": {},
       "action_fees_and_future_obligations": {
         "applied_fees_cad": 0,
