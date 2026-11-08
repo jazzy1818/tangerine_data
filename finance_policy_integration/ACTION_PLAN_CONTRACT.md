@@ -35,7 +35,7 @@ Observed records and derived calculations are distinguished from judge-supplied 
 
 ### Candidate selection and timing
 
-For pauses, the existing selector evaluates fee, month and ID order. Eligible candidates get a standalone trial and a cumulative trial, and the existing full eligible-schedule comparison is still available. The final supported bundle is revalidated on the original ledger. A pause that advances a shortage, increases the funding need, lacks purpose, or breaches payment evidence is withheld. An action that improves later cash may leave the earlier shortage intact. The principal actions call this out by comparing cash at the original shortage and putting an unresolved earlier need first.
+For pauses, the existing selector evaluates fee, month and ID order. Eligible candidates get a standalone trial and a cumulative trial, and the existing full eligible-schedule comparison is still available. The final supported bundle is revalidated on the original ledger. A pause that advances or deepens the first shortage, increases the funding need, lacks purpose, or breaches payment evidence is withheld. An action that improves later cash may leave the earlier shortage intact. The principal actions call this out by comparing cash at the original shortage and putting an unresolved earlier need first.
 
 A stipulated loan deferral is part of the original shock. Its separate counterfactual removes only that deferral while keeping the other scenario inputs and opening basis. This comparison explains a costed emergency bridge and never inserts a new loan decision into the supported bundle. When the deferral terms are missing, the primary ledger withholds both the reduction and repayment. A known catch-up beyond the horizon remains visible.
 

@@ -4,17 +4,29 @@ from crisis_rules import cash_path_metrics, first_shortfall_order
 from scenario_execution import execute_scenario
 
 
-def pause_purpose(before, after, floor):
+def pause_risk(before, after):
     if not before['funding_result_complete'] or not after['funding_result_complete']:
-        return None
+        return 'projection_incomplete'
     prior, next_ = first_shortfall_order(before), first_shortfall_order(after)
     if ((next_ is not None and (prior is None or next_ < prior)) or
         after['additional_cash_needed'] > before['additional_cash_needed'] + .005):
+        return 'advances_shortfall_or_worsens_gap'
+    if (prior is not None and next_ == prior
+            and after['checkpoints'][prior]['cash'] < before['checkpoints'][prior]['cash'] - .005):
+        return 'deepens_first_shortfall'
+    return None
+
+
+def pause_purpose(before, after, floor):
+    if pause_risk(before, after):
         return None
+    prior, next_ = first_shortfall_order(before), first_shortfall_order(after)
     if after['additional_cash_needed'] < before['additional_cash_needed'] - .005:
         return 'reduces_funding_gap'
     if prior is not None and (next_ is None or next_ > prior):
         return 'delays_first_shortfall'
+    if prior is not None and after['checkpoints'][prior]['cash'] > before['checkpoints'][prior]['cash'] + .005:
+        return 'reduces_first_shortfall_amount'
     old_gap = max(0., floor - before['minimum_cash'])
     new_gap = max(0., floor - after['minimum_cash'])
     old_total = sum(max(0., floor-p['cash']) for p in before['checkpoints'])
@@ -55,10 +67,6 @@ def select_pauses(customer, scenario, transfers, revised, *, floor, contribution
                 current = trial
                 row.update(status='included', reason='supported_financial_purpose', purpose=purpose)
             else:
-                row['reason'] = ('projection_incomplete' if not current['funding_result_complete'] else
-                    'advances_shortfall_or_worsens_gap' if (trial['additional_cash_needed'] > current['additional_cash_needed'] + .005
-                        or (first_shortfall_order(trial) is not None and
-                        (first_shortfall_order(current) is None or first_shortfall_order(trial) < first_shortfall_order(current))))
-                    else 'no_shortfall_or_reserve_purpose')
+                row['reason'] = pause_risk(current, trial) or 'no_shortfall_or_reserve_purpose'
         decisions[t.event_id] = row
     return current, dict(releases), dict(fees), selected, [decisions[t.event_id] for t in transfers]

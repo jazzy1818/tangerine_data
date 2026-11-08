@@ -32,6 +32,7 @@ PAUSE_EXCLUSIONS = {
     'fee_consumes_benefit': 'The pause fee is at least as large as the payment.',
     'projection_incomplete': 'Resolve the missing scenario details before relying on a pause.',
     'advances_shortfall_or_worsens_gap': 'The pause would move the shortage earlier or increase the funding need.',
+    'deepens_first_shortfall': 'The fee deepens the earliest shortage even though the pause could improve later cash.',
     'no_shortfall_or_reserve_purpose': 'The modeled pause does not improve the shortage or protect the reserve.',
 }
 

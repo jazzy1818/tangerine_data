@@ -70,6 +70,20 @@ def test_late_receipt_and_late_action_cannot_cover_earlier_shortage():
     assert action['impact']['cash_change_at_original_shortfall_cad'] == 0.
 
 
+def test_pause_fee_that_deepens_the_first_shortfall_is_withheld():
+    customer = account(2200., 2400., 1000.)
+    repair = scenario({'type': 'one_off_cost', 'value': 900., 'start_month': 2})
+    pause = {**transfers()[1], 'pause_fee': 50.}
+    plan = assess(customer, repair, existing_transfers=[pause])
+    item = next(row for row in plan['candidate_action_decisions'] if row['action_id'].startswith('pause:'))
+    assert item['status'] == 'BLOCKED_OR_UNKNOWN'
+    assert 'deepens the earliest shortage' in item['reason']
+    assert item['impact']['before']['first_shortfall']['need_cad'] == 100.
+    assert item['impact']['after']['first_shortfall']['need_cad'] == 150.
+    assert item['impact']['funding_improvement_cad'] == 250.
+    assert plan['comparison']['funding_improvement_cad'] == 0.
+
+
 def test_deferral_keeps_extra_cost_and_separate_counterfactual():
     plan = assess(loan_account(), scenario(deferral()))
     action = next(item for item in plan['candidate_action_decisions'] if item['action_id'] == 'deferral:loan-1')

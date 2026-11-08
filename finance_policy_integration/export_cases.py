@@ -168,15 +168,23 @@ def render_reviews(runs):
 def review_rows(case_id, plan):
     priority = {item['action_id']: number for number, item in enumerate(plan['prioritized_actions'], 1)}
     for item in plan['candidate_action_decisions']:
-        impact = item['impact'] or plan['comparison']
+        impact = item['impact']
+        if impact:
+            before_need = impact['before']['full_funding_need_cad']
+            after_need = impact['after']['full_funding_need_cad']
+        elif daily := item.get('daily_comparison'):
+            before_need = daily['before_funding_need_cad']
+            after_need = daily['after_funding_need_cad']
+        else:
+            before_need = after_need = None
         after = plan['comparison']['after']
         yield {
             'case_id': case_id, 'account_id': plan['account_id'],
             'scenario': json.dumps(plan['financial_diagnosis']['scenario'], separators=(',', ':')),
             'candidate': item['action_id'], 'finance_policy_clause': item['finance_policy_clause'],
             'priority': priority.get(item['action_id']), 'evidence_status': '; '.join(item['evidence']),
-            'action_status': item['status'], 'result_before': impact['before']['full_funding_need_cad'],
-            'result_after': impact['after']['full_funding_need_cad'], 'remaining_gap': plan['remaining_gap_cad'],
+            'action_status': item['status'], 'result_before': before_need,
+            'result_after': after_need, 'remaining_gap': plan['remaining_gap_cad'],
             'first_shortfall': json.dumps(after['first_shortfall']), 'complete': after['complete'],
             'bank_review_flags': ' | '.join(plan['bank_review_flags']),
             'finance_reviewer_verdict': '', 'finance_reviewer_notes': '',
@@ -234,7 +242,7 @@ def export(output):
         f'{record["case_id"]} — {record["title"]}\n{capture}'
         for record, capture in zip(records, captures, strict=True)) + '\n')
     with (output / 'finance_acceptance_cases.csv').open('w', newline='') as handle:
-        writer = csv.DictWriter(handle, fieldnames=REVIEW_COLUMNS)
+        writer = csv.DictWriter(handle, fieldnames=REVIEW_COLUMNS, lineterminator='\n')
         writer.writeheader()
         writer.writerows(rows)
     print(f'Exported {len(records)} distinct accounts, {len(rows)} decision rows and {len(captures)} UI text captures.')
