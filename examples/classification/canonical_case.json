@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.1",
+  "features": {
+    "surplus_margin": -0.021740805295624537,
+    "reserve_months": 3.463831489423286,
+    "fixed_cost_ratio": 0.16240099638447866,
+    "debt_payment_ratio": 0.0,
+    "inflow_iqr_ratio": 0.0014723881898204027,
+    "deficit_month_share": 0.5833333333333334,
+    "negative_balance_month_share": 0.0,
+    "recovered_overdraft_month_share": 0.0,
+    "balance_change_to_spending": 0.5052767758630655,
+    "active_loan": false,
+    "loan_in_arrears": false,
+    "months_observed": 34,
+    "recent_months": 12,
+    "stale_months": 0,
+    "quality_flags": []
+  },
+  "effects": [
+    {
+      "type": "income_multiplier",
+      "value": 0.55,
+      "unit": "ratio",
+      "start_month": 1,
+      "duration_months": 6,
+      "ongoing": false,
+      "cashflow_delta_to_scale": -0.4404248099593121,
+      "evidence": "judge_specified"
+    },
+    {
+      "type": "household_bills_percent",
+      "value": 15.0,
+      "unit": "percent",
+      "start_month": 1,
+      "duration_months": null,
+      "ongoing": true,
+      "cashflow_delta_to_scale": -0.023841809323278982,
+      "evidence": "judge_specified"
+    }
+  ],
+  "phase": "active",
+  "horizon_months": 6,
+  "constraints": {
+    "allowed_modules": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M6",
+      "M7",
+      "M8"
+    ],
+    "reserve_target_months": 3.0,
+    "essential_obligations_at_risk": null,
+    "timing_mismatch_confirmed": null,
+    "spending_cuts_confirmed": false,
+    "credit_approved": false,
+    "insurance_payout_confirmed": false
+  },
+  "observed_reasons": [
+    "compound_effects",
+    "cost_increase",
+    "income_reduction",
+    "recurring_shortfall"
+  ],
+  "missing_details": [],
+  "first_period_gap_to_scale": 0.48554481937300853,
+  "immediate_buffer_to_scale": 3.463831489423286,
+  "first_period_runway_months": 7.133906801634058,
+  "first_period_no_shortfall": false
+}

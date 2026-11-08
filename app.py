@@ -483,6 +483,13 @@ with tab2:
             badge_html = f"<div class='runway-badge-safe'>🛡️ {post_rw}</div>"
         st.markdown(f"**Unprotected Runway:**<br>{badge_html}", unsafe_allow_html=True)
 
+    # Optional module classifier: proposals only; the existing plans remain independent.
+    try:
+        from plan_classification.ui import render_classification
+        render_classification(customer, income_mult, bills_increase, repair_cost)
+    except Exception:
+        st.warning("The optional classifier is unavailable. The financial simulator remains available.")
+
 
 # ==========================================
 # PART 3: REQUIRED PLANS & WEALTH SUITE

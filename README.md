@@ -4,7 +4,24 @@ Tangerine Track · Sheridan Datathon 2026 · November 7-8
 
 Build a financial resilience engine for real bank customers.
 
+Implementation guide for the optional **Jev / Gemini eight-module classifier and data discovery**:
+[CLASSIFICATION.md](CLASSIFICATION.md).
+
 This track is powered by Tangerine. At judging, a judge will pick a customer and a scenario, and you will run your engine live.
+
+## Run locally
+
+Activate your Conda or virtual environment with Python 3.10+, install dependencies once with
+`python -m pip install -r requirements.txt`, then start the web app:
+
+```bash
+bash run.sh
+```
+
+The launcher uses Python from your active environment, with a `python3` fallback. It works on
+Linux and macOS; Windows requires Bash (for example, Git Bash or WSL) with Python available.
+Use `bash run.sh cli` for the command-line engine. Extra arguments are passed through, such as
+`bash run.sh --server.port 8502`. The classifier reads API keys from the project `.env` file.
 
 ---
 

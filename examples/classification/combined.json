@@ -1,0 +1,8 @@
+{
+  "description": "Judge: usual inflows at 55% for six months; household bills up 15%",
+  "horizon_months": 6,
+  "effects": [
+    {"type": "income_multiplier", "value": 0.55, "duration_months": 6},
+    {"type": "household_bills_percent", "value": 15, "ongoing": true}
+  ]
+}

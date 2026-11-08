@@ -1,0 +1,4 @@
+{
+  "description": "An event happened; financial consequences not specified",
+  "effects": [{"type": "unspecified_event", "value": null, "evidence": "unknown"}]
+}

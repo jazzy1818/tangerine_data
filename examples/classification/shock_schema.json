@@ -1,0 +1,118 @@
+{
+  "$defs": {
+    "ShockEffect": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "income_multiplier",
+            "income_delta",
+            "expense_delta",
+            "expense_percent",
+            "household_bills_percent",
+            "household_bills_delta",
+            "debt_payment_delta",
+            "one_off_cost",
+            "one_off_receipt",
+            "liquidity_hold",
+            "payment_delay_days",
+            "investment_return",
+            "unspecified_event"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "start_month": {
+          "default": 1,
+          "maximum": 120,
+          "minimum": 0,
+          "title": "Start Month",
+          "type": "integer"
+        },
+        "duration_months": {
+          "anyOf": [
+            {
+              "maximum": 120,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration Months"
+        },
+        "ongoing": {
+          "default": false,
+          "title": "Ongoing",
+          "type": "boolean"
+        },
+        "evidence": {
+          "default": "judge_specified",
+          "enum": [
+            "judge_specified",
+            "user_confirmed",
+            "assumed",
+            "unknown"
+          ],
+          "title": "Evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ShockEffect",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Description",
+      "type": "string"
+    },
+    "phase": {
+      "default": "active",
+      "enum": [
+        "active",
+        "recovery",
+        "normal"
+      ],
+      "title": "Phase",
+      "type": "string"
+    },
+    "horizon_months": {
+      "default": 6,
+      "maximum": 120,
+      "minimum": 1,
+      "title": "Horizon Months",
+      "type": "integer"
+    },
+    "effects": {
+      "items": {
+        "$ref": "#/$defs/ShockEffect"
+      },
+      "maxItems": 32,
+      "title": "Effects",
+      "type": "array"
+    }
+  },
+  "title": "ShockScenario",
+  "type": "object"
+}

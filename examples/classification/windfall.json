@@ -1,0 +1,4 @@
+{
+  "description": "Judge specifies a received CAD 10000 windfall",
+  "effects": [{"type": "one_off_receipt", "value": 10000, "start_month": 0}]
+}

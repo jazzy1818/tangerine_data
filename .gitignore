@@ -6,6 +6,7 @@ __pycache__/
 
 # Streamlit logs & cache
 streamlit.log
+logs/
 .streamlit/
 
 # macOS metadata

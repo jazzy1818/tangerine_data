@@ -1,0 +1,89 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "lead_module": {
+      "enum": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8"
+      ],
+      "title": "Lead Module",
+      "type": "string"
+    },
+    "support_modules": {
+      "items": {
+        "enum": [
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M5",
+          "M6",
+          "M7",
+          "M8"
+        ],
+        "type": "string"
+      },
+      "maxItems": 2,
+      "title": "Support Modules",
+      "type": "array"
+    },
+    "reason_codes": {
+      "items": {
+        "enum": [
+          "income_reduction",
+          "income_increase",
+          "cost_increase",
+          "cost_reduction",
+          "one_off_expense",
+          "windfall",
+          "debt_payment_change",
+          "timing_or_access",
+          "compound_effects",
+          "reserve_below_target",
+          "recurring_shortfall",
+          "immediate_liquidity_pressure",
+          "historical_timing_stress",
+          "recovery",
+          "surplus_available",
+          "missing_details",
+          "no_new_effect",
+          "investment_change",
+          "essential_obligations_at_risk",
+          "restricted_modules"
+        ],
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "needs_clarification": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 96,
+      "title": "Needs Clarification",
+      "type": "array"
+    },
+    "rationale": {
+      "maxLength": 1200,
+      "minLength": 1,
+      "title": "Rationale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "lead_module",
+    "reason_codes",
+    "rationale"
+  ],
+  "title": "PlanSelection",
+  "type": "object"
+}

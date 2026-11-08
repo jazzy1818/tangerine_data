@@ -1,0 +1,19 @@
+{
+  "positive_surplus_but_under_6_months_at_55pct_inflow": {
+    "numerator": 714,
+    "denominator": 3309
+  },
+  "positive_surplus_but_at_least_3_deficit_months_of_12": {
+    "numerator": 2952,
+    "denominator": 3264
+  },
+  "negative_balance_months_recovered_by_month_end": {
+    "numerator": 242,
+    "denominator": 655
+  },
+  "recent_deficit_months": {
+    "numerator": 22510,
+    "denominator": 53780
+  },
+  "cash_withdrawal_share_of_all_outflow": 0.7637347854615806
+}

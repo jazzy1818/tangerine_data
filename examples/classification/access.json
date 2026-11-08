@@ -1,0 +1,4 @@
+{
+  "description": "CAD 2500 inaccessible for two months",
+  "effects": [{"type": "liquidity_hold", "value": 2500, "duration_months": 2}]
+}
