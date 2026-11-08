@@ -9,7 +9,7 @@ from copy import deepcopy
 from math import isfinite
 from decimal import Decimal, ROUND_CEILING
 
-from pydantic import Field, model_validator
+from pydantic import Field, model_validator, field_validator
 from plan_classification import build_case, profile_from_engine, select_plan
 from plan_classification.backends import validate_selection
 from plan_classification.case import case_hash
@@ -37,6 +37,13 @@ class ExistingGoalTransfer(Contract):
     included_in_baseline: bool = Field(strict=True)
     pause_approved: bool = Field(default=False, strict=True)
     pause_fee: float | None = Field(default=None, ge=0)
+
+    @field_validator('amount', 'pause_fee')
+    @classmethod
+    def posted_cents(cls, value):
+        if value is not None and (abs(value) > 1e12 or Decimal(str(value)) != Decimal(str(value)).quantize(Decimal('.01'))):
+            raise ValueError('Transfer amounts and fees must be posted CAD cents within the supported range')
+        return value
 
 
 _SUPPORTED_MODULE = {
@@ -116,13 +123,24 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
     for t in transfers:
         if t.month > scenario.horizon_months:
             flags.append(f'BEYOND_HORIZON: Transfer {t.event_id} remains outside this horizon.')
-        elif t.included_in_baseline and t.pause_approved and t.pause_fee is not None:
+        elif t.included_in_baseline and t.pause_approved and t.pause_fee is not None and t.pause_fee < t.amount:
             releases[t.month] += t.amount
             fees[t.month] += t.pause_fee
         else:
-            flags.append(f'TRANSFER_PAUSE_UNVERIFIED: {t.event_id} has no complete baseline-inclusion, approval and fee evidence; no cash is credited.')
+            flags.append(f'TRANSFER_PAUSE_UNVERIFIED: {t.event_id} lacks complete pause evidence or its fee consumes the benefit; no cash is credited.')
     comparison = execute_scenario(customer, scenario, spending_releases=dict(releases), release_fees=dict(fees), **kwargs)
-    if source_cap == 0 and releases:
+    applied = execute_scenario(customer, scenario, contribution=revised_debit,
+        spending_releases=dict(releases), release_fees=dict(fees), **kwargs)
+    applied_releases, applied_fees = dict(releases), dict(fees)
+    eligible_ids = [t.event_id for t in transfers if t.month <= scenario.horizon_months
+        and t.included_in_baseline and t.pause_approved and t.pause_fee is not None and t.pause_fee < t.amount]
+    earlier = (first_shortfall_order(applied) is not None and
+        (first_shortfall_order(revised) is None or first_shortfall_order(applied) < first_shortfall_order(revised)))
+    if earlier or applied['additional_cash_needed'] > revised['additional_cash_needed'] + .005:
+        flags.append('PAUSE_NOT_APPLIED: Upfront fees worsen the funding gap or advance the first shortfall; retain the comparison for review.')
+        applied = revised.copy()
+        applied_releases, applied_fees, eligible_ids = {}, {}, []
+    if source_cap == 0 and eligible_ids:
         goal_status = 'EXISTING_TRANSFERS_PAUSED'
     upfront = max([0.] + [-p['cash'] for p in no_action['checkpoints']
                           if p['month'] == 0 or (p['month'] == 1 and p['phase'] == 'start')])
@@ -270,6 +288,9 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
         'G25': worsened, 'trigger_ids': ['G25'] if worsened else [],
         'no_action': no_action, 'baseline_without_crisis': baseline,
         'continue_goal': continued, 'revised_goal': revised, 'supported_pause': comparison,
+        'applied_plan': applied,
+        'applied_transfer_ids': eligible_ids,
+        'pause_fees': round(sum(fees.values()), 2),
         'pause_funding_gap_improvement': round(no_action['additional_cash_needed'] - comparison['additional_cash_needed'], 2),
         'timing_comparison': timing, 'recovery': recovery,
         'funding_result_complete': no_action['funding_result_complete'],
@@ -280,18 +301,22 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
     try:
         for path, extra in ((no_action, {}), (baseline, {}),
                             (continued, {'contribution': debit}), (revised, {'contribution': revised_debit}),
-                            (comparison, {'spending_releases': dict(releases), 'release_fees': dict(fees)})):
+                            (comparison, {'spending_releases': dict(releases), 'release_fees': dict(fees)}),
+                            (applied, {'contribution': revised_debit, 'spending_releases': applied_releases, 'release_fees': applied_fees})):
             applied_scenario = baseline_scenario if path is baseline else scenario
             enforce_execution(path, customer, applied_scenario, **kwargs, **extra)
         from goal_validation import enforce_crisis_validations
         if recovery != make_recovery_plan(recovery_snapshot, reserve_months=normal.reserve_months):
             raise ValueError('Recovery output no longer matches the supplied checkpoint')
-        return enforce_crisis_validations(result)
+        validated = enforce_crisis_validations(result)
+        from tailored_advice import build_advice
+        validated['advice'] = build_advice(validated)
+        return validated
     except ValueError as error:
         result.update(goal_status='REVIEW_REQUIRED', lead_module=None, support_modules=[],
                       funding_result_complete=False, runtime_validation={'enforced': True, 'status': 'blocked'},
                       review_flags=[*flags, 'RUNTIME_VALIDATION_BLOCKED: ' + str(error)])
         # Do not present a failed ledger as a usable funding solution.
-        for key in ('no_action', 'baseline_without_crisis', 'continue_goal', 'revised_goal', 'supported_pause'):
+        for key in ('no_action', 'baseline_without_crisis', 'continue_goal', 'revised_goal', 'supported_pause', 'applied_plan'):
             result[key] = None
         return result

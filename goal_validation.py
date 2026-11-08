@@ -390,6 +390,33 @@ def enforce_crisis_validations(plan):
         raise ValueError('M6 requires a supported recovery checkpoint.')
     if plan['goal_status'] == 'NOT_SCHEDULED' and plan['goal_contribution_before'] != 0:
         raise ValueError('A missing contribution must not be confused with a paused transfer.')
+    # Always reconcile the selected intervention with supplied individual records.
+    from decimal import Decimal
+    applied = plan['applied_plan']
+    earlier = first_shortfall_order(applied)
+    prior = first_shortfall_order(plan['revised_goal'])
+    if ((earlier is not None and (prior is None or earlier < prior)) or
+        applied['additional_cash_needed'] > plan['revised_goal']['additional_cash_needed'] + .005):
+        raise ValueError('Applied action worsens funding or first shortfall')
+    ids = plan['applied_transfer_ids']
+    records = {t['event_id']: t for t in plan['existing_transfers']}
+    if len(ids) != len(set(ids)) or any(i not in records for i in ids):
+        raise ValueError('Applied action IDs are not unique supplied records')
+    for i in ids:
+        t = records[i]
+        if not (t['included_in_baseline'] and t['pause_approved'] and t['pause_fee'] is not None
+                and t['pause_fee'] < t['amount'] and t['month'] <= applied['horizon_months']):
+            raise ValueError('Applied pause lacks evidence or benefit')
+    delta = Decimal(0)
+    for before, after in zip(shocked['schedule'], applied['schedule'], strict=True):
+        entries = [records[i] for i in ids if records[i]['month'] == after['month']]
+        released = sum((Decimal(str(t['amount'])) for t in entries), Decimal(0)).quantize(Decimal('.01'))
+        fees = sum((Decimal(str(t['pause_fee'])) for t in entries), Decimal(0)).quantize(Decimal('.01'))
+        if abs(float(released)-after['paused_existing_outflow']) > .005 or abs(float(fees)-after['action_fees']) > .005:
+            raise ValueError('Applied releases/fees do not match source records')
+        delta += released-fees-Decimal(str(after['proposed_contribution']))
+        if abs(Decimal(str(after['end_balance']))-Decimal(str(before['end_balance']))-delta) > Decimal('.005'):
+            raise ValueError('Revised cash improvement does not reconcile')
     plan['runtime_validation'] = {'enforced': True, 'status': 'passed', 'policy_version': 'crisis-lifecycle-v1',
         'checks': ['original_CAD_ledger', 'all_effects_independent_of_module_labels', 'G25_deterioration',
                    'proposal_pause_zero_credit', 'existing_outflow_evidence', 'partial_funding', 'M6_recovery_evidence']}

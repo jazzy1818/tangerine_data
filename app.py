@@ -97,6 +97,9 @@ def set_account_preset(account_id):
 
 def clear_account_evidence():
     st.session_state.pop('classification_result', None)
+    for key in list(st.session_state):
+        if key.startswith('transfer_') or key == 'tailored_explanation':
+            del st.session_state[key]
     st.session_state['recovery_supplied'] = False
     st.session_state.pop('recovery_month', None)
     for key in ('recovery_cash', 'recovery_income', 'recovery_spending', 'recovery_rate'):
@@ -422,10 +425,20 @@ with tab3:
                     st.warning(str(exc))
             else:
                 st.info('Recovery amounts remain unknown. Crisis calculations continue without a rebuild date.')
-    plans = engine.make_plan(customer, shock=engine.take_shock(customer), analyst_evidence=judge_evidence,
-        scenario=active_scenario, selection_result=classification_selection,
-        recovery_snapshot=recovery_snapshot, include_timing_comparison=True)
+    from transfer_ui import render_transfers
+    transfers = render_transfers(active_scenario.horizon_months)
+    try:
+        plans = engine.make_plan(customer, shock=engine.take_shock(customer), analyst_evidence=judge_evidence,
+            scenario=active_scenario, selection_result=classification_selection, existing_transfers=transfers,
+            recovery_snapshot=recovery_snapshot, include_timing_comparison=True)
+    except ValueError as exc:
+        st.error(f'Supplied action evidence cannot be applied: {exc}. Correct or clear the schedule. No revised advice is issued.')
+        st.stop()
     crisis = plans['crisis_plan']
+    if crisis['runtime_validation']['status'] != 'passed':
+        st.error('Financial validation blocked this result. Review the supplied evidence before issuing advice.')
+        review_flags(crisis['review_flags'])
+        st.stop()
     goal = plans["goal_plan"]
     backup = plans["backup_plan"]
 
@@ -490,8 +503,28 @@ with tab3:
         'Path': label, 'Closing cash (quantified components)': crisis[key]['ending_cash'],
         'Extra starting cash needed (quantified components)': crisis[key]['additional_cash_needed'],
         'Full funding conclusion established': crisis[key]['funding_result_complete'],
-    } for label, key in [('No new action', 'no_action'), ('Continue proposed goal', 'continue_goal'),
-                          ('Revised goal', 'revised_goal'), ('Supported existing-transfer pause', 'supported_pause')]]), hide_index=True)
+    } for label, key in [('Before shock (no proposed transfer)', 'baseline_without_crisis'), ('No new action', 'no_action'), ('Continue proposed goal', 'continue_goal'),
+                          ('Revised goal only', 'revised_goal'), ('Supported existing-transfer pause', 'supported_pause'),
+                          ('Applied revised plan', 'applied_plan')]]), hide_index=True)
+    from tailored_advice import explain_plan, validate_advice
+    validate_advice(crisis['advice'], crisis)
+    st.markdown('**Personalized action plan**')
+    explanation = explain_plan(crisis)
+    if st.button('Use Gemini to emphasize validated findings', key='tailored_explain'):
+        st.session_state['tailored_explanation'] = explain_plan(crisis, backend='gemini')
+    cached = st.session_state.get('tailored_explanation')
+    if cached and cached['fingerprint'] == crisis['advice']['fingerprint']:
+        explanation = cached
+    st.caption('Explanation emphasis: ' + explanation['actual_backend'] +
+        (' · local fallback: ' + explanation['fallback_reason'] if explanation['fallback_reason'] else ''))
+    # All mandatory facts remain visible regardless of model emphasis.
+    for card_id, sentence in crisis['advice']['cards'].items():
+        if card_id in explanation['focus_ids']:
+            st.info(sentence)
+        else:
+            st.write(sentence)
+    if crisis['advice']['transfer_sources']:
+        st.dataframe(crisis['advice']['transfer_sources'], hide_index=True)
     st.markdown('**Recovery assessment**')
     st.write(crisis['recovery']['status'])
     if crisis['recovery'].get('reserve_gap') is not None:

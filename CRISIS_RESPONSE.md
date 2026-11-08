@@ -165,3 +165,45 @@ unsupported actions, benefit expiry, holds, unknown recovery, reserve earmarks,
 checkpoint boundaries, organizer compatibility, and corrupted ledger rejection.
 Jev/Gemini quality and live provider compatibility are not established by offline
 mocked tests; no model winner is claimed.
+
+## Personalized action advice
+
+The dashboard accepts explicitly supplied monthly goal-transfer schedules under
+**Existing goal transfers — supplied evidence**. An identifier, amount, months,
+source, baseline inclusion, approval and known per-payment fee are required for
+cash relief. No transaction is inferred to be a savings transfer. A new account
+clears the evidence; changing scenarios recalculates it. Duplicate schedules,
+fractional-cent transfers and amounts exceeding included nonfixed spending are
+rejected. Correct or clear invalid schedules before advice is issued.
+
+`applied_plan` combines the supported revised contribution with approved existing
+transfer pauses. The separate `supported_pause` path remains a comparison. Fees
+occur at month-start; avoided payments affect month-end. A pause whose fees consume
+the benefit is excluded. If the combined pause advances the first shortfall or
+increases required funding, the applied plan retains the revised goal alone and
+marks the pause comparison for review. No automatic banking action occurs.
+
+Mandatory runtime checks reconcile each applied payment, fee and contribution
+against supplied records, the original scenario ledger, and every closing cash
+difference. `tailored_advice.py` derives account-specific explanations from that
+validated result: opening basis, monthly cash flows, event dates, goals, supported
+pauses, remaining gaps, conditional bill timing and separately supplied recovery.
+A funding target never establishes adjustable spending. Partial paths retain
+explicit incomplete-funding language. No product, TFSA transfer, insurance payout,
+loan approval or investment suitability is inferred.
+
+Gemini is optional and invoked by an explicit dashboard button. It selects up to
+three approved findings to emphasize; it does not author unrestricted financial
+prose. The API receives categorical statuses and approved IDs, excluding account
+IDs, source descriptions and exact CAD amounts. Unknown IDs, extra fields,
+duplicate IDs, invalid JSON, timeouts or missing credentials retain the full local
+explanation. Every finding and review flag remains visible. Cached emphasis is
+bound to the complete advice fingerprint. This is a constrained explanation layer,
+not a live provider benchmark or product recommendation engine.
+
+Independent numerical regression examples include the $3,360/$1,560 compound
+case; fee and approval boundaries; the late receipt path
+$400, -$200, $1,200, $600, $0, -$600; and a $4,200 reserve gap rebuilt at $300/month
+in 14 months. The late-receipt example needs $200 before the receipt and $600 of
+extra starting cash across the full six-month horizon. These are synthetic
+verification cases, not observed customer facts or independent finance-team signoff.
