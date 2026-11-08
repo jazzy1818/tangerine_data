@@ -16,6 +16,14 @@ class ReviewDetails(Contract):
     prepared_by: str = Field(default='', max_length=120)
     customer_priority: str = Field(default='', max_length=2000)
     cash_source: str = Field(default='', max_length=500)
+    # Defaults applied when a plain-text shock omitted amounts or timing (shown with the plans).
+    shock_defaults: list[str] = Field(default_factory=list, max_length=12)
+
+    @model_validator(mode='after')
+    def short_defaults(self):
+        if any(len(text) > 300 for text in self.shock_defaults):
+            raise ValueError('Each default note must be 300 characters or fewer.')
+        return self
 
 
 class ScenarioInput(Contract):

@@ -3,6 +3,7 @@ import json
 import logging
 
 import engine
+from action_plan import build_action_plan
 from backup_comparison import build_comparison, safe_mode_status
 from plan_classification import build_case, profile_from_engine, select_plan
 from plan_classification.case import case_hash
@@ -84,6 +85,9 @@ def execute_run(session_id, request):
             log_warning = 'The text request log could not be appended; request metadata remains in this saved result.'
         plans = engine.make_plan(customer, selection_result=selected,
                                  include_timing_comparison=request.scenario.phase == 'active', **kwargs)
+        # Finance-owned action plan (policy v1.1): reads the validated ledgers only.
+        plans['action_plan'] = build_action_plan(customer, plans['crisis_plan'], scenario=request.scenario,
+                                                 goal_plan=plans.get('goal_plan'), opening_cash=request.opening_cash)
         comparison = build_comparison(plans['crisis_plan'])
         status, reason = safe_mode_status(plans['crisis_plan'], comparison)
         comparison['planning_status'] = {'label': status, 'reason': reason}

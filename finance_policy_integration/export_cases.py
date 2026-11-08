@@ -11,6 +11,7 @@ import subprocess
 from uuid import NAMESPACE_URL, uuid5
 
 import engine
+from action_plan import build_action_plan
 from backup_comparison import build_comparison, safe_mode_status
 from finance_actions import source_commit
 from plan_classification.schemas import ShockScenario
@@ -238,6 +239,8 @@ def export(output):
                                  existing_transfers=request.existing_transfers,
                                  recovery_snapshot=request.recovery_snapshot, include_timing_comparison=True)
         crisis = plans['crisis_plan']
+        plans['action_plan'] = build_action_plan(customer, crisis, scenario=request.scenario,
+                                                goal_plan=plans.get('goal_plan'), opening_cash=request.opening_cash)
         if crisis['runtime_validation']['status'] != 'passed':
             raise ValueError(f'{case_id}: {crisis["review_flags"]}')
         plan = crisis['finance_plan']

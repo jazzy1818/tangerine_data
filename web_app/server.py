@@ -15,7 +15,7 @@ from fastapi.staticfiles import StaticFiles
 import engine
 from plan_classification.config import classifier_settings
 from plan_classification.schemas import MODULES, MODULE_DESCRIPTIONS, ShockScenario
-from . import analytics, portfolio, service, store
+from . import analytics, portfolio, scenario_intake, service, store
 from .contracts import RunInput, ScenarioInput, ReviewUpdate
 
 STATIC = Path(__file__).with_name('static')
@@ -84,6 +84,7 @@ def config():
             'providers': {'rules': {'configured': True, 'label': 'Local baseline'},
                           'jev': {'configured': bool(settings.get('OPENROUTER_API_KEY')), 'label': 'Jev / OpenRouter'},
                           'gemini': {'configured': bool(settings.get('GEMINI_API_KEY')), 'label': 'Gemini'}},
+            'scenario_intake': {'configured': bool(settings.get('GEMINI_API_KEY'))},
             'configuration_error': error, 'scenario_schema': ShockScenario.model_json_schema()}
 
 
@@ -111,6 +112,16 @@ def discovery(cohort: Literal['recurring_shortfalls', 'thin_reserves', 'payment_
 @app.post('/api/scenarios/preview')
 def preview(request: ScenarioInput):
     return service.preview(request)
+
+
+@app.post('/api/scenarios/interpret')
+def interpret_scenario(payload: scenario_intake.IntakeRequest, request: Request):
+    if payload.account_id not in engine.get_account_ids():
+        raise HTTPException(404, 'This account is not in the supplied dataset.')
+    try:
+        return scenario_intake.interpret(payload, request.state.session_id)
+    except scenario_intake.IntakeError as exc:
+        raise HTTPException(503, str(exc)) from exc
 
 
 @app.post('/api/runs', status_code=202)

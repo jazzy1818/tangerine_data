@@ -6,7 +6,7 @@ import shlex
 
 ENV_FILE = Path(__file__).resolve().parents[1] / '.env'
 SETTING_NAMES = ('OPENROUTER_API_KEY', 'JEV_MODEL', 'GEMINI_API_KEY', 'GEMINI_CLASSIFIER_MODEL',
-                 'GEMINI_EXPLANATION_MODEL', 'GEMINI_ADVISOR_MODEL')
+                 'GEMINI_EXPLANATION_MODEL', 'GEMINI_ADVISOR_MODEL', 'GEMINI_SCENARIO_MODEL')
 
 
 def classifier_settings():
@@ -41,6 +41,7 @@ PROVIDER_ROUTES = {
     'gemini': ('GEMINI_API_KEY', 'GEMINI_CLASSIFIER_MODEL', 'gemini-3.5-flash-lite'),
     'explanation': ('GEMINI_API_KEY', 'GEMINI_EXPLANATION_MODEL', 'gemini-2.5-flash'),
     'daily': ('GEMINI_API_KEY', 'GEMINI_ADVISOR_MODEL', 'gemini-2.5-flash'),
+    'scenario': ('GEMINI_API_KEY', 'GEMINI_SCENARIO_MODEL', 'gemini-3.5-flash-lite'),
 }
 
 

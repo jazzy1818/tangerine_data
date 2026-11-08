@@ -8,3 +8,11 @@
 .sidebar-foot a{color:#dce9df}.onboarding{background:#eef3eb}.onboarding h3{margin-top:12px}.onboarding p{font-size:12px;color:#536758}.resume-card{display:flex;align-items:center;justify-content:space-between;gap:18px}.resume-card p{margin:0}.followup-list{display:grid;gap:12px;margin:18px 0 24px}.followup-item{display:flex;flex-direction:row;align-items:flex-start;gap:12px;background:#f6f8f3;border:1px solid #e0e6dc;border-radius:6px;padding:13px}.followup-item input{flex-shrink:0;margin-top:3px}.followup-item strong{display:block;font-size:12px}.followup-item small{display:block;font-weight:400;line-height:1.6;color:#627267;margin-top:4px}.filter-label{max-width:300px;margin-bottom:22px}.preserve-lines{white-space:pre-wrap}.print-only{display:none}form[data-entry]{padding:10px 0}form[data-entry]>.actions{margin-top:12px}
 @media(max-width:720px){.resume-card{align-items:flex-start;flex-direction:column}.effect-list li{align-items:flex-start;flex-wrap:wrap}.effect-list .actions{width:auto}.sidebar-foot a{display:none}}
 @media print{.print-only{display:block}.onboarding,.resume-card{display:none}.followup-list{break-inside:avoid}.preserve-lines{overflow:visible}}
+
+/* Backup plan: recommended actions (finance decision policy) */
+.plan-actions{list-style:none;padding:0;margin:8px 0 18px}
+.plan-action{padding:14px 0;border-top:1px solid var(--line)}
+.plan-action:first-child{border-top:0;padding-top:4px}
+.plan-action .card-head{margin-bottom:6px;align-items:center}
+.plan-action h3{margin:0}
+.plan-action p{margin:0 0 6px}
