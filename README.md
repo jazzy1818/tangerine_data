@@ -4,6 +4,9 @@ Tangerine Track · Sheridan Datathon 2026 · November 7-8
 
 Build a financial resilience engine for real bank customers.
 
+**Team financial plan:** [Eight-module financial plan and full blueprint](docs/financial-planning/README.md).
+This index links the M1–M8 response library, goal policy, current implementation and finance review evidence.
+
 Implementation guide for the optional **Jev / Gemini eight-module classifier and data discovery**:
 [CLASSIFICATION.md](CLASSIFICATION.md).
 
