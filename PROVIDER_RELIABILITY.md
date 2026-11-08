@@ -131,8 +131,10 @@ and an offline fallback must never be counted as a successful live response.
 
 ## Results for this branch
 
-The full suite passed **423 tests and 9 subtests** (23 new provider-specific
-checks). The existing finance, crisis, chart and ETF regressions passed unchanged.
+After merging the latest `main` at `064a173` into this feature branch without
+conflicts, the full suite passed **444 tests and 9 subtests** (23 new
+provider-specific checks). The existing finance, crisis, chart and ETF
+regressions passed unchanged. This sync did not merge the feature into `main`.
 `git diff --check` passed. Chromium used an ephemeral wrapper with synthetic
 settings and all remote entry points blocked: cold launch, all five tabs,
 account/shock/provider/note edits made zero provider attempts. Only the explicit
