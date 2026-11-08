@@ -1,9 +1,10 @@
 {
-  "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+  "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
   "source_manifest": {
-    "base_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
-    "has_uncommitted_source_changes": true,
+    "base_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
+    "has_uncommitted_source_changes": false,
     "sha256": {
+      "action_plan.py": "cfbeb34440cb676948c669b8dc712901f56fd056e6611004e870a20bbe0fbdb8",
       "app.py": "781163384ca3abb99a8cf58bcb57af414a970a5b49d37437eda315db61b426a2",
       "backup_comparison.py": "30b4aa376a78596ad97d784819cae2559b9b6ffa21499cae0a79261e2821154e",
       "crisis_response.py": "a1c61befb478dadcc0371f3add79815fbd82e6c22fffb920c285d79dfe8aa71c",
@@ -15,7 +16,7 @@
       "etf_market.py": "1aed14aeab907e9930a2818c4f5dc69cf54ea1f1d45540c748959c5c29d7c955",
       "etf_ui.py": "a272d904adb20add7d9327b34dcf9f43ee24587aa5e0dfde3983bd26d187b9b7",
       "finance_actions.py": "f5a07e28a6743a8ba51bd28618ec8f01f358ad3fb87122ba676d2f8a02e9aca0",
-      "finance_policy_integration/export_cases.py": "bd6fd32bde7eded797fc056975a71141fa2b61edefe402a4ccaddf3a63f9c22f",
+      "finance_policy_integration/export_cases.py": "664ec852beee0abde9e1f45115c92379de64cfdb47c86b04bd632dd8db1bbed6",
       "gemini_advisor.py": "f2d8a6de0bf7ea0f4bcfe54e9a9bc2d8f5601551014548b2f65d955c2e1105b6",
       "goal_validation.py": "f5a628d7898cbac6e26e892a0b6d32bcc718b584c0f9752ffee1574e1636505c",
       "investment_triggers.py": "57bb50f779342e9a3ce82f4e547fde88467497dedbfa3ac4cc0c2410c7e46a20",
@@ -24,7 +25,7 @@
       "plan_classification/__main__.py": "4fa44f7a27b6f6e7a875d59b9dc3e32a0c583c68cd558b719e3079449bbc8832",
       "plan_classification/backends.py": "e87c5bc58bbf864ce5bf7633392430d4f57d270b86c27f87069724197829a0d4",
       "plan_classification/case.py": "4715ab2bed12f23d92e99e093b1fa61ee1d2d89b7759411624e82284ac1b86c7",
-      "plan_classification/config.py": "f5a016603723bd0c5b9448f534e6639f0b816ead077ac5afcb641a6e02e34b3e",
+      "plan_classification/config.py": "6da96b933e0ccb69ab84dd7dd417c7bf919dac6d55117a13da1351f7161db926",
       "plan_classification/discovery.py": "2dd6bcff5bf1577781cadd4cd1a63b3fe384084bd5977c627fad5e2ddac86765",
       "plan_classification/features.py": "8126d43eaffabfd6e98b4cef37fabea4c88bcbaf36d1fe915ce8c731af12bcf7",
       "plan_classification/request_log.py": "7dfc8d4593e8a673475e5f1193ba19dc8b21968fdf7074052264e3e4bbd54461",
@@ -43,6 +44,7 @@
       "tailored_advice.py": "c2b14c083e205521f0adc5d0092e63304db627b24d7990cfcc1fcdefbc9f779e",
       "tests/conftest.py": "9705edb97412b4a020cd9eb03018723da3c45a41900e088f8ec90b6a9588ddf4",
       "tests/provider_test_support.py": "ba4b3f2900ae03e09784e5623e7340d6bdfbfdf4574e9490fd488e77e551a68c",
+      "tests/test_action_plan.py": "f7484aedb17713af7df89cb3fe583d9af86ca0620db5715c5986e40cdbf4611a",
       "tests/test_advice_ui.py": "c6680369859bbdb8175f8d9b418ac1bf7cc2be84fcc7b66e71205f322afb9bff",
       "tests/test_app_allocation.py": "84f01eb63fcd135463424fdf226bdd367cbc6b2148a510d607b9d920daeeec0a",
       "tests/test_backend_audit.py": "080deb0fb6117555ecdba283da9c78c1dfb256286dc7042287817114f946cb4a",
@@ -59,6 +61,7 @@
       "tests/test_finance_policy_followup.py": "326ce67846041155878e96f5259e748e768cec963e81da17b4bbffc53cbde419",
       "tests/test_goal_matrix.py": "a036159e8c49334cc0293889607ab99f12c4702448eaba90c044ed55118b965a",
       "tests/test_investment_triggers.py": "9056b597e37ea4df3318b74626074acd878bab4d3ba335c5da8afe18c5aceb92",
+      "tests/test_main_sync.py": "168772121db9b3f6be1ec6e6efa3f8878688d33f9aba0f341341c20bef17e588",
       "tests/test_portfolio_overview.py": "4404941c0453053b4311a235dea3f2a56daef1f96c18ba06928653cf8c0c7075",
       "tests/test_provider_controls.py": "aa2fd14f116ab44da8e8da3b096205b6c57584a2e12daa916e339a195f3367d2",
       "tests/test_provider_fallback_evidence.py": "72a1e51d7f91995213f3cd44e0e1d624021841f41872df92624879778786b7fa",
@@ -69,30 +72,33 @@
       "tests/test_review_ui.py": "6e216b45295ad6853bd6c50d45620ebc619e9bfd6acee97e41393ff50edb8bc8",
       "tests/test_runtime_enforcement.py": "75d67e0c43c2f62dd9fc17992015f5dfbbfb35ed1e4bb200bf75b86b8e780e75",
       "tests/test_schema_audit.py": "b4351edf2c21b4a7593b1b6514ff04849a8685f0c80df98b8e522571e4506246",
+      "tests/test_shock_text.py": "0f9c7adce7a22182258174d370e403957d35f7ec068aa95c01a2990cdecd83f1",
       "tests/test_tailored_advice.py": "3c81a6222ad8ebea85c1b390fd02586ba0fa6d01ad689836770a1fc027f3ecb4",
       "tests/test_ui_audit.py": "d2adf6460ea96a33793b60dec6e585d19fcb9bd24db41e7e6f57dc432d2374fe",
       "tests/test_website_savings.py": "278c091c299f6b7029a01c767cbbddf864264b449a4caf0f9e5cbc0b09f3df88",
       "transfer_ui.py": "aea1cc48fc8ccaa178646ed615915bf873eaad13449c47f84e1bd188f31edc6e",
       "web_app/__init__.py": "1f8b904348671d06853f1e160070d2e17f630082b062a4822871a0f801741cdd",
       "web_app/analytics.py": "a4d23de077f23c98b9d1def7712150a952de30e076daead49a617242eb496942",
-      "web_app/contracts.py": "ae11e718841ef6d8e34a39fc9cc1e3fe4759a045a83fd0317e71ee9fbe10257f",
+      "web_app/contracts.py": "d68dd805e0a1f64ecaf85baa06a090661c0e9518d129b7335c14255c4a0229d2",
       "web_app/portfolio.py": "ae053b39d45a391231cf00ef24b08f33fe5b142111b345b5d8a6b92feef2c2de",
       "web_app/savings.py": "80223baef557e1bdd0eaf18cafb46cd34fd3b234d0af2b7f5813c485db0aa15b",
-      "web_app/server.py": "c219204e790fbef4f7002f395dd64662c299190072c31b1366e5bbad7718e246",
-      "web_app/service.py": "d0708dc67931dd69af40fc351ba5d118acc0fa19507ba3f96c2e444763597c42",
-      "web_app/static/app.js": "776622dd26d7a2ac99ab1ec237c1ee7e45bec9479c42cfbed0101e4d5c7f2889",
+      "web_app/scenario_intake.py": "bff9d4f9c62d7904f9b4f9dcd87cfa901cc0109e99ea0b2dc6172923081a6bd3",
+      "web_app/server.py": "6351b1c52a470df41de505f6f202b62331daf244f0dd480e41abb0c8e56770d3",
+      "web_app/service.py": "fd0a46eda39578c16a37ccbdc8ed704d54b543845732530ebbde0916473fde5a",
+      "web_app/shock_text.py": "dcbf48b08d05a58e124289ecae0958cc6349920c92cfe9786a5a2e33b95ac57b",
+      "web_app/static/app.js": "c7b68acb29b05c1b6a1ef5802c72dbfe0da4e39dfe91c049e1b87bbfd12d2d3b",
       "web_app/static/charts.js": "cf9e85210dd792ec0e093f250cd59fb512c8b15e51cbfa8f22dbc25429315983",
       "web_app/static/common.js": "0795a7f74fe2ff5e79eea94bd642f2c6dc8f1b041000e7100b24cf45af2f338e",
-      "web_app/static/financial.js": "1a7f32a66d1960084d3fcb23956b18e07176e15b6939e78cde08cab52958edda",
+      "web_app/static/financial.js": "b88f3280b32139ba0c6635e47e9a97f9d857000a489ee0169b8272a3cd5a0e39",
       "web_app/static/index.html": "40ee94fdf0380f409a774f8e59fa9f2dbc494b6b89aa0add817cf3443c059581",
-      "web_app/static/reviews.js": "ece97c4fff6276f1161e6616c4bba21fc4f07bed719ef7950b7675cb49d032ee",
-      "web_app/static/scenario.js": "37ae317db6e0cd976f6111a62fa353472efa9d05de286348c16f0050affbeb66",
-      "web_app/static/styles.css": "7aaca6e9480ba6f3f441c92909e4f0013fc681dd09d2807f10a9482d788fbb25",
+      "web_app/static/reviews.js": "f7613eaf4e0b5c9a5df0471d67177478547b3156de2ca5db5d3d621125273f33",
+      "web_app/static/scenario.js": "78e2d3ce819cd58348d4ded9c6cc388abf60dc35af9d4064df87be72e55ed596",
+      "web_app/static/styles.css": "52ecb9e30ec0b0ae581542c1298b88c5a9b23f0ef4bf36ebceba14a62809610a",
       "web_app/static/views.js": "1d81b3e65db640272f02782ce08c5dfc8e33ec0a40aaf5b59ac1518475859763",
       "web_app/store.py": "847dfc69c66db0983beab377ae7b37be4658f5d9ac43344b197060ee7ef8ca81"
     }
   },
-  "generated_at": "2026-11-08T16:17:53.227789+00:00",
+  "generated_at": "2026-11-08T17:31:27.327097+00:00",
   "finance_approval": "PENDING",
   "cases": [
     {
@@ -128,7 +134,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "2d0dd087-7d94-5ba8-8888-7d47ecbc585b",
@@ -180,7 +187,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20741,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -856,7 +863,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "0ef7d441-487f-5da6-99c8-199cc407d0e9",
@@ -908,7 +916,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 21026,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -1645,7 +1653,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "140b7690-48b4-5b60-bc56-5a593bf9c137",
@@ -1697,7 +1706,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 21101,
         "scenario_hash": "507cd34993724eefffdfa86906422554b6ce68c93dc556ed1a09ecde349d8af9",
         "horizon_months": 6,
@@ -2450,7 +2459,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "8d945ce1-5699-5c8b-8067-46c7c5ad9178",
@@ -2502,7 +2512,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 32078,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -3240,7 +3250,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "27847c83-65ed-5962-a88e-b7701ee83d5e",
@@ -3292,7 +3303,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 26939,
         "scenario_hash": "843927d87de08879afe94243af278a339ff9e3530127587c74d7d7a673fa70ac",
         "horizon_months": 6,
@@ -4053,7 +4064,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "f5806570-8495-58a8-a820-dfc660672a67",
@@ -4105,7 +4117,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20578,
         "scenario_hash": "d7b34cbd03311a99042499083055df2ed67c37bbdee44f9710cfe242203fbd14",
         "horizon_months": 6,
@@ -4823,7 +4835,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "d63ff941-ff13-5364-bace-dfda045f9cd1",
@@ -4874,7 +4887,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20111,
         "scenario_hash": "a5d8d1e954cf1a0fa1aab931744f94dceccf3f7ed77a2f6e71373066f5040b90",
         "horizon_months": 6,
@@ -5627,7 +5640,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "a370b9bc-2338-587f-8f4e-b0b1a127373f",
@@ -5671,7 +5685,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20134,
         "scenario_hash": "68e4120796c860251d45240fd6416d5273b30270cccc5b77f78d38856586f8b4",
         "horizon_months": 6,
@@ -6564,7 +6578,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "72411f1f-ff26-540e-b95f-fb58c1c240e7",
@@ -6616,7 +6631,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 31500,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -7323,7 +7338,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "4dbdaab7-99d5-50cf-aa97-87f3d358e526",
@@ -7375,7 +7391,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20303,
         "scenario_hash": "1e83552378f22a4da7132d802ef963e48761cfb56f903f487dc482bd8ee09580",
         "horizon_months": 6,
@@ -8108,7 +8124,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "3626144e-fa2a-58b1-b931-07d5121faee1",
@@ -8160,7 +8177,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20133,
         "scenario_hash": "843927d87de08879afe94243af278a339ff9e3530127587c74d7d7a673fa70ac",
         "horizon_months": 6,
@@ -9044,7 +9061,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "ef33756a-f2d4-57df-bb88-2291c1e970de",
@@ -9096,7 +9114,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20143,
         "scenario_hash": "e05cd985bb6c590ff5d2487495324a5fe12258323e80e5bb73c5a80ff6e09cea",
         "horizon_months": 6,
@@ -11094,7 +11112,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "3aa0995b-787f-566f-ab2d-e0ab5d92e2cd",
@@ -11139,7 +11158,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 21817,
         "scenario_hash": "3c24f54906be87925b8541d5c361eec660349b9ef2517705e7847950a3ac506c",
         "horizon_months": 6,
@@ -11912,7 +11931,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "1696d150-2a3b-5e1e-baa5-d15385ec2653",
@@ -11956,7 +11976,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 21214,
         "scenario_hash": "04ec00a5234a4e14d116db38c570d05d7e8fd5f7369f06edef95bedf24f06fe2",
         "horizon_months": 6,
@@ -12735,7 +12755,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "ac446f58-7543-546c-8a5c-35e9e6602a72",
@@ -12780,7 +12801,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20176,
         "scenario_hash": "bcbbe6a1a5edcf9cd8dbefe02ca6c6fd0fd34af5bf0ca383ab7f7e7dace09ae9",
         "horizon_months": 6,
@@ -13520,7 +13541,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "1fc54d14-7e6c-51b3-b041-230da81bee53",
@@ -13565,7 +13587,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20160,
         "scenario_hash": "963b1ad722e01c68b97ad80f806e6d1aa6e36a778f112b9d418800228c296a57",
         "horizon_months": 6,
@@ -14333,7 +14355,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "6e2ce112-7b4b-5fd8-aac9-412fe39a08b3",
@@ -14378,7 +14401,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20189,
         "scenario_hash": "16a22c7bc6b52f064f2bbfaf6c153cf834c5d21c744bcbed494b41c80ea545ac",
         "horizon_months": 6,
@@ -15096,7 +15119,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "04746ee0-a851-5bef-8b36-99a481eba2a9",
@@ -15147,7 +15171,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20208,
         "scenario_hash": "4bb48c71fcf1f14de570dbcfa7552f205fe49ae748f9ec6844b7533e4da53c2b",
         "horizon_months": 6,
@@ -15870,7 +15894,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "1c25b84b-03fb-56d5-a6f4-029f60a799ad",
@@ -15915,7 +15940,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20230,
         "scenario_hash": "3fb44d037e121142b98b6b1cf80b54a77954e2e7308b43df7ee4b6054a6bea0b",
         "horizon_months": 6,
@@ -16967,7 +16992,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "b7b286ed-71e4-5a78-8a8a-d37219e1060d",
@@ -17012,7 +17038,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20331,
         "scenario_hash": "f468e3a629053cc02ab7bbea72c7412536f0a8206db8381bb4ffd1446c41208a",
         "horizon_months": 6,
@@ -17895,7 +17921,8 @@
           "purpose": "cash_flow",
           "prepared_by": "",
           "customer_priority": "",
-          "cash_source": ""
+          "cash_source": "",
+          "shock_defaults": []
         },
         "savings_evidence": null,
         "request_id": "8ed31331-83f4-5c0c-aefa-3b539eec1e29",
@@ -17940,7 +17967,7 @@
       "finance_plan": {
         "policy_version": "finance-decision-v1.1",
         "finance_approval": "PENDING",
-        "source_commit": "372fa21e06327b6855259e5f4485d6213b9de2b1",
+        "source_commit": "4950dc20f02f8b36e768bdb9b67431b1544fa2ee",
         "account_id": 20243,
         "scenario_hash": "199e492221078a2f196761f5de8152bab6c751688f5ab68d75e7cb34e8b41e10",
         "horizon_months": 6,

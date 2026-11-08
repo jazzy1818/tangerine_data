@@ -1,5 +1,11 @@
 # Financial decision verification
 
+## Main synchronization verification
+
+The combined branch's code commit is `4950dc20f02f8b36e768bdb9b67431b1544fa2ee`, merging main `b65be040e9270ca12c44edb3edfa850497fba809` into the finance branch. **570 tests and 9 subtests passed**, with **0 failures, errors or skips**, in 152.93 seconds. Focused combined-flow checks passed **58 tests** in 4.29 seconds. The restarted website passed offline compound/unknown-shock saved-review checks, with both action views agreeing on funding and zero remote calls. All 21 original paired cash ledgers remain unchanged.
+
+See [MAIN_SYNC.md](MAIN_SYNC.md) for exact commands, conflict resolutions, source commits and presentation startup. The refreshed detailed export fingerprints the clean merged code, and the text captures include main's overview alongside the finance action cards. The sections below retain the earlier verification history. Finance approval remains **PENDING**.
+
 ## Continuation verification
 
 Branch `feat/finance-decision-policy`, with a reviewable uncommitted diff based on `372fa21e06327b6855259e5f4485d6213b9de2b1`. Python 3.12.14 and Node v24.22.1 on the cloud machine. The detailed export's `source_manifest` records the actual runtime, renderer, exporter and test hashes; the base commit alone does not identify these edits. **Finance approval is PENDING.**

@@ -11,13 +11,13 @@ source .venv/bin/activate
 bash run.sh
 ```
 
-In the website, choose **Standard rules-based** in Assessment preferences. No Gemini/Jev credentials or external requests are needed. Use local HTTP checks for `/api/health` and `/api/accounts?limit=1` when diagnosing startup. Retain one worker for the SQLite workspace.
+In the website, choose **Standard rules-based** in Assessment preferences. No Gemini/Jev credentials are needed. With no Gemini key configured, the new description reader also runs offline; a configured key can enable assisted interpretation independently of the classifier preference. Use local HTTP checks for `/api/health` and `/api/accounts?limit=1` when diagnosing startup. Retain one worker for the SQLite workspace.
 
 The exact case inputs are `cases[].request` in `finance_acceptance_details.json`. Matching account IDs are in `finance_acceptance_cases.csv`; they are demonstration inputs, never special cases in the policy. For an API demonstration, submit a selected request to `POST /api/runs` with a fresh UUID `request_id` and `backend: "rules"`, then poll `GET /api/runs/{id}` using the same browser-workspace cookie. Request IDs are idempotent, so reuse must not be confused with a fresh test.
 
 ## Show the financial decision
 
-1. **12-compound:** Find the customer in the review sheet. Enter the income and bills changes, immediate repair, and supplied hypothetical included-payment schedule from the saved request. Check the financial impact and prepare the review. Above the comparison chart, read the original first shortage, first remaining shortage, and full remaining need separately.
+1. **12-compound:** Find the customer in the review sheet. Describe the shock or use **Adjust the shock (optional)** to enter the exact income and bills changes, immediate repair, and hypothetical included-payment schedule from the saved request. Select **Generate main & backup plans**. Above the comparison chart, read the original first shortage, first remaining shortage, and full remaining need separately.
 2. Open **Recommended Financial Actions**. Show the modeled pause bundle, dates, fees, **Review by**, and **Trade-offs**. Only existing included payments produce relief; holding a future proposal releases zero. The residual target identifies required funds without inventing a source.
 3. Open candidate evidence and the monthly schedule. Trace one pause and its fee to the right checkpoint. Compare both paths using the same opening basis. Monthly projections do not prove daily solvency.
 4. **13-late-receipt:** Explain the shortage before the later receipt. A later source does not retroactively cover that checkpoint.

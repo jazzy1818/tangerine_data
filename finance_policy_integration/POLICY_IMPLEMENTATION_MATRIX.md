@@ -1,6 +1,6 @@
 # Finance decision policy v1.1 implementation matrix
 
-Baseline `eb45c8d` on `feat/flexible-emergency-savings`. Integration is on `feat/finance-decision-policy`. This continuation is a reviewable working-tree diff based on `372fa21e06327b6855259e5f4485d6213b9de2b1`; `source_manifest` in the detailed export fingerprints the actual runtime and test files. Finance approval is **PENDING**. The supplied [policy and handoff](FINANCIAL_DECISION_POLICY_v1_1.md) are preserved verbatim as the source of truth; their proposed-policy status is unchanged.
+Baseline `eb45c8d` on `feat/flexible-emergency-savings`. Integration is on `feat/finance-decision-policy`. The evidence follow-up was committed as `d1788af`; main `b65be04` was then merged into this branch in code commit `4950dc2`. [MAIN_SYNC.md](MAIN_SYNC.md) records the combined-flow validation. `source_manifest` in the detailed export fingerprints the actual runtime and test files. Finance approval is **PENDING**. The supplied [policy and handoff](FINANCIAL_DECISION_POLICY_v1_1.md) are preserved verbatim as the source of truth; their proposed-policy status is unchanged.
 
 | Policy | Baseline assessment and owning code | Integration and verification |
 | --- | --- | --- |
