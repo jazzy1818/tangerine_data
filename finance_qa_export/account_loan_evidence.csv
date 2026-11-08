@@ -1,0 +1,2 @@
+loan_id,account_id,loan_start,amount,duration_months,monthly_payment,status,status_meaning,defaulted
+906277,20111,2023-12-15,139811.4,60,2330.19,D,"running, client in debt",1

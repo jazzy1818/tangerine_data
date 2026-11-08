@@ -1,0 +1,38 @@
+{
+  "total_accounts": 4424,
+  "nonnegative_month_end_accounts": 2324,
+  "intra_month_overdrafts": 143,
+  "accounts_with_movable_bill": 102,
+  "overdrafts_resolved_by_shift": 44,
+  "resolution_rate_pct": 43.1,
+  "month_end_balance_delta": 0.0,
+  "methodology": "July\u2013December 2025 complete-history cohort. Start with the mean daily balance from up to six completed pre-July account months, scale all observed inflows to 55%, and increase identified household bills by 15%. Measure end-of-day cash, then replay a conditional seven-day move of one recurring bill identified from pre-July history. Every shifted payment stays in its original month.",
+  "summary_points": [
+    "4,424 accounts met the replay data requirements.",
+    "2,324 started and closed each month nonnegative. 143 of these went negative between month-ends.",
+    "102 of the timing-shortfall accounts had a qualifying bill-date scenario. The conditional move avoided a daily shortfall for 44.",
+    "This replay assumes no fee for the date change. Historical payment records do not establish approval."
+  ],
+  "distribution": [
+    {
+      "Category": "Negative opening balance or month-end",
+      "Accounts": 2100
+    },
+    {
+      "Category": "No shortfall",
+      "Accounts": 2181
+    },
+    {
+      "Category": "Daily shortfall avoided in conditional replay",
+      "Accounts": 44
+    },
+    {
+      "Category": "Daily shortfall remained after conditional move",
+      "Accounts": 58
+    },
+    {
+      "Category": "Daily shortfall and no qualifying bill move",
+      "Accounts": 41
+    }
+  ]
+}

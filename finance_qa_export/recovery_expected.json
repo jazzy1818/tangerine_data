@@ -1,0 +1,35 @@
+{
+  "calculated_at": "2026-11-08T13:46:24.185895+00:00",
+  "source": "Tangerine-Team-Execution-Prompts.pdf, Phase 1 Case D, page 3",
+  "review_status": "Pending human finance review",
+  "method": "Standalone Decimal arithmetic; no engine imports; retrospective check",
+  "inputs": {
+    "current_cash": "3000",
+    "monthly_essential_spending": "2400",
+    "reserve_months": "3",
+    "stable_cash_flow": true,
+    "obligations_covered": true,
+    "monthly_inflow": null
+  },
+  "formulas": {
+    "reserve_target": "essential spending * reserve months",
+    "reserve_gap": "max(0, target - accessible cash)",
+    "months_to_target": "ceil(gap / supported monthly contribution); unknown when contribution unknown"
+  },
+  "paths": {
+    "Supported contribution": {
+      "reserve_target": 7200.0,
+      "reserve_gap": 4200.0,
+      "monthly_contribution": 300.0,
+      "months_to_target": 14,
+      "monthly_surplus": null
+    },
+    "Unknown contribution": {
+      "reserve_target": 7200.0,
+      "reserve_gap": 4200.0,
+      "monthly_contribution": 0.0,
+      "months_to_target": null,
+      "monthly_surplus": null
+    }
+  }
+}
