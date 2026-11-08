@@ -1,0 +1,2494 @@
+01-stable — Stable surplus and normal review
+Customer review
+Stable surplus and normal review
+Account 20741 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$31,157.87After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Further financial review
+Reviewing existing circumstancesRegular inflow exceeds spending
+The initial suggestion was “Plan for additional funds”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+Maintain the current viable plan Maintain and monitor
+No new action is justified on the modeled evidence.
+No cash change is credited to the supported path.
+Review Reassess when new cash, income or obligation evidence is available.
+Next review Reassess when new cash, income or obligation evidence is available.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| maintain-and-monitor | Maintain and monitor | DERIVED | No new action is justified on the modeled evidence.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $19,890.41 | $19,890.41
+| Closing cash | $31,157.87 | $31,157.87
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 19,890.4 | 19,890.4 | 19,890.4
+| M0 end | 19,890.4 | 19,890.4 | 19,890.4
+| M1 start | 19,890.4 | 19,890.4 | 19,890.4
+| M1 end | 21,768.3 | 21,768.3 | 21,768.3
+| M2 start | 21,768.3 | 21,768.3 | 21,768.3
+| M2 end | 23,646.2 | 23,646.2 | 23,646.2
+| M3 start | 23,646.2 | 23,646.2 | 23,646.2
+| M3 end | 25,524.1 | 25,524.1 | 25,524.1
+| M4 start | 25,524.1 | 25,524.1 | 25,524.1
+| M4 end | 27,402.1 | 27,402.1 | 27,402.1
+| M5 start | 27,402.1 | 27,402.1 | 27,402.1
+| M5 end | 29,280 | 29,280 | 29,280
+| M6 start | 29,280 | 29,280 | 29,280
+| M6 end | 31,157.9 | 31,157.9 | 31,157.9
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $7,480.08
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+No new changes. The review uses the customer’s existing circumstances.
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $19,890.41
+| 1 | $3,796.93 | $1,919.02 | $0.00 | $0.00 | $21,768.32
+| 2 | $3,796.93 | $1,919.02 | $0.00 | $0.00 | $23,646.23
+| 3 | $3,796.93 | $1,919.02 | $0.00 | $0.00 | $25,524.14
+| 4 | $3,796.93 | $1,919.02 | $0.00 | $0.00 | $27,402.05
+| 5 | $3,796.93 | $1,919.02 | $0.00 | $0.00 | $29,279.96
+| 6 | $3,796.93 | $1,919.02 | $0.00 | $0.00 | $31,157.87
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+02-structural — Recurring deficit with no authorized intervention
+Customer review
+Recurring deficit with no authorized intervention
+Account 21026 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$939.23Before supported changes
+Remaining funding gap$939.23After supported changes
+First shortfall after changesEnd of month 6
+Cash at period end-$939.23After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Rebalance spending
+Reviewing existing circumstancesRegular spending exceeds inflowCash reserves are below the planning target
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 6 end · $939.23
+First remaining shortage after supported actions Month 6 end · $939.23
+Remaining funding need $939.23
+No supported cash intervention was established for this case.
+Calculated target $0.00 upfront and $156.54 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall.
+Month 6 end · $939.23 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Next review Month 6 end · Review available funding and protected payments before the first remaining shortfall.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 6 (end). The funding gap is unchanged at CAD 939.23.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 6 (end) | Month 6 (end)
+| Cash missing at first shortfall | $939.23 | $939.23
+| Lowest cash | -$939.23 | -$939.23
+| Closing cash | -$939.23 | -$939.23
+| Full funding need | $939.23 | $939.23
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 19,366 | 19,366 | 19,366
+| M0 end | 19,366 | 19,366 | 19,366
+| M1 start | 19,366 | 19,366 | 19,366
+| M1 end | 15,981.8 | 15,981.8 | 15,981.8
+| M2 start | 15,981.8 | 15,981.8 | 15,981.8
+| M2 end | 12,597.6 | 12,597.6 | 12,597.6
+| M3 start | 12,597.6 | 12,597.6 | 12,597.6
+| M3 end | 9,213.4 | 9,213.4 | 9,213.4
+| M4 start | 9,213.4 | 9,213.4 | 9,213.4
+| M4 end | 5,829.2 | 5,829.2 | 5,829.2
+| M5 start | 5,829.2 | 5,829.2 | 5,829.2
+| M5 end | 2,445 | 2,445 | 2,445
+| M6 start | 2,445 | 2,445 | 2,445
+| M6 end | -939.2 | -939.2 | -939.2
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $0.00 upfront and $156.54 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $60,176.79
+| Reserve gap before the change | $40,810.76
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Discuss the remaining funding gapThe known amounts leave $939.23 to cover. Record any agreed funding or spending changes before reassessing.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Discuss the remaining funding gap
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+No new changes. The review uses the customer’s existing circumstances.
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $19,366.03
+| 1 | $4,082.08 | $7,466.29 | $0.00 | $0.00 | $15,981.82
+| 2 | $4,082.08 | $7,466.29 | $0.00 | $0.00 | $12,597.61
+| 3 | $4,082.08 | $7,466.29 | $0.00 | $0.00 | $9,213.40
+| 4 | $4,082.08 | $7,466.29 | $0.00 | $0.00 | $5,829.19
+| 5 | $4,082.08 | $7,466.29 | $0.00 | $0.00 | $2,444.98
+| 6 | $4,082.08 | $7,466.29 | $0.00 | $0.00 | -$939.23
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+03-thin-repair — Thin buffer and immediate repair
+Customer review
+Thin buffer and immediate repair
+Account 21101 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$7,552.23Before supported changes
+Remaining funding gap$7,552.23After supported changes
+First shortfall after changesImmediately
+Cash at period end$2,461.05After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Cover an urgent cash need
+Past overdrafts recovered before month endAvailable cash is under immediate pressureA one-time expense is dueCash reserves are below the planning targetRegular inflow exceeds spending
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 0 start · $7,552.23
+First remaining shortage after supported actions Month 0 start · $7,552.23
+Remaining funding need $7,552.23
+No supported cash intervention was established for this case.
+Calculated target $7,552.23 upfront and $0.00 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall.
+Month 0 start · $7,552.23 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Next review Month 0 start · Review available funding and protected payments before the first remaining shortfall.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 0 (start). The funding gap is unchanged at CAD 7,552.23.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 0 (start) | Month 0 (start)
+| Cash missing at first shortfall | $7,552.23 | $7,552.23
+| Lowest cash | -$7,552.23 | -$7,552.23
+| Closing cash | $2,461.05 | $2,461.05
+| Full funding need | $7,552.23 | $7,552.23
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 12,059 | -7,552.2 | -7,552.2
+| M0 end | 12,059 | -7,552.2 | -7,552.2
+| M1 start | 12,059 | -7,552.2 | -7,552.2
+| M1 end | 13,727.9 | -5,883.4 | -5,883.4
+| M2 start | 13,727.9 | -5,883.4 | -5,883.4
+| M2 end | 15,396.7 | -4,214.5 | -4,214.5
+| M3 start | 15,396.7 | -4,214.5 | -4,214.5
+| M3 end | 17,065.6 | -2,545.6 | -2,545.6
+| M4 start | 17,065.6 | -2,545.6 | -2,545.6
+| M4 end | 18,734.5 | -876.7 | -876.7
+| M5 start | 18,734.5 | -876.7 | -876.7
+| M5 end | 20,403.4 | 792.2 | 792.2
+| M6 start | 20,403.4 | 792.2 | 792.2
+| M6 end | 22,072.3 | 2,461.1 | 2,461.1
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $7,552.23 upfront and $0.00 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $73,431.09
+| Reserve gap before the change | $70,331.94
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Discuss the remaining funding gapThe known amounts leave $7,552.23 to cover. Record any agreed funding or spending changes before reassessing.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Discuss the remaining funding gap
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| One-time expense | $19,611.21 | Immediately · one time | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $19,611.21 | $0.00 | -$7,552.23
+| 1 | $21,280.09 | $19,611.21 | $0.00 | $0.00 | -$5,883.35
+| 2 | $21,280.09 | $19,611.21 | $0.00 | $0.00 | -$4,214.47
+| 3 | $21,280.09 | $19,611.21 | $0.00 | $0.00 | -$2,545.59
+| 4 | $21,280.09 | $19,611.21 | $0.00 | $0.00 | -$876.71
+| 5 | $21,280.09 | $19,611.21 | $0.00 | $0.00 | $792.17
+| 6 | $21,280.09 | $19,611.21 | $0.00 | $0.00 | $2,461.05
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+04-negative-b — Negative historical buffer
+Customer review
+Negative historical buffer
+Account 32078 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$2,513.04Before supported changes
+Remaining funding gap$2,513.04After supported changes
+First shortfall after changesImmediately
+Cash at period end-$1,225.26After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Cover an urgent cash need
+Past overdrafts recovered before month endAvailable cash is under immediate pressureReviewing existing circumstancesCash reserves are below the planning targetRegular inflow exceeds spending
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 0 start · $2,513.04
+First remaining shortage after supported actions Month 0 start · $2,513.04
+Remaining funding need $2,513.04
+No supported cash intervention was established for this case.
+Calculated target $2,513.04 upfront and $0.00 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall.
+Month 0 start · $2,513.04 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Next review Month 0 start · Review available funding and protected payments before the first remaining shortfall.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 0 (start). The funding gap is unchanged at CAD 2,513.04.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 0 (start) | Month 0 (start)
+| Cash missing at first shortfall | $2,513.04 | $2,513.04
+| Lowest cash | -$2,513.04 | -$2,513.04
+| Closing cash | -$1,225.26 | -$1,225.26
+| Full funding need | $2,513.04 | $2,513.04
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | -2,513 | -2,513 | -2,513
+| M0 end | -2,513 | -2,513 | -2,513
+| M1 start | -2,513 | -2,513 | -2,513
+| M1 end | -2,298.4 | -2,298.4 | -2,298.4
+| M2 start | -2,298.4 | -2,298.4 | -2,298.4
+| M2 end | -2,083.8 | -2,083.8 | -2,083.8
+| M3 start | -2,083.8 | -2,083.8 | -2,083.8
+| M3 end | -1,869.2 | -1,869.2 | -1,869.2
+| M4 start | -1,869.2 | -1,869.2 | -1,869.2
+| M4 end | -1,654.5 | -1,654.5 | -1,654.5
+| M5 start | -1,654.5 | -1,654.5 | -1,654.5
+| M5 end | -1,439.9 | -1,439.9 | -1,439.9
+| M6 start | -1,439.9 | -1,439.9 | -1,439.9
+| M6 end | -1,225.3 | -1,225.3 | -1,225.3
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $2,513.04 upfront and $0.00 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $12,638.04
+| Reserve gap before the change | $16,065.55
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Discuss the remaining funding gapThe known amounts leave $2,513.04 to cover. Record any agreed funding or spending changes before reassessing.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Discuss the remaining funding gap
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+No new changes. The review uses the customer’s existing circumstances.
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | -$2,513.04
+| 1 | $3,181.40 | $2,966.77 | $0.00 | $0.00 | -$2,298.41
+| 2 | $3,181.40 | $2,966.77 | $0.00 | $0.00 | -$2,083.78
+| 3 | $3,181.40 | $2,966.77 | $0.00 | $0.00 | -$1,869.15
+| 4 | $3,181.40 | $2,966.77 | $0.00 | $0.00 | -$1,654.52
+| 5 | $3,181.40 | $2,966.77 | $0.00 | $0.00 | -$1,439.89
+| 6 | $3,181.40 | $2,966.77 | $0.00 | $0.00 | -$1,225.26
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+negative_historical_buffer
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+05-zero-inflow — Zero typical inflow and organizer income reduction
+Customer review
+Zero typical inflow and organizer income reduction
+Account 26939 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$8,466.10After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Rebalance spending
+Reviewing existing circumstancesRegular spending exceeds inflow
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+No supported cash intervention was established for this case.
+Address the recurring cash-flow deficit Funding target
+Existing cash covers the modeled checkpoints while spending still exceeds inflows in some periods.
+Month 1 end · $157.32 of recurring deficit in Month 1
+No cash change is credited to the supported path.
+Review Confirm recurring inflows and which costs can actually change. Review later months in the ledger.
+Next review Month 7 start · Confirm replacement inflow before temporary income ends.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| review-recurring-deficit | Funding target | DERIVED | Existing cash covers the modeled checkpoints while spending still exceeds inflows in some periods.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $8,466.10 | $8,466.10
+| Closing cash | $8,466.10 | $8,466.10
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 9,410 | 9,410 | 9,410
+| M0 end | 9,410 | 9,410 | 9,410
+| M1 start | 9,410 | 9,410 | 9,410
+| M1 end | 9,252.7 | 9,252.7 | 9,252.7
+| M2 start | 9,252.7 | 9,252.7 | 9,252.7
+| M2 end | 9,095.4 | 9,095.4 | 9,095.4
+| M3 start | 9,095.4 | 9,095.4 | 9,095.4
+| M3 end | 8,938.1 | 8,938.1 | 8,938.1
+| M4 start | 8,938.1 | 8,938.1 | 8,938.1
+| M4 end | 8,780.7 | 8,780.7 | 8,780.7
+| M5 start | 8,780.7 | 8,780.7 | 8,780.7
+| M5 end | 8,623.4 | 8,623.4 | 8,623.4
+| M6 start | 8,623.4 | 8,623.4 | 8,623.4
+| M6 end | 8,466.1 | 8,466.1 | 8,466.1
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $2,548.56
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Confirm income after temporary support endsCheck the expected amount and date of replacement income; recovery is not automatically assumed.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Confirm income after temporary support ends
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Income level | 55% of usual income | From month 1 · for 6 months | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $9,410.02
+| 1 | $0.00 | $157.32 | $0.00 | $0.00 | $9,252.70
+| 2 | $0.00 | $157.32 | $0.00 | $0.00 | $9,095.38
+| 3 | $0.00 | $157.32 | $0.00 | $0.00 | $8,938.06
+| 4 | $0.00 | $157.32 | $0.00 | $0.00 | $8,780.74
+| 5 | $0.00 | $157.32 | $0.00 | $0.00 | $8,623.42
+| 6 | $0.00 | $157.32 | $0.00 | $0.00 | $8,466.10
+Download cash-flow spreadsheet
+Assumptions and limitations
+This horizon does not establish replacement income after temporary inflows end.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+zero_recent_median_inflow, zero_typical_inflow
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+06-zero-spending — Zero typical spending and repair equal to spending
+Customer review
+Zero typical spending and repair equal to spending
+Account 20578 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$29,936.51After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Further financial review
+Reviewing existing circumstancesRegular inflow exceeds spending
+The initial suggestion was “Plan for additional funds”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+Maintain the current viable plan Maintain and monitor
+No new action is justified on the modeled evidence.
+No cash change is credited to the supported path.
+Review Reassess when new cash, income or obligation evidence is available.
+Next review Reassess when new cash, income or obligation evidence is available.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| maintain-and-monitor | Maintain and monitor | DERIVED | No new action is justified on the modeled evidence.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $25,405.79 | $25,405.79
+| Closing cash | $29,936.51 | $29,936.51
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 25,405.8 | 25,405.8 | 25,405.8
+| M0 end | 25,405.8 | 25,405.8 | 25,405.8
+| M1 start | 25,405.8 | 25,405.8 | 25,405.8
+| M1 end | 26,160.9 | 26,160.9 | 26,160.9
+| M2 start | 26,160.9 | 26,160.9 | 26,160.9
+| M2 end | 26,916 | 26,916 | 26,916
+| M3 start | 26,916 | 26,916 | 26,916
+| M3 end | 27,671.2 | 27,671.2 | 27,671.2
+| M4 start | 27,671.2 | 27,671.2 | 27,671.2
+| M4 end | 28,426.3 | 28,426.3 | 28,426.3
+| M5 start | 28,426.3 | 28,426.3 | 28,426.3
+| M5 end | 29,181.4 | 29,181.4 | 29,181.4
+| M6 start | 29,181.4 | 29,181.4 | 29,181.4
+| M6 end | 29,936.5 | 29,936.5 | 29,936.5
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $0.00
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| One-time expense | $0.00 | Immediately · one time | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $25,405.79
+| 1 | $755.12 | $0.00 | $0.00 | $0.00 | $26,160.91
+| 2 | $755.12 | $0.00 | $0.00 | $0.00 | $26,916.03
+| 3 | $755.12 | $0.00 | $0.00 | $0.00 | $27,671.15
+| 4 | $755.12 | $0.00 | $0.00 | $0.00 | $28,426.27
+| 5 | $755.12 | $0.00 | $0.00 | $0.00 | $29,181.39
+| 6 | $755.12 | $0.00 | $0.00 | $0.00 | $29,936.51
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+zero_typical_spending
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+07-zero-bills — Zero recorded household bills and 15% bill shock
+Customer review
+Zero recorded household bills and 15% bill shock
+Account 20111 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$4,050.54After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Protect essential payments
+Existing obligations need attentionPast overdrafts recovered before month endReviewing existing circumstancesRegular spending exceeds inflowCash reserves are below the planning target
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+No supported cash intervention was established for this case.
+Address the recurring cash-flow deficit Funding target
+Existing cash covers the modeled checkpoints while spending still exceeds inflows in some periods.
+Month 1 end · $2,260.22 of recurring deficit in Month 1
+No cash change is credited to the supported path.
+Review Confirm recurring inflows and which costs can actually change. Review later months in the ledger.
+Next review Reassess when new cash, income or obligation evidence is available.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| review-recurring-deficit | Funding target | DERIVED | Existing cash covers the modeled checkpoints while spending still exceeds inflows in some periods.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $4,050.54 | $4,050.54
+| Closing cash | $4,050.54 | $4,050.54
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 17,611.9 | 17,611.9 | 17,611.9
+| M0 end | 17,611.9 | 17,611.9 | 17,611.9
+| M1 start | 17,611.9 | 17,611.9 | 17,611.9
+| M1 end | 15,351.6 | 15,351.6 | 15,351.6
+| M2 start | 15,351.6 | 15,351.6 | 15,351.6
+| M2 end | 13,091.4 | 13,091.4 | 13,091.4
+| M3 start | 13,091.4 | 13,091.4 | 13,091.4
+| M3 end | 10,831.2 | 10,831.2 | 10,831.2
+| M4 start | 10,831.2 | 10,831.2 | 10,831.2
+| M4 end | 8,571 | 8,571 | 8,571
+| M5 start | 8,571 | 8,571 | 8,571
+| M5 end | 6,310.8 | 6,310.8 | 6,310.8
+| M6 start | 6,310.8 | 6,310.8 | 6,310.8
+| M6 end | 4,050.5 | 4,050.5 | 4,050.5
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $32,314.41
+| Reserve gap before the change | $21,451.76
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Confirm payment terms and any reliefCheck due dates, fees and authority for any proposed pause or change before taking action.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Confirm payment terms and any relief
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Household bills | 15% increase | From month 1 · for 6 months | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $17,611.86
+| 1 | $6,339.39 | $8,599.61 | $0.00 | $0.00 | $15,351.64
+| 2 | $6,339.39 | $8,599.61 | $0.00 | $0.00 | $13,091.42
+| 3 | $6,339.39 | $8,599.61 | $0.00 | $0.00 | $10,831.20
+| 4 | $6,339.39 | $8,599.61 | $0.00 | $0.00 | $8,570.98
+| 5 | $6,339.39 | $8,599.61 | $0.00 | $0.00 | $6,310.76
+| 6 | $6,339.39 | $8,599.61 | $0.00 | $0.00 | $4,050.54
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Recorded payment pressure does not establish current APR, deferral approval or payment release.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+08-deferral — Active loan with hypothetical included deferral and a $50 catch-up premium
+Customer review
+Active loan with hypothetical included deferral and a $50 catch-up premium
+Account 20134 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$15,934.34After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Protect essential payments
+Several circumstances are changingRegular costs are reducingLoan payments are changingA one-time expense is dueCash reserves are below the planning targetRegular inflow exceeds spending
+The initial suggestion was “Cover an urgent cash need”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+No supported cash intervention was established for this case.
+Address the recurring cash-flow deficit Funding target
+Existing cash covers the modeled checkpoints while spending still exceeds inflows in some periods.
+Month 3 end · $102.52 of recurring deficit in Month 3
+No cash change is credited to the supported path.
+Review Confirm recurring inflows and which costs can actually change. Review later months in the ledger.
+Review the loan deferral and catch-up payment Conditional review
+This change is already stipulated in the scenario. Compare the timing benefit and repayment cost separately.
+Month 1 end to Month 2 end · $250.00 per deferred month
+Separate comparison with and without the stipulated deferral · Funding need is unchanged. First shortage none → none.
+Catch-up payment $550.00 at Month 4 start.
+The separate comparison adds no cash to the primary action path.
+Review Confirm authorization, baseline inclusion, full fees and repayment terms with the lender.
+Next review Month 4 start · Review the cash available before the loan catch-up is due.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| deferral:loan-deferral | Conditional review | JUDGE_SPECIFIED | This change is already stipulated in the scenario. Compare the timing benefit and repayment cost separately.
+| review-recurring-deficit | Funding target | DERIVED | Existing cash covers the modeled checkpoints while spending still exceeds inflows in some periods.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $15,934.34 | $15,934.34
+| Closing cash | $15,934.34 | $15,934.34
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 16,599.5 | 16,599.5 | 16,599.5
+| M0 end | 16,599.5 | 16,599.5 | 16,599.5
+| M1 start | 16,599.5 | 16,599.5 | 16,599.5
+| M1 end | 16,496.9 | 16,746.9 | 16,746.9
+| M2 start | 16,496.9 | 16,746.9 | 16,746.9
+| M2 end | 16,394.4 | 16,894.4 | 16,894.4
+| M3 start | 16,394.4 | 16,894.4 | 16,894.4
+| M3 end | 16,291.9 | 16,791.9 | 16,791.9
+| M4 start | 16,291.9 | 16,241.9 | 16,241.9
+| M4 end | 16,189.4 | 16,139.4 | 16,139.4
+| M5 start | 16,189.4 | 16,139.4 | 16,139.4
+| M5 end | 16,086.9 | 16,036.9 | 16,036.9
+| M6 start | 16,086.9 | 16,036.9 | 16,036.9
+| M6 end | 15,984.3 | 15,934.3 | 15,934.3
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $24,842.28
+| Reserve gap before the change | $12,564.03
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Confirm payment terms and any reliefCheck due dates, fees and authority for any proposed pause or change before taking action.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Confirm payment terms and any relief
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Loan payment | $250.00 less per month | From month 1 · for 2 months | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $16,599.46
+| 1 | $7,958.00 | $7,810.52 | $0.00 | $0.00 | $16,746.94
+| 2 | $7,958.00 | $7,810.52 | $0.00 | $0.00 | $16,894.42
+| 3 | $7,958.00 | $8,060.52 | $0.00 | $0.00 | $16,791.90
+| 4 | $7,958.00 | $8,060.52 | $550.00 | $0.00 | $16,139.38
+| 5 | $7,958.00 | $8,060.52 | $0.00 | $0.00 | $16,036.86
+| 6 | $7,958.00 | $8,060.52 | $0.00 | $0.00 | $15,934.34
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Recorded payment pressure does not establish current APR, deferral approval or payment release.
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+09-short-recent — Shortest available recent history; no invented current evidence
+Customer review
+Shortest available recent history; no invented current evidence
+Account 31500 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$7,508.92After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Further financial review
+Reviewing existing circumstances
+The initial suggestion was “Rebuild cash reserves”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+Verify the current account position Evidence needed
+The account history is stale for a current savings or spending decision.
+No cash change is credited to the supported path.
+Review Obtain recent cash and commitment evidence before changing the plan.
+Next review Month 0 start · Obtain recent cash and commitment evidence before changing the plan.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| review-stale-history | Evidence needed | OBSERVED, UNKNOWN_OR_CONFLICTING | The account history is stale for a current savings or spending decision.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $7,508.92 | $7,508.92
+| Closing cash | $7,508.92 | $7,508.92
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 7,508.9 | 7,508.9 | 7,508.9
+| M0 end | 7,508.9 | 7,508.9 | 7,508.9
+| M1 start | 7,508.9 | 7,508.9 | 7,508.9
+| M1 end | 7,508.9 | 7,508.9 | 7,508.9
+| M2 start | 7,508.9 | 7,508.9 | 7,508.9
+| M2 end | 7,508.9 | 7,508.9 | 7,508.9
+| M3 start | 7,508.9 | 7,508.9 | 7,508.9
+| M3 end | 7,508.9 | 7,508.9 | 7,508.9
+| M4 start | 7,508.9 | 7,508.9 | 7,508.9
+| M4 end | 7,508.9 | 7,508.9 | 7,508.9
+| M5 start | 7,508.9 | 7,508.9 | 7,508.9
+| M5 end | 7,508.9 | 7,508.9 | 7,508.9
+| M6 start | 7,508.9 | 7,508.9 | 7,508.9
+| M6 end | 7,508.9 | 7,508.9 | 7,508.9
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $94.38
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+No new changes. The review uses the customer’s existing circumstances.
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+| 1 | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+| 2 | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+| 3 | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+| 4 | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+| 5 | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+| 6 | $0.00 | $0.00 | $0.00 | $0.00 | $7,508.92
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+fewer_than_12_recent_months, stale_history, zero_typical_inflow, zero_typical_spending
+Rebuild cash reserves proposal does not establish recovery; updated checkpoint required.
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+10-shared — Shared access and a hypothetical emergency expense
+Customer review
+Shared access and a hypothetical emergency expense
+Account 20303 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$14,249.16After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Cover an urgent cash need
+A one-time expense is dueRegular inflow exceeds spending
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+Maintain the current viable plan Maintain and monitor
+No new action is justified on the modeled evidence.
+No cash change is credited to the supported path.
+Review Reassess when new cash, income or obligation evidence is available.
+Next review Reassess when new cash, income or obligation evidence is available.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| maintain-and-monitor | Maintain and monitor | DERIVED | No new action is justified on the modeled evidence.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $10,562.28 | $10,562.28
+| Closing cash | $14,249.16 | $14,249.16
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 10,862.3 | 10,562.3 | 10,562.3
+| M0 end | 10,862.3 | 10,562.3 | 10,562.3
+| M1 start | 10,862.3 | 10,562.3 | 10,562.3
+| M1 end | 11,476.8 | 11,176.8 | 11,176.8
+| M2 start | 11,476.8 | 11,176.8 | 11,176.8
+| M2 end | 12,091.2 | 11,791.2 | 11,791.2
+| M3 start | 12,091.2 | 11,791.2 | 11,791.2
+| M3 end | 12,705.7 | 12,405.7 | 12,405.7
+| M4 start | 12,705.7 | 12,405.7 | 12,405.7
+| M4 end | 13,320.2 | 13,020.2 | 13,020.2
+| M5 start | 13,320.2 | 13,020.2 | 13,020.2
+| M5 end | 13,934.7 | 13,634.7 | 13,634.7
+| M6 start | 13,934.7 | 13,634.7 | 13,634.7
+| M6 end | 14,549.2 | 14,249.2 | 14,249.2
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $4,284.03
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| One-time expense | $300.00 | Immediately · one time | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $300.00 | $0.00 | $10,562.28
+| 1 | $2,042.49 | $1,428.01 | $0.00 | $0.00 | $11,176.76
+| 2 | $2,042.49 | $1,428.01 | $0.00 | $0.00 | $11,791.24
+| 3 | $2,042.49 | $1,428.01 | $0.00 | $0.00 | $12,405.72
+| 4 | $2,042.49 | $1,428.01 | $0.00 | $0.00 | $13,020.20
+| 5 | $2,042.49 | $1,428.01 | $0.00 | $0.00 | $13,634.68
+| 6 | $2,042.49 | $1,428.01 | $0.00 | $0.00 | $14,249.16
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+11-income — Temporary reduction in account inflows
+Customer review
+Temporary reduction in account inflows
+Account 20133 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$12,818.89Before supported changes
+Remaining funding gap$12,818.89After supported changes
+First shortfall after changesEnd of month 5
+Cash at period end-$12,818.89After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Maintain income
+Income is reducingRegular spending exceeds inflowCash reserves are below the planning target
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 5 end · $5,649.42
+First remaining shortage after supported actions Month 5 end · $5,649.42
+Remaining funding need $12,818.89
+No supported cash intervention was established for this case.
+Calculated target $0.00 upfront and $2,136.49 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall.
+Month 5 end · $12,818.89 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Next review Month 5 end · Review available funding and protected payments before the first remaining shortfall.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 5 (end). The funding gap is unchanged at CAD 12,818.89.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 5 (end) | Month 5 (end)
+| Cash missing at first shortfall | $5,649.42 | $5,649.42
+| Lowest cash | -$12,818.89 | -$12,818.89
+| Closing cash | -$12,818.89 | -$12,818.89
+| Full funding need | $12,818.89 | $12,818.89
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 30,197.9 | 30,197.9 | 30,197.9
+| M0 end | 30,197.9 | 30,197.9 | 30,197.9
+| M1 start | 30,197.9 | 30,197.9 | 30,197.9
+| M1 end | 33,915.8 | 23,028.5 | 23,028.5
+| M2 start | 33,915.8 | 23,028.5 | 23,028.5
+| M2 end | 37,633.6 | 15,859 | 15,859
+| M3 start | 37,633.6 | 15,859 | 15,859
+| M3 end | 41,351.5 | 8,689.5 | 8,689.5
+| M4 start | 41,351.5 | 8,689.5 | 8,689.5
+| M4 end | 45,069.3 | 1,520.1 | 1,520.1
+| M5 start | 45,069.3 | 1,520.1 | 1,520.1
+| M5 end | 48,787.2 | -5,649.4 | -5,649.4
+| M6 start | 48,787.2 | -5,649.4 | -5,649.4
+| M6 end | 52,505 | -12,818.9 | -12,818.9
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $0.00 upfront and $2,136.49 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $43,210.29
+| Reserve gap before the change | $13,012.37
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Discuss the remaining funding gapThe known amounts leave $12,818.89 to cover. Record any agreed funding or spending changes before reassessing.
+Confirm income after temporary support endsCheck the expected amount and date of replacement income; recovery is not automatically assumed.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Discuss the remaining funding gap
+To do: Confirm income after temporary support ends
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Income level | 55% of usual income | From month 1 · for 6 months | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $30,197.93
+| 1 | $13,306.72 | $20,476.19 | $0.00 | $0.00 | $23,028.46
+| 2 | $13,306.72 | $20,476.19 | $0.00 | $0.00 | $15,858.99
+| 3 | $13,306.72 | $20,476.19 | $0.00 | $0.00 | $8,689.52
+| 4 | $13,306.72 | $20,476.19 | $0.00 | $0.00 | $1,520.05
+| 5 | $13,306.72 | $20,476.19 | $0.00 | $0.00 | -$5,649.42
+| 6 | $13,306.72 | $20,476.19 | $0.00 | $0.00 | -$12,818.89
+Download cash-flow spreadsheet
+Assumptions and limitations
+This horizon does not establish replacement income after temporary inflows end.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+12-compound — Compound income, bills and repair with a supplied pause schedule
+Customer review
+Compound income, bills and repair with a supplied pause schedule
+Account 20143 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$70,008.18Before supported changes
+Remaining funding gap$69,408.18After supported changes
+First shortfall after changesEnd of month 3
+Cash at period end-$69,408.18After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Coordinate several financial pressures
+Several circumstances are changingRegular costs are increasingIncome is reducingA one-time expense is dueRegular spending exceeds inflowCash reserves are below the planning target
+Also consider: Maintain income; Rebalance spending.
+Impact on the savings goal
+Review supported payment pauses
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 3 end · $15,356.28
+First remaining shortage after supported actions Month 3 end · $15,056.28
+Remaining funding need $69,408.18
+Calculated target $0.00 upfront and $11,568.03 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Pause the approved existing transfers Supported in the model
+The modeled pauses improve cash at the original shortfall.
+Month 1 end to Month 6 end · $600.00 total across selected payments · Fees $0.00
+Revised goal, before and after the selected pause bundle · Funding need decreases by $600.00. First shortage Month 3 end → Month 3 end.
+Only included payments are retained, once each. Fees post at month start.
+Review Verify each payment, approval and fee before acting.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall.
+Month 3 end · $69,408.18 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Review whether the bill date can move Conditional review
+The separate daily replay shows a benefit under its assumptions.
+$4,109.76 median recorded payment
+Separate daily replay · first payment 2025-07-11 → 2025-07-18 · first shortage 2025-09-11 → 2025-09-13 · funding need $74,158.65 → $74,158.65.
+No cash change is credited to the supported path.
+Review Confirm the specific bill, effective date, approval and fee. Keep the daily cash basis separate.
+Next review Month 1 start · Confirm the pause is in effect and check the fee before this payment.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| pause:approved-goal-1 | Supported in the model | JUDGE_SPECIFIED | This payment passes the modeled funding, timing or reserve check in the selected sequence.
+| pause:approved-goal-2 | Supported in the model | JUDGE_SPECIFIED | This payment passes the modeled funding, timing or reserve check in the selected sequence.
+| pause:approved-goal-3 | Supported in the model | JUDGE_SPECIFIED | This payment passes the modeled funding, timing or reserve check in the selected sequence.
+| pause:approved-goal-4 | Supported in the model | JUDGE_SPECIFIED | This payment passes the modeled funding, timing or reserve check in the selected sequence.
+| pause:approved-goal-5 | Supported in the model | JUDGE_SPECIFIED | This payment passes the modeled funding, timing or reserve check in the selected sequence.
+| pause:approved-goal-6 | Supported in the model | JUDGE_SPECIFIED | This payment passes the modeled funding, timing or reserve check in the selected sequence.
+| historical-bill-shift | Conditional review | OBSERVED, ASSUMED_FOR_COMPARISON | The separate daily replay shows a benefit under its assumptions.
+| selected-pause-bundle | Supported in the model | JUDGE_SPECIFIED | The modeled pauses improve cash at the original shortfall.
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 3 (end). The modeled revised plan reduces the funding gap from CAD 70,008.18 to CAD 69,408.18, a decrease of CAD 600.00.
+6 supported transfer pauses retain CAD 600.00 before CAD 0.00 of fees (CAD 600.00 net).
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 3 (end) | Month 3 (end)
+| Cash missing at first shortfall | $15,356.28 | $15,056.28
+| Lowest cash | -$70,008.18 | -$69,408.18
+| Closing cash | -$70,008.18 | -$69,408.18
+| Full funding need | $70,008.18 | $69,408.18
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 39,545.6 | 39,295.6 | 39,295.6
+| M0 end | 39,545.6 | 39,295.6 | 39,295.6
+| M1 start | 39,545.6 | 39,295.6 | 39,295.6
+| M1 end | 35,836.6 | 21,078.3 | 21,178.3
+| M2 start | 35,836.6 | 21,078.3 | 21,178.3
+| M2 end | 32,127.5 | 2,861 | 3,061
+| M3 start | 32,127.5 | 2,861 | 3,061
+| M3 end | 28,418.5 | -15,356.3 | -15,056.3
+| M4 start | 28,418.5 | -15,356.3 | -15,056.3
+| M4 end | 24,709.5 | -33,573.6 | -33,173.6
+| M5 start | 24,709.5 | -33,573.6 | -33,173.6
+| M5 end | 21,000.4 | -51,790.9 | -51,290.9
+| M6 start | 21,000.4 | -51,790.9 | -51,290.9
+| M6 end | 17,291.4 | -70,008.2 | -69,408.2
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $0.00 upfront and $11,668.03 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $101,873.97
+| Reserve gap before the change | $78,115.31
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Discuss the remaining funding gapThe known amounts leave $69,408.18 to cover. Record any agreed funding or spending changes before reassessing.
+Confirm income after temporary support endsCheck the expected amount and date of replacement income; recovery is not automatically assumed.
+Confirm payment terms and any reliefCheck due dates, fees and authority for any proposed pause or change before taking action.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Discuss the remaining funding gap
+To do: Confirm income after temporary support ends
+To do: Confirm payment terms and any relief
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Income level | 55% of usual income | From month 1 · for 6 months | Provided information
+| Household bills | 15% increase | From month 1 · for 6 months | Provided information
+| One-time expense | $250.00 | Immediately · one time | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $250.00 | $0.00 | $39,295.62
+| 1 | $16,978.86 | $35,196.16 | $0.00 | $0.00 | $21,078.32
+| 2 | $16,978.86 | $35,196.16 | $0.00 | $0.00 | $2,861.02
+| 3 | $16,978.86 | $35,196.16 | $0.00 | $0.00 | -$15,356.28
+| 4 | $16,978.86 | $35,196.16 | $0.00 | $0.00 | -$33,573.58
+| 5 | $16,978.86 | $35,196.16 | $0.00 | $0.00 | -$51,790.88
+| 6 | $16,978.86 | $35,196.16 | $0.00 | $0.00 | -$70,008.18
+Download cash-flow spreadsheet
+Payment pause decisions
+| Payment | Outcome | Reason
+| approved-goal-1 | included | supported_financial_purpose
+| approved-goal-2 | included | supported_financial_purpose
+| approved-goal-3 | included | supported_financial_purpose
+| approved-goal-4 | included | supported_financial_purpose
+| approved-goal-5 | included | supported_financial_purpose
+| approved-goal-6 | included | supported_financial_purpose
+Assumptions and limitations
+This horizon does not establish replacement income after temporary inflows end.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+13-late-receipt — Receipt arrives after the first shortage
+Customer review
+Receipt arrives after the first shortage
+Account 21817 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$6,443.58Before supported changes
+Remaining funding gap$6,443.58After supported changes
+First shortfall after changesEnd of month 2
+Cash at period end-$6,443.58After supported changes
+Opening cash uses the supplied scenario figure. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Rebalance spending
+Past overdrafts recovered before month endRegular spending exceeds inflowCash reserves are below the planning targetAdditional funds are expected
+The initial suggestion was “Plan for additional funds”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 2 end · $1,288.72
+First remaining shortage after supported actions Month 2 end · $1,288.72
+Remaining funding need $6,443.58
+No supported cash intervention was established for this case.
+Calculated target $0.00 upfront and $1,073.93 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall. The Month 3 start receipt arrives after that shortage.
+Month 2 end · $6,443.58 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Next review Month 2 end · Review available funding and protected payments before the first remaining shortfall.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall. The Month 3 start receipt arrives after that shortage.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 2 (end). The funding gap is unchanged at CAD 6,443.58.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 2 (end) | Month 2 (end)
+| Cash missing at first shortfall | $1,288.72 | $1,288.72
+| Lowest cash | -$6,443.58 | -$6,443.58
+| Closing cash | -$6,443.58 | -$6,443.58
+| Full funding need | $6,443.58 | $6,443.58
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 3,866.1 | 3,866.1 | 3,866.1
+| M0 end | 3,866.1 | 3,866.1 | 3,866.1
+| M1 start | 3,866.1 | 3,866.1 | 3,866.1
+| M1 end | 1,288.7 | 1,288.7 | 1,288.7
+| M2 start | 1,288.7 | 1,288.7 | 1,288.7
+| M2 end | -1,288.7 | -1,288.7 | -1,288.7
+| M3 start | -1,288.7 | 3,866.1 | 3,866.1
+| M3 end | -3,866.2 | 1,288.7 | 1,288.7
+| M4 start | -3,866.2 | 1,288.7 | 1,288.7
+| M4 end | -6,443.6 | -1,288.7 | -1,288.7
+| M5 start | -6,443.6 | -1,288.7 | -1,288.7
+| M5 end | -9,021 | -3,866.2 | -3,866.2
+| M6 start | -9,021 | -3,866.2 | -3,866.2
+| M6 end | -11,598.4 | -6,443.6 | -6,443.6
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $0.00 upfront and $1,073.93 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $5,960.40
+| Reserve gap before the change | $4,017.25
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Discuss the remaining funding gapThe known amounts leave $6,443.58 to cover. Record any agreed funding or spending changes before reassessing.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Discuss the remaining funding gap
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Additional funds | $5,154.86 | From month 3 · one time | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $3,866.14
+| 1 | $20,148.41 | $22,725.84 | $0.00 | $0.00 | $1,288.71
+| 2 | $20,148.41 | $22,725.84 | $0.00 | $0.00 | -$1,288.72
+| 3 | $20,148.41 | $22,725.84 | $0.00 | $5,154.86 | $1,288.71
+| 4 | $20,148.41 | $22,725.84 | $0.00 | $0.00 | -$1,288.72
+| 5 | $20,148.41 | $22,725.84 | $0.00 | $0.00 | -$3,866.15
+| 6 | $20,148.41 | $22,725.84 | $0.00 | $0.00 | -$6,443.58
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash is explicitly supplied for this scenario, not verified live banking data.
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Source not recorded
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+14-hold — Temporary hold limits access to existing cash
+Customer review
+Temporary hold limits access to existing cash
+Account 21214 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+A funding gap remains.
+Funding discussion needed
+Additional cash needed$50.00Before supported changes
+Remaining funding gap$50.00After supported changes
+First shortfall after changesImmediately
+Cash at period end$15,938.55After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Address payment timing and access
+Cash reserves are below the planning targetRegular inflow exceeds spendingPayment timing or access needs review
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Month 0 start · $50.00
+First remaining shortage after supported actions Month 0 start · $50.00
+Remaining funding need $50.00
+No supported cash intervention was established for this case.
+Calculated target $50.00 upfront and $0.00 per month starting at Month 1 end. Confirm a source before relying on these amounts.
+Cover the remaining funding gap Funding target
+Protect the obligations at the earliest remaining shortfall.
+Month 0 start · $50.00 additional starting cash across the horizon
+No cash change is credited to the supported path.
+Review Identify a dated source of cash or an authorized adjustable expense, then rerun the full ledger.
+Next review Month 0 start · Review available funding and protected payments before the first remaining shortfall.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| remaining-funding-target | Funding target | DERIVED | Protect the obligations at the earliest remaining shortfall.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Modeled liquidity protection Follow the engine’s revised contribution and supported pause decisions. Any remaining cash requirement is shown below.
+First shortfall remains at Month 0 (start). The funding gap is unchanged at CAD 50.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | Month 0 (start) | Month 0 (start)
+| Cash missing at first shortfall | $50.00 | $50.00
+| Lowest cash | -$50.00 | -$50.00
+| Closing cash | $15,938.55 | $15,938.55
+| Full funding need | $50.00 | $50.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 13,844.1 | -50 | -50
+| M0 end | 13,844.1 | -50 | -50
+| M1 start | 13,844.1 | -50 | -50
+| M1 end | 14,193.2 | 299.1 | 299.1
+| M2 start | 14,193.2 | 299.1 | 299.1
+| M2 end | 14,542.2 | 648.2 | 648.2
+| M3 start | 14,542.2 | 14,542.2 | 14,542.2
+| M3 end | 14,891.3 | 14,891.3 | 14,891.3
+| M4 start | 14,891.3 | 14,891.3 | 14,891.3
+| M4 end | 15,240.4 | 15,240.4 | 15,240.4
+| M5 start | 15,240.4 | 15,240.4 | 15,240.4
+| M5 end | 15,589.5 | 15,589.5 | 15,589.5
+| M6 start | 15,589.5 | 15,589.5 | 15,589.5
+| M6 end | 15,938.6 | 15,938.6 | 15,938.6
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+What would need to improve?
+The projection requires $50.00 upfront and $0.00 of monthly improvement before any additional action.
+This is the calculated amount to address. It does not establish that spending can be cut or that funding is available. Record supported changes and reassess.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $53,578.50
+| Reserve gap before the change | $39,734.43
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Discuss the remaining funding gapThe known amounts leave $50.00 to cover. Record any agreed funding or spending changes before reassessing.
+Confirm payment terms and any reliefCheck due dates, fees and authority for any proposed pause or change before taking action.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Discuss the remaining funding gap
+To do: Confirm payment terms and any relief
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Cash temporarily unavailable | $13,894.07 | Immediately · for 2 months | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | -$50.00
+| 1 | $16,069.07 | $15,719.99 | $0.00 | $0.00 | $299.08
+| 2 | $16,069.07 | $15,719.99 | $0.00 | $0.00 | $648.16
+| 3 | $16,069.07 | $15,719.99 | $0.00 | $0.00 | $14,891.31
+| 4 | $16,069.07 | $15,719.99 | $0.00 | $0.00 | $15,240.39
+| 5 | $16,069.07 | $15,719.99 | $0.00 | $0.00 | $15,589.47
+| 6 | $16,069.07 | $15,719.99 | $0.00 | $0.00 | $15,938.55
+Download cash-flow spreadsheet
+Assumptions and limitations
+Honoring the modeled payments while preserving held funds requires additional accessible cash in month 0; no borrowing is assumed.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Recorded payment pressure does not establish current APR, deferral approval or payment release.
+This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+15-unknown — Unpriced income change
+Customer review
+Unpriced income change
+Account 20176 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+Confirm the outstanding information.
+Incomplete information
+Additional cash neededNot establishedKnown amounts leave $0.00
+Remaining funding gapNot establishedKnown amounts leave $0.00
+First shortfall after changesNot established
+Cash at period end$15,425.08Known amounts only
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Rebalance spending
+Some information remains unconfirmedRegular inflow exceeds spending
+The initial suggestion was “Rebuild cash reserves”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Known components only · Not established
+First remaining shortage after supported actions Known components only · Not established
+Remaining funding need Full funding need not established
+Verify the missing financial terms Evidence needed
+Full funding need is not established.
+No cash change is credited to the supported path.
+Review Event 1 · Confirm the amount or percentage and its source. Confirm the duration of effect 1 (income_delta), or mark it explicitly ongoing. Confirm the financial value and timing of effect 1 (income_delta).
+Next review Month 0 start · Confirm missing material scenario terms before relying on the projection.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| verify-material-inputs | Evidence needed | UNKNOWN_OR_CONFLICTING | Full funding need is not established.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Review required Incomplete evidence or an existing goal review prevents an unrestricted contribution conclusion.
+Partial projection · Known components. Missing evidence can change the shortfall and required cash. Full funding need: Not established.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Information behind this comparison
+Event 1 · Confirm the amount or percentage and its source.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| Known components · First shortfall | Not established | Not established
+| Known components · Cash missing at first shortfall | Not established | Not established
+| Known components · Lowest cash | $15,425.08 | $15,425.08
+| Known components · Closing cash | $15,425.08 | $15,425.08
+| Full funding need | Not established | Not established
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Known cash components by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 34,694.3 | 34,694.3 | 34,694.3
+| M0 end | 34,694.3 | 34,694.3 | 34,694.3
+| M1 start | 34,694.3 | 34,694.3 | 34,694.3
+| M1 end | 35,764.1 | 31,482.8 | 31,482.8
+| M2 start | 35,764.1 | 31,482.8 | 31,482.8
+| M2 end | 36,833.8 | 28,271.2 | 28,271.2
+| M3 start | 36,833.8 | 28,271.2 | 28,271.2
+| M3 end | 37,903.6 | 25,059.7 | 25,059.7
+| M4 start | 37,903.6 | 25,059.7 | 25,059.7
+| M4 end | 38,973.4 | 21,848.2 | 21,848.2
+| M5 start | 38,973.4 | 21,848.2 | 21,848.2
+| M5 end | 40,043.1 | 18,636.6 | 18,636.6
+| M6 start | 40,043.1 | 18,636.6 | 18,636.6
+| M6 end | 41,112.9 | 15,425.1 | 15,425.1
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $11,144.88
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Information to confirm
+Confirm the duration of effect 1 (Regular income), or mark it explicitly ongoing.
+Confirm the financial value and timing of effect 1 (Regular income).
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Confirm the missing amounts and datesResolve the information listed under “Information to confirm” and update the assessment.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Confirm the missing amounts and dates
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Regular income | Amount to confirm | From month 1 · timing / duration to confirm | Not yet confirmed
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $34,694.32
+| 1 | Not established | $3,211.54 | $0.00 | $0.00 | $31,482.78
+| 2 | Not established | $3,211.54 | $0.00 | $0.00 | $28,271.24
+| 3 | Not established | $3,211.54 | $0.00 | $0.00 | $25,059.70
+| 4 | Not established | $3,211.54 | $0.00 | $0.00 | $21,848.16
+| 5 | Not established | $3,211.54 | $0.00 | $0.00 | $18,636.62
+| 6 | Not established | $3,211.54 | $0.00 | $0.00 | $15,425.08
+Download cash-flow spreadsheet
+Assumptions and limitations
+Only known amounts are included; no complete funding conclusion is established.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Rebuild cash reserves proposal does not establish recovery; updated checkpoint required.
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+Confirm the duration of effect 1 (Regular income), or mark it explicitly ongoing.
+Confirm the financial value and timing of effect 1 (Regular income).
+This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+16-recovery — Separate hypothetical recovery checkpoint
+Customer review
+Separate hypothetical recovery checkpoint
+Account 20160 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+Confirm the outstanding information.
+Incomplete information
+Additional cash neededNot establishedKnown amounts leave $0.00
+Remaining funding gapNot establishedKnown amounts leave $0.00
+First shortfall after changesNot established
+Cash at period end$30,627.51Known amounts only
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Rebalance spending
+Reviewing existing circumstancesThe customer is rebuildingRegular spending exceeds inflowCash reserves are below the planning target
+Also consider: Rebuild cash reserves.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Known components only · Not established
+First remaining shortage after supported actions Known components only · Not established
+Remaining funding need Full funding need not established
+Review the separate reserve checkpoint Conditional review
+Rebuild liquid reserves; contributions remain liquid cash, not investment returns.
+$300.00 per month at the supplied checkpoint
+No cash change is credited to the supported path.
+Review Confirm cash, covered obligations, stability and a sustainable contribution before committing.
+Next review 2026-11 · Reassess stability and contribution capacity at the supplied recovery checkpoint.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| historical-bill-shift | Evidence needed | OBSERVED, ASSUMED_FOR_COMPARISON | The replay did not improve timing or funding without a worse outcome elsewhere.
+| review-recovery-checkpoint | Conditional review | JUDGE_SPECIFIED | Rebuild liquid reserves; contributions remain liquid cash, not investment returns.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Review required Incomplete evidence or an existing goal review prevents an unrestricted contribution conclusion.
+Partial projection · Known components. Missing evidence can change the shortfall and required cash. Full funding need: Not established.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Information behind this comparison
+Recovery phase alone does not establish updated cash or income; this is a baseline reference, with recovery assessed separately.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| Known components · First shortfall | Not established | Not established
+| Known components · Cash missing at first shortfall | Not established | Not established
+| Known components · Lowest cash | $30,627.51 | $30,627.51
+| Known components · Closing cash | $30,627.51 | $30,627.51
+| Full funding need | Not established | Not established
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Known cash components by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 31,662.5 | 31,662.5 | 31,662.5
+| M0 end | 31,662.5 | 31,662.5 | 31,662.5
+| M1 start | 31,662.5 | 31,662.5 | 31,662.5
+| M1 end | 31,490 | 31,490 | 31,490
+| M2 start | 31,490 | 31,490 | 31,490
+| M2 end | 31,317.5 | 31,317.5 | 31,317.5
+| M3 start | 31,317.5 | 31,317.5 | 31,317.5
+| M3 end | 31,145 | 31,145 | 31,145
+| M4 start | 31,145 | 31,145 | 31,145
+| M4 end | 30,972.5 | 30,972.5 | 30,972.5
+| M5 start | 30,972.5 | 30,972.5 | 30,972.5
+| M5 end | 30,800 | 30,800 | 30,800
+| M6 start | 30,800 | 30,800 | 30,800
+| M6 end | 30,627.5 | 30,627.5 | 30,627.5
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $36,126.27
+| Reserve gap before the change | $4,463.82
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Rebuilding reserves
+Rebuild liquid reserves; contributions remain liquid cash, not investment returns.
+Reserve gap: $4,200.00
+Supported rebuild contribution: $300.00 / month
+Rebuild timeline: 14 months
+Monthly inflow and surplus remain unknown. Any rebuild date uses only the supported contribution, confirmed cash-flow stability and covered obligations.
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Confirm the missing amounts and datesResolve the information listed under “Information to confirm” and update the assessment.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Confirm the missing amounts and dates
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+No new changes. The review uses the customer’s existing circumstances.
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $31,662.45
+| 1 | $13,392.44 | $13,564.93 | $0.00 | $0.00 | $31,489.96
+| 2 | $13,392.44 | $13,564.93 | $0.00 | $0.00 | $31,317.47
+| 3 | $13,392.44 | $13,564.93 | $0.00 | $0.00 | $31,144.98
+| 4 | $13,392.44 | $13,564.93 | $0.00 | $0.00 | $30,972.49
+| 5 | $13,392.44 | $13,564.93 | $0.00 | $0.00 | $30,800.00
+| 6 | $13,392.44 | $13,564.93 | $0.00 | $0.00 | $30,627.51
+Download cash-flow spreadsheet
+Assumptions and limitations
+Only known amounts are included; no complete funding conclusion is established.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Updated recovery cash is separately supplied; it is not assumed to follow from an unfunded crisis balance.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+17-windfall — One-time receipt and a positive normal cash position
+Customer review
+One-time receipt and a positive normal cash position
+Account 20189 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$42,098.67After supported changes
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Plan for additional funds
+Cash reserves are below the planning targetRegular inflow exceeds spendingAdditional funds are expected
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+Review accessible surplus against the customer’s goal Conditional review
+Consider available funds after required payments and reserves are protected.
+No cash change is credited to the supported path.
+Review Confirm accessibility, near-term commitments and the customer’s goal.
+Next review Reassess when new cash, income or obligation evidence is available.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| review-accessible-surplus | Conditional review | DERIVED | Consider available funds after required payments and reserves are protected.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $31,320.03 | $31,320.03
+| Closing cash | $42,098.67 | $42,098.67
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 28,320 | 31,320 | 31,320
+| M0 end | 28,320 | 31,320 | 31,320
+| M1 start | 28,320 | 31,320 | 31,320
+| M1 end | 30,116.5 | 33,116.5 | 33,116.5
+| M2 start | 30,116.5 | 33,116.5 | 33,116.5
+| M2 end | 31,912.9 | 34,912.9 | 34,912.9
+| M3 start | 31,912.9 | 34,912.9 | 34,912.9
+| M3 end | 33,709.4 | 36,709.4 | 36,709.4
+| M4 start | 33,709.4 | 36,709.4 | 36,709.4
+| M4 end | 35,505.8 | 38,505.8 | 38,505.8
+| M5 start | 35,505.8 | 38,505.8 | 38,505.8
+| M5 end | 37,302.2 | 40,302.2 | 40,302.2
+| M6 start | 37,302.2 | 40,302.2 | 40,302.2
+| M6 end | 39,098.7 | 42,098.7 | 42,098.7
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $22,086.63
+| Reserve gap before the change | $0.00
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Additional funds | $3,000.00 | Immediately · one time | Provided information
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $3,000.00 | $31,320.03
+| 1 | $20,641.57 | $18,845.13 | $0.00 | $0.00 | $33,116.47
+| 2 | $20,641.57 | $18,845.13 | $0.00 | $0.00 | $34,912.91
+| 3 | $20,641.57 | $18,845.13 | $0.00 | $0.00 | $36,709.35
+| 4 | $20,641.57 | $18,845.13 | $0.00 | $0.00 | $38,505.79
+| 5 | $20,641.57 | $18,845.13 | $0.00 | $0.00 | $40,302.23
+| 6 | $20,641.57 | $18,845.13 | $0.00 | $0.00 | $42,098.67
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+18-zero-opening — Explicit zero opening cash; historical B remains separate
+Customer review
+Explicit zero opening cash; historical B remains separate
+Account 20208 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+No funding gap is projected at the monthly checkpoints.
+Review with customer
+Additional cash needed$0.00Before supported changes
+Remaining funding gap$0.00After supported changes
+First shortfall after changesNone in this period
+Cash at period end$20,027.58After supported changes
+Opening cash uses the supplied scenario figure. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Further financial review
+Available cash is under immediate pressureReviewing existing circumstancesCash reserves are below the planning targetRegular inflow exceeds spending
+The initial suggestion was “Cover an urgent cash need”. The cash and eligibility checks support the response shown here.
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock None at modeled checkpoints
+First remaining shortage after supported actions None at modeled checkpoints
+Remaining funding need $0.00
+Review whether the bill date can move Conditional review
+The separate daily replay shows a benefit under its assumptions.
+$6,393.38 median recorded payment
+Separate daily replay · first payment 2025-07-05 → 2025-07-12 · first shortage 2025-08-05 → 2025-08-12 · funding need $20,738.02 → $20,738.02.
+No cash change is credited to the supported path.
+Review Confirm the specific bill, effective date, approval and fee. Keep the daily cash basis separate.
+Next review Reassess when new cash, income or obligation evidence is available.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| historical-bill-shift | Conditional review | OBSERVED, ASSUMED_FOR_COMPARISON | The separate daily replay shows a benefit under its assumptions.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+No additional restriction established The current engine result does not call for an additional contribution restriction in this scenario; investment suitability remains separate.
+Cash stays at or above $0 across modeled checkpoints. The funding gap is unchanged at CAD 0.00.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| First shortfall | None at checkpoints | None at checkpoints
+| Cash missing at first shortfall | $0.00 | $0.00
+| Lowest cash | $0.00 | $0.00
+| Closing cash | $20,027.58 | $20,027.58
+| Full funding need | $0.00 | $0.00
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Projected accessible cash by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 0 | 0 | 0
+| M0 end | 0 | 0 | 0
+| M1 start | 0 | 0 | 0
+| M1 end | 3,337.9 | 3,337.9 | 3,337.9
+| M2 start | 3,337.9 | 3,337.9 | 3,337.9
+| M2 end | 6,675.9 | 6,675.9 | 6,675.9
+| M3 start | 6,675.9 | 6,675.9 | 6,675.9
+| M3 end | 10,013.8 | 10,013.8 | 10,013.8
+| M4 start | 10,013.8 | 10,013.8 | 10,013.8
+| M4 end | 13,351.7 | 13,351.7 | 13,351.7
+| M5 start | 13,351.7 | 13,351.7 | 13,351.7
+| M5 end | 16,689.7 | 16,689.7 | 16,689.7
+| M6 start | 16,689.7 | 16,689.7 | 16,689.7
+| M6 end | 20,027.6 | 20,027.6 | 20,027.6
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $84,581.28
+| Reserve gap before the change | $54,802.95
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm payment terms and any reliefCheck due dates, fees and authority for any proposed pause or change before taking action.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm payment terms and any relief
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+No new changes. The review uses the customer’s existing circumstances.
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $0.00
+| 1 | $20,395.49 | $17,057.56 | $0.00 | $0.00 | $3,337.93
+| 2 | $20,395.49 | $17,057.56 | $0.00 | $0.00 | $6,675.86
+| 3 | $20,395.49 | $17,057.56 | $0.00 | $0.00 | $10,013.79
+| 4 | $20,395.49 | $17,057.56 | $0.00 | $0.00 | $13,351.72
+| 5 | $20,395.49 | $17,057.56 | $0.00 | $0.00 | $16,689.65
+| 6 | $20,395.49 | $17,057.56 | $0.00 | $0.00 | $20,027.58
+Download cash-flow spreadsheet
+Assumptions and limitations
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash is explicitly supplied for this scenario, not verified live banking data.
+Recorded payment pressure does not establish current APR, deferral approval or payment release.
+Classification proposal is retained for audit; the finance engine selected a supported protective/review response.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Source not recorded
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
+
+19-conditional — Unconfirmed spending change kept in a separate comparison
+Customer review
+Unconfirmed spending change kept in a separate comparison
+Account 20230 · Prepared 11/8/2026, 10:34:34 AM
+Revise assessmentDownload review summaryPrint / save PDF
+Customer need
+Manage cash flow
+The customer’s priority has not been recorded.
+Prepared by: Not recorded · Review period: 6 months
+Assessment summary
+Confirm the outstanding information.
+Incomplete information
+Additional cash neededNot establishedKnown amounts leave $0.00
+Remaining funding gapNot establishedKnown amounts leave $0.00
+First shortfall after changesNot established
+Cash at period end$19,957.70Known amounts only
+Opening cash is a historical estimate; confirm the accessible balance. Monthly checkpoints do not establish day-to-day payment coverage.
+Suggested focus
+Rebalance spending
+Regular costs are increasingSome information remains unconfirmedRegular spending exceeds inflowCash reserves are below the planning target
+Impact on the savings goal
+No regular contribution established
+Before the change$0.00Proposed monthly contribution
+Supported after the change$0.00Per month
+This amount stays in accessible cash reserves. Pausing a proposed contribution does not add cash to the existing balance.
+Recommended Financial Actions
+First shortage under the shock Known components only · Not established
+First remaining shortage after supported actions Known components only · Not established
+Remaining funding need Full funding need not established
+Verify the missing financial terms Evidence needed
+Full funding need is not established.
+No cash change is credited to the supported path.
+Review Event 1 · Verify the assumed change before relying on the result. Confirm the assumed effect 1 (expense_delta).
+Review the separate assumed scenario Conditional review
+Assumed effects appear only in this separate known-components comparison.
+No cash change is credited to the supported path.
+Review Verify the assumed amounts, timing and authority before counting any benefit.
+Next review Month 0 start · Confirm missing material scenario terms before relying on the projection.
+Separate assumed scenario · known-components cash need $0.00. Full need remains unestablished.
+Candidate decisions and evidence
+| Candidate | Status | Evidence | Reason
+| verify-material-inputs | Evidence needed | UNKNOWN_OR_CONFLICTING | Full funding need is not established.
+| scenario-assumptions | Conditional review | ASSUMED_FOR_COMPARISON | Assumed effects appear only in this separate known-components comparison.
+Supplied approvals are scenario evidence. No banking instruction has been executed.
+Compare the financial paths
+Review required Incomplete evidence or an existing goal review prevents an unrestricted contribution conclusion.
+Partial projection · Known components. Missing evidence can change the shortfall and required cash. Full funding need: Not established.
+The two cash paths are identical. The revised plan posts no net cash change relative to taking no new action.
+Reserve earmarks remain liquid; changing an earmark creates no extra cash.
+No evidenced existing-transfer schedule is supplied; no pause relief is credited.
+Information behind this comparison
+Event 1 · Verify the assumed change before relying on the result.
+Cash position at key checkpoints
+| Measure | Without additional action | With supported changes
+| Known components · First shortfall | Not established | Not established
+| Known components · Cash missing at first shortfall | Not established | Not established
+| Known components · Lowest cash | $19,957.70 | $19,957.70
+| Known components · Closing cash | $19,957.70 | $19,957.70
+| Full funding need | Not established | Not established
+Before the change
+Without additional action
+With supported changes
+Keep the original goal
+Known cash components by checkpoint
+Before the changeWithout additional actionWith supported changes
+View chart data (CAD)
+| Checkpoint | Before the change | Without additional action | With supported changes
+| M0 start | 29,557.2 | 29,557.2 | 29,557.2
+| M0 end | 29,557.2 | 29,557.2 | 29,557.2
+| M1 start | 29,557.2 | 29,557.2 | 29,557.2
+| M1 end | 27,957.3 | 27,957.3 | 27,957.3
+| M2 start | 27,957.3 | 27,957.3 | 27,957.3
+| M2 end | 26,357.3 | 26,357.3 | 26,357.3
+| M3 start | 26,357.3 | 26,357.3 | 26,357.3
+| M3 end | 24,757.4 | 24,757.4 | 24,757.4
+| M4 start | 24,757.4 | 24,757.4 | 24,757.4
+| M4 end | 23,157.5 | 23,157.5 | 23,157.5
+| M5 start | 23,157.5 | 23,157.5 | 23,157.5
+| M5 end | 21,557.6 | 21,557.6 | 21,557.6
+| M6 start | 21,557.6 | 21,557.6 | 21,557.6
+| M6 end | 19,957.7 | 19,957.7 | 19,957.7
+Start and end of each modeled month. Diamonds mark the first projected shortfall; hover over points for posted cash changes. These checkpoints do not establish daily payment coverage.
+Cash reserve goal
+| Measure | Amount
+| Three-month reserve target | $53,229.78
+| Reserve gap before the change | $32,067.87
+| Baseline monthly reserve contribution | $0.00
+The contribution after the change is shown above. The reserve goal uses recorded spending and a planning target; confirm it with the customer.
+Recovery and rebuilding
+Updated figures needed
+Obtain updated cash, income, spending and obligation figures before establishing a rebuild date.
+Rebuild timeline: Not yet established
+Information to confirm
+Confirm the assumed effect 1 (Regular spending).
+Record the discussion and next steps
+Record what was discussed, what information is outstanding, and who will follow up.
+Review progressIn progressAwaiting informationReady for discussionFollow-up scheduledClosed
+Review owner
+Follow-up date
+Confirm accessible cashObtain a current available balance; the projection currently starts from a historical estimate.
+Confirm the missing amounts and datesResolve the information listed under “Information to confirm” and update the assessment.
+Record the customer discussionExplain the proposed next steps, record the customer’s priorities, and agree when to review progress.
+Discussion notes and agreed next step
+Save review notesDiscard edits / load saved notesNotes not yet saved
+Review progress: In progress · Owner: Not recorded · Follow-up: Not scheduled
+To do: Confirm accessible cash
+To do: Confirm the missing amounts and dates
+To do: Record the customer discussion
+No discussion notes recorded.
+Checklist completion records staff work. To change the financial assessment, update the figures and reassess. No payment or product approval is made here.
+Figures and assumptions behind the review
+Changes included in this assessment
+| Change | Amount | Timing | Information basis
+| Regular spending | $100.00 more per month | From month 1 · for 6 months | Estimate to confirm
+Monthly cash-flow schedule
+| Month | Money in | Regular spending | One-time costs | One-time receipts | Closing cash
+| Now | $0.00 | $0.00 | $0.00 | $0.00 | $29,557.16
+| 1 | $15,828.72 | $17,428.63 | $0.00 | $0.00 | $27,957.25
+| 2 | $15,828.72 | $17,428.63 | $0.00 | $0.00 | $26,357.34
+| 3 | $15,828.72 | $17,428.63 | $0.00 | $0.00 | $24,757.43
+| 4 | $15,828.72 | $17,428.63 | $0.00 | $0.00 | $23,157.52
+| 5 | $15,828.72 | $17,428.63 | $0.00 | $0.00 | $21,557.61
+| 6 | $15,828.72 | $17,428.63 | $0.00 | $0.00 | $19,957.70
+Download cash-flow spreadsheet
+Assumptions and limitations
+Only known amounts are included; no complete funding conclusion is established.
+Historical typical inflows and spending and the supplied effects are not verified future cash flows; month-start/end checkpoints do not establish daily solvency.
+Opening cash uses the historical cash estimate, not a live accessible balance.
+Confirm the assumed effect 1 (Regular spending).
+This dated/custom scenario is not supported by the existing daily bill-shift replay; monthly results do not establish daily solvency.
+Record details
+| Record | Detail
+| Customer records through | 2025-12
+| Cash figure source | Historical account balances
+| Assessment approach | Standard rules-based assessment
+| Prepared on | 11/8/2026, 10:34:34 AM
