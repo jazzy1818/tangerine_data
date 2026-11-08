@@ -1,7 +1,7 @@
 import {api,escapeHtml as e,notice,notify,download,downloadFile,blankDraft,readDraft,saveDraft} from './common.js';
 import {homeView,discoveryView,accountListView,customerView,previewView,settingsView} from './views.js';
 import {runView,projectionChart,historyView,compareView} from './reviews.js';
-import {scenarioView,effectFields,effectFromForm,contextFromForm,preset} from './scenario.js';
+import {scenarioView,effectFields,effectFromForm,contextFromForm,preset,basicScenario,intakeState,descriptionPending,shockSummaryView} from './scenario.js';
 import {reviewBrief,plainNote} from './financial.js';
 
 const main=document.getElementById('main');
@@ -28,11 +28,44 @@ function invalidate(){state.preview=null;const slot=document.getElementById('pre
 function financialInput(){return {...state.draft.context,account_id:state.draft.accountId,scenario:state.draft.scenario};}
 function currentInput(){
   if(!state.draft.accountId)throw new Error('Find the customer first.');
+  if(state.draft.basicDraft)state.draft.scenario=basicScenario(state.draft.basicDraft,state.draft.scenario);
   if(state.draft.rawScenario!=null||state.draft.rawContext!=null)throw new Error('Resolve the unfinished entry from the previous editor before continuing.');
   const pending=Object.keys(state.draft.formDrafts||{});
   if(pending.length)throw new Error(`Save or discard the unfinished ${pending.map(id=>entryNames[id]).join(', ')} before continuing.`);
   if(state.draft.context.opening_cash!=null&&!(state.draft.reviewDetails.cash_source||'').trim())throw new Error('Record the source and date of the supplied cash figure.');
   return financialInput();
+}
+async function readShock(button){
+  // Read a changed description (Gemini or the offline reader) before planning.
+  const target=state.draft,i=intakeState(target),text=i.text.trim();
+  if(!descriptionPending(target))return true;
+  if(!text){i.handledText='';i.mode='none';i.questions=[];i.assumptions=[];target.scenario={phase:'normal',horizon_months:target.scenario.horizon_months||6,description:'',effects:[]};delete target.basicDraft;persist();return true;}
+  if(text.length<3)throw new Error('Describe what happened in a few words.');
+  if(Object.keys(target.formDrafts||{}).length)throw new Error('Save or discard the optional entry being edited first.');
+  const label=button.textContent;button.textContent='Reading the description…';
+  const result=await api('/scenarios/interpret',{method:'POST',body:JSON.stringify({account_id:target.accountId,description:text,horizon_months:6})});
+  button.textContent=label;
+  if(target!==state.draft||i.text.trim()!==text)throw new Error('The customer or description changed while reading. Try again.');
+  const context={...target.context,...result.context_updates};
+  await validateDraft({...context,account_id:target.accountId,scenario:result.scenario});
+  target.context=context;target.scenario=result.scenario;delete target.basicDraft;
+  target.intake={text,handledText:text,mode:result.source==='local'?'local':'gemini',questions:result.questions,assumptions:result.assumptions};
+  if(result.context_updates.opening_cash!=null)target.reviewDetails.cash_source='Supplied scenario description';
+  invalidate();
+  return true;
+}
+function selectCustomer(customer){
+  state.customer=customer;
+  if(state.draft.accountId!==customer.account_id){
+    const old=state.draft;persist();const saved=state.customerDrafts[customer.account_id];
+    state.draft=saved?structuredClone(saved):blankDraft(customer.account_id);
+    if(!saved){state.draft.backend=old.backend;state.draft.reviewDetails.prepared_by=old.reviewDetails?.prepared_by||'';}
+    state.preview=null;persist();
+  }
+}
+function changedSettings(){
+  delete state.draft.basicDraft;
+  const i=intakeState(state.draft);if(i.mode==='gemini')i.mode='edited';
 }
 function capture(form){
   const data={};
@@ -82,11 +115,11 @@ async function render({quiet=false,refreshPortfolio=false}={}){
     else if(page==='customers'){const params=new URLSearchParams({q:state.query,filter:state.filter,offset:state.offset});html=accountListView(await api(`/accounts?${params}`),state.query,state.filter);}
     else if(page==='customer'){
       const customer=await api(`/customers/${encodeURIComponent(id)}`);if(version!==state.routeVersion)return;
-      state.customer=customer;
-      if(state.draft.accountId!==customer.account_id){const old=state.draft;persist();const saved=state.customerDrafts[customer.account_id];state.draft=saved?structuredClone(saved):blankDraft(customer.account_id);if(!saved){state.draft.backend=old.backend;state.draft.reviewDetails.prepared_by=old.reviewDetails?.prepared_by||'';}state.preview=null;persist();}
+      selectCustomer(customer);
       html=customerView(customer,state.historyMonths);
     }else if(page==='scenario'){
-      if(state.draft.accountId&&state.customer?.account_id!==state.draft.accountId){const c=await api(`/customers/${state.draft.accountId}`);if(version!==state.routeVersion)return;state.customer=c;}
+      const account=id||state.draft.accountId;
+      if(account&&String(state.customer?.account_id)!==String(account)){const c=await api(`/customers/${encodeURIComponent(account)}`);if(version!==state.routeVersion)return;selectCustomer(c);}
       html=scenarioView(state.draft,state.customer,state.config,state.preview);
     }else if(page==='history')html=historyView((await api('/runs')).items,state.reviewFilter);
     else if(page==='run'){
@@ -118,6 +151,7 @@ async function validateDraft(candidate){return api('/scenarios/preview',{method:
 main.addEventListener('submit',event=>{
   event.preventDefault();if(state.busy)return;
   const form=event.target;
+  if(form.id==='plan-account'){const account=String(new FormData(form).get('account_id')).trim();location.hash=`scenario/${encodeURIComponent(account)}`;return;}
   if(form.id==='account-search'){const f=new FormData(form);state.query=String(f.get('q')).trim();state.filter=f.get('filter');state.offset=0;render();return;}
   try{
     if(form.id==='review-form'){
@@ -128,7 +162,7 @@ main.addEventListener('submit',event=>{
       const effect=effectFromForm(form,state.draft.accountId),scenario=structuredClone(state.draft.scenario),editing=state.draft.editingEffect;
       if(editing!=null){effect.effect_id=scenario.effects[editing].effect_id||effect.effect_id;scenario.effects[editing]=effect;}else scenario.effects.push(effect);
       if(scenario.phase==='normal')scenario.phase='active';
-      perform(async()=>{await validateDraft({...financialInput(),scenario});state.draft.scenario=scenario;delete state.draft.formDrafts[form.id];delete state.draft.editingEffect;invalidate();await render({quiet:true});notify('Customer circumstance saved.');});
+      perform(async()=>{await validateDraft({...financialInput(),scenario});state.draft.scenario=scenario;changedSettings();delete state.draft.formDrafts[form.id];delete state.draft.editingEffect;invalidate();await render({quiet:true});notify('Customer circumstance saved.');});
     }else if(entryNames[form.id]){
       const entry=contextFromForm(form,state.draft.accountId),context=structuredClone(state.draft.context);
       if(form.id==='transfer-form')context.existing_transfers.push(entry);
@@ -140,10 +174,24 @@ main.addEventListener('submit',event=>{
 
 main.addEventListener('input',event=>{
   const el=event.target,form=el.closest('form');
+  if(form?.id==='basic-shock'){
+    state.draft.basicDraft=capture(form);
+    try{
+      state.draft.scenario=basicScenario(state.draft.basicDraft,state.draft.scenario);
+      const i=intakeState(state.draft);if(i.mode==='gemini')i.mode='edited';i.questions=[];i.assumptions=[];
+      document.getElementById('shock-summary').innerHTML=shockSummaryView(state.draft);
+    }catch{document.getElementById('shock-summary').innerHTML=notice('Complete the basic amounts before generating plans. Use zero for no change.','warn');}
+    invalidate();return;
+  }
+  if(el.id==='shock-description'){
+    intakeState(state.draft).text=el.value;
+    document.getElementById('description-status').innerHTML=descriptionPending(state.draft)&&el.value.trim()?'<p class="help">Your description will be read when you generate the plans.</p>':'';const summary=document.getElementById('shock-summary');if(summary&&descriptionPending(state.draft))summary.innerHTML='';
+    invalidate();return;
+  }
   if(form?.id==='review-form'&&state.run){state.reviewDrafts[state.run.id]=capture(form);writeLocal('tangerine-review-notes',state.reviewDrafts);document.getElementById('review-save-status').textContent='Unsaved notes — save to update the worklist.';return;}
   if(form?.dataset.entry){state.draft.formDrafts[form.id]=capture(form);invalidate();return;}
   const fields={
-    'scenario-title':()=>state.draft.title=el.value,'scenario-horizon':()=>state.draft.scenario.horizon_months=Number(el.value),
+    'scenario-title':()=>state.draft.title=el.value,'scenario-horizon':()=>{state.draft.scenario.horizon_months=Number(el.value);changedSettings();},
     'scenario-description':()=>state.draft.scenario.description=el.value,'opening-cash':()=>state.draft.context.opening_cash=el.value===''?null:Number(el.value),
     'prepared-by':()=>state.draft.reviewDetails.prepared_by=el.value,'customer-priority':()=>state.draft.reviewDetails.customer_priority=el.value,
     'cash-source':()=>state.draft.reviewDetails.cash_source=el.value,
@@ -157,7 +205,7 @@ main.addEventListener('change',event=>{
   else if(el.name==='unknown'||el.name==='duration_mode')syncEffectFields();
   else if(el.id==='backend'){state.draft.backend=el.value;persist();render({quiet:true});}
   else if(el.id==='review-purpose'){state.draft.reviewDetails.purpose=el.value;persist();}
-  else if(el.id==='scenario-phase'){state.draft.scenario.phase=el.value;invalidate();}
+  else if(el.id==='scenario-phase'){state.draft.scenario.phase=el.value;changedSettings();invalidate();}
   else if(el.id==='history-window'){state.historyMonths=Number(el.value);main.innerHTML=customerView(state.customer,state.historyMonths);}
   else if(el.id==='review-filter'){state.reviewFilter=el.value;render({quiet:true});}
   else if(el.dataset.path){const selected=[...main.querySelectorAll('[data-path]:checked')].map(x=>x.dataset.path);document.getElementById('projection-chart').innerHTML=projectionChart(state.run.result.plans.crisis_plan,selected);}
@@ -185,25 +233,40 @@ main.addEventListener('click',event=>{
   if(action==='legacy-backup'){download('unfinished-review-entry.json',{scenario:state.draft.rawScenario,commitments:state.draft.rawContext});return;}
   perform(async()=>{
     if(action==='discard-review-edits'){delete state.reviewDrafts[state.run.id];writeLocal('tangerine-review-notes',state.reviewDrafts);await render({quiet:true});notify('Saved notes loaded.');}
-    else if(action==='preset'){state.draft.scenario=preset(button.dataset.preset,state.customer);state.draft.title=button.textContent;delete state.draft.formDrafts['effect-form'];delete state.draft.editingEffect;invalidate();await render({quiet:true});}
+    else if(action==='description-note'){
+      const i=intakeState(state.draft);i.handledText=i.text;i.mode=i.text.trim()?'note':'none';i.questions=[];i.assumptions=[];state.draft.scenario.description=i.text;
+      invalidate();await render({quiet:true});
+    }else if(action==='example'){
+      const i=intakeState(state.draft);i.text=button.dataset.text;persist();await render({quiet:true});
+      const box=document.getElementById('shock-description');if(box){box.focus();box.setSelectionRange(box.value.length,box.value.length);}
+    }else if(action==='interpret'){
+      const i=intakeState(state.draft);if(!descriptionPending(state.draft))i.handledText='';
+      await readShock(button);await render({quiet:true});notify('Read. Check what we understood below.');
+    }else if(action==='preset'){
+      const i=intakeState(state.draft);state.draft.scenario={...preset(button.dataset.preset,state.customer),description:i.text};state.draft.title=button.textContent;
+      i.handledText=i.text;i.mode=i.text.trim()?'note':'none';i.questions=[];i.assumptions=[];
+      delete state.draft.basicDraft;delete state.draft.formDrafts['effect-form'];delete state.draft.editingEffect;invalidate();await render({quiet:true});
+    }
     else if(action==='edit-effect'){
       const index=Number(button.dataset.index),f=state.draft.scenario.effects[index];state.draft.editingEffect=index;
       state.draft.formDrafts['effect-form']={...f,value:f.value==null?'':f.value*(f.type==='income_multiplier'?100:1),unknown:f.value==null,duration_mode:f.ongoing?'ongoing':f.duration_months?'known':'unknown'};
       persist();await render({quiet:true});document.getElementById('add-effect-details').scrollIntoView({block:'start'});
-    }else if(action==='remove-effect'){state.draft.scenario.effects.splice(Number(button.dataset.index),1);delete state.draft.formDrafts['effect-form'];delete state.draft.editingEffect;if(!state.draft.scenario.effects.length&&state.draft.scenario.phase==='active')state.draft.scenario.phase='normal';invalidate();await render({quiet:true});}
+    }else if(action==='remove-effect'){state.draft.scenario.effects.splice(Number(button.dataset.index),1);changedSettings();delete state.draft.formDrafts['effect-form'];delete state.draft.editingEffect;if(!state.draft.scenario.effects.length&&state.draft.scenario.phase==='active')state.draft.scenario.phase='normal';invalidate();await render({quiet:true});}
     else if(action==='clear-entry'){delete state.draft.formDrafts[button.dataset.form];if(button.dataset.form==='effect-form')delete state.draft.editingEffect;persist();await render({quiet:true});}
     else if(action==='remove-transfer'){state.draft.context.existing_transfers.splice(Number(button.dataset.index),1);invalidate();await render({quiet:true});}
     else if(action==='remove-goal'||action==='remove-recovery'){const goal=action==='remove-goal';state.draft.context[goal?'normal_goal':'recovery_snapshot']=null;delete state.draft.formDrafts[goal?'goal-form':'recovery-form'];invalidate();await render({quiet:true});}
     else if(action==='discard-legacy'){delete state.draft.rawScenario;delete state.draft.rawContext;persist();await render({quiet:true});}
     else if(action==='preview'){
-      const payload=currentInput(),signature=JSON.stringify(payload),initial=route();button.textContent='Checking the figures…';
+      await readShock(button);const payload=currentInput(),signature=JSON.stringify(payload),initial=route();button.textContent='Checking the figures…';
       const result=await validateDraft(payload);
       if(initial===route()&&signature===JSON.stringify(currentInput())){state.preview=result;const slot=document.getElementById('preview-slot');slot.innerHTML=previewView(result);slot.scrollIntoView({block:'start'});}
     }else if(action==='run'){
-      const body={...currentInput(),backend:state.draft.backend,title:state.draft.title.trim(),review_details:state.draft.reviewDetails};
-      if(!body.title)throw new Error('Give the customer review a title.');
+      await readShock(button);
+      const intake=intakeState(state.draft),defaults=['gemini','local'].includes(intake.mode)?(intake.assumptions||[]).slice(0,12):[];
+      const said=state.draft.scenario.description?.trim(),title=said?(said[0].toUpperCase()+said.slice(1)).slice(0,120):state.draft.title.trim()||`Plans for account ${state.draft.accountId}`;
+      const body={...currentInput(),backend:state.draft.backend,title,review_details:{...state.draft.reviewDetails,shock_defaults:defaults}};
       const signature=JSON.stringify(body),old=state.draft.pendingRequest,id=old?.signature===signature?old.id:crypto.randomUUID();
-      state.draft.pendingRequest={id,signature};persist();button.textContent='Preparing review…';
+      state.draft.pendingRequest={id,signature};persist();button.textContent='Generating plans…';
       const accepted=await api('/runs',{method:'POST',body:JSON.stringify({...body,request_id:id})});delete state.draft.pendingRequest;persist();location.hash=`run/${accepted.id}`;
     }else if(action==='duplicate'){
       const r=state.run.request;state.draft={...blankDraft(r.account_id),title:`${r.title.slice(0,100)} · revision`,backend:r.backend,reviewDetails:structuredClone(r.review_details||blankDraft().reviewDetails),scenario:structuredClone(r.scenario),context:structuredClone({opening_cash:r.opening_cash,normal_goal:r.normal_goal,existing_transfers:r.existing_transfers||[],recovery_snapshot:r.recovery_snapshot})};state.preview=null;persist();location.hash='scenario';
