@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "actions": [
+    {
+      "id": "build_scenario_reserve",
+      "plan": "goal",
+      "title": "Build a reserve for the selected shock",
+      "shocks": ["layoff", "bill_increase", "one_off_expense"],
+      "required_inputs": ["scenario_horizon", "projected_cash_flows", "available_cash", "confirmed_monthly_contribution"],
+      "confirmation_question": "How much can you set aside each month after the expenses you need to protect?",
+      "engine_effect": "Find the starting cash required to keep the projected balance at or above zero through the selected horizon. Subtract available cash and calculate the savings timeline using the confirmed contribution.",
+      "constraints": [
+        "Use the same contribution in the displayed recommendation and savings timeline.",
+        "When more savings are required and the contribution is zero, show that the target has no projected date."
+      ]
+    },
+    {
+      "id": "move_recurring_bill",
+      "plan": "backup",
+      "title": "Move a recurring bill after a deposit",
+      "shocks": ["layoff", "bill_increase", "one_off_expense"],
+      "required_inputs": ["bill_event", "deposit_event", "biller_approved_date", "first_effective_date"],
+      "confirmation_question": "Can this bill be moved to after the deposit, and when would the new date take effect?",
+      "engine_effect": "Move the affected bill events to the confirmed date in each billing cycle, keep their amounts, and rerun the daily cash flow.",
+      "constraints": [
+        "Keep the action hypothetical until the new date is confirmed.",
+        "Apply the move only from the first effective date and include any extra charge.",
+        "Show whether a shortfall still occurs before the first moved payment."
+      ]
+    },
+    {
+      "id": "reduce_confirmed_spending",
+      "plan": "backup",
+      "title": "Reduce a specific expense temporarily",
+      "shocks": ["layoff", "bill_increase", "one_off_expense"],
+      "required_inputs": ["expense_events", "confirmed_reduction", "start_date", "end_date"],
+      "confirmation_question": "Which expense can you reduce, by how much, and when would the first saving take effect?",
+      "engine_effect": "Reduce eligible expense events by the confirmed amount during the agreed period and rerun the cash flow.",
+      "constraints": [
+        "Keep customer-marked essential expenses out of the candidate set.",
+        "Bound the cut by the amount of the selected expense. Unlabelled debits and cash withdrawals require confirmation.",
+        "Restore normal spending when the agreed period ends."
+      ]
+    },
+    {
+      "id": "pause_goal_transfer",
+      "plan": "backup",
+      "title": "Pause a planned goal contribution",
+      "shocks": ["layoff", "bill_increase", "one_off_expense"],
+      "required_inputs": ["scheduled_goal_transfers", "confirmed_pause_count", "confirmed_restart_date"],
+      "confirmation_question": "Are you willing to pause any scheduled goal contributions, and for how long?",
+      "engine_effect": "Remove the selected future transfers from available-cash outflows during the pause, then recalculate cash runway and the goal date.",
+      "constraints": [
+        "Apply only to future transfers already included as outflows in the available-cash projection.",
+        "Show the estimated delay to the goal alongside the cash saved."
+      ]
+    },
+    {
+      "id": "split_one_off_payment",
+      "plan": "backup",
+      "title": "Test an approved split payment for a one-off cost",
+      "shocks": ["one_off_expense"],
+      "required_inputs": ["one_off_event", "provider_approved_payment_schedule", "total_fees"],
+      "confirmation_question": "Has the provider offered a split payment? What are the payment dates, amounts, and total fees?",
+      "engine_effect": "Replace the original expense event with the approved payment schedule and include all fees in the dated cash flow.",
+      "constraints": [
+        "Check that scheduled payments and fees reconcile with the quoted total.",
+        "Show the total cost and any payments that fall after the scenario horizon."
+      ]
+    },
+    {
+      "id": "test_post_benefit_income",
+      "plan": "backup",
+      "title": "Check the first month after temporary income ends",
+      "shocks": ["layoff"],
+      "required_inputs": ["benefit_end_date", "ongoing_income", "replacement_income_scenarios"],
+      "confirmation_question": "What income do you expect after the temporary payments stop, and when would it start?",
+      "engine_effect": "End temporary payments on the supplied date, keep confirmed ongoing inflows, and rerun each replacement-income scenario.",
+      "constraints": [
+        "Label any unconfirmed replacement income as a scenario assumption.",
+        "Show the first shortfall date and the minimum additional cash needed if replacement income is delayed."
+      ]
+    }
+  ]
+}
