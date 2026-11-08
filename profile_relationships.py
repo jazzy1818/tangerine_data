@@ -1,4 +1,4 @@
-"""Profile Tangerine account inflows and possible caretaker/dependent links."""
+"""Summarize observed Tangerine account access and account-level inflows."""
 
 from pathlib import Path
 
@@ -13,12 +13,8 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 TIERS = ["Lower", "Middle", "Upper"]
-CARETAKER = "Possible caretaker"
-DEPENDENT = "Possible dependent"
-UNLINKED_MINOR = "Under 18 with no inferred caretaker"
-UNKNOWN = "Dependency status unknown"
-POSSIBLE_PAIR = "Possible caretaker/dependent pair"
 SHARED_ACCESS = "Shared account access"
+OWNER_ONLY = "Owner record only"
 
 
 def build_tables():
@@ -53,14 +49,11 @@ def build_tables():
         on="account_id",
         validate="one_to_many",
     )
-    possible = connections["owner_age"].ge(18) & connections["authorized_age"].lt(18)
     connections["connection_type"] = SHARED_ACCESS
-    connections.loc[possible, "connection_type"] = POSSIBLE_PAIR
 
-    people["relationship_status"] = UNKNOWN
-    people.loc[people["age"].lt(18), "relationship_status"] = UNLINKED_MINOR
-    people.loc[people["client_id"].isin(connections.loc[possible, "owner_client_id"]), "relationship_status"] = CARETAKER
-    people.loc[people["client_id"].isin(connections.loc[possible, "authorized_client_id"]), "relationship_status"] = DEPENDENT
+    people["relationship_status"] = people["account_id"].isin(connections["account_id"]).map({
+        True: SHARED_ACCESS, False: OWNER_ONLY,
+    })
     return people, connections, lower, upper
 
 
@@ -82,10 +75,10 @@ def make_preview(people, connections, lower, upper, destination):
         people.groupby(["relationship_status", "inflow_tier"], observed=True)
         .size()
         .unstack(fill_value=0)
-        .reindex(index=[CARETAKER, DEPENDENT, UNLINKED_MINOR, UNKNOWN], columns=TIERS, fill_value=0)
+        .reindex(index=[SHARED_ACCESS, OWNER_ONLY], columns=TIERS, fill_value=0)
     )
     counts["Total"] = counts.sum(axis=1)
-    pairs = connections[connections["connection_type"].eq(POSSIBLE_PAIR)]
+    pairs = connections.sort_values("account_id").head(10)
     ink = "#172B36"
     muted = "#4D616B"
     fig, (detail, summary) = plt.subplots(1, 2, figsize=(15, 7.8), gridspec_kw={"width_ratios": [1, 1.23]})
@@ -97,27 +90,27 @@ def make_preview(people, connections, lower, upper, destination):
     detail.set_title("Connections", loc="left", fontsize=15, weight="bold", color=ink, pad=15)
     detail.axis("off")
     if pairs.empty:
-        detail.text(0, 0.95, "No account pairs meet the inference rule.", va="top", color=muted)
+        detail.text(0, 0.95, "No shared account access appears in the records.", va="top", color=muted)
     else:
         cells = [
             [str(row.account_id), f"{row.owner_client_id} ({row.owner_age})", f"{row.authorized_client_id} ({row.authorized_age})"]
-            for row in pairs.sort_values("account_id").itertuples(index=False)
+            for row in pairs.itertuples(index=False)
         ]
-        draw_table(detail, cells, ["Account ID", "Owner ID (age)", "Authorized ID (age)"], [0.21, 0.35, 0.44], 1, ink)
-    detail.text(0, -0.055, f"{len(pairs):,} possible pairs shown. The CSV includes all {len(connections):,} shared-account connections.",
+        draw_table(detail, cells, ["Account ID", "Owner ID (age)", "Authorized ID (age)"], [0.21, 0.35, 0.44], 0.85, ink)
+    detail.text(0, 0.10, f"{len(pairs):,} records shown. The CSV includes all {len(connections):,} shared-account connections.",
                 fontsize=9, color=muted, va="top")
 
     summary.set_title("Labels by account inflow tier", loc="left", fontsize=15, weight="bold", color=ink, pad=15)
     summary.axis("off")
     label_rows = [[label, *(f"{count:,}" for count in row)] for label, row in counts.iterrows()]
-    draw_table(summary, label_rows, ["Relationship label", *counts.columns], [0.52, 0.12, 0.12, 0.12, 0.12], 0.4, ink)
+    draw_table(summary, label_rows, ["Account access", *counts.columns], [0.52, 0.12, 0.12, 0.12, 0.12], 0.4, ink)
     summary.text(0, 0.53, f"{len(people):,} clients in the labels CSV. Join either client ID from the\nconnections table to the client ID in the labels table.",
                  fontsize=10, color=muted, va="top")
 
     fig.text(0.06, 0.058, f"Inflow tiers use thirds of median monthly account inflows. Cutoffs are CAD {lower:,.2f} and {upper:,.2f}.",
              fontsize=9, color=muted)
-    fig.text(0.06, 0.033, "An adult owner and an under-18 authorized user sharing an account are a possible pair. "
-             "Individual income and family relationships are unverified.", fontsize=9, color=muted)
+    fig.text(0.06, 0.033, "Access roles come from the account records. Individual income and family relationships are unverified.",
+             fontsize=9, color=muted)
     fig.savefig(destination, dpi=160, facecolor="white")
     plt.close(fig)
 

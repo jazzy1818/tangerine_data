@@ -22,8 +22,8 @@ fi
 
 if [ "${1:-}" == "cli" ]; then
     shift
-    exec "$PYTHON_BIN" engine.py "$@"
+    exec "$PYTHON_BIN" -B engine.py "$@"
 else
-    echo "Starting Tangerine Resilience Engine Web App ..."
-    exec "$PYTHON_BIN" -m streamlit run app.py "$@"
+    echo "Starting Tangerine Mission Control ..."
+    exec "$PYTHON_BIN" -B -m streamlit run app.py "$@"
 fi

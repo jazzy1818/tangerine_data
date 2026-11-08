@@ -1,24 +1,10 @@
 account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connection_type
-20584,3803863,20,3041979,15,Possible caretaker/dependent pair
-23723,2151677,19,1551788,15,Possible caretaker/dependent pair
-37938,3891743,22,1112055,14,Possible caretaker/dependent pair
-44553,4748890,22,8300157,16,Possible caretaker/dependent pair
-51474,4314613,18,6866465,17,Possible caretaker/dependent pair
-52341,6109833,20,8531549,13,Possible caretaker/dependent pair
-53253,1795354,18,8154269,16,Possible caretaker/dependent pair
-57156,9541416,20,5305580,16,Possible caretaker/dependent pair
-61163,4293410,18,2311696,13,Possible caretaker/dependent pair
-68018,8784214,18,9970554,15,Possible caretaker/dependent pair
-72969,1686247,20,5102496,13,Possible caretaker/dependent pair
-79475,9348902,19,1277735,12,Possible caretaker/dependent pair
-79823,4947887,25,2995823,17,Possible caretaker/dependent pair
-94544,6822712,21,5074797,16,Possible caretaker/dependent pair
-94681,9000317,18,8784295,11,Possible caretaker/dependent pair
 20303,5761763,39,1586720,42,Shared account access
 20401,9814163,56,4378191,63,Shared account access
 20549,8299078,75,1408342,76,Shared account access
 20572,2562919,56,7764344,57,Shared account access
 20578,8111909,57,4810787,51,Shared account access
+20584,3803863,20,3041979,15,Shared account access
 20706,5339014,52,6985455,57,Shared account access
 20715,5626567,79,8822722,77,Shared account access
 20741,5631158,78,4708544,87,Shared account access
@@ -53,6 +39,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 23363,3030118,73,5540812,71,Shared account access
 23543,2066142,78,2048928,75,Shared account access
 23588,4475281,57,1838488,58,Shared account access
+23723,2151677,19,1551788,15,Shared account access
 23754,9069121,21,8509322,26,Shared account access
 23771,5638560,72,3197495,70,Shared account access
 23976,4089176,62,9632580,54,Shared account access
@@ -199,6 +186,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 37854,7082157,75,1648893,79,Shared account access
 37871,3466380,27,9911792,27,Shared account access
 37927,8106276,66,2925713,72,Shared account access
+37938,3891743,22,1112055,14,Shared account access
 38168,1754488,34,5823429,30,Shared account access
 38246,1524655,37,6545772,38,Shared account access
 38311,9484820,78,7514873,85,Shared account access
@@ -273,6 +261,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 44394,3456267,37,2062137,32,Shared account access
 44413,4566411,47,4010817,52,Shared account access
 44536,8921435,37,3915328,43,Shared account access
+44553,4748890,22,8300157,16,Shared account access
 44665,5568817,53,9630315,58,Shared account access
 44725,1236841,40,4261011,39,Shared account access
 44758,8658182,33,2308554,29,Shared account access
@@ -347,6 +336,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 51270,6125059,72,3224350,70,Shared account access
 51292,5485823,22,9365063,29,Shared account access
 51367,3508782,56,7743426,51,Shared account access
+51474,4314613,18,6866465,17,Shared account access
 51517,7428332,67,2100059,70,Shared account access
 51796,6570829,25,1193273,20,Shared account access
 51817,7029290,26,6003816,21,Shared account access
@@ -354,10 +344,12 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 52236,8425951,35,7580994,29,Shared account access
 52289,4708598,77,2621317,81,Shared account access
 52309,4525668,33,4414445,27,Shared account access
+52341,6109833,20,8531549,13,Shared account access
 52376,1843454,70,7085686,67,Shared account access
 52563,9217004,58,8625879,58,Shared account access
 52727,1130024,41,5748023,37,Shared account access
 52917,1827056,30,6048287,34,Shared account access
+53253,1795354,18,8154269,16,Shared account access
 53266,9112507,47,3709901,53,Shared account access
 53342,9444770,73,1087969,75,Shared account access
 53412,7854526,55,8301925,54,Shared account access
@@ -420,6 +412,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 57107,4867584,32,1713436,32,Shared account access
 57131,2490547,47,6822121,52,Shared account access
 57142,9205540,45,8453979,52,Shared account access
+57156,9541416,20,5305580,16,Shared account access
 57213,3754428,30,1441782,32,Shared account access
 57365,1074851,50,5836817,54,Shared account access
 57369,4771643,53,9481239,55,Shared account access
@@ -457,6 +450,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 60869,6599050,77,1886627,75,Shared account access
 60889,5291292,66,6306711,64,Shared account access
 61080,8120946,77,9375694,85,Shared account access
+61163,4293410,18,2311696,13,Shared account access
 61387,3796272,21,7550397,21,Shared account access
 61425,2805903,21,7221010,20,Shared account access
 61487,9092139,55,7920253,62,Shared account access
@@ -522,6 +516,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 67755,5477508,25,3496123,21,Shared account access
 67870,9295048,38,1946045,43,Shared account access
 68010,3583495,80,6720620,84,Shared account access
+68018,8784214,18,9970554,15,Shared account access
 68089,8977040,70,6032244,64,Shared account access
 68159,7422457,63,5279837,58,Shared account access
 68182,4101837,53,4409117,61,Shared account access
@@ -576,6 +571,7 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 72797,1333089,61,2852247,54,Shared account access
 72819,4156021,21,1462719,26,Shared account access
 72843,3439902,30,2676575,34,Shared account access
+72969,1686247,20,5102496,13,Shared account access
 73097,9211898,48,7719282,45,Shared account access
 73106,5061136,50,9384519,50,Shared account access
 73157,9755386,43,9513600,43,Shared account access
@@ -647,10 +643,12 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 79103,6221213,30,8111640,37,Shared account access
 79122,7125018,35,5303862,37,Shared account access
 79277,3650814,51,8886802,56,Shared account access
+79475,9348902,19,1277735,12,Shared account access
 79541,3842477,59,8540302,55,Shared account access
 79567,4769129,22,2631736,19,Shared account access
 79569,1660051,46,2476333,38,Shared account access
 79632,8555178,31,5420491,28,Shared account access
+79823,4947887,25,2995823,17,Shared account access
 79868,6520725,38,8052909,36,Shared account access
 79869,2149784,59,4769890,55,Shared account access
 80026,7226016,63,3730577,56,Shared account access
@@ -810,7 +808,9 @@ account_id,owner_client_id,owner_age,authorized_client_id,authorized_age,connect
 94249,9366162,69,5997473,70,Shared account access
 94299,4412602,22,5146544,24,Shared account access
 94443,9879102,39,8708458,37,Shared account access
+94544,6822712,21,5074797,16,Shared account access
 94642,2189042,36,8858353,35,Shared account access
+94681,9000317,18,8784295,11,Shared account access
 94755,6026684,44,9344268,50,Shared account access
 94769,9457107,74,2176706,78,Shared account access
 94968,9620723,46,8545222,39,Shared account access

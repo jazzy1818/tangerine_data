@@ -1,395 +1,311 @@
-"""
-Daily Cash Flow Replay & Playbook Simulation Engine for Tangerine Resilience Rewired.
+"""End-of-day historical cash-flow replay and conditional bill-date comparison."""
 
-Performs day-by-day cash flow replay through the 180-day shock period (July–Dec 2025),
-identifying intra-month liquidity crunches, exact first shortfall dates, and extra cash needed.
-Integrates the 6 shock playbook actions (bill shifting, confirmed cuts, repair splits, etc.).
-"""
-
-from datetime import datetime, timedelta
+from functools import lru_cache
+from math import isfinite
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+
 import pandas as pd
-import numpy as np
+
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
-
-_TX_CACHE: Optional[pd.DataFrame] = None
-_ORDERS_CACHE: Optional[pd.DataFrame] = None
-
-
-def load_transactions(data_dir: Path = DATA_DIR) -> pd.DataFrame:
-    """Load and cache transactions with optimized types."""
-    global _TX_CACHE
-    if _TX_CACHE is None:
-        tx_path = data_dir / "transactions.csv"
-        if not tx_path.exists():
-            tx_path_gz = data_dir / "transactions.csv.gz"
-            if tx_path_gz.exists():
-                tx_path = tx_path_gz
-            else:
-                raise FileNotFoundError(f"transactions.csv (or .csv.gz) not found in {data_dir}")
-        # Read only required columns to maximize speed and minimize memory
-        usecols = [
-            "account_id",
-            "date",
-            "direction",
-            "operation",
-            "purpose",
-            "amount",
-            "signed_amount",
-            "balance",
-        ]
-        df = pd.read_csv(
-            tx_path,
-            usecols=usecols,
-            dtype={
-                "account_id": np.int32,
-                "amount": np.float64,
-                "signed_amount": np.float64,
-                "balance": np.float64,
-            },
-            low_memory=False,
-        )
-        df["date"] = pd.to_datetime(df["date"])
-        _TX_CACHE = df
-    return _TX_CACHE
+REPLAY_START = "2025-07-01"
+REPLAY_END = "2025-12-31"
+_SERIES_COLUMNS = ["account_id", "partner_bank", "partner_account"]
 
 
-def load_standing_orders(data_dir: Path = DATA_DIR) -> pd.DataFrame:
-    """Load and cache standing orders."""
-    global _ORDERS_CACHE
-    if _ORDERS_CACHE is None:
-        so_path = data_dir / "standing_orders.csv"
-        if so_path.exists():
-            _ORDERS_CACHE = pd.read_csv(so_path)
-        else:
-            _ORDERS_CACHE = pd.DataFrame()
-    return _ORDERS_CACHE
+@lru_cache(maxsize=2)
+def load_transactions(data_dir=DATA_DIR):
+    """Read only the fields needed for dated flows and recurring bills."""
+    path = Path(data_dir) / "transactions.csv"
+    if not path.exists():
+        path = path.with_suffix(".csv.gz")
+    if not path.exists():
+        raise FileNotFoundError(f"transactions.csv or transactions.csv.gz not found in {data_dir}")
+    columns = [*_SERIES_COLUMNS, "date", "purpose", "signed_amount"]
+    transactions = pd.read_csv(
+        path, usecols=columns, parse_dates=["date"], keep_default_na=False,
+        dtype={"partner_bank": "string", "partner_account": "string"},
+    )
+    transactions["signed_amount"] = pd.to_numeric(transactions["signed_amount"], errors="coerce")
+    return transactions
 
 
-def get_account_standing_orders(account_id: int, data_dir: Path = DATA_DIR) -> List[Dict[str, Any]]:
-    """Return all standing orders for a given account."""
-    so_df = load_standing_orders(data_dir)
-    if so_df.empty or "account_id" not in so_df.columns:
-        return []
-    orders = so_df[so_df["account_id"] == account_id].to_dict(orient="records")
-    return orders
+@lru_cache(maxsize=2)
+def _load_monthly(data_dir):
+    monthly = pd.read_csv(
+        Path(data_dir) / "monthly_summary.csv",
+        usecols=["account_id", "month", "avg_daily_balance"],
+    )
+    monthly["month"] = pd.PeriodIndex(monthly["month"], freq="M")
+    return monthly.sort_values("month")
+
+
+def _window(tx, start, end):
+    return tx.loc[tx["date"].between(start, end)]
+
+
+def _bill_mask(tx):
+    return tx["purpose"].eq("household bills") & tx["signed_amount"].lt(0)
+
+
+def _largest_recurring_bill(tx, start):
+    """Choose one counterparty using six completed months before replay."""
+    first_month = start.to_period("M")
+    prior = _window(tx, (first_month - 6).start_time, first_month.start_time - pd.Timedelta(days=1))
+    bills = prior.loc[
+        _bill_mask(prior)
+        & prior["partner_bank"].ne("")
+        & ~prior["partner_account"].isin(["", "0", "0.0"]),
+        [*_SERIES_COLUMNS, "date", "signed_amount"],
+    ].assign(
+        month=lambda rows: rows["date"].dt.to_period("M"),
+        day=lambda rows: rows["date"].dt.day,
+    )
+    series = bills.groupby(_SERIES_COLUMNS, as_index=False).agg(
+        payments=("date", "size"), months=("month", "nunique"),
+        earliest_day=("day", "min"), latest_day=("day", "max"),
+        median_debit=("signed_amount", "median"),
+    )
+    recurring = series.loc[
+        series["payments"].eq(6) & series["months"].eq(6)
+        & (series["latest_day"] - series["earliest_day"]).le(2)
+    ]
+    return recurring.sort_values(["median_debit", *_SERIES_COLUMNS]).drop_duplicates("account_id")
+
+
+def _movable_payments(tx, recurring, days, end, expected_months):
+    """Match the chosen series to the replay and keep dates inside their month."""
+    matched = tx.loc[_bill_mask(tx)].merge(recurring, on=_SERIES_COLUMNS, how="inner")
+    matched["shifted_date"] = matched["date"] + pd.Timedelta(days=days)
+    matched["month"] = matched["date"].dt.to_period("M")
+    matched["date_allowed"] = matched["shifted_date"].le(end) & matched["shifted_date"].dt.to_period("M").eq(matched["month"])
+    coverage = matched.groupby("account_id").agg(
+        payments=("date", "size"), months=("month", "nunique"), all_dates_allowed=("date_allowed", "all"),
+    )
+    eligible = coverage.index[
+        coverage["payments"].eq(expected_months) & coverage["months"].eq(expected_months)
+        & coverage["all_dates_allowed"]
+    ]
+    return matched.loc[matched["account_id"].isin(eligible)].sort_values("date")
+
+
+def _shocked_amounts(tx, income_multiplier, bills_increase_pct):
+    amounts = tx["signed_amount"].astype(float)
+    amounts = amounts.where(amounts.le(0), amounts * income_multiplier)
+    return amounts.where(~_bill_mask(tx), amounts * (1 + bills_increase_pct))
 
 
 def simulate_daily_cashflow(
-    account_id: int,
-    initial_balance: Optional[float] = None,
-    income_multiplier: float = 0.55,
-    bills_increase_pct: float = 0.15,
-    one_off_costs: float = 0.0,
-    shift_bill_days: int = 0,
-    bill_shift_approved: bool = True,
-    spending_cut_pct: float = 0.0,
-    split_repair_months: int = 1,
-    pause_goal_transfers: bool = False,
-    start_date: str = "2025-07-01",
-    end_date: str = "2025-12-31",
-    data_dir: Path = DATA_DIR,
-) -> Dict[str, Any]:
-    """Simulate day-by-day cash flow for July–Dec 2025 under shock & playbook actions.
+    account_id,
+    initial_balance=None,
+    income_multiplier=0.55,
+    bills_increase_pct=0.15,
+    one_off_costs=0.0,
+    shift_bill_days=0,
+    bill_shift_approved=False,
+    start_date=REPLAY_START,
+    end_date=REPLAY_END,
+    data_dir=DATA_DIR,
+):
+    """Replay observed end-of-day flows with one optional conditional bill move.
 
-    Parameters:
-    - account_id: Customer account ID.
-    - initial_balance: Starting cash buffer. Defaults to the baseline buffer B.
-    - income_multiplier: Layoff multiplier (e.g. 0.55 for 55% statutory EI).
-    - bills_increase_pct: Hike on household bills (e.g. 0.15 for +15%).
-    - one_off_costs: Immediate expense (e.g. furnace/car repair).
-    - shift_bill_days: Days to shift recurring household bill (e.g. 7 days).
-    - bill_shift_approved: Whether biller approval is granted. If False, shift_bill_days is forced to 0.
-    - spending_cut_pct: Confirmed percentage cut to discretionary spending (0.0 to 0.75).
-    - split_repair_months: Installments for repair cost (1 = immediate, 3 = spread over 3 months).
-    - pause_goal_transfers: Whether to pause standing investment/goal transfers.
+    The default opening balance is an average from completed months before the
+    replay. A supplied opening balance is a separate scenario input.
     """
-    tx = load_transactions(data_dir)
-    acc_tx = tx[tx["account_id"] == account_id].sort_values("date").copy()
+    start, end = pd.Timestamp(start_date).normalize(), pd.Timestamp(end_date).normalize()
+    if pd.isna(start) or pd.isna(end) or start > end or start.tzinfo is not None or end.tzinfo is not None:
+        raise ValueError("Replay start date must be on or before the end date")
+    if not all(isfinite(value) for value in (income_multiplier, bills_increase_pct, one_off_costs)):
+        raise ValueError("Replay scenario amounts must be finite")
+    if income_multiplier < 0 or bills_increase_pct < -1 or one_off_costs < 0 or shift_bill_days < 0 or shift_bill_days % 1:
+        raise ValueError("Invalid replay scenario amounts")
+    if initial_balance is not None and not isfinite(initial_balance):
+        raise ValueError("Scenario opening balance must be finite")
 
-    start_dt = pd.to_datetime(start_date)
-    end_dt = pd.to_datetime(end_date)
+    monthly = _load_monthly(data_dir)
+    history = monthly.loc[monthly["account_id"].eq(account_id)].set_index("month")
+    replay_months = pd.period_range(start, end, freq="M")
+    if not replay_months.isin(history.index).all():
+        return {"available": False, "reason": "Account history does not cover the full replay window."}
 
-    # Filter transactions in horizon
-    h2_tx = acc_tx[(acc_tx["date"] >= start_dt) & (acc_tx["date"] <= end_dt)].copy()
-
-    # If starting balance not supplied, look up June 30 balance or baseline B
     if initial_balance is None:
-        prior_tx = acc_tx[acc_tx["date"] < start_dt]
-        if not prior_tx.empty:
-            initial_balance = float(prior_tx.iloc[-1]["balance"])
-        else:
-            initial_balance = float(h2_tx.iloc[0]["balance"]) if not h2_tx.empty else 0.0
+        prior = history.loc[history.index < replay_months[0], "avg_daily_balance"].tail(6)
+        if prior.empty or not prior.map(isfinite).all():
+            return {"available": False, "reason": "No usable opening-balance history before the replay window."}
+        initial_balance = float(prior.mean())
+        opening_basis = f"Historical proxy from {len(prior)} completed account months before the replay"
+    else:
+        opening_basis = "Supplied scenario opening balance"
 
-    # Effective bill shift only if approved
-    eff_shift_days = shift_bill_days if bill_shift_approved else 0
+    transactions = load_transactions(data_dir)
+    account = transactions.loc[transactions["account_id"].eq(account_id)]
+    if account.empty:
+        return {"available": False, "reason": "No transaction records for this account."}
+    replay = _window(account, start, end)
+    if not replay["signed_amount"].map(isfinite).all():
+        return {"available": False, "reason": "Unusable transaction amounts within the replay window."}
+    flows = _shocked_amounts(replay, income_multiplier, bills_increase_pct)
+    daily = flows.groupby(replay["date"]).sum().reindex(pd.date_range(start, end), fill_value=0.0)
 
-    events: List[Dict[str, Any]] = []
+    candidate = None
+    if shift_bill_days:
+        recurring = _largest_recurring_bill(account, start)
+        movable = _movable_payments(replay, recurring, shift_bill_days, end, len(replay_months))
+        if not movable.empty:
+            first = movable.iloc[0]
+            candidate = {
+                "observed_payments": int(first["payments"]),
+                "matched_payments": len(movable),
+                "median_payment": round(-float(first["median_debit"]), 2),
+                "first_original_date": first["date"].strftime("%Y-%m-%d"),
+                "first_shifted_date": first["shifted_date"].strftime("%Y-%m-%d"),
+            }
+            if bill_shift_approved:
+                moved_amounts = movable["signed_amount"] * (1 + bills_increase_pct)
+                daily = daily.sub(moved_amounts.groupby(movable["date"]).sum(), fill_value=0.0)
+                daily = daily.add(moved_amounts.groupby(movable["shifted_date"]).sum(), fill_value=0.0)
 
-    # 1. Apply one-off repair costs (either lump sum on start_date or split)
-    if one_off_costs > 0:
-        if split_repair_months > 1:
-            installment = one_off_costs / split_repair_months
-            for m in range(split_repair_months):
-                inst_dt = start_dt + timedelta(days=m * 30)
-                if inst_dt <= end_dt:
-                    events.append({
-                        "date": inst_dt,
-                        "delta": -installment,
-                        "type": "one_off_repair",
-                        "desc": f"Approved Repair Installment ({m+1}/{split_repair_months})",
-                        "raw_amt": installment,
-                    })
-        else:
-            events.append({
-                "date": start_dt,
-                "delta": -one_off_costs,
-                "type": "one_off_repair",
-                "desc": f"Surprise One-Off Repair (Lump Sum)",
-                "raw_amt": one_off_costs,
-            })
-
-    # 2. Process historical transactions with shock scaling
-    for _, row in h2_tx.iterrows():
-        dt = row["date"]
-        amt = float(row["amount"])
-        direction = str(row["direction"]).lower()
-        operation = str(row["operation"]).lower() if pd.notna(row["operation"]) else ""
-        purpose = str(row["purpose"]).lower() if pd.notna(row["purpose"]) else ""
-        signed_amt = float(row["signed_amount"])
-
-        if "credit" in direction:
-            # Regular income deposits are shocked
-            if "deposit" in operation or "salary" in purpose:
-                delta = amt * income_multiplier
-                ev_type = "income_deposit"
-                desc = f"Simulated Income Deposit ({income_multiplier*100:.0f}%)"
-            else:
-                # Interest, etc.
-                delta = amt
-                ev_type = "other_credit"
-                desc = f"{row['operation']} {purpose}".strip()
-            events.append({
-                "date": dt,
-                "delta": delta,
-                "type": ev_type,
-                "desc": desc,
-                "raw_amt": amt,
-            })
-        else:
-            # Outflow
-            if "household bills" in purpose:
-                # Household bill: apply bill hike and potential date shift
-                delta = -amt * (1.0 + bills_increase_pct)
-                shifted_dt = dt + timedelta(days=eff_shift_days)
-                # Keep within end_dt
-                eff_dt = min(shifted_dt, end_dt)
-                events.append({
-                    "date": eff_dt,
-                    "delta": delta,
-                    "type": "household_bill",
-                    "desc": f"Household Bill (+{bills_increase_pct*100:.0f}%" + (f", shifted {eff_shift_days}d" if eff_shift_days > 0 else "") + ")",
-                    "raw_amt": amt,
-                    "original_date": dt,
-                })
-            elif "loan payment" in purpose:
-                # Fixed loan payments cannot be cut
-                events.append({
-                    "date": dt,
-                    "delta": signed_amt,
-                    "type": "loan_payment",
-                    "desc": "Contractual Loan Payment",
-                    "raw_amt": amt,
-                })
-            elif "insurance" in purpose:
-                events.append({
-                    "date": dt,
-                    "delta": signed_amt,
-                    "type": "insurance",
-                    "desc": "Insurance Premium",
-                    "raw_amt": amt,
-                })
-            elif "statement fee" in purpose or "bank fee" in operation:
-                events.append({
-                    "date": dt,
-                    "delta": signed_amt,
-                    "type": "bank_fee",
-                    "desc": "Account & Statement Fee",
-                    "raw_amt": amt,
-                })
-            else:
-                # Discretionary / variable spending: eligible for confirmed cut
-                if spending_cut_pct > 0:
-                    cut_amount = amt * spending_cut_pct
-                    delta = -(amt - cut_amount)
-                    desc = f"{row['operation']} (Cut {spending_cut_pct*100:.0f}%)"
-                else:
-                    delta = signed_amt
-                    desc = f"{row['operation']} {purpose}".strip()
-
-                events.append({
-                    "date": dt,
-                    "delta": delta,
-                    "type": "discretionary_spending",
-                    "desc": desc,
-                    "raw_amt": amt,
-                })
-
-    # Sort events by date; on same date, credits apply before debits to avoid false overdrafts
-    events.sort(key=lambda x: (x["date"], -x["delta"]))
-
-    # Daily trajectory simulation
-    bal = float(initial_balance)
-    min_bal = bal
-    first_shortfall_date: Optional[datetime] = None
-    first_shortfall_deficit: float = 0.0
-
-    timeline: List[Dict[str, Any]] = []
-
-    # Record day 0 starting status
-    timeline.append({
-        "date": start_dt.strftime("%Y-%m-%d"),
-        "delta": 0.0,
-        "balance": round(bal, 2),
-        "type": "initial_balance",
-        "description": "Starting Available Cash Buffer",
-    })
-
-    for ev in events:
-        bal += ev["delta"]
-        if bal < min_bal:
-            min_bal = bal
-
-        if bal < 0 and first_shortfall_date is None:
-            first_shortfall_date = ev["date"]
-            first_shortfall_deficit = abs(bal)
-
+    cash_after_cost = initial_balance - one_off_costs
+    balances = (cash_after_cost + daily.cumsum()).round(2)
+    opening_minimum = round(min(initial_balance, cash_after_cost), 2)
+    min_balance = min(opening_minimum, balances.min())
+    negative_days = balances.index[balances.lt(0)]
+    first_shortfall = start if opening_minimum < 0 else next(iter(negative_days), None)
+    month_ends = balances.groupby(balances.index.to_period("M")).last()
+    timeline = [{
+        "date": start.strftime("%Y-%m-%d"), "delta": 0.0, "balance": round(initial_balance, 2),
+        "type": "initial_balance", "description": "Scenario opening balance before daily flows",
+    }]
+    if one_off_costs:
         timeline.append({
-            "date": ev["date"].strftime("%Y-%m-%d"),
-            "delta": round(ev["delta"], 2),
-            "balance": round(bal, 2),
-            "type": ev["type"],
-            "description": ev["desc"],
+            "date": start.strftime("%Y-%m-%d"), "delta": -round(one_off_costs, 2),
+            "balance": round(cash_after_cost, 2), "type": "one_off_repair",
+            "description": "Immediate one-off scenario cost",
         })
-
-    extra_cash_needed = round(max(0.0, -min_bal), 2)
-    days_to_shortfall = (first_shortfall_date - start_dt).days if first_shortfall_date else None
-
-    # Determine intra-month shortfall (negative between month ends despite positive month ends)
-    # Group by month end
-    df_tl = pd.DataFrame(timeline)
-    df_tl["dt"] = pd.to_datetime(df_tl["date"])
-    df_tl["month"] = df_tl["dt"].dt.to_period("M")
-    
-    month_ends = df_tl.groupby("month").last()
-    clears_all_month_ends = bool((month_ends["balance"] >= 0).all()) if not month_ends.empty else False
-    has_intra_month_dip = bool((df_tl["balance"] < 0).any())
-
-    intra_month_only_shortfall = has_intra_month_dip and clears_all_month_ends
-
+    timeline.extend(
+        {
+            "date": day.strftime("%Y-%m-%d"), "delta": round(float(daily.loc[day]), 2),
+            "balance": round(float(balance), 2), "type": "end_of_day", "description": "Net daily cash flow",
+        }
+        for day, balance in balances.items()
+    )
+    applied = bool(candidate and bill_shift_approved)
     return {
+        "available": True,
         "account_id": account_id,
         "initial_balance": round(initial_balance, 2),
-        "end_balance": round(bal, 2),
-        "min_balance": round(min_bal, 2),
-        "extra_cash_needed": extra_cash_needed,
-        "first_shortfall_date": first_shortfall_date.strftime("%Y-%m-%d") if first_shortfall_date else None,
-        "days_to_shortfall": days_to_shortfall,
-        "makes_it_through_horizon": first_shortfall_date is None,
-        "intra_month_only_shortfall": intra_month_only_shortfall,
-        "total_events": len(events),
+        "opening_balance_basis": opening_basis,
+        "replay_start_date": start.strftime("%Y-%m-%d"),
+        "replay_end_date": end.strftime("%Y-%m-%d"),
+        "end_balance": round(float(balances.iloc[-1]), 2),
+        "min_balance": round(float(min_balance), 2),
+        "extra_cash_needed": round(max(0.0, -min_balance), 2),
+        "first_shortfall_date": first_shortfall.strftime("%Y-%m-%d") if first_shortfall is not None else None,
+        "days_to_shortfall": (first_shortfall - start).days if first_shortfall is not None else None,
+        "makes_it_through_horizon": first_shortfall is None,
+        "intra_month_only_shortfall": bool(
+            opening_minimum >= 0 and len(negative_days) and month_ends.ge(0).all()
+        ),
+        "total_events": len(replay) + int(one_off_costs > 0),
         "timeline": timeline,
-        "shift_bill_days": eff_shift_days,
-        "bill_shift_approved": bill_shift_approved,
-        "spending_cut_pct": spending_cut_pct,
-        "split_repair_months": split_repair_months,
+        "has_bill_to_shift": candidate is not None,
+        "bill_candidate": candidate,
+        "shift_bill_days": shift_bill_days if applied else 0,
+        "bill_shift_approved": applied,
     }
 
 
-def compare_bill_shift(
-    account_id: int,
-    initial_balance: Optional[float] = None,
-    income_multiplier: float = 0.55,
-    bills_increase_pct: float = 0.15,
-    shift_days: int = 7,
-    data_dir: Path = DATA_DIR,
-) -> Dict[str, Any]:
-    """Direct comparison between unshifted baseline and 7-day shifted bill payment.
-
-    Specifically verifies Account 22812 demo anchor:
-    - Shifting largest household bill 7 days buys 27 days before first shortfall
-    - But still leaves $6,186 / $5,698 in extra starting cash needed!
-    """
-    baseline = simulate_daily_cashflow(
-        account_id=account_id,
-        initial_balance=initial_balance,
-        income_multiplier=income_multiplier,
-        bills_increase_pct=bills_increase_pct,
-        shift_bill_days=0,
-        bill_shift_approved=False,
-        data_dir=data_dir,
+def compare_bill_shift(account_id, initial_balance=None, income_multiplier=0.55, bills_increase_pct=0.15,
+                       shift_days=7, data_dir=DATA_DIR):
+    """Compare the same replay with and without the eligible bill-date change."""
+    inputs = dict(
+        initial_balance=initial_balance, income_multiplier=income_multiplier, bills_increase_pct=bills_increase_pct,
+        shift_bill_days=shift_days, data_dir=data_dir,
     )
-
-    shifted = simulate_daily_cashflow(
-        account_id=account_id,
-        initial_balance=initial_balance,
-        income_multiplier=income_multiplier,
-        bills_increase_pct=bills_increase_pct,
-        shift_bill_days=shift_days,
-        bill_shift_approved=True,
-        data_dir=data_dir,
-    )
-
-    days_bought = 0
-    if baseline["first_shortfall_date"] and shifted["first_shortfall_date"]:
-        d1 = datetime.strptime(baseline["first_shortfall_date"], "%Y-%m-%d")
-        d2 = datetime.strptime(shifted["first_shortfall_date"], "%Y-%m-%d")
-        days_bought = (d2 - d1).days
-    elif baseline["first_shortfall_date"] and shifted["first_shortfall_date"] is None:
-        days_bought = 180  # completely prevented shortfall
-
-    cash_deficit_reduction = baseline["extra_cash_needed"] - shifted["extra_cash_needed"]
-
+    baseline = simulate_daily_cashflow(account_id, **inputs)
+    if not baseline["available"]:
+        return baseline
+    shifted = simulate_daily_cashflow(account_id, bill_shift_approved=True, **inputs)
+    before, after = baseline["days_to_shortfall"], shifted["days_to_shortfall"]
     return {
-        "account_id": account_id,
-        "baseline": baseline,
-        "shifted": shifted,
-        "days_bought": days_bought,
-        "cash_deficit_reduction": round(cash_deficit_reduction, 2),
+        "available": True, "account_id": account_id, "baseline": baseline, "shifted": shifted,
+        "days_bought": after - before if before is not None and after is not None else None,
+        "cash_deficit_reduction": round(baseline["extra_cash_needed"] - shifted["extra_cash_needed"], 2),
         "remaining_cash_needed": shifted["extra_cash_needed"],
     }
 
 
-def get_macro_discovery_data() -> Dict[str, Any]:
-    """Return verified macro discovery replay findings across all 4,500 accounts.
+def _daily_matrix(account_ids, days, amounts, tx):
+    by_day = amounts.groupby([tx["account_id"], tx["date"]]).sum().unstack(fill_value=0.0)
+    return by_day.reindex(index=account_ids, columns=days, fill_value=0.0)
 
-    July–December 2025 Replay under simulated layoff (55% EI) & 15% bill shock:
-    - 131 accounts went negative between month-ends despite clearing every monthly close.
-    - 103 had a recognizable monthly household bill that could be shifted 7 days.
-    - Moving the largest qualifying bill eliminated the shortfall for 43 of those 103 (41.7%).
-    - Month-end balance change: exactly $0.00.
-    """
+
+@lru_cache(maxsize=2)
+def get_macro_discovery_data(data_dir=DATA_DIR):
+    """Reproduce the existing timing discovery with the same replay rules."""
+    start, end = pd.Timestamp(REPLAY_START), pd.Timestamp(REPLAY_END)
+    months = pd.period_range(start, end, freq="M")
+    days = pd.date_range(start, end)
+    month_ends = months.to_timestamp(how="end").normalize()
+    monthly = _load_monthly(data_dir)
+    coverage = monthly.loc[monthly["month"].isin(months)].groupby("account_id")["month"].nunique()
+    prior = monthly.loc[monthly["month"].lt(months[0])].groupby("account_id").tail(6)
+    opening = prior.groupby("account_id")["avg_daily_balance"].mean()
+    opening = opening.loc[opening.index.intersection(coverage.index[coverage.eq(len(months))])]
+    invalid_prior = prior.loc[~prior["avg_daily_balance"].map(isfinite), "account_id"]
+    opening = opening.loc[~opening.index.isin(invalid_prior)]
+
+    tx = load_transactions(data_dir)
+    replay = _window(tx, start, end)
+    invalid_replay = replay.loc[~replay["signed_amount"].map(isfinite), "account_id"]
+    opening = opening.loc[opening.index.isin(tx["account_id"]) & ~opening.index.isin(invalid_replay)]
+    replay = replay.loc[replay["account_id"].isin(opening.index)]
+    amounts = _shocked_amounts(replay, 0.55, 0.15)
+    daily = _daily_matrix(opening.index, days, amounts, replay)
+    cash = daily.cumsum(axis=1).add(opening, axis=0).round(2)
+
+    clears_monthly = opening.round(2).ge(0) & cash[month_ends].ge(0).all(axis=1)
+    hidden = cash.index[clears_monthly & cash.lt(0).any(axis=1)]
+    recurring = _largest_recurring_bill(tx.loc[tx["account_id"].isin(hidden)], start)
+    movable = _movable_payments(replay, recurring, 7, end, len(months))
+    candidates = pd.Index(movable["account_id"].unique())
+    moved_amounts = movable["signed_amount"] * 1.15
+    before = _daily_matrix(candidates, days, moved_amounts, movable)
+    after = _daily_matrix(candidates, days, moved_amounts, movable.assign(date=movable["shifted_date"]))
+    shifted = (daily.loc[candidates] - before + after).cumsum(axis=1).add(opening.loc[candidates], axis=0).round(2)
+    resolved = int(shifted.ge(0).all(axis=1).sum())
+    monthly_change = (
+        round(float((shifted[month_ends] - cash.loc[candidates, month_ends]).abs().max().max()), 2)
+        if len(candidates) else 0.0
+    )
+    total = len(opening)
+    clear_count = int(clears_monthly.sum())
     return {
-        "total_accounts": 4500,
-        "intra_month_overdrafts": 131,
-        "accounts_with_movable_bill": 103,
-        "overdrafts_resolved_by_shift": 43,
-        "resolution_rate_pct": 41.7,
-        "month_end_balance_delta": 0.0,
+        "total_accounts": total,
+        "nonnegative_month_end_accounts": clear_count,
+        "intra_month_overdrafts": len(hidden),
+        "accounts_with_movable_bill": len(candidates),
+        "overdrafts_resolved_by_shift": resolved,
+        "resolution_rate_pct": round(100 * resolved / len(candidates), 1) if len(candidates) else 0.0,
+        "month_end_balance_delta": monthly_change,
+        "methodology": (
+            "July–December 2025 complete-history cohort. Start with the mean daily balance from up to six "
+            "completed pre-July account months, scale all observed inflows to 55%, and increase identified "
+            "household bills by 15%. Measure end-of-day cash, then replay a conditional seven-day move of one "
+            "recurring bill identified from pre-July history. Every shifted payment stays in its original month."
+        ),
         "summary_points": [
-            "131 accounts suffered hidden intra-month deficits despite closing every month positive.",
-            "103 accounts had regular monthly household bills preceding their paychecks.",
-            "Shifting the bill by 7 days eliminated overdrafts entirely for 43 customers (41.7%).",
-            "Required zero external capital and changed month-end net savings by exactly $0.00.",
-            "Crucial real-world constraint: bill-date changes strictly require biller approval.",
+            f"{total:,} accounts met the replay data requirements.",
+            f"{clear_count:,} started and closed each month nonnegative. {len(hidden):,} of these went negative between month-ends.",
+            f"{len(candidates):,} of the timing-shortfall accounts had a qualifying bill-date scenario. "
+            f"The conditional move avoided a daily shortfall for {resolved:,}.",
+            "This replay assumes no fee for the date change. Historical payment records do not establish approval.",
         ],
         "distribution": [
-            {"Category": "Clean Trajectory (No Overdraft)", "Accounts": 4369, "Status": "Solvent"},
-            {"Category": "Saved Entirely by 7-Day Bill Shift", "Accounts": 43, "Status": "Rescued via Timing"},
-            {"Category": "Needs Bill Shift + Spending Cuts", "Accounts": 60, "Status": "Partial Relief"},
-            {"Category": "No Movable Household Bill", "Accounts": 28, "Status": "Requires Budget Intervention"},
+            {"Category": "Negative opening balance or month-end", "Accounts": total - clear_count},
+            {"Category": "No shortfall", "Accounts": clear_count - len(hidden)},
+            {"Category": "Daily shortfall avoided in conditional replay", "Accounts": resolved},
+            {"Category": "Daily shortfall remained after conditional move", "Accounts": len(candidates) - resolved},
+            {"Category": "Daily shortfall and no qualifying bill move", "Accounts": len(hidden) - len(candidates)},
         ],
     }
-
