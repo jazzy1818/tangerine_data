@@ -436,12 +436,12 @@ with tab3:
             from recovery_plan import RecoverySnapshot
             checkpoint_month = st.text_input('Checkpoint month (YYYY-MM)', value='', key='recovery_month')
             rcash = st.number_input('Accessible cash at checkpoint (CAD)', value=None, key='recovery_cash')
-            rincome = st.number_input('Updated recurring inflows (CAD/month)', min_value=0., value=None, key='recovery_income')
+            rincome = st.number_input('Updated recurring inflows (CAD/month; optional if contribution support is supplied)', min_value=0., value=None, key='recovery_income')
             rspending = st.number_input('Updated recurring spending (CAD/month)', min_value=.01, value=None, key='recovery_spending')
             rrate = st.number_input('Supported rebuild contribution (CAD/month; leave blank if unknown)', min_value=0., value=None, key='recovery_rate')
             rstable = st.checkbox('Scenario explicitly establishes stable cash flow', key='recovery_stable')
             rcovered = st.checkbox('Scenario explicitly establishes coverage of upcoming obligations', key='recovery_covered')
-            if None not in (rcash, rincome, rspending):
+            if None not in (rcash, rspending):
                 try:
                     recovery_snapshot = RecoverySnapshot(source='Judge-supplied conditional recovery checkpoint',
                         account_id=customer['account_id'],
