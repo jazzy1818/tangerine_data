@@ -1,0 +1,1158 @@
+group,case,checkpoint,metric,expected,observed,comparison,comparison_rule,commit,review_status
+Official metrics,20111,,I,6339.39,6339.389999999999,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,20111,,S,8599.605,8599.605,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,20111,,H,0.0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,20111,,F,2330.06,2330.06,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,20111,,B,17611.86333333333333333333333,17611.863333333335,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,20111,,P,2330.19,2330.19,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,22812,,I,14472.325,14472.325,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,22812,,S,14786.965,14786.965,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,22812,,H,2350.32,2350.32,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,22812,,F,2350.32,2350.32,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,22812,,B,51219.555,51219.555,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Official metrics,22812,,P,0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,monthly_funding_gap,5112.9405,5112.9405,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,one_time_expense,0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,post_shock_monthly_spending,8599.605,8599.605,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,post_shock_income,3486.6645,3486.6645,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,official_runway_rounded,3.4,3.4,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,remaining_buffer,17611.86333333333333333333333,17611.863333333335,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Job loss,,official_runway_before_rounding,3.444566455121731483738825697,3.444566455121732,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,monthly_funding_gap,2260.215,2260.215,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,one_time_expense,8599.605,8599.605,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,post_shock_monthly_spending,8599.605,8599.605,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,post_shock_income,6339.39,6339.389999999999,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,official_runway_rounded,4.0,4.0,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,remaining_buffer,9012.25833333333333333333333,9012.258333333335,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Furnace repair,,official_runway_before_rounding,3.987345599128106544436406860,3.987345599128107,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,monthly_funding_gap,5112.9405,5112.9405,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,one_time_expense,0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,post_shock_monthly_spending,8599.605,8599.605,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,post_shock_income,3486.6645,3486.6645,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,official_runway_rounded,3.4,3.4,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,remaining_buffer,17611.86333333333333333333333,17611.863333333335,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,20111 Combined shock,,official_runway_before_rounding,3.444566455121731483738825697,3.444566455121732,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,monthly_funding_gap,6827.18625,6827.186249999999,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,one_time_expense,0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,post_shock_monthly_spending,14786.965,14786.965,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,post_shock_income,7959.77875,7959.778750000001,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,official_runway_rounded,7.5,7.5,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,remaining_buffer,51219.555,51219.555,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Job loss,,official_runway_before_rounding,7.502293496094382953152918598,7.502293496094384,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,monthly_funding_gap,314.640,314.6399999999994,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,one_time_expense,14786.965,14786.965,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,post_shock_monthly_spending,14786.965,14786.965,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,post_shock_income,14472.325,14472.325,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,official_runway_rounded,115.8,115.8,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,remaining_buffer,36432.590,36432.59,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Furnace repair,,official_runway_before_rounding,115.7913488431222984998728706,115.7913488431225,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,monthly_funding_gap,7179.73425,7179.7342499999995,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,one_time_expense,0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,post_shock_monthly_spending,15139.5130,15139.513,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,post_shock_income,7959.77875,7959.778750000001,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,official_runway_rounded,7.1,7.1,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,remaining_buffer,51219.555,51219.555,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Organizer shock,22812 Combined shock,,official_runway_before_rounding,7.133906801634057695102015788,7.133906801634058,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=0.0, gap=100.0",,official runway,0.0,0.0,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=-1.0, gap=-1.0",,official runway,0.0,0.0,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=100.0, gap=0.0",,official runway,no shortfall (120+),no shortfall (120+),MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=100.0, gap=-5.0",,official runway,no shortfall (120+),no shortfall (120+),MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=12000.0, gap=1.0",,official runway,120.0,120.0,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=60.0, gap=0.5",,official runway,120.0,120.0,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Runway boundary,"B_left=5.0, gap=3.0",,official runway,1.7,1.7,MATCH,one_decimal,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,one_time_expense,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,closing_accessible_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,opening_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,closing_accessible_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,opening_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,closing_accessible_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,opening_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,closing_accessible_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,opening_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,closing_accessible_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,opening_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,closing_accessible_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,opening_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,closing_accessible_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,opening_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,closing_accessible_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,opening_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,closing_accessible_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,opening_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,closing_accessible_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,opening_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,closing_accessible_cash,-3360,-3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A No intervention,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,one_time_expense,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,closing_accessible_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,opening_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,closing_accessible_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,opening_cash,690,690.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,closing_accessible_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,opening_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,closing_accessible_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,opening_cash,-120,-120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,closing_accessible_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,opening_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,closing_accessible_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,opening_cash,-930,-930.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,closing_accessible_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,opening_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,closing_accessible_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,opening_cash,-1740,-1740.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,closing_accessible_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,opening_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,closing_accessible_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,opening_cash,-2550,-2550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,closing_accessible_cash,-3360,-3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause future proposed investment,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,one_time_expense,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,closing_accessible_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,opening_cash,1500,1500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,closing_accessible_cash,990,990.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,1 end,action_cash_effect,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,opening_cash,990,990.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,closing_accessible_cash,990,990.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,opening_cash,990,990.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,closing_accessible_cash,480,480.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,2 end,action_cash_effect,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,opening_cash,480,480.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,closing_accessible_cash,480,480.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,opening_cash,480,480.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,closing_accessible_cash,-30,-30.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,3 end,action_cash_effect,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,opening_cash,-30,-30.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,closing_accessible_cash,-30,-30.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,opening_cash,-30,-30.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,closing_accessible_cash,-540,-540.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,4 end,action_cash_effect,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,opening_cash,-540,-540.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,closing_accessible_cash,-540,-540.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,opening_cash,-540,-540.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,closing_accessible_cash,-1050,-1050.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,5 end,action_cash_effect,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,opening_cash,-1050,-1050.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,closing_accessible_cash,-1050,-1050.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,income,1650,1650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,opening_cash,-1050,-1050.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,closing_accessible_cash,-1560,-1560.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,spending,2460,2460.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,A Pause approved existing outflow,6 end,action_cash_effect,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,opening_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,closing_accessible_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,opening_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,closing_accessible_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,opening_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,closing_accessible_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,income,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,opening_cash,1000,1000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,closing_accessible_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,opening_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,closing_accessible_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,income,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,opening_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,closing_accessible_cash,-200,-200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,opening_cash,-200,-200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,one_time_receipt,2000,2000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,closing_accessible_cash,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,income,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,opening_cash,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,closing_accessible_cash,1200,1200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,opening_cash,1200,1200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,closing_accessible_cash,1200,1200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,income,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,opening_cash,1200,1200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,closing_accessible_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,opening_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,closing_accessible_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,income,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,opening_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,closing_accessible_cash,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,opening_cash,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,closing_accessible_cash,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,income,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,opening_cash,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,closing_accessible_cash,-600,-600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,B Start Month 3 receipt,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,closing_accessible_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,opening_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,closing_accessible_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,opening_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,closing_accessible_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,opening_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,closing_accessible_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,opening_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,closing_accessible_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,opening_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,closing_accessible_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,opening_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,closing_accessible_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,opening_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,closing_accessible_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,opening_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,closing_accessible_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,opening_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,closing_accessible_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,opening_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,closing_accessible_cash,-900,-900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Original payments,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,closing_accessible_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,spending,2100,2100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,opening_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,closing_accessible_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,opening_cash,400,400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,closing_accessible_cash,500,500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,spending,2100,2100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,opening_cash,500,500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,closing_accessible_cash,500,500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,opening_cash,500,500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,repayments,650,650.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,closing_accessible_cash,-350,-350.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,opening_cash,-350,-350.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,closing_accessible_cash,-550,-550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,opening_cash,-550,-550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,closing_accessible_cash,-550,-550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,opening_cash,-550,-550.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,closing_accessible_cash,-750,-750.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,opening_cash,-750,-750.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,closing_accessible_cash,-750,-750.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,opening_cash,-750,-750.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,closing_accessible_cash,-950,-950.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Approved deferral,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,closing_accessible_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,opening_cash,300,300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,closing_accessible_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,opening_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,closing_accessible_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,opening_cash,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,closing_accessible_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,opening_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,closing_accessible_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,opening_cash,-100,-100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,closing_accessible_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,opening_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,closing_accessible_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,opening_cash,-300,-300.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,closing_accessible_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,opening_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,closing_accessible_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,opening_cash,-500,-500.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,closing_accessible_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,opening_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,closing_accessible_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,income,2200,2200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,opening_cash,-700,-700.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,closing_accessible_cash,-900,-900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,C Deferral without baseline evidence,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,closing_accessible_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,closing_accessible_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,0 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,closing_accessible_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,income,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,opening_cash,3000,3000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,closing_accessible_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,1 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,opening_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,closing_accessible_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,income,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,opening_cash,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,closing_accessible_cash,-1800,-1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,2 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,opening_cash,-1800,-1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,closing_accessible_cash,-1800,-1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,income,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,opening_cash,-1800,-1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,closing_accessible_cash,-4200,-4200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,3 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,opening_cash,-4200,-4200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,closing_accessible_cash,-4200,-4200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,income,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,opening_cash,-4200,-4200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,closing_accessible_cash,-6600,-6600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,4 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,opening_cash,-6600,-6600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,closing_accessible_cash,-6600,-6600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,income,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,opening_cash,-6600,-6600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,closing_accessible_cash,-9000,-9000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,5 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,income,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,opening_cash,-9000,-9000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,closing_accessible_cash,-9000,-9000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,spending,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 start,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,income,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,opening_cash,-9000,-9000.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,repayments,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,one_time_expense,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,one_time_receipt,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,closing_accessible_cash,-11400,-11400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,fees,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,spending,2400,2400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic checkpoint,E Income changes; synthetic baseline from Case A,6 end,action_cash_effect,0,0.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,first_negative_shortfall,120,120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,first_negative_month,2,2,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,additional_starting_cash_known_components,3360,3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,complete_shock_funding_requirement,3360,3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,lowest_accessible_cash,-3360,-3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A No intervention,,complete,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,first_negative_shortfall,120,120.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,first_negative_month,2,2,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,additional_starting_cash_known_components,3360,3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,complete_shock_funding_requirement,3360,3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,lowest_accessible_cash,-3360,-3360.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause future proposed investment,,complete,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,first_negative_shortfall,30,30.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,first_negative_month,3,3,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,additional_starting_cash_known_components,1560,1560.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,complete_shock_funding_requirement,1560,1560.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,lowest_accessible_cash,-1560,-1560.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,A Pause approved existing outflow,,complete,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,first_negative_shortfall,200,200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,first_negative_month,2,2,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,cash_needed_before_receipt,200,200.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,additional_starting_cash_known_components,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,complete_shock_funding_requirement,600,600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,lowest_accessible_cash,-600,-600.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,B Start Month 3 receipt,,complete,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,first_negative_shortfall,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,first_negative_month,2,2,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,additional_starting_cash_known_components,900,900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,complete_shock_funding_requirement,900,900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,lowest_accessible_cash,-900,-900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Original payments,,complete,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,first_negative_shortfall,350,350.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,first_negative_month,4,4,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,first_negative_phase,Start,Start,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,additional_starting_cash_known_components,950,950.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,complete_shock_funding_requirement,950,950.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,lowest_accessible_cash,-950,-950.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Approved deferral,,complete,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,first_negative_shortfall,100,100.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,first_negative_month,2,2,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,additional_starting_cash_known_components,900,900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,complete_shock_funding_requirement,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,lowest_accessible_cash,-900,-900.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,C Deferral without baseline evidence,,complete,False,False,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,first_negative_shortfall,1800,1800.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,first_negative_month,2,2,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,cash_needed_before_receipt,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,first_negative_phase,End,End,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,additional_starting_cash_known_components,11400,11400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,complete_shock_funding_requirement,,,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,lowest_accessible_cash,-11400,-11400.0,MATCH,money,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Synthetic summary,E Income changes; synthetic baseline from Case A,,complete,False,False,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,total_accounts,4424,4424,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,nonnegative_month_end_accounts,2324,2324,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,intra_month_overdrafts,143,143,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,accounts_with_movable_bill,102,102,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,overdrafts_resolved_by_shift,44,44,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,resolution_rate_pct,43.1,43.1,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Independent daily replay,cohort,,month_end_balance_delta,0.00,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,goal_review_required,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,goal_status,REVIEW_REQUIRED,REVIEW_REQUIRED,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,G25_state,unknown,unknown,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,complete funding unknown,,,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,asks for duration,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,asks for value,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Unknown-income guard,E,,asks for timing,True,True,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Supported contribution,,reserve_target,7200.0,7200.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Supported contribution,,reserve_gap,4200.0,4200.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Supported contribution,,monthly_contribution,300.0,300.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Supported contribution,,months_to_target,14,14,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Supported contribution,,monthly_surplus,,,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Unknown contribution,,reserve_target,7200.0,7200.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Unknown contribution,,reserve_gap,4200.0,4200.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Unknown contribution,,monthly_contribution,0.0,0.0,MATCH,raw,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Unknown contribution,,months_to_target,,,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review
+Recovery,D Unknown contribution,,monthly_surplus,,,MATCH,exact,d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4,Pending human finance review

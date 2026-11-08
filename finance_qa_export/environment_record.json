@@ -1,0 +1,9 @@
+{
+  "branch": "chore/finance-verification-handoff",
+  "commit": "d920e5b2e41e8b7ab79ece69cd75a796f8e4e8f4",
+  "status_at_export": "?? finance_qa_export/",
+  "tracked_changes": "",
+  "staged_changes": "",
+  "exported_at": "2026-11-08T13:46:24.968659+00:00",
+  "finance_review_status": "Pending human finance review"
+}

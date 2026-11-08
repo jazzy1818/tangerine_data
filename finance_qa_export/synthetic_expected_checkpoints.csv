@@ -1,0 +1,113 @@
+case,path,month,engine_phase,opening_cash,one_time_receipt,one_time_expense,income,spending,action_cash_effect,fees,repayments,closing_accessible_cash
+A,No intervention,0,start,3000,0,1500,0,0,0,0,0,1500
+A,No intervention,0,end,1500,0,0,0,0,0,0,0,1500
+A,No intervention,1,start,1500,0,0,0,0,0,0,0,1500
+A,No intervention,1,end,1500,0,0,1650,2460,0,0,0,690
+A,No intervention,2,start,690,0,0,0,0,0,0,0,690
+A,No intervention,2,end,690,0,0,1650,2460,0,0,0,-120
+A,No intervention,3,start,-120,0,0,0,0,0,0,0,-120
+A,No intervention,3,end,-120,0,0,1650,2460,0,0,0,-930
+A,No intervention,4,start,-930,0,0,0,0,0,0,0,-930
+A,No intervention,4,end,-930,0,0,1650,2460,0,0,0,-1740
+A,No intervention,5,start,-1740,0,0,0,0,0,0,0,-1740
+A,No intervention,5,end,-1740,0,0,1650,2460,0,0,0,-2550
+A,No intervention,6,start,-2550,0,0,0,0,0,0,0,-2550
+A,No intervention,6,end,-2550,0,0,1650,2460,0,0,0,-3360
+A,Pause future proposed investment,0,start,3000,0,1500,0,0,0,0,0,1500
+A,Pause future proposed investment,0,end,1500,0,0,0,0,0,0,0,1500
+A,Pause future proposed investment,1,start,1500,0,0,0,0,0,0,0,1500
+A,Pause future proposed investment,1,end,1500,0,0,1650,2460,0,0,0,690
+A,Pause future proposed investment,2,start,690,0,0,0,0,0,0,0,690
+A,Pause future proposed investment,2,end,690,0,0,1650,2460,0,0,0,-120
+A,Pause future proposed investment,3,start,-120,0,0,0,0,0,0,0,-120
+A,Pause future proposed investment,3,end,-120,0,0,1650,2460,0,0,0,-930
+A,Pause future proposed investment,4,start,-930,0,0,0,0,0,0,0,-930
+A,Pause future proposed investment,4,end,-930,0,0,1650,2460,0,0,0,-1740
+A,Pause future proposed investment,5,start,-1740,0,0,0,0,0,0,0,-1740
+A,Pause future proposed investment,5,end,-1740,0,0,1650,2460,0,0,0,-2550
+A,Pause future proposed investment,6,start,-2550,0,0,0,0,0,0,0,-2550
+A,Pause future proposed investment,6,end,-2550,0,0,1650,2460,0,0,0,-3360
+A,Pause approved existing outflow,0,start,3000,0,1500,0,0,0,0,0,1500
+A,Pause approved existing outflow,0,end,1500,0,0,0,0,0,0,0,1500
+A,Pause approved existing outflow,1,start,1500,0,0,0,0,0,0,0,1500
+A,Pause approved existing outflow,1,end,1500,0,0,1650,2460,300,0,0,990
+A,Pause approved existing outflow,2,start,990,0,0,0,0,0,0,0,990
+A,Pause approved existing outflow,2,end,990,0,0,1650,2460,300,0,0,480
+A,Pause approved existing outflow,3,start,480,0,0,0,0,0,0,0,480
+A,Pause approved existing outflow,3,end,480,0,0,1650,2460,300,0,0,-30
+A,Pause approved existing outflow,4,start,-30,0,0,0,0,0,0,0,-30
+A,Pause approved existing outflow,4,end,-30,0,0,1650,2460,300,0,0,-540
+A,Pause approved existing outflow,5,start,-540,0,0,0,0,0,0,0,-540
+A,Pause approved existing outflow,5,end,-540,0,0,1650,2460,300,0,0,-1050
+A,Pause approved existing outflow,6,start,-1050,0,0,0,0,0,0,0,-1050
+A,Pause approved existing outflow,6,end,-1050,0,0,1650,2460,300,0,0,-1560
+B,Start Month 3 receipt,0,start,1000,0,0,0,0,0,0,0,1000
+B,Start Month 3 receipt,0,end,1000,0,0,0,0,0,0,0,1000
+B,Start Month 3 receipt,1,start,1000,0,0,0,0,0,0,0,1000
+B,Start Month 3 receipt,1,end,1000,0,0,1800,2400,0,0,0,400
+B,Start Month 3 receipt,2,start,400,0,0,0,0,0,0,0,400
+B,Start Month 3 receipt,2,end,400,0,0,1800,2400,0,0,0,-200
+B,Start Month 3 receipt,3,start,-200,2000,0,0,0,0,0,0,1800
+B,Start Month 3 receipt,3,end,1800,0,0,1800,2400,0,0,0,1200
+B,Start Month 3 receipt,4,start,1200,0,0,0,0,0,0,0,1200
+B,Start Month 3 receipt,4,end,1200,0,0,1800,2400,0,0,0,600
+B,Start Month 3 receipt,5,start,600,0,0,0,0,0,0,0,600
+B,Start Month 3 receipt,5,end,600,0,0,1800,2400,0,0,0,0
+B,Start Month 3 receipt,6,start,0,0,0,0,0,0,0,0,0
+B,Start Month 3 receipt,6,end,0,0,0,1800,2400,0,0,0,-600
+C,Original payments,0,start,300,0,0,0,0,0,0,0,300
+C,Original payments,0,end,300,0,0,0,0,0,0,0,300
+C,Original payments,1,start,300,0,0,0,0,0,0,0,300
+C,Original payments,1,end,300,0,0,2200,2400,0,0,0,100
+C,Original payments,2,start,100,0,0,0,0,0,0,0,100
+C,Original payments,2,end,100,0,0,2200,2400,0,0,0,-100
+C,Original payments,3,start,-100,0,0,0,0,0,0,0,-100
+C,Original payments,3,end,-100,0,0,2200,2400,0,0,0,-300
+C,Original payments,4,start,-300,0,0,0,0,0,0,0,-300
+C,Original payments,4,end,-300,0,0,2200,2400,0,0,0,-500
+C,Original payments,5,start,-500,0,0,0,0,0,0,0,-500
+C,Original payments,5,end,-500,0,0,2200,2400,0,0,0,-700
+C,Original payments,6,start,-700,0,0,0,0,0,0,0,-700
+C,Original payments,6,end,-700,0,0,2200,2400,0,0,0,-900
+C,Approved deferral,0,start,300,0,0,0,0,0,0,0,300
+C,Approved deferral,0,end,300,0,0,0,0,0,0,0,300
+C,Approved deferral,1,start,300,0,0,0,0,0,0,0,300
+C,Approved deferral,1,end,300,0,0,2200,2100,0,0,0,400
+C,Approved deferral,2,start,400,0,0,0,0,0,0,0,400
+C,Approved deferral,2,end,400,0,0,2200,2100,0,0,0,500
+C,Approved deferral,3,start,500,0,0,0,0,0,0,0,500
+C,Approved deferral,3,end,500,0,0,2200,2400,0,0,0,300
+C,Approved deferral,4,start,300,0,0,0,0,0,0,650,-350
+C,Approved deferral,4,end,-350,0,0,2200,2400,0,0,0,-550
+C,Approved deferral,5,start,-550,0,0,0,0,0,0,0,-550
+C,Approved deferral,5,end,-550,0,0,2200,2400,0,0,0,-750
+C,Approved deferral,6,start,-750,0,0,0,0,0,0,0,-750
+C,Approved deferral,6,end,-750,0,0,2200,2400,0,0,0,-950
+C,Deferral without baseline evidence,0,start,300,0,0,0,0,0,0,0,300
+C,Deferral without baseline evidence,0,end,300,0,0,0,0,0,0,0,300
+C,Deferral without baseline evidence,1,start,300,0,0,0,0,0,0,0,300
+C,Deferral without baseline evidence,1,end,300,0,0,2200,2400,0,0,0,100
+C,Deferral without baseline evidence,2,start,100,0,0,0,0,0,0,0,100
+C,Deferral without baseline evidence,2,end,100,0,0,2200,2400,0,0,0,-100
+C,Deferral without baseline evidence,3,start,-100,0,0,0,0,0,0,0,-100
+C,Deferral without baseline evidence,3,end,-100,0,0,2200,2400,0,0,0,-300
+C,Deferral without baseline evidence,4,start,-300,0,0,0,0,0,0,0,-300
+C,Deferral without baseline evidence,4,end,-300,0,0,2200,2400,0,0,0,-500
+C,Deferral without baseline evidence,5,start,-500,0,0,0,0,0,0,0,-500
+C,Deferral without baseline evidence,5,end,-500,0,0,2200,2400,0,0,0,-700
+C,Deferral without baseline evidence,6,start,-700,0,0,0,0,0,0,0,-700
+C,Deferral without baseline evidence,6,end,-700,0,0,2200,2400,0,0,0,-900
+E,Income changes; synthetic baseline from Case A,0,start,3000,0,0,0,0,0,0,0,3000
+E,Income changes; synthetic baseline from Case A,0,end,3000,0,0,0,0,0,0,0,3000
+E,Income changes; synthetic baseline from Case A,1,start,3000,0,0,0,0,0,0,0,3000
+E,Income changes; synthetic baseline from Case A,1,end,3000,0,0,,2400,0,0,0,600
+E,Income changes; synthetic baseline from Case A,2,start,600,0,0,0,0,0,0,0,600
+E,Income changes; synthetic baseline from Case A,2,end,600,0,0,,2400,0,0,0,-1800
+E,Income changes; synthetic baseline from Case A,3,start,-1800,0,0,0,0,0,0,0,-1800
+E,Income changes; synthetic baseline from Case A,3,end,-1800,0,0,,2400,0,0,0,-4200
+E,Income changes; synthetic baseline from Case A,4,start,-4200,0,0,0,0,0,0,0,-4200
+E,Income changes; synthetic baseline from Case A,4,end,-4200,0,0,,2400,0,0,0,-6600
+E,Income changes; synthetic baseline from Case A,5,start,-6600,0,0,0,0,0,0,0,-6600
+E,Income changes; synthetic baseline from Case A,5,end,-6600,0,0,,2400,0,0,0,-9000
+E,Income changes; synthetic baseline from Case A,6,start,-9000,0,0,0,0,0,0,0,-9000
+E,Income changes; synthetic baseline from Case A,6,end,-9000,0,0,,2400,0,0,0,-11400

@@ -1,0 +1,9 @@
+case,path,first_negative_month,first_negative_phase,first_negative_shortfall,lowest_accessible_cash,additional_starting_cash_known_components,complete_shock_funding_requirement,complete,cash_needed_before_receipt
+A,No intervention,2,End,120,-3360,3360,3360,True,
+A,Pause future proposed investment,2,End,120,-3360,3360,3360,True,
+A,Pause approved existing outflow,3,End,30,-1560,1560,1560,True,
+B,Start Month 3 receipt,2,End,200,-600,600,600,True,200
+C,Original payments,2,End,100,-900,900,900,True,
+C,Approved deferral,4,Start,350,-950,950,950,True,
+C,Deferral without baseline evidence,2,End,100,-900,900,,False,
+E,Income changes; synthetic baseline from Case A,2,End,1800,-11400,11400,,False,
