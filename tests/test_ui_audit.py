@@ -115,13 +115,10 @@ def test_guided_edit_hides_previous_result():
 
 
 def test_full_app_classification_offline(monkeypatch):
-    import etf_service
     import gemini_advisor
 
     monkeypatch.delenv('GEMINI_API_KEY', raising=False)
     monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
-    summary = [{'ticker': ticker, **details, 'is_live': False}
-               for ticker, details in etf_service.ETF_CATALOG.items()]
     original_advisor = gemini_advisor.consult_gemini_advisor
 
     def offline_advisor(*args, **kwargs):
@@ -130,10 +127,7 @@ def test_full_app_classification_offline(monkeypatch):
 
     # No classifier request is expected with Local baseline, and the existing
     # action advisor is explicitly kept offline. Market endpoints are fixtures.
-    with patch.object(etf_service, 'fetch_live_ticker_details', return_value={'success': False}), \
-         patch.object(etf_service, 'get_etf_summary', return_value=summary), \
-         patch.object(etf_service, 'get_etf_historical_trends', return_value=pd.DataFrame()), \
-         patch.object(gemini_advisor, 'HAVE_GOOGLE_GENAI', False), \
+    with patch.object(gemini_advisor, 'HAVE_GOOGLE_GENAI', False), \
          patch.object(gemini_advisor, 'consult_gemini_advisor', side_effect=offline_advisor):
         app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py')).run(timeout=30)
         assert not app.exception

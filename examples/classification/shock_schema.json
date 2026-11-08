@@ -3,6 +3,20 @@
     "ShockEffect": {
       "additionalProperties": false,
       "properties": {
+        "effect_id": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effect Id"
+        },
         "type": {
           "enum": [
             "income_multiplier",

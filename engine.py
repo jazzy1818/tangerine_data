@@ -271,8 +271,18 @@ def make_plan(
     *,
     confirmed_monthly_cut: float = 0.0,
     analyst_evidence=None,
+    scenario=None,
+    selection_result=None,
+    normal_goal=None,
+    existing_transfers=(),
+    recovery_snapshot=None,
+    opening_cash=None,
+    include_timing_comparison=False,
+    selection=None,
 ) -> Dict[str, Any]:
     """Return historical reserve estimates and a conditional shock projection."""
+    if scenario is not None and confirmed_monthly_cut:
+        raise ValueError('Use an explicit dated, sourced expense effect in ShockScenario; bare confirmed_monthly_cut is not applied to structured scenarios.')
     raw_I = customer.get("raw_I", customer["I"])
     raw_S = customer.get("raw_S", customer["S"])
     raw_B = customer.get("raw_B", customer["B"])
@@ -289,7 +299,9 @@ def make_plan(
     # MANDATORY: every UI/CLI goal uses the S01-S40 runtime enforcement inside
     # evaluate_investment_triggers. Never substitute unchecked model/selector
     # output here; missing facts stay unknown and violations require review.
-    investment_plan = evaluate_investment_triggers(customer, shock, transactions=transactions, evidence=analyst_evidence)
+    # Structured execution freezes the normal goal BEFORE the crisis. The dated
+    # crisis path has its own mandatory validation; do not flatten it to sliders.
+    investment_plan = evaluate_investment_triggers(customer, None if scenario is not None else shock, transactions=transactions, evidence=analyst_evidence)
     allocation_features = investment_plan["features"]
     planning_spending = allocation_features.get("median_monthly_spending", raw_S)
     planning_cash = allocation_features.get("opening_cash_estimate", raw_B)
@@ -375,7 +387,80 @@ def make_plan(
             "review_flags": review_flags,
         }
 
-    return {"goal_plan": goal_plan, "backup_plan": backup_plan, "investment_plan": investment_plan}
+    result = {"goal_plan": goal_plan, "backup_plan": backup_plan, "investment_plan": investment_plan}
+    if scenario is not None:
+        from crisis_response import make_crisis_plan, NormalGoal
+        from plan_classification.schemas import ShockScenario
+        scenario = ShockScenario.model_validate(scenario)
+        baseline_effects = []
+        if analyst_evidence is not None:
+            if analyst_evidence.available_cash is not None:
+                if opening_cash is not None and abs(opening_cash - analyst_evidence.available_cash) > .005:
+                    raise ValueError('Conflicting supplied opening-cash facts')
+                opening_cash = analyst_evidence.available_cash
+            from plan_classification.schemas import ShockEffect
+            for index, expense in enumerate(analyst_evidence.known_expenses):
+                if expense.due_month is not None and expense.due_month > 120:
+                    raise ValueError('Known expense lies beyond the scenario schema; retain it as a separately documented obligation before projecting.')
+                known = expense.amount is not None and expense.due_month is not None
+                baseline_effects.append(ShockEffect(type='one_off_cost' if known else 'unspecified_event',
+                    value=expense.amount if known else None, start_month=expense.due_month if known else 0,
+                    evidence='user_confirmed' if known else 'unknown', effect_id=f'known-obligation-{index+1}'))
+            if baseline_effects:
+                scenario = ShockScenario(phase='active' if scenario.phase == 'normal' else scenario.phase,
+                    horizon_months=scenario.horizon_months, description=scenario.description,
+                    effects=[*scenario.effects, *baseline_effects])
+        if normal_goal is None:
+            investment = investment_plan['normal_monthly_allocation']
+            normal_goal = NormalGoal(name=goal_plan['primary_goal'],
+                monthly_contribution=investment or contribution,
+                reserve_target=goal_plan['target_3mo'],
+                kind='PROPOSED_TRANSFER' if investment else 'LIQUID_RESERVE_EARMARK')
+        crisis = make_crisis_plan(customer, scenario, normal_goal=normal_goal,
+            selection_result=selection_result, existing_transfers=existing_transfers,
+            recovery_snapshot=recovery_snapshot, opening_cash=opening_cash,
+            data_dir=customer.get('data_dir'), include_timing_comparison=include_timing_comparison,
+            baseline_effects=baseline_effects, module_proposal=selection)
+        result['crisis_plan'] = crisis
+        path = crisis['no_action']
+        if path is not None:
+            reference = scenario_reference(customer, scenario)
+            backup_plan.update(
+                projection_scope='Structured scenario, full-history medians, month-start/end checkpoints; quantified components only when partial.',
+                funding_result_complete=crisis['funding_result_complete'],
+                unprotected_runway=reference['runway'], monthly_cash_gap=reference['gap'],
+                month_6_balance=path['ending_cash'], initial_buffer_left=path['schedule'][0]['end_balance'],
+                remaining_cash_needed=path['additional_cash_needed'], exhaustion_month=path['first_shortfall_month'],
+                makes_it_to_month_6=path['makes_it_through_horizon'], six_month_schedule=path['schedule'],
+                actions=[f"{crisis['lead_module'] or 'BANK_REVIEW'}: goal status {crisis['goal_status']}. "
+                         f"Known-component funding need: CAD {path['additional_cash_needed']:,.2f}."],
+                review_flags=crisis['review_flags'])
+        else:
+            backup_plan.update(funding_result_complete=False, month_6_balance=None, initial_buffer_left=None,
+                remaining_cash_needed=None, exhaustion_month=None, makes_it_to_month_6=False,
+                six_month_schedule=[], actions=['Runtime validation requires analyst review.'],
+                review_flags=crisis['review_flags'])
+    return result
+
+
+def scenario_reference(customer, scenario):
+    """Official preset formula, or an explicitly first-period-only reference."""
+    from plan_classification.schemas import ShockScenario
+    from scenario_execution import organizer_inputs, period_values
+    scenario = ShockScenario.model_validate(scenario)
+    controls = organizer_inputs(scenario)
+    if controls is not None:
+        return {**take_shock(customer, **controls), 'scope': 'ORGANIZER_STANDARD'}
+    p0, p1 = (period_values(customer, scenario, m) for m in (0, 1))
+    incoming, spending = float(p1['income']), float(p1['spending'])
+    buffer = customer.get('raw_B', customer['B']) + float(p0['receipt'] - p0['cost'])
+    gap = None if p1['income_unknown'] or p1['spending_unknown'] else spending - incoming
+    return {'income_after_shock': None if p1['income_unknown'] else incoming,
+            'spending_after_shock': None if p1['spending_unknown'] else spending,
+            'buffer_left': buffer, 'gap': gap,
+            'runway': calculate_runway(buffer, gap) if gap is not None and not p0['unknown'] else None,
+            'scope': 'FIRST_PERIOD_COMPONENT_REFERENCE',
+            'funding_result_complete': not p0['unknown'] and not p1['unknown']}
 
 
 def run_pipeline(
@@ -386,6 +471,8 @@ def run_pipeline(
     data_dir: Path = DATA_DIR,
     *,
     analyst_evidence=None,
+    scenario=None,
+    **planning_options,
 ) -> Dict[str, Any]:
     """Execute the complete 3-step pipeline."""
     customer = know_customer(account_id, data_dir=data_dir)
@@ -395,11 +482,11 @@ def run_pipeline(
         bills_increase_pct=bills_increase_pct,
         one_off_costs=one_off_costs,
     )
-    plan = make_plan(customer, shock=shock, analyst_evidence=analyst_evidence)
+    plan = make_plan(customer, shock=shock, analyst_evidence=analyst_evidence, scenario=scenario, **planning_options)
 
     return {
         "customer": customer,
-        "shock": shock,
+        "shock": scenario_reference(customer, scenario) if scenario is not None else shock,
         "plan": plan,
     }
 
@@ -411,7 +498,10 @@ def main():
     parser.add_argument("--ei", type=float, default=1.0, help="Income multiplier (e.g. 0.55 for EI)")
     parser.add_argument("--bills", type=float, default=0.0, help="Household bills increase (e.g. 0.15 for 15 percent)")
     parser.add_argument("--repair", type=float, default=0.0, help="One-off surprise cost in CAD")
+    parser.add_argument("--scenario", type=Path, help="Shared structured ShockScenario JSON")
     args = parser.parse_args()
+    if args.scenario and (args.ei != 1. or args.bills != 0. or args.repair != 0.):
+        parser.error('Use --scenario or the simple --ei/--bills/--repair controls, not both.')
 
     if args.account_pos is not None and args.account is not None and args.account_pos != args.account:
         parser.error("The positional account ID and --account must match when both are supplied.")
@@ -423,6 +513,7 @@ def main():
             income_multiplier=args.ei,
             bills_increase_pct=args.bills,
             one_off_costs=args.repair,
+            scenario=__import__('json').loads(args.scenario.read_text()) if args.scenario else None,
         )
     except (ValueError, FileNotFoundError) as error:
         parser.error(str(error))
@@ -430,6 +521,11 @@ def main():
     c = results["customer"]
     s = results["shock"]
     p = results["plan"]
+    if args.scenario:
+        import json
+        print(json.dumps({'account_id': target_account, 'first_period_reference': s,
+                          'normal_goal': p['goal_plan'], 'crisis_plan': p['crisis_plan']}, indent=2, allow_nan=False))
+        return
 
     def runway_label(value: Union[float, str]) -> str:
         return value if isinstance(value, str) else f"{value:.1f} months"
@@ -447,7 +543,10 @@ def main():
     print(f"  • Baseline Runway             : {runway_label(c['baseline_runway'])}")
 
     print("\nPART 2: TAKE A SHOCK")
-    print(f"  • Shock Inputs                : Inflow x{s['income_multiplier']:.2f}, Bills {s['bills_increase_pct']:+.1%}, One-off: ${s['one_off_costs']:.2f}")
+    if args.scenario:
+        print(f"  • Structured scenario         : {args.scenario} ({s['scope']})")
+    else:
+        print(f"  • Shock Inputs                : Inflow x{s['income_multiplier']:.2f}, Bills {s['bills_increase_pct']:+.1%}, One-off: ${s['one_off_costs']:.2f}")
     print(f"  • Inflow After Shock          : ${s['income_after_shock']:>10.2f}")
     print(f"  • Spending After Shock        : ${s['spending_after_shock']:>10.2f}")
     print(f"  • Remaining Buffer            : ${s['buffer_left']:>10.2f}")
@@ -482,6 +581,12 @@ def main():
     print(f"  • All listed stress scenarios : ${investment['all_scenarios_monthly_allocation']:,.2f}/mo")
     print(f"  • Active triggers             : {', '.join(investment['trigger_ids'])}")
     print(f"  • Suitability                 : {investment['investment_suitability']}")
+    if 'crisis_plan' in p:
+        crisis = p['crisis_plan']
+        print(f"\nCRISIS HANDOFF: {crisis['lead_module'] or 'BANK_REVIEW'}; goal {crisis['goal_status']}; G25={crisis['G25']}")
+        print(f"  • Proposed-pause cash credit  : ${crisis['proposal_pause_cash_credit']:,.2f}")
+        print(f"  • Existing-transfer credit    : ${crisis['existing_transfer_pause_credit']:,.2f}")
+        print(f"  • Recovery                    : {crisis['recovery']['status']}")
     print("=" * 65 + "\n")
 
 

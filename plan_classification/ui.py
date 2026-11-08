@@ -108,10 +108,11 @@ def _render_guided_scenario():
                                   key=f'classification_guided_value_{kind}', on_change=_clear_classification_result)
         value = None if unknown else amount
     is_one_time = kind in ONE_TIME
-    start = st.number_input('Effect starts in month (0 = immediate one-time event)',
-                            min_value=0 if is_one_time else 1, max_value=120,
-                            value=0 if is_one_time else 1,
-                            key='classification_guided_start_oneoff' if is_one_time else 'classification_guided_start_recurring',
+    immediate = is_one_time or kind == 'liquidity_hold'
+    start = st.number_input('Effect starts in month (0 = immediate expense, receipt or hold)',
+                            min_value=0 if immediate else 1, max_value=120,
+                            value=0 if immediate else 1,
+                            key='classification_guided_start_hold' if kind == 'liquidity_hold' else 'classification_guided_start_oneoff' if is_one_time else 'classification_guided_start_recurring',
                             on_change=_clear_classification_result)
     duration, ongoing = None, False
     if not is_one_time and kind not in {'unspecified_event', 'investment_return'}:
@@ -129,13 +130,17 @@ def _render_guided_scenario():
                             ['judge_specified', 'user_confirmed', 'assumed', 'unknown'],
                             format_func=lambda value: value.replace('_', ' ').capitalize(),
                             key='classification_guided_evidence', on_change=_clear_classification_result)
+    identity = st.text_input('Effect / obligation ID (optional; local only)', key='classification_guided_effect_id',
+                             help='Use the same ID for a repeated invoice, different IDs for distinct obligations.',
+                             on_change=_clear_classification_result)
     if st.button('Add effect to scenario', key='classification_guided_add'):
         try:
             effect = ShockEffect(type=kind, value=value, start_month=start,
-                                 duration_months=duration, ongoing=ongoing, evidence=evidence)
+                                 duration_months=duration, ongoing=ongoing, evidence=evidence,
+                                 effect_id=identity.strip() or None)
             combined = [*st.session_state['classification_guided_effects'], effect.model_dump(mode='json')]
-            ShockScenario(effects=combined, phase=phase, horizon_months=horizon)
-            st.session_state['classification_guided_effects'] = combined
+            checked = ShockScenario(effects=combined, phase=phase, horizon_months=horizon)
+            st.session_state['classification_guided_effects'] = [e.model_dump(mode='json') for e in checked.effects]
             _clear_classification_result()
         except ValueError as exc:
             st.error(f'This effect was not added: {exc}')
@@ -158,7 +163,7 @@ def _render_guided_scenario():
     return ShockScenario(description=description, phase=phase, horizon_months=horizon, effects=effects)
 
 
-def render_classification(customer, income_multiplier, bills_increase_pct, one_off_costs):
+def render_classification(customer, income_multiplier, bills_increase_pct, one_off_costs, event_evidence=None):
     with st.expander('Classify this scenario into one of the eight plan modules'):
         st.caption('Select a response family using Jev, Gemini, or the local baseline. '
                    'The selection is a proposal for the planning engine.')
@@ -177,7 +182,7 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
                 st.error(f'Check the guided scenario: {exc}')
                 with history_area:
                     _render_request_history()
-                return
+                return {'scenario': None, 'selection_result': None, 'input_error': str(exc)}
         elif mode == 'Custom structured scenario':
             st.caption('Use financial effects for windfalls, debt changes, holds, delays, or combinations. '
                        'Percent values use percentage points (15 means 15%). Month 0 is immediate; '
@@ -190,7 +195,12 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
                 st.error(f'Check scenario fields: {exc}')
                 with history_area:
                     _render_request_history()
-                return
+                return {'scenario': None, 'selection_result': None, 'input_error': str(exc)}
+        if event_evidence and event_evidence.event_financial_effect == 'unspecified' and not any(e.type == 'unspecified_event' for e in scenario.effects):
+            scenario = ShockScenario(phase='active' if scenario.phase == 'normal' else scenario.phase,
+                horizon_months=scenario.horizon_months, description=scenario.description,
+                effects=[*scenario.effects, ShockEffect(type='unspecified_event', evidence='unknown')])
+        handoff = {'scenario': scenario, 'selection_result': None, 'input_error': None}
         key = None
         if backend != 'rules':
             try:
@@ -199,7 +209,7 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
                 st.error(str(exc))
                 with history_area:
                     _render_request_history()
-                return
+                return handoff
             provider = 'OpenRouter' if backend == 'jev' else 'Gemini'
             variable = 'OPENROUTER_API_KEY' if backend == 'jev' else 'GEMINI_API_KEY'
             widget = 'classification_openrouter_key' if backend == 'jev' else 'classification_gemini_key'
@@ -212,11 +222,15 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
         profile = profile_from_engine(customer)
         try:
             case = build_case(profile, scenario)
+            # Reject invalid financial inputs before a paid classification call;
+            # the same executor is used by the actual backup plan.
+            from scenario_execution import execute_scenario
+            execute_scenario(customer, scenario)
         except ValueError as exc:
             st.error(str(exc))
             with history_area:
                 _render_request_history()
-            return
+            return {'scenario': None, 'selection_result': None, 'input_error': str(exc)}
         st.caption('API classifiers receive derived ratios and structured effects. '
                    'Account IDs, exact balances, demographics, histories, and narrative text are excluded.')
         if st.checkbox('Inspect classifier inputs', key='classification_inspect'):
@@ -238,6 +252,7 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
         saved = st.session_state.get('classification_result')
         if saved and saved[0] == fingerprint:
             result = saved[1]
+            handoff['selection_result'] = result
             selection = result['selection']
             if result['fallback_used']:
                 st.warning(f"{choice} unavailable ({result['fallback_reason']}). Showing the local baseline.")
@@ -246,7 +261,7 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
                 st.write('Supporting modules: ' + ', '.join(selection['support_modules']))
             st.write(selection['rationale'])
             for question in selection['needs_clarification']:
-                st.info(question)
+                st.info('Bank analyst review: ' + question)
             st.caption(f"Source: {result['actual_backend']} · {result['elapsed_ms']:.0f} ms · "
                        f"API calls: {result['api_calls']}")
             if result['provider_confidence'] is not None:
@@ -257,3 +272,4 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
                                key='classification_download')
         with history_area:
             _render_request_history()
+        return handoff

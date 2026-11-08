@@ -77,8 +77,7 @@ In the existing Streamlit app, open **Take a Shock → Classify this scenario in
 plan modules**. The panel uses the selected account and shock sliders, a guided effect editor,
 or a custom JSON scenario for windfalls, debt changes, delays, holds, recovery, and combinations. Choose the backend and
 press **Classify scenario**. Selecting a backend alone never calls it. Results are invalidated
-when the account, canonical case, or backend changes. The classification does not change the
-existing plan or execute any financial action.
+when the account, canonical case, or backend changes. The selected structured scenario also drives the backup through `engine.make_plan()`. Module proposals pass independent financial validation; changing the provider cannot change the cash arithmetic. No financial action is executed. See [CRISIS_RESPONSE.md](CRISIS_RESPONSE.md).
 
 **Classification request logs** in that panel show each run's provider, model, lead module,
 latency, API call count, fallback reason, and reported usage. `api_success` means a valid provider
@@ -106,7 +105,7 @@ each effect, amount, timing, duration, and evidence without writing JSON, then a
 It does not claim arbitrary free-text parsing: a narrative is retained locally and financial effects
 must be entered explicitly. A finite duration or `ongoing: true` states known timing; an omitted
 duration with `ongoing: false` stays unknown and requests clarification.
-Unknown effects use null and produce clarification questions. Your friend's future translator can
+Unknown effects use null and produce nonblocking bank-analyst review flags (the shared field remains `needs_clarification`). Your friend's future translator can
 produce the same `ShockScenario` directly; no classifier rewrite is needed.
 
 ## Integration contract for teammates
@@ -125,7 +124,10 @@ shock = ShockScenario(effects=[
 case = build_case(profile, shock, FinancialConstraints())
 result = select_plan(case, backend="jev")  # or "gemini" or "rules"
 proposal = result.selection.model_dump()
-# Pass proposal to your financial solver for feasibility checks and action sizing.
+# The shared financial solver sizes and validates the proposal:
+import engine
+customer = engine.know_customer(22812)
+plan = engine.make_plan(customer, scenario=shock, selection=proposal)
 ```
 
 Use `profile_from_engine(customer)` and `scenario_from_engine(...)` to adapt objects from the
@@ -161,7 +163,7 @@ of the observed signals, not a claim to expose Jev's reasoning. Model confidence
 probability that a customer will recover or that an intervention is financially feasible.
 
 Gemini uses `response_json_schema` with a compact provider schema: field types and allowed enum
-values are sent, while array and string bounds remain enforced locally. This avoids the SDK's
+values are sent, together with the small two-support-module bound. Larger array and string bounds remain enforced locally. This avoids the SDK's
 incompatible OpenAPI field serialization and the provider's constrained-decoding complexity limit.
 Gemini returns validated structured JSON. Its default model uses supported provider sampling
 settings; a configured legacy Gemini 2.x model uses temperature 0. Neither backend may emit unknown
@@ -205,3 +207,17 @@ offline. Dependencies were installed in `/tmp/tangerine-classification-venv`; yo
 
 The banking dataset remains the only source of customer features. Provider documentation is an
 API implementation source, not additional financial data.
+
+## Crisis handoff update
+
+Case schema 1.2 preserves historical features and adds `planning_cash_basis` for
+explicit scenario opening cash. `build_case(..., planning_cash=...)` and the finance
+executor use the same supplied amount without changing official historical B.
+The local optional `effect_id` identifies invoices: exact repeated IDs are
+idempotent, conflicting repeats are rejected, and distinct IDs can identify equal
+amounts. IDs are excluded from the canonical model case.
+
+The classifier remains a proposal layer. The dated executor, goal handoff, G25
+deterioration rule, approved-transfer comparisons and evidence-gated recovery are
+documented in [CRISIS_RESPONSE.md](CRISIS_RESPONSE.md). Old verification counts
+below describe the earlier classifier audit, not the complete merged suite.

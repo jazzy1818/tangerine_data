@@ -7,6 +7,9 @@ Build a financial resilience engine for real bank customers.
 Implementation guide for the optional **Jev / Gemini eight-module classifier and data discovery**:
 [CLASSIFICATION.md](CLASSIFICATION.md).
 
+The guided/custom scenario also drives the guarded backup and recovery plan:
+[Crisis response integration and calculation limits](CRISIS_RESPONSE.md).
+
 This track is powered by Tangerine. At judging, a judge will pick a customer and a scenario, and you will run your engine live.
 
 ## Run locally

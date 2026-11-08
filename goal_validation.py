@@ -84,7 +84,7 @@ def _short_history(plan, facts):
 def _deficit_response(plan, facts):
     if plan['selected_scenario_monthly_allocation'] != 0:
         return 'Do not continue an investment contribution through a modeled cash-flow deficit.'
-    if facts.get('financial_change') and _trigger(plan, 'G25') != 'active':
+    if facts.get('goal_worsened') and _trigger(plan, 'G25') != 'active':
         return 'A quantified shock that prevents contributions must activate G25.'
     if plan['primary_goal'] not in ('STABILIZE_CASHFLOW', 'NO_FEASIBLE_CONTRIBUTION',
                                      'DATA_LIMITED_REVIEW', 'PROTECT_OPERATING_CASH'):
@@ -362,4 +362,35 @@ def enforce_goal_validations(plan, facts):
             trigger['reason'] = 'Original result blocked by runtime validation; analyst review required.'
         plan['trigger_ids'] = ['G24']
     plan['runtime_validation'] = audit
+    return plan
+
+
+def enforce_crisis_validations(plan):
+    """Mandatory extension for the dated M1-M8 handoff; S01-S40 stay enabled.
+
+    CAD ledgers have already been reconciled with the original ShockScenario by
+    enforce_execution. Here enforce lifecycle, G25, proposals and recovery truth.
+    No selector confidence, phase label or proposed pause may create funds.
+    """
+    from crisis_rules import goal_worsened, first_shortfall_order
+    baseline, shocked = plan['baseline_without_crisis'], plan['no_action']
+    # The exact decision including contribution headroom is frozen by the finance
+    # engine, not reconstructed from the classifier's normalized ratios.
+    lower_capacity = plan['goal_contribution_revised'] < plan['normal_feasible_contribution'] - .005
+    expected = goal_worsened(baseline_gap=baseline['additional_cash_needed'], scenario_gap=shocked['additional_cash_needed'],
+                            baseline_first=first_shortfall_order(baseline), scenario_first=first_shortfall_order(shocked),
+                            normal_contribution=1. if lower_capacity else 0., scenario_contribution=0.)
+    if plan['G25'] != expected:
+        raise ValueError('G25 must describe deterioration, not merely an existing deficit or a changed scenario.')
+    if plan['proposal_pause_cash_credit'] != 0:
+        raise ValueError('Pausing a proposal cannot add cash to the no-action path.')
+    if not shocked['funding_result_complete'] and plan['funding_result_complete']:
+        raise ValueError('Partial effects cannot establish full funding.')
+    if plan['lead_module'] == 'M6' and plan['recovery']['status'] != 'REBUILDING':
+        raise ValueError('M6 requires a supported recovery checkpoint.')
+    if plan['goal_status'] == 'NOT_SCHEDULED' and plan['goal_contribution_before'] != 0:
+        raise ValueError('A missing contribution must not be confused with a paused transfer.')
+    plan['runtime_validation'] = {'enforced': True, 'status': 'passed', 'policy_version': 'crisis-lifecycle-v1',
+        'checks': ['original_CAD_ledger', 'all_effects_independent_of_module_labels', 'G25_deterioration',
+                   'proposal_pause_zero_credit', 'existing_outflow_evidence', 'partial_funding', 'M6_recovery_evidence']}
     return plan

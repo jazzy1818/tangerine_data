@@ -13,6 +13,7 @@ from typing import Optional
 
 import pandas as pd
 from goal_validation import enforce_goal_validations
+from crisis_rules import goal_worsened
 
 
 @dataclass(frozen=True)
@@ -534,6 +535,10 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
                 "adjusted_minimum_cash": _money(row["min_balance"] - index * normal),
                 "adjusted_closing_cash": _money(row["month_end_balance"] - index * normal)})
     selected_no = simulate_allocation(**kwargs, contribution=0.0, cash_floor=floor_cash, scenario=selected)
+    baseline_no = simulate_allocation(**kwargs, contribution=0.0, cash_floor=floor_cash, scenario=baseline)
+    worsened = goal_worsened(baseline_gap=baseline_no['additional_cash_needed'], scenario_gap=selected_no['additional_cash_needed'],
+        baseline_first=baseline_no['first_shortfall_month'], scenario_first=selected_no['first_shortfall_month'],
+        normal_contribution=normal, scenario_contribution=selected_amount)
     shock_deficit = selected_no["monthly_net_before_contribution"] < 0 or not selected_no["nonnegative_cash"]
     goal_missing = not evidence.objective
     profile_missing = [label for label, value in (("objective", evidence.objective), ("horizon", evidence.horizon_months),
@@ -602,7 +607,7 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
     set_trigger("G23", True if evidence.goal_completed_verified else None, "Completion requires additional sourced evidence.")
     set_trigger("G24", evidence.available_cash is None or not evidence.sole_control_verified or bool(profile_missing) or not timing_known or not fixed_known or sparse or expense_unknown or evidence.event_financial_effect == "unspecified",
                 "Current cash, control, complete obligations or suitability information is missing.")
-    set_trigger("G25", financial_change and (pause or shock_deficit),
+    set_trigger("G25", financial_change and worsened,
                 f"Normal allocation {normal:.2f}; selected-scenario allocation {selected_amount:.2f}. No contribution assumes prior savings occurred.")
 
     if spending <= 0 or sparse or evidence.event_financial_effect == "unspecified":
@@ -706,6 +711,7 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
         'unusual_inflow': unusual_inflow, 'depleted': depleted or (reserve_gap > 0 and evidence.prior_shock_verified),
         'exceptional_deficit': exceptional_deficit, 'rising_with_deficits': rising_with_deficits,
         'financial_change': financial_change, 'shock_deficit': shock_deficit,
+        'goal_worsened': worsened,
         'funding_gap': selected_no['additional_cash_needed'] > 0,
         'expense_unknown': expense_unknown, 'known_expenses': bool(relevant_expenses),
         'insurance_recorded': bool(rows['insurance'].gt(0).any()) if 'insurance' in rows else None,

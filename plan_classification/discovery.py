@@ -110,7 +110,7 @@ Keep deficit_month_share; I-S alone is insufficient evidence for a fixed savings
 ended with nonnegative balances. This affects {recent.loc[recovered,'account_id'].nunique():,}
 distinct accounts; total recent records = {len(recent):,}. The denominator here is negative-balance
 **months**, not accounts. Timing is a hypothesis; this does not establish bill/payday causation
-or reproduce the other team's 131-account daily shock replay.
+or reproduce the separate July–December daily shock replay (143 hidden-shortfall accounts among 4,424 eligible accounts; 44 of 102 qualifying bill-shift cases resolved conditionally).
 Only months with both days_below_zero and month_end_balance observed enter this ratio:
 {int(liquidity_known.sum()):,} eligible records; {int((~liquidity_known).sum()):,} excluded for missing data.
 

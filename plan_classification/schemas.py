@@ -82,6 +82,8 @@ MONEY_EFFECTS = {
 
 
 class ShockEffect(Contract):
+    # Local execution identity; omitted from the privacy-minimized model case.
+    effect_id: str | None = Field(default=None, min_length=1, max_length=120)
     type: EffectType
     value: float | None = Field(default=None, strict=True)
     start_month: int = Field(default=1, ge=0, le=120)
@@ -106,13 +108,16 @@ class ShockEffect(Contract):
                 raise ValueError('A percentage decrease cannot exceed 100%.')
         if self.type in ONE_TIME and self.duration_months is not None:
             raise ValueError('One-off events cannot repeat; omit duration_months.')
-        if self.type not in ONE_TIME and self.start_month == 0:
-            raise ValueError('Recurring/access effects start at month 1 or later; month 0 is for one-offs.')
+        if self.type not in ONE_TIME | {'liquidity_hold'} and self.start_month == 0:
+            raise ValueError('Recurring effects start at month 1 or later; month 0 supports immediate one-offs/holds.')
         return self
 
     def active(self, month: int) -> bool:
         if self.type in ONE_TIME:
             return month == self.start_month
+        if self.type == 'liquidity_hold' and self.start_month == 0:
+            # Month 0 is instantaneous, followed by N full monthly periods.
+            return month >= 0 and (self.duration_months is None or month <= self.duration_months)
         return month >= self.start_month and (
             self.duration_months is None or month < self.start_month + self.duration_months)
 
@@ -124,6 +129,24 @@ class ShockScenario(Contract):
     horizon_months: int = Field(default=6, ge=1, le=120)
     effects: list[ShockEffect] = Field(default_factory=list, max_length=32)
 
+    @model_validator(mode='before')
+    @classmethod
+    def identified_obligations_once(cls, data):
+        if not isinstance(data, dict) or not isinstance(data.get('effects'), list):
+            return data
+        seen, retained = {}, []
+        for item in data['effects']:
+            identity = item.get('effect_id') if isinstance(item, dict) else getattr(item, 'effect_id', None)
+            if identity:
+                effect = ShockEffect.model_validate(item)
+                if effect.effect_id in seen:
+                    if seen[effect.effect_id] != effect.model_dump():
+                        raise ValueError('Conflicting amounts/timing/evidence for the same effect_id')
+                    continue  # Idempotent repeat of exactly the same identified event.
+                seen[effect.effect_id] = effect.model_dump()
+            retained.append(item)
+        return {**data, 'effects': retained}
+
     @model_validator(mode='after')
     def no_double_counting(self):
         if self.phase == 'normal' and any(
@@ -134,8 +157,12 @@ class ShockScenario(Contract):
             raise ValueError('A normal/no-change scenario cannot contain financial shocks; use phase active.')
         for i, left in enumerate(self.effects):
             for right in self.effects[i + 1:]:
+                if left.effect_id is not None and left.effect_id == right.effect_id:
+                    raise ValueError('Duplicate effect_id; an identified obligation can be applied only once.')
                 # Provenance cannot make the same financial charge a second event.
-                if left.model_dump(exclude={'evidence'}) == right.model_dump(exclude={'evidence'}):
+                if left.model_dump(exclude={'evidence', 'effect_id'}) == right.model_dump(exclude={'evidence', 'effect_id'}) and not (
+                    left.effect_id and right.effect_id and left.type in ONE_TIME
+                ):
                     raise ValueError('Duplicate effects: combine distinct costs before submission.')
                 overlap = any(left.active(m) and right.active(m) for m in range(121))
                 if not overlap:
@@ -190,7 +217,8 @@ class NormalizedEffect(Contract):
 
 
 class ClassificationCase(Contract):
-    schema_version: Literal['1.1'] = '1.1'
+    schema_version: Literal['1.1', '1.2'] = '1.2'
+    planning_cash_basis: Literal['historical_proxy', 'supplied_scenario'] = 'historical_proxy'
     features: CustomerFeatures
     effects: list[NormalizedEffect]
     phase: Literal['active', 'recovery', 'normal']

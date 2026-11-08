@@ -11,9 +11,9 @@ from .config import classifier_settings
 from .schemas import (ClassificationCase, MODULES, MODULE_DESCRIPTIONS,
                       PlanSelection, SelectionResult)
 
-VERSION = '1.1.1'
-PROMPT_VERSION = 'module-selection-1.1'
-GEMINI_PROMPT_VERSION = 'module-selection-gemini-1.2'
+VERSION = '1.2.0'
+PROMPT_VERSION = 'module-selection-1.2'
+GEMINI_PROMPT_VERSION = 'module-selection-gemini-1.3'
 JEV_ENDPOINT = 'https://openrouter.ai/api/v1/systemone'
 POLICY = """Select the lead financial response family from the allowed modules using the supplied case.
 Classify the financial problem, not the person's income bracket. Several interacting adverse
@@ -25,6 +25,8 @@ Percent effects are percentage points; ratios are dimensionless. Missing values 
 cashflow_delta_to_scale is the effect's signed cash-flow impact divided by cash_scale:
 positive improves cash flow, negative worsens it; null means it cannot be quantified as cash.
 First-period screening does not model benefit expiry, later effects, or daily cash timing.
+features.reserve_months remains historical. When planning_cash_basis is supplied_scenario,
+immediate_buffer_to_scale instead uses explicitly supplied scenario cash after immediate effects.
 Historical overdraft recovery suggests a timing problem, not proof of its cause.
 No fabricated benefits, cuts, funds, approvals, assets, or investment returns. Select modules only;
 the separate finance engine will size and validate actions. Preserve unresolved input questions.

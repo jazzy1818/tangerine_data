@@ -1,6 +1,7 @@
 """Build the exact same privacy-minimized case for every selection backend."""
 import hashlib
 import json
+import math
 
 from .schemas import (ClassificationCase, CustomerProfile, FinancialConstraints,
                       MONEY_EFFECTS, NormalizedEffect, ShockScenario)
@@ -27,12 +28,16 @@ def scenario_from_engine(income_multiplier=1.0, bills_increase_pct=0.0, one_off_
 
 
 def build_case(profile: CustomerProfile, scenario: ShockScenario,
-               constraints: FinancialConstraints | None = None) -> ClassificationCase:
+               constraints: FinancialConstraints | None = None, *, planning_cash: float | None = None) -> ClassificationCase:
     constraints = constraints or FinancialConstraints()
     b, f = profile.baseline, profile.features
     scale = max(b.I, b.S, 1.0)  # Never transmit this CAD scale, IDs, dates, or narrative.
     reasons, missing, effects = set(), [], []
     income, spending, immediate_buffer = b.I, b.S, b.B
+    if planning_cash is not None:
+        if isinstance(planning_cash, bool) or not math.isfinite(planning_cash):
+            raise ValueError('Supplied planning cash must be finite')
+        immediate_buffer = planning_cash
     families = set()
     if scenario.phase == 'active' and not scenario.effects:
         missing.append('Provide financial effects, or explicitly mark the scenario as normal/no financial change.')
@@ -147,6 +152,7 @@ def build_case(profile: CustomerProfile, scenario: ShockScenario,
     # An uncapped first-period screening feature; never claim this models expiry or future effects.
     runway = 0.0 if immediate_buffer <= 0 else immediate_buffer/gap if gap > 0 else None
     return ClassificationCase(
+        planning_cash_basis='historical_proxy' if planning_cash is None else 'supplied_scenario',
         features=f, effects=effects, phase=scenario.phase, horizon_months=scenario.horizon_months,
         constraints=constraints, observed_reasons=sorted(reasons), missing_details=list(dict.fromkeys(missing)),
         first_period_gap_to_scale=gap/scale, immediate_buffer_to_scale=immediate_buffer/scale,

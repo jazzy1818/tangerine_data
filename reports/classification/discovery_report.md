@@ -24,7 +24,7 @@ Keep deficit_month_share; I-S alone is insufficient evidence for a fixed savings
 ended with nonnegative balances. This affects 145
 distinct accounts; total recent records = 53,780. The denominator here is negative-balance
 **months**, not accounts. Timing is a hypothesis; this does not establish bill/payday causation
-or reproduce the other team's 131-account daily shock replay.
+or reproduce the separate July–December daily shock replay (143 hidden-shortfall accounts among 4,424 eligible accounts; 44 of 102 qualifying bill-shift cases resolved conditionally).
 Only months with both days_below_zero and month_end_balance observed enter this ratio:
 53,780 eligible records; 0 excluded for missing data.
 

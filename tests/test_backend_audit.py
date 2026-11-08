@@ -201,7 +201,9 @@ def test_actual_google_sdk_serializes_and_parses_without_network(case):
     assert 'additional_properties' not in json.dumps(schema)
     assert 'max_items' not in json.dumps(schema)
     assert 'minItems' not in json.dumps(schema)
-    assert 'maxItems' not in json.dumps(schema)
+    assert schema['properties']['support_modules']['maxItems'] == 2
+    assert 'maxItems' not in schema['properties']['reason_codes']
+    assert 'maxItems' not in schema['properties']['needs_clarification']
     # These are local validation rules, outside the API's supported JSON Schema subset.
     assert 'minLength' not in schema['properties']['rationale']
     assert 'maxLength' not in schema['properties']['rationale']
