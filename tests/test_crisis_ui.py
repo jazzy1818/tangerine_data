@@ -144,6 +144,23 @@ def test_generic_delay_does_not_silently_show_old_daily_replay(app):
     assert any('No old slider scenario is substituted' in m.value for m in app.info)
 
 
+def test_recovery_supported_without_inflow_then_unknown_rate_has_no_date(app):
+    app.checkbox(key='recovery_supplied').check().run()
+    app.text_input(key='recovery_month').set_value('2026-11')
+    app.number_input(key='recovery_cash').set_value(3000.)
+    app.number_input(key='recovery_spending').set_value(2400.)
+    app.number_input(key='recovery_rate').set_value(300.)
+    app.checkbox(key='recovery_stable').check()
+    app.checkbox(key='recovery_covered').check().run()
+    assert app.number_input(key='recovery_income').value is None
+    assert not app.exception
+    assert any('14 months' in str(m.value) for m in app.markdown)
+    app.number_input(key='recovery_rate').set_value(None).run()
+    assert not app.exception
+    assert not any('14 months' in str(m.value) for m in app.markdown)
+    assert any('Rebuild date not established' in str(m.value) for m in app.markdown)
+
+
 def test_account_change_clears_account_specific_recovery(app):
     app.checkbox(key='recovery_supplied').check().run()
     app.number_input(key='recovery_cash').set_value(9000.).run()

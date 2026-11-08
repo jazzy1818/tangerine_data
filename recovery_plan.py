@@ -11,7 +11,7 @@ class RecoverySnapshot(Contract):
     assessment_month: str = Field(min_length=1)
     cash_basis: str = Field(pattern='^(judge_specified|observed|simulated)$')
     available_cash: float = Field(ge=-1e12, le=1e12)
-    monthly_inflow: float = Field(ge=0, le=1e12)
+    monthly_inflow: float | None = Field(default=None, ge=0, le=1e12)
     monthly_spending: float = Field(gt=0, le=1e12)
     stable_cash_flow: bool = Field(strict=True)
     obligations_covered: bool = Field(strict=True)
@@ -32,18 +32,22 @@ def make_recovery_plan(snapshot=None, *, reserve_months=3.):
     if snapshot is None:
         return {'status': 'RECOVERY_UNVERIFIED', 'lead_module': None, 'trigger_ids': [],
                 'monthly_contribution': 0., 'months_to_target': None, 'reserve_gap': None,
-                'review_flags': ['RECOVERY_UNVERIFIED: Updated cash, inflows, spending and obligations are required; no automatic income recovery is assumed.']}
+                'review_flags': ['RECOVERY_UNVERIFIED: Updated cash, spending, stability and obligation coverage are required; a supported contribution is needed for a rebuild date. No automatic income recovery is assumed.']}
     snapshot = RecoverySnapshot.model_validate(snapshot)
     target = round(snapshot.monthly_spending * reserve_months, 2)
     usable_cash = snapshot.available_cash - snapshot.earmarked_near_term_cash
     gap = round(max(0., target - usable_cash), 2)
-    surplus = round(snapshot.monthly_inflow - snapshot.monthly_spending, 2)
+    surplus = (round(snapshot.monthly_inflow - snapshot.monthly_spending, 2)
+               if snapshot.monthly_inflow is not None else None)
     flags = ['CONDITIONAL_RECOVERY: Timeline uses the supplied checkpoint; simulated cash is not verified current funds.']
+    if surplus is None:
+        flags.append('INFLOW_UNQUANTIFIED: Monthly inflow and surplus remain unknown; any rebuild date uses only the explicitly supported contribution, stability and obligation coverage.')
     result = {'source': snapshot.source, 'assessment_month': snapshot.assessment_month,
               'cash_basis': snapshot.cash_basis, 'reserve_target': target, 'reserve_gap': gap,
               'current_cash': snapshot.available_cash, 'monthly_surplus': surplus,
               'monthly_contribution': 0., 'months_to_target': None, 'review_flags': flags}
-    if (usable_cash < 0 or surplus < 0 or not snapshot.obligations_covered or not snapshot.stable_cash_flow):
+    if (usable_cash < 0 or (surplus is not None and surplus < 0)
+            or not snapshot.obligations_covered or not snapshot.stable_cash_flow):
         return {**result, 'status': 'ACTIVE_CRISIS', 'lead_module': None, 'trigger_ids': ['G01'],
                 'reason': 'Cash-flow stability and obligation coverage are not established; rebuilding cannot begin.'}
     if gap == 0:
@@ -52,7 +56,8 @@ def make_recovery_plan(snapshot=None, *, reserve_months=3.):
     bound = snapshot.supported_monthly_contribution
     # A newly supplied regime does not automatically inherit an old savings rate.
     # Use an explicit supported bound, or leave ETA unknown.
-    rate = floor(max(0., min(surplus, bound)) * 100 + 1e-8) / 100 if bound is not None else 0.
+    supported = min(surplus, bound) if surplus is not None and bound is not None else bound
+    rate = floor(max(0., supported) * 100 + 1e-8) / 100 if supported is not None else 0.
     rate_cents = round(rate * 100)
     gap_cents = round(gap * 100)
     result.update(status='REBUILDING', lead_module='M6', trigger_ids=['G15'],
