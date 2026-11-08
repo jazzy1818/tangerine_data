@@ -210,26 +210,29 @@ def test_withheld_deferral_has_no_relief_or_repayment(overrides):
     assert case.missing_details
 
 
-def test_assumed_deferral_posts_both_sides_of_partial_path():
+def test_assumed_deferral_posts_both_sides_only_in_separate_comparison():
     scenario = ShockScenario(effects=[dict(
         type='debt_payment_delta', value=-300., duration_months=2, evidence='assumed',
         debt_change_kind='deferral', repayment_month=4, repayment_amount=600.,
     )])
     customer = loan_account()
-    path = execute_scenario(customer, scenario)
+    main = execute_scenario(customer, scenario)
+    assert [row['spending'] for row in main['schedule'][1:3]] == [2400., 2400.]
+    assert not any(row['deferred_repayment'] for row in main['schedule'])
+    assert main['full_funding_need'] is None
+    path = execute_scenario(customer, scenario, include_assumptions=True)
     assert [row['spending'] for row in path['schedule'][1:3]] == [2100., 2100.]
     assert [row['one_off_cost'] for row in path['schedule']] == [0., 0., 0., 0., 600., 0., 0.]
     assert path['ending_cash'] == 6600.
     assert path['full_funding_need'] is None
     case = build_case(profile_from_engine(customer), scenario)
     by_type = {effect.type: effect for effect in case.effects}
-    assert {effect.evidence for effect in by_type.values()} == {'assumed'}
-    assert by_type['debt_payment_delta'].cashflow_delta_to_scale == pytest.approx(.1)
-    assert by_type['one_off_cost'].cashflow_delta_to_scale == pytest.approx(-.2)
+    assert set(by_type) == {'debt_payment_delta'}
+    assert by_type['debt_payment_delta'].cashflow_delta_to_scale is None
 
 
 @pytest.mark.parametrize('included', [True, False])
-def test_unresolved_repayment_is_pending_only_if_relief_was_modeled(included):
+def test_unresolved_repayment_withholds_relief_and_only_tracks_an_evidenced_payment(included):
     scenario = ShockScenario(effects=[dict(
         type='debt_payment_delta', value=-300., duration_months=2, effect_id='loan-1',
         obligation_payment=300., obligation_source='Synthetic payment', payment_in_baseline=included,
@@ -237,7 +240,8 @@ def test_unresolved_repayment_is_pending_only_if_relief_was_modeled(included):
     )])
     customer = loan_account()
     path = execute_scenario(customer, scenario)
-    assert path['schedule'][1]['spending'] == (2100. if included else 2400.)
+    assert path['schedule'][1]['spending'] == path['schedule'][2]['spending'] == 2400.
+    assert all(row['deferred_repayment'] == 0 for row in path['schedule'])
     assert path['full_funding_need'] is None
     assert len(path['pending_effects']) == int(included)
     if included:
@@ -245,7 +249,7 @@ def test_unresolved_repayment_is_pending_only_if_relief_was_modeled(included):
         assert path['pending_effects'][0]['effect_id'] == 'loan-1'
     case = build_case(profile_from_engine(customer), scenario)
     assert all(effect.type != 'one_off_cost' for effect in case.effects)
-    assert any('Deferred repayment remains outstanding' in detail for detail in case.missing_details) == included
+    assert any('Confirm the deferred repayment amount and due month' in detail for detail in case.missing_details) == included
 
 
 def test_repayment_uses_original_payment_basis_when_next_change_is_active():

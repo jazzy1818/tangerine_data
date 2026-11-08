@@ -1,6 +1,6 @@
 """Deterministic pause selection: evidence permits modeling; purpose permits advice."""
 from collections import defaultdict
-from crisis_rules import first_shortfall_order
+from crisis_rules import cash_path_metrics, first_shortfall_order
 from scenario_execution import execute_scenario
 
 
@@ -43,6 +43,11 @@ def select_pauses(customer, scenario, transfers, revised, *, floor, contribution
             trial_fees[t.month] = trial_fees.get(t.month, 0.) + t.pause_fee
             trial = execute_scenario(customer, scenario, opening_cash=opening_cash,
                 contribution=contribution, spending_releases=trial_releases, release_fees=trial_fees)
+            standalone = trial if not selected else execute_scenario(
+                customer, scenario, opening_cash=opening_cash, contribution=contribution,
+                spending_releases={t.month: t.amount}, release_fees={t.month: t.pause_fee})
+            row.update(standalone=cash_path_metrics(standalone),
+                       cumulative_before=cash_path_metrics(current), cumulative_trial=cash_path_metrics(trial))
             purpose = pause_purpose(current, trial, floor)
             if purpose:
                 releases, fees = defaultdict(float, trial_releases), defaultdict(float, trial_fees)

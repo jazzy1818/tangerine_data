@@ -37,6 +37,8 @@ def preview(request):
         raise ValueError('Recovery checkpoint belongs to a different account.')
     if len({t.event_id for t in request.existing_transfers}) != len(request.existing_transfers):
         raise ValueError('Each scheduled transfer needs a unique event_id.')
+    if any(t.account_id not in (None, request.account_id) for t in request.existing_transfers):
+        raise ValueError('Scheduled transfer belongs to a different account.')
     notes = []
     if profile.features.loan_in_arrears:
         notes.append('Loan arrears are recorded before these changes. Confirm the current payment position with the customer.')
@@ -80,7 +82,8 @@ def execute_run(session_id, request):
             append_request(record)
         except OSError:
             log_warning = 'The text request log could not be appended; request metadata remains in this saved result.'
-        plans = engine.make_plan(customer, selection_result=selected, **kwargs)
+        plans = engine.make_plan(customer, selection_result=selected,
+                                 include_timing_comparison=request.scenario.phase == 'active', **kwargs)
         comparison = build_comparison(plans['crisis_plan'])
         status, reason = safe_mode_status(plans['crisis_plan'], comparison)
         comparison['planning_status'] = {'label': status, 'reason': reason}

@@ -7,14 +7,14 @@ schedule, approval and fee evidence before a pause changes the no-action path.
 from collections import defaultdict
 from copy import deepcopy
 from math import isfinite
-from decimal import Decimal, ROUND_CEILING
+from decimal import Decimal
 
 from pydantic import Field, model_validator, field_validator
 from plan_classification import build_case, profile_from_engine, select_plan
 from plan_classification.backends import validate_selection
 from plan_classification.case import case_hash
 from plan_classification.schemas import Contract, PlanSelection, SelectionResult, ShockScenario
-from crisis_rules import goal_worsened, first_shortfall_order, evidenced_goal_worsened
+from crisis_rules import evidenced_goal_worsened, funding_target
 from recovery_plan import make_recovery_plan
 from scenario_execution import execute_scenario, enforce_execution, money, period_values, scenario_hash
 
@@ -31,6 +31,7 @@ class NormalGoal(Contract):
 
 class ExistingGoalTransfer(Contract):
     event_id: str = Field(min_length=1)
+    account_id: int | None = Field(default=None, ge=1)
     month: int = Field(ge=1, le=120)
     amount: float = Field(gt=0)
     source: str = Field(min_length=1)
@@ -79,6 +80,8 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
     scenario = ShockScenario.model_validate(scenario)
     normal = NormalGoal.model_validate(normal_goal)
     transfers = [ExistingGoalTransfer.model_validate(t) for t in existing_transfers]
+    if any(t.account_id not in (None, customer['account_id']) for t in transfers):
+        raise ValueError('Scheduled transfer belongs to a different account')
     if len({t.event_id for t in transfers}) != len(transfers):
         raise ValueError('Duplicate scheduled transfer event_id; no double pause credit is allowed')
     baseline_scenario = ShockScenario(phase='active' if baseline_effects else 'normal',
@@ -135,15 +138,7 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
             flags.append('PAUSE_NOT_APPLIED: ' + decision['event_id'] + ': ' + decision['reason'])
     if source_cap == 0 and eligible_ids:
         goal_status = 'EXISTING_TRANSFERS_PAUSED'
-    upfront = max([0.] + [-p['cash'] for p in no_action['checkpoints']
-                          if p['month'] == 0 or (p['month'] == 1 and p['phase'] == 'start')])
-    monthly_target = Decimal(0)
-    for checkpoint in no_action['checkpoints']:
-        periods = checkpoint['month'] - (1 if checkpoint['phase'] == 'start' else 0)
-        if periods > 0:
-            monthly_target = max(monthly_target,
-                max(Decimal(0), -Decimal(str(checkpoint['cash'])) - Decimal(str(upfront))) / periods)
-    monthly_target = float(monthly_target.quantize(Decimal('.01'), rounding=ROUND_CEILING))
+    upfront, monthly_target = funding_target(no_action)
     # Shared source for model selection, independently checked even if selection
     # was supplied by UI. Never trust a stale account/scenario fingerprint.
     case = build_case(profile_from_engine(customer), scenario, planning_cash=opening_cash)
@@ -179,7 +174,7 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
             proposal_status = 'rejected_invalid_external_proposal'
             flags.append('CLASSIFICATION_REJECTED: Invalid external PlanSelection; local baseline retained.')
     in_scope_effects = [effect for effect in scenario.effects
-                        if effect.value is not None and effect.evidence != 'unknown'
+                        if effect.value is not None and effect.evidence in ('judge_specified', 'user_confirmed')
                         and effect.start_month <= scenario.horizon_months]
     modules = list(dict.fromkeys(_SUPPORTED_MODULE[e.type] for e in in_scope_effects
                                 if e.type in _SUPPORTED_MODULE
@@ -308,6 +303,8 @@ def make_crisis_plan(customer, scenario, *, normal_goal, selection_result=None,
         validated = enforce_crisis_validations(result)
         from tailored_advice import build_advice
         validated['advice'] = build_advice(validated)
+        from finance_actions import build_finance_plan
+        validated['finance_plan'] = build_finance_plan(validated, customer, scenario, case)
         return validated
     except ValueError as error:
         result.update(goal_status='REVIEW_REQUIRED', lead_module=None, support_modules=[],

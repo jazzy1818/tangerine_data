@@ -69,7 +69,7 @@ def _evidence_notes(crisis, left, right):
     return notes
 
 
-def _pause_exclusion(decision, transfer):
+def pause_exclusion_reason(decision, transfer):
     reason = decision['reason']
     if reason == 'evidence_incomplete':
         missing = []
@@ -143,7 +143,7 @@ def build_comparison(crisis):
             actions.append('No existing-transfer pause is applied.')
         else:actions.append('No evidenced existing-transfer schedule is supplied; no pause relief is credited.')
     exclusions = Counter(
-        _pause_exclusion(decision, records[decision['event_id']])
+        pause_exclusion_reason(decision, records[decision['event_id']])
         for decision in crisis['pause_decisions'] if decision['status'] == 'excluded'
     )
     for explanation, count in exclusions.items():
@@ -290,6 +290,34 @@ def render_backup_comparison(crisis):
     for kind, month in view['pending']:
         st.caption(f"Scheduled for Month {month}: {kind.replace('_', ' ')}. This falls outside the {view['horizon']}-month chart.")
     for action in view['actions']:st.write(action)
+    if finance := crisis.get('finance_plan'):
+        st.markdown('#### Recommended Financial Actions')
+        remaining = finance['remaining_gap_cad']
+        st.write('Full funding need not established.' if remaining is None else f'Remaining funding need: {_cad(remaining)}.')
+        for index, action in enumerate(finance['prioritized_actions'], 1):
+            st.markdown(f"**{index}. {action['title']}** · {action['status'].replace('_', ' ').title()}")
+            start, end = action['starts_at'], action['ends_at']
+            timing = _point_label(start)
+            if end and end != start:
+                timing += ' to ' + _point_label(end)
+            amount = None if action['amount_cad'] is None else f"{_cad(action['amount_cad'])} {action['frequency'] or ''}"
+            fee = None if action['fee_cad'] is None else 'Fees ' + _cad(action['fee_cad'])
+            if any((timing, amount, fee)):
+                st.caption(' · '.join(filter(None, (timing, amount, fee))))
+            if action['impact'] and action['impact']['funding_improvement_cad'] is not None:
+                impact = action['impact']['funding_improvement_cad']
+                st.caption(f"{action['impact']['basis']} · funding need {'decreases' if impact >= 0 else 'increases'} by {_cad(abs(impact))}.")
+            if action['repayment'] and action['repayment']['due']:
+                st.caption(f"Catch-up: {_cad(action['repayment']['amount_cad'])} at {_point_label(action['repayment']['due'])}.")
+            st.write(action['reason'])
+            st.caption(action['cash_treatment'] + ' ' + action['required_review'])
+        if target := finance['required_target_only']:
+            st.caption(f"Calculated target: {_cad(target['upfront_cad'])} upfront plus {_cad(target['uniform_monthly_improvement_cad'])}/month from Month 1 end.")
+        review = finance['next_review_checkpoint']
+        st.caption('Next review · ' + ' · '.join(filter(None, (_point_label(review['checkpoint']) or review.get('calendar_month'), review['reason']))))
+        with st.expander('Candidate decisions and evidence'):
+            for action in finance['candidate_action_decisions']:
+                st.write(f"{action['action_id']} · {action['status']} · {', '.join(action['evidence'])} · {action['reason']}")
     st.plotly_chart(comparison_figure(view),key='backup_cash_comparison',width='stretch')
     st.caption(f"Monthly projection · opening basis: {view['opening_basis']}. Both lines use the same account and selected shock. Lines connect start/end checkpoints; they do not establish daily or intramonth solvency. No banking instruction is executed.")
     st.caption('Open circles mark posted cash changes. A diamond marks the first shortfall. Hover for the exact start or end checkpoint, cash, and any posted events.')

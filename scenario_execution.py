@@ -33,7 +33,7 @@ def _base(customer, key):
     return money(customer.get('raw_' + key, customer.get(key)))
 
 
-def period_values(customer, scenario, month):
+def period_values(customer, scenario, month, *, include_assumptions=False):
     income, spending, bills = (_base(customer, k) for k in ('I', 'S', 'H'))
     baseline_income, baseline_spending = income, spending
     protected = _base(customer, 'F')
@@ -64,7 +64,8 @@ def period_values(customer, scenario, month):
             continue
         active = effect.active(month)
         repayment_due = effect.debt_change_kind == 'deferral' and month == effect.repayment_month
-        if kind in ('income_multiplier', 'income_delta') and v is not None:
+        if (kind in ('income_multiplier', 'income_delta') and v is not None
+                and (effect.evidence != 'assumed' or include_assumptions)):
             adverse = (v < 1 if kind == 'income_multiplier' else v < 0)
             end = effect.start_month + effect.duration_months if effect.duration_months else None
             if adverse and end is not None and month >= end:
@@ -85,6 +86,8 @@ def period_values(customer, scenario, month):
             continue
         if effect.evidence == 'assumed':
             unknown.append(f'{identity}: conditional operator assumption, not verified fact')
+            if not include_assumptions:
+                continue
         if kind not in ('one_off_cost', 'one_off_receipt', 'investment_return') and effect.duration_months is None and not effect.ongoing:
             unknown.append(f'{identity}: duration unknown')
             if month > effect.start_month:
@@ -117,6 +120,12 @@ def period_values(customer, scenario, month):
                     continue
                 if included_payment + change < 0:
                     raise ValueError(f'Reduction exceeds the loan payment included in baseline spending in month {month}')
+            if effect.debt_change_kind == 'deferral' and effect.repayment_unresolved:
+                unknown.append(f'{identity}: deferred loan obligation unresolved; repayment not established')
+                if month == effect.start_month:
+                    pending_deferrals.append({'effect_id': effect.effect_id, 'type': 'deferred_repayment',
+                                              'start_month': None, 'value': None, 'unresolved': True})
+                continue
             # Both legs depend on the same payment evidence and assumption status.
             if repayment_due:
                 repayments[index] = money(effect.repayment_amount)
@@ -127,12 +136,8 @@ def period_values(customer, scenario, month):
                 spending += change
                 protected += change
                 debt_changes[index] = change
-                if effect.debt_change_kind == 'deferral' and (
-                    effect.repayment_unresolved or effect.repayment_month > scenario.horizon_months
-                ):
-                    reason = ('deferred loan obligation unresolved; repayment not established'
-                              if effect.repayment_unresolved else 'deferred repayment beyond horizon remains owed')
-                    unknown.append(f'{identity}: {reason}')
+                if effect.debt_change_kind == 'deferral' and effect.repayment_month > scenario.horizon_months:
+                    unknown.append(f'{identity}: deferred repayment beyond horizon remains owed')
                     if month == effect.start_month:
                         pending_deferrals.append({
                             'effect_id': effect.effect_id, 'type': 'deferred_repayment',
@@ -185,7 +190,7 @@ def period_values(customer, scenario, month):
 
 
 def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
-               spending_releases=None, release_fees=None):
+               spending_releases=None, release_fees=None, include_assumptions=False):
     cash = _base(customer, 'B') if opening_cash is None else money(opening_cash)
     if not cash.is_finite():
         raise ValueError('Opening cash must be finite')
@@ -206,7 +211,7 @@ def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
         complete = False
         unknowns.append('Recovery phase alone does not establish updated cash or income; this is a baseline reference, with recovery assessed separately.')
     for month in range(scenario.horizon_months + 1):
-        p = period_values(customer, scenario, month)
+        p = period_values(customer, scenario, month, include_assumptions=include_assumptions)
         pending.extend(p['pending_deferrals'])
         release = money(releases.get(month, 0)) if month else Decimal(0)
         fee = money(fees.get(month, 0)) if month else Decimal(0)
@@ -258,11 +263,12 @@ def _calculate(customer, scenario, *, opening_cash=None, contribution=0.,
 
 
 def execute_scenario(customer, scenario, *, opening_cash=None, contribution=0.,
-                     spending_releases=None, release_fees=None):
+                     spending_releases=None, release_fees=None, include_assumptions=False):
     """Validated monthly execution, separate from the unchanged official formula."""
     scenario = ShockScenario.model_validate(scenario)
     result = _calculate(customer, scenario, opening_cash=opening_cash, contribution=contribution,
-                        spending_releases=spending_releases, release_fees=release_fees)
+                        spending_releases=spending_releases, release_fees=release_fees,
+                        include_assumptions=include_assumptions)
     return result
 
 

@@ -70,6 +70,12 @@ def build_case(profile: CustomerProfile, scenario: ShockScenario,
         if t == 'debt_payment_delta' and v != 0:
             posted_change = periods[effect.start_month]['debt_changes'].get(index)
             if posted_change is None:
+                identity = effect.effect_id or f'effect-{index + 1}'
+                if effect.repayment_unresolved and any(
+                    issue.startswith(f'{identity}: deferred loan obligation unresolved')
+                    for issue in periods[effect.start_month]['unknown']
+                ):
+                    missing.append('Confirm the deferred repayment amount and due month before modeling the change.')
                 if effect.obligation_account_id is not None and effect.obligation_account_id != profile.account_id:
                     missing.append('Payment evidence belongs to another account. Supply evidence for the selected account.')
                 elif v is not None and evidence != 'unknown':

@@ -453,7 +453,7 @@ with tab3:
             else:
                 st.info('Recovery amounts remain unknown. Crisis calculations continue without a rebuild date.')
     from transfer_ui import render_transfers
-    transfers = render_transfers(active_scenario.horizon_months)
+    transfers = render_transfers(active_scenario.horizon_months, customer['account_id'])
     try:
         plans = engine.make_plan(customer, shock=engine.take_shock(customer), analyst_evidence=judge_evidence,
             scenario=active_scenario, selection_result=classification_selection, existing_transfers=transfers,

@@ -95,7 +95,7 @@ export function effectFromForm(form,accountId) {
 
 export function contextFromForm(form,accountId) {
   const d=new FormData(form),num=k=>d.get(k)===''?null:Number(d.get(k)),text=k=>String(d.get(k)||'').trim();
-  if(form.id==='transfer-form') return {event_id:text('event_id'),month:num('month'),amount:num('amount'),source:text('source'),included_in_baseline:d.has('included_in_baseline'),pause_approved:d.has('pause_approved'),pause_fee:num('pause_fee')};
+  if(form.id==='transfer-form') return {event_id:text('event_id'),account_id:accountId,month:num('month'),amount:num('amount'),source:text('source'),included_in_baseline:d.has('included_in_baseline'),pause_approved:d.has('pause_approved'),pause_fee:num('pause_fee')};
   if(form.id==='recovery-form') return {account_id:accountId,assessment_month:text('assessment_month'),source:text('source'),cash_basis:text('cash_basis'),available_cash:num('available_cash'),monthly_inflow:num('monthly_inflow'),monthly_spending:num('monthly_spending'),supported_monthly_contribution:num('supported_monthly_contribution'),earmarked_near_term_cash:num('earmarked_near_term_cash'),stable_cash_flow:d.has('stable_cash_flow'),obligations_covered:d.has('obligations_covered')};
   return {name:text('name'),monthly_contribution:num('monthly_contribution'),reserve_target:num('reserve_target'),reserve_months:num('reserve_months'),kind:text('kind'),source:text('source')};
 }

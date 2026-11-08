@@ -3,7 +3,7 @@ import streamlit as st
 from crisis_response import ExistingGoalTransfer
 
 
-def render_transfers(horizon):
+def render_transfers(horizon, account_id):
     with st.expander('Existing goal transfers — supplied evidence (optional)'):
         st.caption('Enter only supplied schedules. Inclusion means the payment is already counted in projected spending. Approval and fees must be explicitly supplied. These entries are scenario evidence, not verified live bank records.')
         with st.form('transfer_form'):
@@ -21,7 +21,7 @@ def render_transfers(horizon):
             try:
                 if amount is None or end < start:
                     raise ValueError('Supply an amount and a valid payment-month range.')
-                entries = [ExistingGoalTransfer(event_id=f'{event.strip()}:{m}', month=m, amount=amount,
+                entries = [ExistingGoalTransfer(event_id=f'{event.strip()}:{m}', account_id=account_id, month=m, amount=amount,
                     source=source, included_in_baseline=included, pause_approved=approved, pause_fee=fee).model_dump()
                     for m in range(start, end+1)]
                 if not event.strip():
