@@ -224,16 +224,20 @@ Unknown payment/inclusion leaves relief unapplied and the projection incomplete.
 An explicit scenario override requires `obligation_payment`, `obligation_source`
 and `payment_in_baseline=true`. The guided editor binds such evidence to the
 selected account with local `obligation_account_id`; switching accounts leaves
-that override unapplied until matching evidence is supplied. Scoped reductions never consume unchanged
+that override unapplied until matching evidence is supplied and clears unsaved
+loan and repayment inputs. Scoped reductions never consume unchanged
 household bills or other protected fixed obligations. Classification uses the
 same obligation checks; raw payment evidence remains local.
 
 A temporary deferral uses `debt_change_kind="deferral"` plus finite duration,
 `repayment_month` and `repayment_amount`, or `repayment_unresolved=true`.
-Repayment cannot omit deferred principal. A dated repayment enters cash once;
-unknown repayment or repayment beyond the horizon remains a visible liability
-and prevents a full-funding claim. The normalized classifier case includes an
-in-horizon repayment as a dated cost. Example with a known included $300 payment:
+Reductions and repayments must be in whole CAD cents, and repayment must cover
+the deferred principal. The relief and repayment share the same evidence decision.
+An excluded deferral posts neither side. A dated repayment enters cash once,
+including in an assumed comparison where both sides remain conditional. Unknown
+repayment or repayment beyond the horizon stays visible when relief was modeled
+and prevents a full-funding claim. The classifier receives normalized amounts
+from the same posted changes. Example with a known included $300 payment:
 
 ```json
 {"type":"debt_payment_delta","value":-300.0,"duration_months":2,

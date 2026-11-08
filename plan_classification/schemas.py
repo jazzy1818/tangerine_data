@@ -1,4 +1,5 @@
 """Validated, versioned contracts for module selection, independent of plan execution."""
+from decimal import Decimal
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -113,6 +114,11 @@ class ShockEffect(Contract):
         if self.debt_change_kind == 'deferral':
             if v is not None and v >= 0:
                 raise ValueError('A deferral must reduce a scheduled loan payment.')
+            for amount in (v, self.repayment_amount):
+                if amount is not None:
+                    posted = Decimal(str(amount))
+                    if abs(posted) > Decimal('1000000000000') or posted != posted.quantize(Decimal('.01')):
+                        raise ValueError('Deferral reductions and repayments must be in whole CAD cents within the supported range.')
             if self.repayment_unresolved:
                 if self.repayment_month is not None or self.repayment_amount is not None:
                     raise ValueError('Choose explicit repayment terms or an unresolved obligation.')
@@ -121,7 +127,6 @@ class ShockEffect(Contract):
             else:
                 if self.repayment_month < self.start_month + self.duration_months:
                     raise ValueError('Repayment must follow the deferred-payment periods.')
-                from decimal import Decimal
                 if v is not None and Decimal(str(self.repayment_amount)) < -Decimal(str(v))*self.duration_months:
                     raise ValueError('Repayment cannot omit deferred principal; otherwise mark the obligation unresolved.')
         elif self.repayment_month is not None or self.repayment_amount is not None or self.repayment_unresolved:
@@ -154,12 +159,15 @@ class ShockEffect(Contract):
             self.duration_months is None or month < self.start_month + self.duration_months)
 
 
+MAX_SHOCK_EFFECTS = 32
+
+
 class ShockScenario(Contract):
     # Narrative is LOCAL ONLY, excluded from the canonical classifier input.
     description: str = Field(default='', max_length=2000)
     phase: Literal['active', 'recovery', 'normal'] = 'active'
     horizon_months: int = Field(default=6, ge=1, le=120)
-    effects: list[ShockEffect] = Field(default_factory=list, max_length=32)
+    effects: list[ShockEffect] = Field(default_factory=list, max_length=MAX_SHOCK_EFFECTS)
 
     @model_validator(mode='before')
     @classmethod

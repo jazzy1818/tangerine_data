@@ -2,7 +2,7 @@
 import pytest
 from test_crisis_execution import account, normal_goal
 from crisis_response import make_crisis_plan, NormalGoal
-from plan_classification import ShockScenario
+from plan_classification import ShockScenario, build_case, profile_from_engine
 from scenario_execution import execute_scenario
 
 
@@ -81,7 +81,6 @@ def test_supplied_payment_cannot_erase_unchanged_household_bills():
 
 
 def test_deferral_repayment_counts_once_and_does_not_create_wealth():
-    from plan_classification import build_case, profile_from_engine
     s=ShockScenario(effects=[dict(type='debt_payment_delta',value=-300.,duration_months=2,
         debt_change_kind='deferral',repayment_month=4,repayment_amount=600.)])
     c=loan_account();p=execute_scenario(c,s)
@@ -175,7 +174,6 @@ def test_payment_override_cannot_leak_to_another_account():
 
 
 def test_other_accounts_deferral_does_not_become_a_classifier_cash_cost():
-    from plan_classification import build_case, profile_from_engine
     s=ShockScenario(effects=[dict(type='debt_payment_delta',value=-300.,duration_months=2,
         obligation_payment=300.,obligation_source='Account 18 evidence',payment_in_baseline=True,
         obligation_account_id=18,debt_change_kind='deferral',repayment_month=4,repayment_amount=600.)])
@@ -183,3 +181,119 @@ def test_other_accounts_deferral_does_not_become_a_classifier_cash_cost():
     assert all(r['one_off_cost']==0 for r in p['schedule'])
     case=build_case(profile_from_engine(c),s)
     assert all(e.cashflow_delta_to_scale is None for e in case.effects)
+
+
+@pytest.mark.parametrize('overrides', [
+    {'obligation_payment': 300., 'obligation_source': 'Synthetic payment', 'payment_in_baseline': False},
+    {'value': None},
+    {'evidence': 'unknown'},
+])
+def test_withheld_deferral_has_no_relief_or_repayment(overrides):
+    terms = dict(type='debt_payment_delta', value=-300., duration_months=2,
+                 debt_change_kind='deferral', repayment_month=4, repayment_amount=600.)
+    scenario = ShockScenario(effects=[{**terms, **overrides}])
+    customer = loan_account()
+    plan = make_crisis_plan(customer, scenario, normal_goal=normal_goal())
+    path = plan['no_action']
+    assert plan['runtime_validation']['status'] == 'passed'
+    assert [row['spending'] for row in path['schedule'][1:]] == [2400.] * 6
+    assert all(row['one_off_cost'] == 0 for row in path['schedule'])
+    assert path['ending_cash'] == plan['baseline_without_crisis']['ending_cash'] == 6600.
+    assert path['full_funding_need'] is None
+    case = build_case(profile_from_engine(customer), scenario)
+    assert len(case.effects) == 1
+    effect = case.effects[0]
+    assert effect.type == 'debt_payment_delta' and effect.evidence == 'unknown'
+    assert effect.value is None and effect.cashflow_delta_to_scale is None
+    assert 'one_off_expense' not in case.observed_reasons
+    assert 'cost_reduction' not in case.observed_reasons
+    assert case.missing_details
+
+
+def test_assumed_deferral_posts_both_sides_of_partial_path():
+    scenario = ShockScenario(effects=[dict(
+        type='debt_payment_delta', value=-300., duration_months=2, evidence='assumed',
+        debt_change_kind='deferral', repayment_month=4, repayment_amount=600.,
+    )])
+    customer = loan_account()
+    path = execute_scenario(customer, scenario)
+    assert [row['spending'] for row in path['schedule'][1:3]] == [2100., 2100.]
+    assert [row['one_off_cost'] for row in path['schedule']] == [0., 0., 0., 0., 600., 0., 0.]
+    assert path['ending_cash'] == 6600.
+    assert path['full_funding_need'] is None
+    case = build_case(profile_from_engine(customer), scenario)
+    by_type = {effect.type: effect for effect in case.effects}
+    assert {effect.evidence for effect in by_type.values()} == {'assumed'}
+    assert by_type['debt_payment_delta'].cashflow_delta_to_scale == pytest.approx(.1)
+    assert by_type['one_off_cost'].cashflow_delta_to_scale == pytest.approx(-.2)
+
+
+@pytest.mark.parametrize('included', [True, False])
+def test_unresolved_repayment_is_pending_only_if_relief_was_modeled(included):
+    scenario = ShockScenario(effects=[dict(
+        type='debt_payment_delta', value=-300., duration_months=2, effect_id='loan-1',
+        obligation_payment=300., obligation_source='Synthetic payment', payment_in_baseline=included,
+        debt_change_kind='deferral', repayment_unresolved=True,
+    )])
+    customer = loan_account()
+    path = execute_scenario(customer, scenario)
+    assert path['schedule'][1]['spending'] == (2100. if included else 2400.)
+    assert path['full_funding_need'] is None
+    assert len(path['pending_effects']) == int(included)
+    if included:
+        assert path['pending_effects'][0]['unresolved']
+        assert path['pending_effects'][0]['effect_id'] == 'loan-1'
+    case = build_case(profile_from_engine(customer), scenario)
+    assert all(effect.type != 'one_off_cost' for effect in case.effects)
+    assert any('Deferred repayment remains outstanding' in detail for detail in case.missing_details) == included
+
+
+def test_repayment_uses_original_payment_basis_when_next_change_is_active():
+    first = dict(type='debt_payment_delta', value=-300., duration_months=2,
+                 debt_change_kind='deferral', repayment_month=3, repayment_amount=600.)
+    second = dict(type='debt_payment_delta', value=-100., start_month=3, duration_months=2)
+    customer = loan_account()
+    for effects in ([first, second], [second, first]):
+        path = execute_scenario(customer, ShockScenario(effects=effects))
+        assert path['schedule'][3]['one_off_cost'] == 600.
+        assert path['schedule'][3]['spending'] == 2300.
+        assert path['funding_result_complete']
+
+
+@pytest.mark.parametrize('value, repayment', [(-.005, .01), (-.01, .025)])
+def test_deferral_requires_postable_cad_cents(value, repayment):
+    with pytest.raises(ValueError, match='whole CAD cents'):
+        ShockScenario(effects=[dict(
+            type='debt_payment_delta', value=value, duration_months=2,
+            debt_change_kind='deferral', repayment_month=4, repayment_amount=repayment,
+        )])
+
+
+def test_deferral_can_repay_exact_cent_principal():
+    scenario = ShockScenario(effects=[dict(
+        type='debt_payment_delta', value=-.01, duration_months=2,
+        debt_change_kind='deferral', repayment_month=4, repayment_amount=.02,
+    )])
+    path = execute_scenario(loan_account(), scenario)
+    assert path['schedule'][1]['spending'] == 2399.99
+    assert path['schedule'][2]['spending'] == 2399.99
+    assert path['schedule'][4]['one_off_cost'] == .02
+    assert path['ending_cash'] == 6600.
+
+
+@pytest.mark.parametrize('start, evidence, eligible', [
+    (7, 'judge_specified', False),
+    (1, 'unknown', False),
+    (6, 'judge_specified', True),
+])
+def test_positive_income_change_only_activates_m8_inside_horizon_with_evidence(start, evidence, eligible):
+    scenario = ShockScenario(effects=[dict(
+        type='income_delta', value=100., start_month=start, evidence=evidence, ongoing=True,
+    )])
+    plan = make_crisis_plan(account(cash=10000.), scenario, normal_goal=normal_goal())
+    assert plan['runtime_validation']['status'] == 'passed'
+    assert ('M8' in plan['affected_modules']) == eligible
+    assert (plan['lead_module'] == 'M8') == eligible
+    if start == 7:
+        assert plan['no_action']['pending_effects'][0]['start_month'] == 7
+        assert plan['no_action']['schedule'][6]['income'] == 3000.

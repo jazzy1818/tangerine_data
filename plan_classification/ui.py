@@ -7,7 +7,7 @@ from . import build_case, profile_from_engine, scenario_from_engine, select_plan
 from .case import case_hash
 from .config import classifier_settings
 from .request_log import append_request, request_record
-from .schemas import MODULES, ONE_TIME, ShockEffect, ShockScenario
+from .schemas import MAX_SHOCK_EFFECTS, MODULES, ONE_TIME, ShockEffect, ShockScenario
 
 
 # Values are stored in the same explicit units as the shared scenario schema.
@@ -190,32 +190,30 @@ def render_classification(customer, income_multiplier, bills_increase_pct, one_o
         history_area = st.container()
         mode = st.radio('Scenario source', ['Current shock controls', 'Guided scenario editor', 'Custom structured scenario'],
                         horizontal=True, key='classification_input_mode')
-        scenario = scenario_from_engine(income_multiplier, bills_increase_pct, one_off_costs)
-        if mode == 'Guided scenario editor':
-            try:
+        try:
+            scenario = scenario_from_engine(income_multiplier, bills_increase_pct, one_off_costs)
+            if mode == 'Guided scenario editor':
                 scenario = _render_guided_scenario(customer['account_id'])
-            except ValueError as exc:
-                st.error(f'Check the guided scenario: {exc}')
-                with history_area:
-                    _render_request_history()
-                return {'scenario': None, 'selection_result': None, 'input_error': str(exc)}
-        elif mode == 'Custom structured scenario':
-            st.caption('Use financial effects for windfalls, debt changes, holds, delays, or combinations. '
-                       'Percent values use percentage points (15 means 15%). Month 0 is immediate; '
-                       'recurring effects start at month 1. Use value: null for an unknown amount.')
-            raw = st.text_area('Scenario JSON', value=scenario.model_dump_json(indent=2), height=260,
-                               key='classification_scenario_json')
-            try:
+            elif mode == 'Custom structured scenario':
+                st.caption('Use financial effects for windfalls, debt changes, holds, delays, or combinations. '
+                           'Percent values use percentage points (15 means 15%). Month 0 is immediate; '
+                           'recurring effects start at month 1. Use value: null for an unknown amount.')
+                raw = st.text_area('Scenario JSON', value=scenario.model_dump_json(indent=2), height=260,
+                                   key='classification_scenario_json')
                 scenario = ShockScenario.model_validate_json(raw)
-            except ValueError as exc:
-                st.error(f'Check scenario fields: {exc}')
-                with history_area:
-                    _render_request_history()
-                return {'scenario': None, 'selection_result': None, 'input_error': str(exc)}
-        if event_evidence and event_evidence.event_financial_effect == 'unspecified' and not any(e.type == 'unspecified_event' for e in scenario.effects):
-            scenario = ShockScenario(phase='active' if scenario.phase == 'normal' else scenario.phase,
-                horizon_months=scenario.horizon_months, description=scenario.description,
-                effects=[*scenario.effects, ShockEffect(type='unspecified_event', evidence='unknown')])
+            if (event_evidence and event_evidence.event_financial_effect == 'unspecified'
+                and not any(e.type == 'unspecified_event' for e in scenario.effects)):
+                if len(scenario.effects) >= MAX_SHOCK_EFFECTS:
+                    raise ValueError(f'An unquantified judge event takes one of the {MAX_SHOCK_EFFECTS} effect slots. '
+                                     'Remove an effect, or clear the optional event if it does not apply.')
+                scenario = ShockScenario(phase='active' if scenario.phase == 'normal' else scenario.phase,
+                    horizon_months=scenario.horizon_months, description=scenario.description,
+                    effects=[*scenario.effects, ShockEffect(type='unspecified_event', evidence='unknown')])
+        except ValueError as exc:
+            st.error(f'Check the scenario inputs. {exc}')
+            with history_area:
+                _render_request_history()
+            return {'scenario': None, 'selection_result': None, 'input_error': str(exc)}
         handoff = {'scenario': scenario, 'selection_result': None, 'input_error': None}
         key = None
         if backend != 'rules':
