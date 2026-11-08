@@ -2,7 +2,8 @@
 
 Work began with a clean tree on branch `work`, commit
 `b9c39a45ddfb32f8acc2cd1459c2b6cd12c71943` (Backup Plan cash comparison).
-Implementation is isolated on `provider-demo-reliability`; main is not changed.
+Implementation was developed on `provider-demo-reliability` and subsequently
+merged into `main`; integration results are recorded below.
 The initial mocked reproductions exposed four failures: automatic daily API use
 with an inherited key; malformed-settings exceptions on both remote classifiers;
 and explanation settings bypassing the project file. No live provider was called.
@@ -146,3 +147,11 @@ not added to the repository.
 The branch also adds `tests/conftest.py` to isolate real operator credentials and
 `.env` for the entire automated suite. Provider tests explicitly opt into synthetic
 settings and mocked transports; the production settings file is never edited.
+
+## Main integration verification
+
+Pulled `main` at `d920e5b`, including the newer Backup Plan smoke checks, and
+merged `provider-demo-reliability` at `e6c5663` without conflicts. The combined
+code passed **446 tests and 9 subtests** using `.venv/bin/python -m pytest tests -q`.
+`git diff --check` passed. Provider testing remained mocked; no live provider
+requests or credential-based live verification were performed during integration.
