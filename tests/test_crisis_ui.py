@@ -37,7 +37,7 @@ def custom(app,scenario):
 
 def backup_cash_chart(app):
     return next((json.loads(chart.proto.spec) for chart in app.tabs[2].get('plotly_chart')
-                 if chart.proto.id.endswith('-backup_cash_timeline')), None)
+                 if chart.proto.id.endswith('-backup_cash_comparison')), None)
 
 
 def test_backup_chart_uses_dated_checkpoints_and_posted_events(app):
@@ -60,21 +60,23 @@ def test_backup_chart_uses_dated_checkpoints_and_posted_events(app):
                              ('With supported actions', 'applied_plan', 'solid')):
         trace = traces[label]
         checkpoints = expected[key]['checkpoints']
-        assert trace['x'] == [f"Month {p['month']} {p['phase']}" for p in checkpoints]
+        labels = [row[:2] for row in trace['customdata']]
+        assert labels == [[p['month'], p['phase']] for p in checkpoints]
+        assert trace['x'] == list(range(len(checkpoints)))
         assert trace['y'] == [p['cash'] for p in checkpoints]
         assert trace['line']['dash'] == dash
-        first = trace['x'].index('Month 1 start')
+        first = labels.index([1, 'start'])
         assert trace['y'][first] == -100.
         assert trace['y'][first + 1] > 0.
         assert trace['marker']['symbol'][first] == 'diamond-open'
-        assert 'First shortfall' in trace['customdata'][first]
-        assert 'One-off receipt: $200.00' in trace['customdata'][trace['x'].index('Month 3 start')]
-        repayment = trace['customdata'][trace['x'].index('Month 4 start')]
-        assert 'Deferred loan repayment: $225.00' in repayment
-        assert 'One-off cost: $50.00' in repayment
+        assert 'One-off receipt: CAD 200.00' in trace['customdata'][labels.index([3, 'start'])][2]
+        repayment = trace['customdata'][labels.index([4, 'start'])][2]
+        assert 'Deferred loan repayment: CAD 225.00' in repayment
+        assert 'One-off cost: CAD 50.00' in repayment
     assert figure['layout']['shapes'][0]['y0'] == figure['layout']['shapes'][0]['y1'] == 0
-    assert any('First shortfall: Month 1 start' in m.value for m in app.tabs[2].markdown)
-    assert sum(c.value == 'Full-period funding need: $100.00' for c in app.tabs[2].caption) == 2
+    assert metric(app,'First shortfall · without new action') == 'Month 1 (start)'
+    assert metric(app,'Extra cash needed · without new action') == 'CAD 100.00'
+    assert sum(c.value == 'Lowest modeled cash: CAD -100.00' for c in app.tabs[2].caption) == 2
 
 
 def test_windfall_changes_classification_and_backup_once(app):
@@ -116,7 +118,8 @@ def test_invalid_or_unknown_scenario_does_not_restore_old_slider_values(app):
     assert not app.exception
     assert metric(app,'Month 1 Inflow')=='Not established'
     assert backup_cash_chart(app) is not None
-    assert sum(c.value == 'Full-period funding need: Not established' for c in app.tabs[2].caption) == 2
+    assert metric(app,'Extra cash needed · without new action') == 'Not established'
+    assert metric(app,'Extra cash needed · revised plan') == 'Not established'
 
 
 def test_recovery_phase_needs_checkpoint_and_then_shows_rebuild(app):

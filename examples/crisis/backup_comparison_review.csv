@@ -1,0 +1,5 @@
+case,input_basis,opening_cash,monthly_inflow,monthly_spending,household_bills,scenario,action_evidence,expected_first_before,expected_first_after,expected_full_gap_before,expected_full_gap_after,finance_reviewer,finance_signoff
+compound_proposal_only,synthetic,3000,3000,2400,400,"Repair1500 Month0; 55% inflow and +15% household bills Months1-6",Future proposal300 only; no pausable existing outflow,Month2 end,Month2 end,3360,3360,,Pending independent review
+compound_supported_pauses,synthetic,3000,3000,2400,400,"Repair1500 Month0; 55% inflow and +15% household bills Months1-6","Six included approved payments300 Months1-6; fee0 each",Month2 end,Month3 end,3360,1560,,Pending independent review
+start_shortfall_end_recovers,synthetic,200,1000,500,100,One-off cost600 at Month1 start,No new proposed transfer,Month1 start,Month1 start,400,400,,Pending independent review
+unknown_impact,synthetic,3000,3000,2400,400,Unspecified financial event,None,Not established,Not established,Not established,Not established,,Pending independent review

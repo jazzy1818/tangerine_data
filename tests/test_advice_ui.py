@@ -22,10 +22,10 @@ def test_dashboard_applies_schedule_and_resets_account_evidence(app):
     applied = paths['With supported actions']
     shocked = paths['Shock only']
     assert round(applied['y'][-1] - shocked['y'][-1], 2) == 1650.
-    first_payment = applied['x'].index('Month 1 start')
-    assert 'Action fee: $25.00' in applied['customdata'][first_payment]
-    assert 'Action fee' not in shocked['customdata'][first_payment]
-    assert any('full-period funding need is $1,650.00 lower' in c.value for c in app.tabs[2].caption)
+    first_payment = next(i for i, row in enumerate(applied['customdata']) if row[:2] == [1, 'start'])
+    assert 'Action fee: CAD 25.00' in applied['customdata'][first_payment][2]
+    assert 'Action fee' not in shocked['customdata'][first_payment][2]
+    assert any('a decrease of CAD 1,650.00' in m.value for m in app.tabs[2].markdown)
     # Reruns do not duplicate scheduled payments.
     app.run()
     assert len(app.session_state['transfer_records'])==6
@@ -33,7 +33,7 @@ def test_dashboard_applies_schedule_and_resets_account_evidence(app):
     assert not app.exception
     assert 'transfer_records' not in app.session_state
     assert any('No existing-transfer pause' in m.value for m in app.markdown)
-    assert all('Action fee' not in note for trace in backup_cash_chart(app)['data'] for note in trace['customdata'])
+    assert all('Action fee' not in row[2] for trace in backup_cash_chart(app)['data'] for row in trace['customdata'])
 
 
 def test_unknown_fee_and_duplicate_schedule_get_no_invented_cash(app):
