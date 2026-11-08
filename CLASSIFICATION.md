@@ -51,13 +51,15 @@ python -m plan_classification classify 22812 --scenario examples/classification/
 
 python -m pytest tests -q
 
-# Start the existing app, keeping inherited keys out of the separate automatic advisor
-env -u GEMINI_API_KEY -u GOOGLE_API_KEY python -m streamlit run app.py
+# Start the app: every remote route requires a separate explicit button
+python -m streamlit run app.py
 ```
 
 Copy `.env.example` to `.env` in the repo root and fill in your keys. The classifier reads it
-automatically, without exporting the keys to other app components. Explicit API arguments / the
-classifier's password fields take priority, followed by `.env`, then inherited shell settings.
+directly, without changing `os.environ`. The classifier and both advice routes share this reader.
+Explicit nonblank API arguments / the classifier's password fields take priority, followed by
+`.env`, then inherited shell settings. Classifier password overrides stay in that browser's
+classifier control; they are not forwarded to the other advice routes.
 An empty `.env` value overrides an inherited value too. Never paste keys into code.
 
 | Backend | Environment | Default model | API |
@@ -70,8 +72,10 @@ Get an OpenRouter key from [OpenRouter settings](https://openrouter.ai/settings/
 Get a Gemini key from [Google AI Studio](https://aistudio.google.com/apikey).
 The new classifier uses Google's current Flash-Lite model because access to older 2.5 models
 is restricted for new projects. The existing advisor retains its original configuration.
-Use accounts/models enabled for your team; model names are configurable. Existing advisor model
-configuration is separate. No secrets are printed, saved to run logs, or included in errors.
+Use accounts/models enabled for your team; model names are configurable. Explanation emphasis uses
+`GEMINI_EXPLANATION_MODEL`; the daily advisor uses `GEMINI_ADVISOR_MODEL`. Both retain
+`gemini-2.5-flash` as their separate legacy default; set an enabled model for your project.
+No model availability is inferred from a key. No secrets are printed, logged, or included in errors.
 
 In the existing Streamlit app, open **Take a Shock → Classify this scenario into one of the eight
 plan modules**. The panel uses the selected account and shock sliders, a guided effect editor,
@@ -95,10 +99,18 @@ To watch new classification records in a terminal after the first request:
 tail -f logs/classification.jsonl
 ```
 
-The sidebar's **Gemini AI Advisor Settings** belongs to the separate action advisor. Use the
-classifier's own controls for module selection; entering a sidebar key enables that advisor's
-existing automatic API behavior. The launcher above clears inherited Gemini keys only for the
-app process, while the classifier still reads `.env`.
+All remote UI routes are deliberate and separate:
+
+- **Classify scenario** calls only the selected Jev/Gemini classifier, or offline rules.
+- **Use Gemini to emphasize validated findings** requests only approved fact IDs.
+- **Ask Gemini to review bill timing** requests a conditional bill-move selection or abstention.
+
+The daily advisor defaults to local rules even with keys configured. Changing accounts, shocks,
+notes, ETF controls or tabs never initiates a provider call. Missing/unreadable configuration,
+missing keys, SDK failures and provider errors retain useful local results with explicit fallback
+labels. ETF history still has its independent **Show ETF history** action and public-only cache.
+The former `env -u` launch workaround is unnecessary; keys no longer enable an automatic advisor.
+See [provider/demo reliability audit](PROVIDER_RELIABILITY.md) for route traces and checks.
 
 This implementation uses **structured scenario input**. The guided editor lets an operator enter
 each effect, amount, timing, duration, and evidence without writing JSON, then add or remove effects.
@@ -165,7 +177,10 @@ probability that a customer will recover or that an intervention is financially 
 Gemini uses `response_json_schema` with a compact provider schema: field types and allowed enum
 values are sent, together with the small two-support-module bound. Larger array and string bounds remain enforced locally. This avoids the SDK's
 incompatible OpenAPI field serialization and the provider's constrained-decoding complexity limit.
-Gemini returns validated structured JSON. Its default model uses supported provider sampling
+Gemini returns validated structured JSON. After validation, its module and reason codes are
+accepted as a proposal; raw rationale and extra questions are not accepted as financial prose.
+The application supplies an evidence template (`rationale_source=evidence_template`) and retains
+canonical missing-details flags. The finance engine still owns the effective module and cash. Its default model uses supported provider sampling
 settings; a configured legacy Gemini 2.x model uses temperature 0. Neither backend may emit unknown
 module IDs, disallowed modules, duplicate modules, or unsupported reason codes. Missing input
 questions are preserved even if the model omits them. API calls have bounded timeouts and at most
@@ -173,7 +188,10 @@ two application attempts. Missing credentials, network/provider errors, or inval
 the explicitly identified local baseline. No cross-provider fallback silently changes the contest.
 A structurally valid selection still needs the shared finance engine's substantive validation.
 
-## What changed and what was checked
+## Original package integration and checks (historical)
+
+The following records the initial classification package. Current provider changes and
+verification are in [PROVIDER_RELIABILITY.md](PROVIDER_RELIABILITY.md).
 
 The new `plan_classification/` package owns features, normalized case data, adapters, CLI, discovery,
 and the optional UI panel. Existing `engine.py`, `daily_simulation.py`, `gemini_advisor.py`,
@@ -221,3 +239,20 @@ The classifier remains a proposal layer. The dated executor, goal handoff, G25
 deterioration rule, approved-transfer comparisons and evidence-gated recovery are
 documented in [CRISIS_RESPONSE.md](CRISIS_RESPONSE.md). Old verification counts
 below describe the earlier classifier audit, not the complete merged suite.
+
+
+## Demo reliability update
+
+Classifier session identity includes account, canonical case hash, selected backend, effective
+configured model and key availability. Editing a classifier password override clears its result.
+Model/case/provider changes hide nonmatching saved results without making a replacement call.
+Advice caches likewise bind current facts/scenario/accepted module and route-specific model to
+the browser session. No provider result uses a process-wide shared cache, and credentials never
+enter cache keys or request logs. Repeated reruns reuse only matching session results.
+
+Gemini emphasis and daily selection now use explicit JSON Schema transport, with the actual
+Google SDK serializer exercised through mocked transport. Emphasis is limited to up to three
+approved card IDs; daily selection permits only the supported bill-move ID or null. Model output
+cannot author new approvals or change any cash totals. All mandatory local facts remain visible.
+Automated tests isolate both inherited provider settings and the project `.env` reference; no
+operator key is read or consumed. Live verification requires separate operator authorization.

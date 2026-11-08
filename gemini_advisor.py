@@ -2,11 +2,11 @@
 
 import json
 import math
-import os
 from pathlib import Path
 from typing import Any, Dict, List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict
+from plan_classification.config import resolve_provider
 
 try:
     from google import genai
@@ -48,12 +48,16 @@ def consult_gemini_advisor(
     denied_action_ids: Optional[List[str]] = None,
     confirmed_action_ids: Optional[List[str]] = None,
     api_key: Optional[str] = None,
+    *, backend: str = 'local', model: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Select an analyst review action without applying it to projected cash.
 
     The caller supplies a bill candidate only after checking that the conditional
     replay has a meaningful benefit. Exact replay amounts and dates stay local.
     """
+    if backend not in ('local','gemini'):
+        raise ValueError('Unknown daily advisor backend')
+    actual_backend, failure, calls = 'local', None, 0
     need_known = cash_needed is not None and math.isfinite(cash_needed) and cash_needed >= 0
     needs_funding = need_known and cash_needed > 0
     resolved_ids = set(denied_action_ids or []) | set(confirmed_action_ids or [])
@@ -76,8 +80,14 @@ def consult_gemini_advisor(
     selected = candidate
     source = "deterministic_rules"
 
-    effective_key = api_key or os.environ.get("GEMINI_API_KEY")
-    if candidate and HAVE_GOOGLE_GENAI and effective_key:
+    effective_key = None
+    if backend == 'gemini':
+        try:effective_key,model=resolve_provider('daily',api_key=api_key,model=model)
+        except ValueError:failure='invalid_provider_settings'
+        if failure is None:
+            failure=('no_supported_candidate' if not candidate else 'missing_google_genai_sdk' if not HAVE_GOOGLE_GENAI
+                     else 'credentials_unavailable' if not effective_key else None)
+    if backend == 'gemini' and failure is None:
         if days_to_shortfall is None:
             timing = "unknown"
         elif days_to_shortfall <= 7:
@@ -112,23 +122,28 @@ def consult_gemini_advisor(
                     retry_options=types.HttpRetryOptions(attempts=1),
                 ),
             ) as client:
+                calls += 1
                 response = client.models.generate_content(
-                    model="gemini-2.5-flash",
+                    model=model,
                     contents=prompt,
                     config=types.GenerateContentConfig(
                         response_mime_type="application/json",
-                        response_schema=AdvisorSelection,
-                        temperature=0.2,
+                        response_json_schema={'type':'object','properties':{
+                            'primary_action_id':{'anyOf':[{'type':'string','enum':[BILL_MOVE]},{'type':'null'}]}},
+                            'required':['primary_action_id'],'additionalProperties':False},
+                        **({'temperature':0.2} if model.startswith('gemini-2.') else {}),
                     ),
                 )
             selection = AdvisorSelection.model_validate_json(response.text)
             if selection.primary_action_id not in (None, candidate):
                 raise ValueError("Advisor returned an unavailable action")
             selected = selection.primary_action_id
-            source = "gemini-2.5-flash"
+            source = model
+            actual_backend = "gemini"
         except Exception:
             # Keep request details and provider exceptions out of the interface.
             source = "deterministic_fallback"
+            failure = "provider_or_validation_failure"
 
     flags = ["CURRENT_LIQUID_CASH_UNVERIFIED"]
     if selected:
@@ -158,7 +173,10 @@ def consult_gemini_advisor(
 
     return {
         "source": source,
-        "is_ai_live": source == "gemini-2.5-flash",
+        "is_ai_live": actual_backend == "gemini",
+        "requested_backend": backend, "actual_backend": actual_backend,
+        "fallback_used": backend == "gemini" and actual_backend != "gemini",
+        "fallback_reason": failure, "api_calls": calls,
         "plan": {
             "primary_action_id": selected,
             "title": title,

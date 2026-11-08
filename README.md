@@ -24,7 +24,7 @@ bash run.sh
 The launcher uses Python from your active environment, with a `python3` fallback. It works on
 Linux and macOS; Windows requires Bash (for example, Git Bash or WSL) with Python available.
 Use `bash run.sh cli` for the command-line engine. Extra arguments are passed through, such as
-`bash run.sh --server.port 8502`. The classifier reads API keys from the project `.env` file.
+`bash run.sh --server.port 8502`. Provider routes read approved settings from the project `.env` file. Each remote route requires its own explicit button; configuring a key does not make calls automatically. See [provider/demo reliability](PROVIDER_RELIABILITY.md).
 
 ---
 

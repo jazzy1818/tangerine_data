@@ -125,8 +125,8 @@ def test_full_app_classification_offline(monkeypatch):
         kwargs['api_key'] = None
         return original_advisor(*args, **kwargs)
 
-    # No classifier request is expected with Local baseline, and the existing
-    # action advisor is explicitly kept offline. Market endpoints are fixtures.
+    # Classifier requests require Classify scenario. The daily advisor defaults
+    # to local rules and requires its own explicit button for a remote request.
     with patch.object(gemini_advisor, 'HAVE_GOOGLE_GENAI', False), \
          patch.object(gemini_advisor, 'consult_gemini_advisor', side_effect=offline_advisor):
         app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py')).run(timeout=30)
