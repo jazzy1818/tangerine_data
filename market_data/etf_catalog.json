@@ -1,0 +1,11 @@
+{
+  "snapshot_date": "2026-11-08",
+  "label": "Selected market examples",
+  "peer_group": "Canadian-listed, globally diversified all-equity asset-allocation ETFs (CAD trading units)",
+  "selection_method": "Three issuer examples in the same portfolio category; no size or performance ranking. Net assets and comparable trailing returns are not established in this snapshot.",
+  "entries": [
+    {"symbol": "XEQT.TO", "name": "iShares Core Equity ETF Portfolio", "currency": "CAD", "category": "Global all-equity asset allocation", "source_url": "https://www.blackrock.com/ca/investors/en/products/309480/ishares-core-equity-etf-portfolio", "data_date": "2026-11-08", "inclusion_reason": "iShares example of a Canadian-listed globally diversified all-equity portfolio; compare its adjusted-price history with peers.", "net_assets": null, "trailing_one_year_total_return": null},
+    {"symbol": "VEQT.TO", "name": "Vanguard All-Equity ETF Portfolio", "currency": "CAD", "category": "Global all-equity asset allocation", "source_url": "https://www.vanguard.ca/en/investor/products/products-group/etfs/VEQT", "data_date": "2026-11-08", "inclusion_reason": "Vanguard example in the same all-equity portfolio category; issuer allocations and costs may differ.", "net_assets": null, "trailing_one_year_total_return": null},
+    {"symbol": "ZEQT.TO", "name": "BMO All-Equity ETF", "currency": "CAD", "category": "Global all-equity asset allocation", "source_url": "https://www.bmogam.com/ca-en/products/exchange-traded-fund/bmo-all-equity-etf-zeqt/", "data_date": "2026-11-08", "inclusion_reason": "BMO example in the same all-equity portfolio category; shown as a market example rather than an account recommendation.", "net_assets": null, "trailing_one_year_total_return": null}
+  ]
+}

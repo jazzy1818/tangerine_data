@@ -190,3 +190,5 @@ Credit the data in your submission:
 - **Statistics Canada** and **Government of Canada** sources, if you use them.
 
 Questions? Ask in ┃ask-a-mentor on the Discord. Good luck!
+
+The Allocation Review tab includes an [interactive ETF explorer](ETF_EXPLORER.md), with fictional fit examples, optional Yahoo history, and read-only contribution illustrations. Install `requirements-etf.txt` for history; the local views work offline.

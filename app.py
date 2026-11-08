@@ -440,11 +440,18 @@ with tab3:
             recovery_snapshot=recovery_snapshot, include_timing_comparison=True)
     except ValueError as exc:
         st.error(f'Supplied action evidence cannot be applied: {exc}. Correct or clear the schedule. No revised advice is issued.')
+        with tab5:
+            from etf_ui import render_etf_explorer
+            render_etf_explorer({'investment_plan': {}}, {'scenario': active_scenario.model_dump(),
+                'runtime_validation': {'status': 'blocked'}})
         st.stop()
     crisis = plans['crisis_plan']
     if crisis['runtime_validation']['status'] != 'passed':
         st.error('Financial validation blocked this result. Review the supplied evidence before issuing advice.')
         review_flags(crisis['review_flags'])
+        with tab5:
+            from etf_ui import render_etf_explorer
+            render_etf_explorer(plans, crisis)
         st.stop()
     with dated_projection_area:
         dated_path = crisis['no_action']
@@ -567,7 +574,7 @@ with tab5:
     allocation = plans["investment_plan"]
     st.subheader("Normal-goal allocation and investment readiness")
     st.caption("This tab contains normal-goal capacity and default stress diagnostics. The active structured scenario and its validated cash paths are in Goal and Backup Plans.")
-    st.caption("Bank analyst decision support · conditional estimates · no ETF selection or trade")
+    st.caption("Bank analyst decision support · conditional estimates · ETF exploration is independent of suitability review; no trade")
     st.write(allocation["recommendation"])
     normal_col, selected_col, stress_col = st.columns(3)
     normal_col.metric("Normal monthly allocation (conditional)", money(allocation["normal_monthly_allocation"]))
@@ -579,6 +586,8 @@ with tab5:
         st.warning("Some supplied effects are unquantified. Paths below show only quantified components; they do not establish full funding or affordability.")
     if crisis["goal_status"] in ("PAUSED", "REDUCED"):
         st.warning("The selected shock calls for reducing or pausing optional allocations. Pausing does not guarantee the funding gap is resolved.")
+    from etf_ui import render_etf_explorer
+    render_etf_explorer(plans, crisis)
     features = allocation["features"]
     if features:
         st.caption(
