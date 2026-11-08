@@ -600,6 +600,9 @@ with tab5:
     normal_col.metric("Normal monthly allocation (conditional)", money(allocation["normal_monthly_allocation"]))
     selected_col.metric("Selected shock monthly allocation", money(crisis["goal_contribution_revised"] if crisis["goal_before_crisis"]["kind"] == "PROPOSED_TRANSFER" else 0.))
     stress_col.metric("Monthly allocation passing all listed scenarios", money(allocation["all_scenarios_monthly_allocation"]))
+    flexible = allocation.get('flexible_reserve_savings', {})
+    if flexible.get('status') == 'conditional_review':
+        st.info(f"Variable liquid-reserve savings review: {flexible['opportunity_months']}/{flexible['observed_months']} historical months had protected capacity. Skip deficit months. Confirm current cash, commitments through the next reliable income and the reserve goal before any set-aside; no fixed contribution or completion date is established.")
     st.write(f"**Primary goal:** {allocation['primary_goal']}")
     st.write(f"**Investment suitability:** {allocation['investment_suitability']}")
     if not allocation.get("funding_result_complete", False):

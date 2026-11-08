@@ -108,6 +108,9 @@ def test_preview_and_saved_review_agree_without_changing_projection(client, savi
     baseline = preview(client, {'account_id': 22812, 'scenario': {'phase': 'normal'}, 'opening_cash': 10000})
     with_savings = preview(client, savings_review)
     result = with_savings.pop('flexible_savings')
+    capacity = with_savings.pop('savings_capacity_review')
+    assert capacity['current_set_aside'] is None
+    assert not capacity['fixed_monthly_commitment']
     assert with_savings == baseline
     run_id = str(uuid4())
     response = client.post('/api/runs', json={**savings_review, 'request_id': run_id, 'backend': 'rules'})

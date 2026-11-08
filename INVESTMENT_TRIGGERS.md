@@ -5,6 +5,37 @@ by `engine.make_plan()` and appears in the CLI and the dashboard's **Allocation
 Review** tab. It requires no API key and never asks the customer questions.
 It does not select an ETF, establish suitability, or execute transfers/trades.
 
+## Variable liquid savings versus fixed investment contributions
+
+Failure to support a fixed monthly debit does not mean the customer can never
+save. The engine now returns `flexible_reserve_savings` alongside the existing
+fixed-allocation outputs. It reviews each completed month's realized surplus and
+minimum cash separately. A deficit month has zero saving capacity rather than
+disqualifying every positive month.
+
+The per-month historical capacity is the smaller of 75% of positive realized
+surplus (the existing configurable allocation fraction), cash above the operating
+cushion and all supplied additional commitments, and the remaining reserve gap.
+Amounts are rounded down. Money remains accessible; it is never deducted as an
+investment debit, credited as new cash, or added to any projection.
+
+An opportunity requires at least six valid consecutive months, protected capacity
+in at least half the observed months and the latest month, positive median
+realized surplus, and a current historical cash estimate above the protected
+floor. Active/unknown shocks, a modeled deficit, deterioration, unquantified
+commitments, source loan arrears and verified costly debt keep protective review
+first. Fixed costs and loan payments already in outflows are not added again.
+
+This output is **historical conditional review**, not a standing payment or
+verified current set-aside. It leaves `current_set_aside` and `months_to_target`
+unknown and `fixed_monthly_commitment` false. Confirm accessible cash, authority,
+all obligations through the next reliable income, and the sourced reserve goal
+before any actual set-aside. No investment suitability requirement is removed.
+The runtime guard suppresses tampered amounts, fixed commitments and invented
+dates. Both website savings reviews and Allocation Review expose the distinction.
+
+See `reports/savings_access/README.md` for the all-account before/after audit.
+
 ## Mandatory rules on every analysis
 
 `goal_validation.py` hardcodes the S01–S40 runtime policy. Every return from

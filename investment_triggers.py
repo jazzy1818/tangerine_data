@@ -8,6 +8,7 @@ are not assumed. Reserve earmarks remain liquid cash, not newly created wealth.
 """
 
 from dataclasses import asdict, dataclass
+from copy import deepcopy
 from math import ceil, floor, isfinite
 from typing import Optional
 
@@ -166,6 +167,51 @@ def _down(value):
 
 def _money(value):
     return round(float(value), 2)
+
+
+def _flexible_reserve_review(rows, policy, *, reserve_gap, cash_floor,
+                             opening, expenses, blocked):
+    """Retrospective variable liquid-saving capacity, never a standing transfer.
+
+    A deficit month contributes zero, rather than disqualifying every other
+    month. Earmarked money stays accessible; it is neither an investment debit
+    nor extra cash in any projection. Today's affordable amount needs a separate
+    current, account-specific obligations/cash review.
+    """
+    result = {'status': 'not_supported', 'current_set_aside': None,
+              'fixed_monthly_commitment': False, 'months_to_target': None,
+              'basis': 'HISTORICAL_CONDITIONAL_REVIEW', 'review_months': [],
+              'opportunity_months': 0, 'observed_months': len(rows),
+              'typical_positive_month_amount': 0.,
+              'allocation_fraction': policy.allocation_fraction,
+              'remaining_reserve_goal': _down(reserve_gap),
+              'rule': 'In a positive month only: min(fraction × realized surplus, cash above protected cushion/obligations, remaining reserve goal). Keep funds liquid; skip deficit months.',
+              'required_evidence': ['Current accessible cash and account authority',
+                  'Reliable next income date and all commitments through then',
+                  'Remaining reserve goal and its source/policy',
+                  'Confirm this month has a realized surplus; do not use a forecast as cash'],
+              'reason': blocked or 'Insufficient observed positive months with protected cash.'}
+    if blocked:
+        return result
+    hold = cash_floor + sum(e.amount for e in expenses)
+    for _, row in rows.iterrows():
+        net = float(row['money_in'] - row['money_out'])
+        room = max(0., float(row['min_balance']) - hold)
+        candidate = _down(min(max(0., net) * policy.allocation_fraction, room, reserve_gap))
+        result['review_months'].append({'month': str(row['_month']),
+            'observed_surplus': _money(net), 'protected_cash': _money(hold),
+            'observed_minimum_cash': _money(row['min_balance']),
+            'conditional_liquid_savings': candidate})
+    amounts = [r['conditional_liquid_savings'] for r in result['review_months'] if r['conditional_liquid_savings'] > 0]
+    result['opportunity_months'] = len(amounts)
+    # At least half the completed months must show a protected opportunity.
+    # Also require capacity in the most recent month, not just distant history.
+    if (len(amounts) >= ceil(len(rows) / 2) and result['review_months'][-1]['conditional_liquid_savings'] > 0
+            and opening >= hold):
+        result.update(status='conditional_review',
+            typical_positive_month_amount=_down(float(pd.Series(amounts).median())),
+            reason='Variable liquid-reserve saving merits review. This is not a fixed monthly commitment or verified cash available today.')
+    return result
 
 
 def simulate_allocation(*, opening_cash, monthly_inflow, monthly_spending,
@@ -407,10 +453,13 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
         "funding_result_complete": False,
         "bank_review_flags": flags, "scenario_results": [], "candidate_results": [],
         "historical_replay": [], "proposed_actions": [],
+        "flexible_reserve_savings": _flexible_reserve_review(rows, policy, reserve_gap=0., cash_floor=0.,
+            opening=0., expenses=(), blocked='Monthly data has not established a savings review.'),
         "next_review_conditions": ["New completed month or material inflow/spending change", "Negative balance or reserve breach", "New judge shock, obligation, or verified suitability evidence"],
         "data_provenance": {"observations": "monthly_summary.csv supplied account history", "assessment_month": str(rows['_month'].max()) if not rows.empty else as_of,
                             "additional_evidence": evidence.source or "NOT_AVAILABLE", "projection": "ASSUMED; constant monthly flows; no investment returns"},
     }
+    validation_facts['flexible_reserve_savings'] = deepcopy(base['flexible_reserve_savings'])
     # Fail closed on malformed/short history while preserving a useful review result.
     if issues:
         for issue in issues:
@@ -540,6 +589,15 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
         baseline_first=baseline_no['first_shortfall_month'], scenario_first=selected_no['first_shortfall_month'],
         normal_contribution=normal, scenario_contribution=selected_amount)
     shock_deficit = selected_no["monthly_net_before_contribution"] < 0 or not selected_no["nonnegative_cash"]
+    flexible_block = ('An active/unknown shock needs crisis review first.' if financial_change or evidence.event_financial_effect == 'unspecified'
+        else 'Complete daily-balance and fixed-obligation history is required.' if not timing_known or not fixed_known
+        else 'Unknown upcoming commitments must be quantified first.' if expense_unknown
+        else 'The reserve goal is already covered.' if reserve_gap <= 0
+        else 'Protect cash and resolve the current deficit or deteriorating trajectory first.' if shock_deficit or median_surplus <= 0 or deteriorating
+        else 'Review arrears or verified costly debt before a new savings suggestion.' if customer.get('source_loan_status') == 'D' or evidence.costly_debt_verified
+        else None)
+    flexible = _flexible_reserve_review(rows, policy, reserve_gap=reserve_gap, cash_floor=floor_cash,
+        opening=opening, expenses=expenses, blocked=flexible_block)
     goal_missing = not evidence.objective
     profile_missing = [label for label, value in (("objective", evidence.objective), ("horizon", evidence.horizon_months),
                        ("risk tolerance", evidence.risk_tolerance), ("capacity for loss", evidence.capacity_for_loss),
@@ -665,6 +723,10 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
         recommendation += f" Under the selected shock, reduce optional allocations to CAD {selected_amount:,.2f}/month" + (" (pause)." if selected_amount == 0 else ".")
     if reserve_gap > 0 and reserve_earmark > 0:
         recommendation += f" Illustrative liquid-reserve earmark: CAD {reserve_earmark:,.2f}/month; this stays in liquid cash."
+    if flexible['status'] == 'conditional_review' and reserve_earmark == 0:
+        supporting.append('REVIEW_FLEXIBLE_RESERVE_SAVINGS')
+        recommendation += (f" Variable liquid-reserve saving merits review: {flexible['opportunity_months']}/{len(rows)} observed months had protected capacity. "
+                           "Skip deficit months; confirm current cash, commitments through the next reliable income, and the remaining reserve goal before setting money aside. No fixed monthly amount or date is established.")
     if selected_no["additional_cash_needed"] > 0:
         recommendation += f" Even with no allocation, the selected path needs CAD {selected_no['additional_cash_needed']:,.2f} additional starting cash to avoid a negative balance."
     features = {
@@ -685,6 +747,7 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
         "selected_scenario_additional_cash_needed": selected_no["additional_cash_needed"],
     }
     base.update(primary_goal=primary, supporting_goals=supporting, recommendation=recommendation,
+                flexible_reserve_savings=flexible,
                 normal_monthly_allocation=normal, selected_scenario_monthly_allocation=selected_amount,
                 all_scenarios_monthly_allocation=robust, reserve_monthly_earmark=reserve_earmark,
                 reserve_earmark_months_to_target=ceil(reserve_gap / reserve_earmark) if reserve_earmark > 0 else None,
@@ -697,6 +760,7 @@ def evaluate_investment_triggers(customer, shock=None, *, policy=None, evidence=
                                    "selected_scenario_monthly_amount": selected_amount, "status": "NOT_EXECUTED"}]
                                   if evidence.objective and evidence.available_cash is not None and not evidence.equities_excluded and not expense_unknown else []))
     validation_facts.update({
+        'flexible_reserve_savings': deepcopy(flexible),
         'allocation_limits': {
             'normal_monthly_allocation': normal,
             'selected_scenario_monthly_allocation': selected_amount,

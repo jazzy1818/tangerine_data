@@ -1,0 +1,44 @@
+{
+  "counts": {
+    "accounts": 4500,
+    "fixed_allocation_candidates": 5,
+    "fixed_reserve_earmarks": 0,
+    "variable_liquid_savings_reviews": 307,
+    "verified_current_set_asides": 0,
+    "runtime_blocks": 0
+  },
+  "primary_goals": {
+    "STABILIZE_CASHFLOW": 2076,
+    "SMOOTH_IRREGULAR_INCOME": 1835,
+    "PROTECT_OPERATING_CASH": 509,
+    "DATA_LIMITED_REVIEW": 80
+  },
+  "active_triggers": {
+    "G01 Negative cash flow": 4490,
+    "G02 Thin surplus": 1839,
+    "G03 Unreliable surplus": 4490,
+    "G04 Volatile inflows": 1039,
+    "G06 Negative balances": 163,
+    "G08 Reserve shortfall": 2156,
+    "G09 No feasible fixed contribution": 4494,
+    "G12 Loan-payment pressure": 94,
+    "G21 Unusual inflow": 708,
+    "G22 Changed cash-flow pattern": 1949,
+    "G24 Data or evidence limitations": 4500,
+    "G26 Maintain and review": 4500,
+    "G05 Deteriorating trajectory": 938,
+    "G11 Fixed-payment pressure": 645,
+    "G15 Reserve depletion": 185,
+    "G10 Strong buffer but fragile timing": 64,
+    "G16 Sustained surplus": 10,
+    "G18 Potential investment review": 5
+  },
+  "source_commit": "eb45c8dd6dd4ad26be4dca88dcaa17967b002cdd",
+  "source_sha256": {
+    "investment_triggers.py": "d980a69c347ea63a71b62636c1e5818e12042b2a20146fee388ea6cbe5200482",
+    "goal_validation.py": "eebe9e5098839f0dabc5779ed328b80750e20a95826af0948b55e22bd72843a0",
+    "data/monthly_summary.csv": "2fedfed4509c96588b05738247fb99595afdce929e962a08af1c083694666e83",
+    "data/loans.csv": "a4eb2e5e3aa76198b26431c9dcbcff858befcf7c38ccd326c18307e5c13a9ebf"
+  },
+  "interpretation": "Variable historical savings-review opportunities are not fixed investment eligibility or verified accessible cash. No current amount, standing transfer, target date or security recommendation is inferred."
+}

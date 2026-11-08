@@ -12,6 +12,7 @@ from scenario_execution import execute_scenario
 from . import store
 from .analytics import records
 from .savings import assess_savings
+from investment_triggers import evaluate_investment_triggers
 
 logger = logging.getLogger('tangerine.website')
 
@@ -56,6 +57,7 @@ def preview(request):
         result['flexible_savings'] = assess_savings(
             request.savings_evidence, account_id=request.account_id, opening_cash=request.opening_cash,
             cash_source=request.review_details.cash_source)
+        result['savings_capacity_review'] = evaluate_investment_triggers(customer)['flexible_reserve_savings']
     return result
 
 

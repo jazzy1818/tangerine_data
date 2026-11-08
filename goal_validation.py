@@ -308,6 +308,14 @@ def enforce_goal_validations(plan, facts):
             errors.append(f'Invalid allocation amount: {name}.')
         elif facts.get('history_valid') and value > facts['allocation_limits'][name] + 1e-8:
             errors.append(f'Allocation exceeds the independent finance engine capacity: {name}.')
+    flexible = plan.get('flexible_reserve_savings')
+    expected_flexible = facts.get('flexible_reserve_savings')
+    if expected_flexible is not None and flexible != expected_flexible:
+        errors.append('Variable reserve-saving review differs from the supplied history and protected capacity.')
+    if flexible and (flexible.get('current_set_aside') is not None
+                     or flexible.get('fixed_monthly_commitment') is not False
+                     or flexible.get('months_to_target') is not None):
+        errors.append('A historical variable-saving review cannot establish current funds, a fixed commitment or an ETA.')
     if not errors:
         if max(plan['selected_scenario_monthly_allocation'], plan['all_scenarios_monthly_allocation']) > plan['normal_monthly_allocation']:
             errors.append('A stress-tested contribution cannot exceed its normal contribution.')
@@ -356,6 +364,10 @@ def enforce_goal_validations(plan, facts):
                     funding_result_complete=False, pause_optional_contributions=True,
                     reserve_earmark_months_to_target=None,
                     abstain_reason='Mandatory runtime checkpoint violation; unsupported outputs suppressed.')
+        if flexible is not None:
+            plan['flexible_reserve_savings'] = dict(status='blocked', current_set_aside=None,
+                fixed_monthly_commitment=False, months_to_target=None,
+                reason='Runtime validation blocked this review.', review_months=[])
         plan['bank_review_flags'].append('RUNTIME_VALIDATION_BLOCKED: ' + '; '.join(audit['violations']))
         for trigger in plan['triggers']:
             trigger['state'] = 'active' if trigger['id'] == 'G24' else 'unknown'
