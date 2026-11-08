@@ -2,13 +2,19 @@
 import json
 from pathlib import Path
 from streamlit.testing.v1 import AppTest
-from test_crisis_ui import app,custom,metric
+from test_crisis_ui import app, backup_cash_chart, custom, metric
 from test_advice_ui import add_schedule
 
 
 def figure(app):
-    # Plotly elements are transported as real JSON specs in the Streamlit runner.
-    return next(json.loads(el.proto.spec) for el in app.get('plotly_chart') if 'cash before and after' in el.proto.spec)
+    chart = backup_cash_chart(app)
+    assert chart is not None
+    ledger = next(frame.value for frame in app.tabs[2].dataframe
+                  if 'Without new action (CAD)' in frame.value.columns)
+    for trace, column in zip(chart['data'], ['Without new action (CAD)', 'Revised plan (CAD)'], strict=True):
+        assert trace['y'] == ledger[column].tolist()
+        assert [row[:2] for row in trace['customdata']] == ledger[['Month', 'Phase']].values.tolist()
+    return chart
 
 
 def test_account_and_shock_changes_update_chart_and_summary_together(app):
@@ -34,8 +40,10 @@ def test_unknown_event_is_a_partial_chart_with_open_full_need(app):
     assert not app.exception
     assert metric(app,'Extra cash needed · without new action')=='Not established'
     assert metric(app,'Extra cash needed · revised plan')=='Not established'
-    assert 'Partial projection' in figure(app)['layout']['title']['text']
+    assert figure(app)['layout']['title']['text'] == 'Known components'
+    assert all('Known components' in trace['hovertemplate'] for trace in figure(app)['data'])
     assert any('Full funding need: Not established' in m.value for m in app.warning)
+    assert any('Enter the cash impact and when it happens' in m.value for m in app.tabs[2].markdown)
 
 
 def test_unsupported_pause_and_identical_paths_have_explanation(app):
@@ -44,9 +52,36 @@ def test_unsupported_pause_and_identical_paths_have_explanation(app):
     assert not app.exception
     fig=figure(app)
     assert fig['data'][0]['y']==fig['data'][1]['y']
-    assert any('No existing-transfer pause is applied' in m.value and 'evidence incomplete' in m.value for m in app.markdown)
+    assert any('No existing-transfer pause is applied' in m.value for m in app.markdown)
+    assert any('Confirm the pause fee, including zero if confirmed' in m.value for m in app.markdown)
     assert any('two cash paths are identical' in m.value for m in app.markdown)
     assert any('Full projection ledger' in e.label for e in app.expander)
+
+
+def test_chart_updates_for_dated_edit_note_and_preset(app):
+    baseline = figure(app)['data'][0]['y']
+    receipt = {'type': 'one_off_receipt', 'value': 400., 'start_month': 7}
+    custom(app, {'effects': [receipt]})
+    assert figure(app)['data'][0]['y'] == baseline
+    assert any('Scheduled for Month 7: one off receipt' in c.value for c in app.tabs[2].caption)
+    assert metric(app, 'Extra cash needed · without new action') != 'Not established'
+
+    receipt['start_month'] = 1
+    app.text_area(key='classification_scenario_json').set_value(json.dumps({'effects': [receipt]})).run()
+    dated = figure(app)['data'][0]['y']
+    assert dated[2] == baseline[2] + 400.
+    assert not any('Scheduled for Month 7' in c.value for c in app.tabs[2].caption)
+
+    app.text_input(key='judge_event').set_value('Income changes').run()
+    partial = figure(app)
+    assert partial['data'][0]['y'] == dated
+    assert partial['layout']['title']['text'] == 'Known components'
+    assert metric(app, 'Extra cash needed · without new action') == 'Not established'
+
+    app.text_input(key='judge_event').set_value('')
+    next(b for b in app.button if 'Layoff (EI 55%)' in b.label).click().run()
+    assert figure(app)['data'][0]['y'] != dated
+    assert any('Official Shock Runway' in m.value for m in app.tabs[1].markdown)
 
 
 def test_exact_compound_example_on_streamlit_screen():
